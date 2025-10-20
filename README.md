@@ -95,33 +95,28 @@ Cada grupo deberá elegir **uno de los tres entornos cloud oficiales**:
 
 ## 🔒 Estructura de Permisos
 
-- Cada grupo cuenta con un **equipo (Team)** propio dentro de la organización GitHub `SI807U-2025`.  
+- Cada grupo cuenta con un **equipo (Team)** propio dentro del repositorio GitHub `webconceptos/SI807_Cloud_BI_2025`.  
 - Cada rama `feature/grupoXX-init` está protegida y solo su equipo puede realizar *push*.  
 - Los merges a `main` requieren revisión docente.  
 
 ---
 
-## 🧾 Documentación y Evaluación
+## 🧾 Evaluaciones Principales – Fase Cloud
 
-Los entregables deberán incluir:
-- **Plan de migración a la nube.**  
-- **Arquitectura implementada (diagrama y descripción).**  
-- **Scripts ETL y consultas SQL.**  
-- **Capturas de ejecución y dashboards publicados.**  
-- **Bitácora técnica y costos estimados.**
-
-Las rúbricas y criterios están disponibles en `docs/rubrica_evaluacion.xlsx`.
+| Hito Académico | Objetivo Principal | Entregables Clave |
+|:--|:--|:--|
+| **Práctica 3 – Migración y Automatización ETL en la Nube** | Implementar y documentar la migración del proceso ETL al entorno Cloud seleccionado (GCP, Azure o AWS). El grupo deberá demostrar la capacidad de orquestar, transformar y cargar datos en servicios gestionados de nube. | - Scripts PySpark / Dataflow / Glue funcionales<br>- Diagrama de flujo de datos actualizado<br>- Bitácora técnica de ejecución<br>- Documentación del proceso ETL en README.md |
+| **Práctica 4 – Implementación del Data Warehouse Cloud** | Diseñar e implementar el **Data Warehouse** completo en la nube con modelo dimensional (Star o Snowflake), garantizando integridad, escalabilidad y seguridad. | - Scripts SQL / DDL de creación de DW<br>- Consultas OLAP y particionamiento<br>- Validación de integración con ETL<br>- Documento técnico: *“Diseño y despliegue del DW Cloud”* |
+| **Examen Final – Despliegue Analítico e Integración Total** | Integrar todos los componentes del sistema de inteligencia de negocios en la nube. Presentar dashboards analíticos conectados al DW, demostrando la trazabilidad del flujo de datos desde la ingestión hasta la visualización final. | - Dashboard publicado (Power BI Service / Looker Studio / QuickSight)<br>- Video demostrativo del funcionamiento<br>- Informe técnico final con costos y arquitectura desplegada<br>- Repositorio actualizado y reproducible |
 
 ---
 
-## 📅 Cronograma General
+### 🧭 Notas Generales
 
-| Semana | Actividad | Entregable |
-|:--:|:--|:--|
-| 1 | Elección de nube y diseño de arquitectura | Documento PDF + Diagrama Cloud |
-| 2 | Migración de ETL | Scripts PySpark / Dataflow / Glue |
-| 3 | Implementación del DW | Tablas, vistas y consultas OLAP |
-| 4 | Dashboard y cierre técnico | Power BI / Looker / QuickSight + Informe final |
+- Cada grupo trabajará exclusivamente en su **rama asignada (`feature/grupoXX-init`)**.  
+- Todos los entregables deberán cargarse en carpetas claramente estructuradas dentro del repositorio GitHub.  
+- La evaluación prioriza **reproducibilidad, documentación y evidencia de ejecución real**.  
+- El **Examen Final** representa la consolidación completa del sistema BI en la nube y su presentación ante el jurado académico.
 
 ---
 
@@ -137,7 +132,7 @@ Las rúbricas y criterios están disponibles en `docs/rubrica_evaluacion.xlsx`.
 ## 🏁 Créditos
 
 Curso: **SI807U – Sistemas de Inteligencia de Negocios**  
-Docente: **Hilario Aradiel -  Fernando García**  
+Docente: **Ing. Fernando García** (`@webconceptos`)  
 Universidad Nacional de Ingeniería – Facultad de Ingeniería Industrial y de Sistemas  
 Semestre: **2025-II**
 
@@ -145,7 +140,6 @@ Semestre: **2025-II**
 
 ## 🔗 Enlaces Útiles
 
-- 🌐 Organización GitHub: [https://github.com/webconceptos/SI807U-2025](https://github.com/webconceptos/SI807U-2025)  
-- 📘 Repositorio central: [https://github.com/webconceptos/SI807_Cloud_BI_2025](https://github.com/webconceptos/SI807U-2025/SI807_Cloud_BI_2025)  
+- 🌐 Repositorio GitHub: [https://github.com/webconceptos/SI807_Cloud_BI_2025](https://github.com/webconceptos/SI807_Cloud_BI_2025)  
 - 🧩 Guía de contribución: [CONTRIBUTING.md](./CONTRIBUTING.md)  
 - 📊 Evaluación: [`docs/rubrica_evaluacion.xlsx`](./docs/rubrica_evaluacion.xlsx)
