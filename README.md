@@ -137,7 +137,7 @@ Las rúbricas y criterios están disponibles en `docs/rubrica_evaluacion.xlsx`.
 ## 🏁 Créditos
 
 Curso: **SI807U – Sistemas de Inteligencia de Negocios**  
-Docente: **Ing. Fernando García** (`@webconceptos`)  
+Docente: **Hilario Aradiel -  Fernando García**  
 Universidad Nacional de Ingeniería – Facultad de Ingeniería Industrial y de Sistemas  
 Semestre: **2025-II**
 
@@ -145,7 +145,7 @@ Semestre: **2025-II**
 
 ## 🔗 Enlaces Útiles
 
-- 🌐 Organización GitHub: [https://github.com/SI807U-2025](https://github.com/SI807U-2025)  
-- 📘 Repositorio central: [https://github.com/SI807U-2025/SI807_Cloud_BI_2025](https://github.com/SI807U-2025/SI807_Cloud_BI_2025)  
+- 🌐 Organización GitHub: [https://github.com/webconceptos/SI807U-2025](https://github.com/webconceptos/SI807U-2025)  
+- 📘 Repositorio central: [https://github.com/webconceptos/SI807_Cloud_BI_2025](https://github.com/webconceptos/SI807U-2025/SI807_Cloud_BI_2025)  
 - 🧩 Guía de contribución: [CONTRIBUTING.md](./CONTRIBUTING.md)  
 - 📊 Evaluación: [`docs/rubrica_evaluacion.xlsx`](./docs/rubrica_evaluacion.xlsx)
