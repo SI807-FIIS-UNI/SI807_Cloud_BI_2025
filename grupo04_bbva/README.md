@@ -4,7 +4,7 @@
 ## Integrantes del grupo 04
 - **Alex Espinoza Cerna** – Rama: `feature/grupo04-alex-limpieza-datos`
 - **Miguel Anderson Inocente Caro** – Rama: `feature/grupo04-miguel-eda-inicial`
-- **Leonardo Gustavo Cardenaz Palacios** – Rama: `feature/grup004-leonardo-resultados feature/grup004-leonardo-notebooks feature/grup004-leonardo-limpieza-datos`
+- **Leonardo Gustavo Cardenaz Palacios** – Rama: `feature/grupo04-leonardo-resultados feature/grupo04-leonardo-notebooks feature/grupo04-leonardo-limpieza-datos`
 
 ---
 
