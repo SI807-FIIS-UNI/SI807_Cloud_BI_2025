@@ -1,6 +1,7 @@
 🧠 Ejercicio Colaborativo – Grupo 09 Cencosud
 
 Autor: Larico Cruz, Diego Cesar
+       Cabana Cazani, Gabriel
 
 📘 Descripción general
 
