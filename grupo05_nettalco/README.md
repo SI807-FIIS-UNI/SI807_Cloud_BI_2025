@@ -15,10 +15,10 @@
 - Otero Vicente, Daniel Mauricio
 
 ## Descripción del proyecto
-El presente proyecto realiza un **análisis exploratorio de datos (EDA)** del conjunto de datos de Netflix, disponible en [Kaggle: Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows).  
-El objetivo principal es **comprender las tendencias y características del catálogo de contenidos**, explorando aspectos como los géneros más comunes, la distribución por países, los tipos de contenido y su evolución a lo largo de los años.
+El presente proyecto realiza un análisis exploratorio de datos (EDA) del conjunto de datos de Netflix, disponible en [Kaggle: Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows).  
+El objetivo principal es comprender las tendencias y características del catálogo de contenidos, explorando aspectos como los géneros más comunes, la distribución por países, los tipos de contenido y su evolución a lo largo de los años.
 
-Este análisis forma parte de un **trabajo académico** orientado al desarrollo de competencias en **ciencia de datos y análisis descriptivo**, utilizando herramientas estadísticas y visualización con Python en Google Colab.
+Este análisis forma parte de un trabajo académico orientado al desarrollo de competencias en ciencia de datos y análisis descriptivo**, utilizando herramientas estadísticas y visualización con Python en Google Colab.
 
 
 
@@ -34,6 +34,6 @@ Este estudio forma parte de un trabajo académico orientado al desarrollo de com
 - Extraer conclusiones sobre la estrategia de contenidos de Netflix.
 ---
 ## Dataset
-**Fuente:** [Kaggle - Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
+Fuente: [Kaggle - Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
 
 
