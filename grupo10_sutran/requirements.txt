@@ -1,2 +1,5 @@
 pandas==2.2.2
-python==3.11
+pandas
+numpy
+matplotlib
+seaborn
