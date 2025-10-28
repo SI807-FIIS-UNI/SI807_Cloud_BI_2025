@@ -1,3 +1,4 @@
+# Ejercicio del grupo 04 - EDA inicial
 # Taller SI807 - Cloud BI 2025
 
 ## Integrantes del grupo 04
