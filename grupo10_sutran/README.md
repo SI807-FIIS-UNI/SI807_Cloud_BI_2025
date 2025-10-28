@@ -1,6 +1,11 @@
 # grupo10_sutran
 Proyecto Cloud BI 2025-II
 
+| Integrante                   | Rol                                | Rama                             |
+| ---------------------------- | ---------------------------------- | -------------------------------- |
+| **Jairo Del Río Gutiérrez**  | Exploratory Data Analysis (EDA)    | `feature/grupo10-eda-inicial`    |
+| **Elias Ortiz Matamoroz** y **Renzo Aldave Reyes**  | Limpieza y transformación de datos | `feature/grupo10-limpieza-datos` |
+
 ## 🧹 Limpieza de Datos – Proyecto Titanic
 
 Este módulo documenta el **proceso de limpieza de los datasets del Titanic** (`train.csv`, `test.csv` y `gender_submission.csv`) antes de su análisis exploratorio o modelado predictivo.  
@@ -54,10 +59,6 @@ La función clean_titanic_data() puede ser reutilizada para nuevas versiones de 
 Todos los pasos garantizan que train y test mantengan consistencia de variables y tipos.
 
 El dataset gender_submission.csv se conserva intacto ya que no requiere limpieza.
-| Integrante                   | Rol                                | Rama                             |
-| ---------------------------- | ---------------------------------- | -------------------------------- |
-| **Jairo Del Río Gutiérrez**  | Exploratory Data Analysis (EDA)    | `feature/grupo10-eda-inicial`    |
-| **Elias Ortiz Matamoroz**    | Limpieza y transformación de datos | `feature/grupo10-limpieza-datos` |
 
 
 # 🧭 Análisis Exploratorio de Datos (EDA) – Titanic Dataset
