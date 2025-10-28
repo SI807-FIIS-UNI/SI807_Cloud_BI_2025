@@ -12,3 +12,15 @@ El objetivo principal es **comprender los patrones y relaciones entre las variab
 
 Este estudio forma parte de un **trabajo académico** orientado al desarrollo de competencias en **análisis de datos y pensamiento crítico**, dentro del curso de Ciencia de Datos.
 ---
+## 🎯 Objetivos
+
+- Analizar la estructura del dataset y el significado de sus variables.  
+- Detectar valores faltantes, outliers y realizar limpieza de datos.  
+- Explorar la distribución de las variables y sus relaciones.  
+- Identificar posibles factores que influyeron en la supervivencia de los pasajeros.  
+- Visualizar la información mediante gráficos estadísticos.  
+---
+## 🧩 Dataset
+**Fuente:** [Kaggle - Titanic: Machine Learning from Disaster](https://www.kaggle.com/c/titanic)
+
+
