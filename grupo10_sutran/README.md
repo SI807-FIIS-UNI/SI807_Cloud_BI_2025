@@ -48,7 +48,7 @@ La organización del repositorio sigue los lineamientos del curso, que se indica
 
 ## 🚀 Pasos Realizados en el EDA
 Revisar notebook para ver a detalle el código realizado para el EDA <br>
-[IR AL NOTEBOOK](/notebooks/EDA_Titanic.ipynb)
+[IR AL NOTEBOOK](notebooks/EDA_Titanic.ipynb)
 
 ### 1. Carga e inspección inicial de datos
 - Lectura de los archivos `train.csv`, `test.csv` y `gender_submission.csv` desde `/data/raw/`.
