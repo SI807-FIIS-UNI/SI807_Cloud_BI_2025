@@ -1,2 +1,1 @@
-# grupo04_bbva
-Proyecto Cloud BI 2025-II
+# Ejercicio del grupo 04 - EDA inicial
