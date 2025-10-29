@@ -36,4 +36,10 @@ Este estudio forma parte de un trabajo académico orientado al desarrollo de com
 ## Dataset
 Fuente: [Kaggle - Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows)
 
+---
+
+### 🧠 Explicación técnica
+
+[👉 Ver explicación técnica aquí](./Mini_Proyecto/README.md)
+
 
