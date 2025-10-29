@@ -40,6 +40,7 @@ Fuente: [Kaggle - Netflix Movies and TV Shows](https://www.kaggle.com/datasets/s
 
 ### 🧠 Explicación técnica
 
-[👉 Ver explicación técnica aquí](./Mini_Proyecto/README.md)
+[![Explicación Técnica](https://img.shields.io/badge/Ver%20Explicaci%C3%B3n%20T%C3%A9cnica-blue?style=for-the-badge)](./Mini_Proyecto/README.md)
+
 
 
