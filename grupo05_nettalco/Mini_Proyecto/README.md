@@ -129,6 +129,8 @@ python .\scripts\run_eda.py
 
 Para dudas sobre el notebook o el proceso, contacta con los integrantes del Grupo 05 (ver `grupo05_nettalco/README.md` para detalles del equipo).
 
+[![Volver](https://img.shields.io/badge/Volver%20al%20README%20principal-green?style=for-the-badge)](../README.md)
+
 ---
 
 Generado automáticamente: README guía para reproducir el análisis y localizar las imágenes/resultados.
