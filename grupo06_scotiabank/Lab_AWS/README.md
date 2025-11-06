@@ -42,7 +42,7 @@ Durante la creación del Crawler, se completaron los siguientes campos requerido
 
 - **Schedule**: Ejecutar bajo demanda (no programado automáticamente)
 
-- **Database**: grupo6_db (base de datos creada en Glue para almacenar los metadatos)
+- **Database**: base_prueba (base de datos creada en Glue para almacenar los metadatos)
 
 - **Output**: Sobrescribir tablas existentes en caso de cambios detectados
 
@@ -53,8 +53,8 @@ Una vez configurado, el crawler fue ejecutado manualmente para detectar el archi
 Como parte del uso del Crawler, fue necesario definir una política de permisos IAM que permita al rol de Glue acceder correctamente al bucket S3.
 Esta política garantiza que el servicio tenga los permisos mínimos necesarios para listar, leer, escribir y eliminar objetos dentro del bucket.
 
+## 📜 Política IAM utilizada
 ```json
-# 📜 Política IAM utilizada
 {
     "Version": "2012-10-17",
     "Statement": [
