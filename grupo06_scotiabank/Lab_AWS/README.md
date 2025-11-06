@@ -19,9 +19,13 @@ Dentro del bucket, se creó la siguiente estructura de carpetas:
 
 ```json
 s3-grupo-6-vf/
- └── archive/
-      └── Amazon Sale Report.csv
+ |── raw/
+ |   └── Amazon Sale Report.csv
+ └── curated/
+      └── part-00001-9b895683-67a3-4327-8915-1ee5573b52d0.c000.snappy.parquet
 ```
+
+![Bucket](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_01_S3.png)
 
 
 # 🤖 2. Configuración del Crawler en AWS Glue
@@ -47,6 +51,8 @@ Durante la creación del Crawler, se completaron los siguientes campos requerido
 - **Output**: Sobrescribir tablas existentes en caso de cambios detectados
 
 Una vez configurado, el crawler fue ejecutado manualmente para detectar el archivo Amazon Sale Report.csv dentro del bucket, generando automáticamente la estructura de columnas y tipos de datos en Glue Catalog.
+
+![Crawler](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_02_Crawler.png)
 
 # 🔐 3. Configuración de IAM Policy
 
@@ -81,6 +87,9 @@ Esta política garantiza que el servicio tenga los permisos mínimos necesarios 
     ]
 }
 ```
+
+![IAM](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_08_PermisosIAM.png)
+
 # 🔎 Aspectos destacados
 
 Action: Define las operaciones permitidas sobre los recursos de S3:
@@ -96,11 +105,22 @@ Action: Define las operaciones permitidas sobre los recursos de S3:
 - **Resource**: Especifica los recursos de S3 a los cuales el rol tiene acceso.
 Incluye el bucket principal (s3-grupo-6-vf) y sus subrutas dentro de archive/.
 
+
 # ⚙️ 4. Desarrollo del Script de Transformación (AWS Glue Job)
 
 En esta fase se desarrolló un **script en Python** que ejecuta un **Glue Job** para leer, transformar y escribir los datos del bucket S3 en formato **Parquet**, optimizado para ser consultado desde **Athena**.
 
+![Evidencia job](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_04_Job.png)
+
 El propósito del script es **limpiar**, **renombrar columnas**, **normalizar fechas**, **convertir tipos de datos**, y **generar particiones** por año y mes para mejorar el rendimiento en consultas posteriores.
+
+Además, es necesario configurar estos parámetros
+
+- **--SOURCE**: Archivo a consumir
+
+- **--TARGET**: Archivo de salida
+
+![Parámetros](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_05_ParametrosJob.png)
 
 ## 🧩 Script Python – Transformación de datos
 ```python
@@ -179,6 +199,8 @@ df2 = (df
 print("✅ Transformación completada. Datos guardados en ruta de destino.")
 
 ```
+![Evidencia Ejecucion](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_09_EjecucionExitosa.png)
+![Evidencia Particion](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_10_Particion.png)
 
 | Parámetro  | Descripción                      | Ejemplo                                             |
 | ---------- | -------------------------------- | --------------------------------------------------- |
@@ -186,6 +208,8 @@ print("✅ Transformación completada. Datos guardados en ruta de destino.")
 | `SOURCE`   | Ruta S3 de origen (archivo CSV)  | `s3://s3-grupo-6-vf/archive/Amazon Sale Report.csv` |
 | `TARGET`   | Ruta S3 destino (salida Parquet) | `s3://s3-grupo-6-vf/curated/`                       |
 
+
+![Evidencia Parquets](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_11_Parquets.png)
 
 ## 5. Consumo de datos en AWS Athena
 
@@ -251,3 +275,4 @@ SELECT *
 FROM base_prueba.orders_parquet
 LIMIT 20;
 ```
+![Evidencia_Consulta](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_12_ConsultaVerificacion.png)
