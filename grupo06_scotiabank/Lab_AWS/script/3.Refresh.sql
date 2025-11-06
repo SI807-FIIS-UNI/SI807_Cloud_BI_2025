@@ -1,0 +1,1 @@
+MSCK REPAIR TABLE base_prueba.orders_parquet
