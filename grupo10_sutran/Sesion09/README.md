@@ -1,5 +1,5 @@
 # grupo10_sutran
-Proyecto Cloud BI 2025-II
+Laboratorio Sesion 09
 
 | Integrante                   | Rol                                | Rama                             |
 | ---------------------------- | ---------------------------------- | -------------------------------- |
