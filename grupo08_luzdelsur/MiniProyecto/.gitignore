@@ -1,0 +1,49 @@
+# Entorno virtual de Python
+venv/
+env/
+ENV/
+.venv/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Notebooks ejecutados (se generan automáticamente)
+*_executed.ipynb
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Archivos de resultados (se regeneran con los scripts)
+results/*.png
+results/*.csv
+results/*.txt
+
+# Archivos de datos procesados (se regeneran desde raw)
+data/processed/*.csv
+
+# Configuración de IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de distribución
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+
+# Variables de entorno
+.env
+.env.local
