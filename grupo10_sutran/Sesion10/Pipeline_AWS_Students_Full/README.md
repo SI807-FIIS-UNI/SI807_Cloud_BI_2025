@@ -38,7 +38,7 @@ ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparque
 
 Instalamos AWSCLIV2.msi y verificamos en la terminal o cmd
 
-![Consola](/Sesion10/Pipeline_AWS_Students_Full/images/image1.png)
+![Consola](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image1.png)
 
 Acá 🔑 Se te pedirá:
 
@@ -56,20 +56,20 @@ Acá 🔑 Se te pedirá:
 
 Creamos el user y activamos el acceso programativo, esto nos generará un “Access Key” y “Secret Access Key”.
 
-![IAM](/Sesion10/Pipeline_AWS_Students_Full/images/image2.png)
+![IAM](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image2.png)
 
 Descargamos el archivo .csv o podemos copiarlo las claves en un lugar seguro. Ya que no podremos ver el Secret Access Key nuevamente.
 
-![Access Key](/Sesion10/Pipeline_AWS_Students_Full/images/image3.png)
+![Access Key](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image3.png)
 
 Volvemos al cmd e ingresamos los datos que generamos y la configuración por default.
 
-![Consola2](/Sesion10/Pipeline_AWS_Students_Full/images/image4.png)
+![Consola2](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image4.png)
 
 Para poder subir el archivo CSV limpio al bucket damos permisos al usuario que creamos
 En lugar de seleccionar una política existente, elige “Create inline policy”
 
-![Permisos](/Sesion10/Pipeline_AWS_Students_Full/images/image5.png)
+![Permisos](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image5.png)
 
 Pegamos este código y le damos en formato JSON, le damos a “Netx” y la nombramos “AllowS3Grupo10”
  ```
@@ -97,7 +97,7 @@ Luego que cremos el permiso al usuario que creamos en IAM, probamos en el CMD el
 ```
 aws s3 cp "<ruta local>" <ruta s3 bucket>
 ```
-![Permisos](/Sesion10/Pipeline_AWS_Students_Full/images/image6.png)
+![Permisos](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image6.png)
 
 Vemos que esta vez si nos permitió hacer la carga del archivo csv que habíamos limpiado localmente.
 
@@ -105,48 +105,48 @@ Vemos que esta vez si nos permitió hacer la carga del archivo csv que habíamos
 Ahora vamos a crear una base de datos Glue
 
 1. Vamos a AWS Glue y creamos una base de datos con el nombre “raw_data”
-![Database_created](/Sesion10/Pipeline_AWS_Students_Full/images/image7.png)
+![Database_created](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image7.png)
 
 2.  Creamos el Crawler, ingresamos nombre y la ruta de la fuente de datos, en este en la carpeta donde guardamos el archivo CSV en S3.
 3. Seleccionamos un rol existente o creamos uno por default, en nuestro caso ingresamos “AWSGlueServiceRole-lider”.
 4. Target database: raw_data y la tabla de salida ecommerce_clean. Luego seleccionamos la frecuencia a On demand.
    
-![configuration_crawler](/Sesion10/Pipeline_AWS_Students_Full/images/image8.png)
+![configuration_crawler](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image8.png)
 
 5. Luego nos dirigimos a la lista de Crawlers y corremos la que creamos
 6. Vamos a “Tables” y verificamos que el schema este correcto
-![schema](Sesion10\Pipeline_AWS_Students_Full\images\image9.png)
+![schema](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image9.png)
 
 ## 3️⃣ Transformación con Glue Job (PySpark)
 En AWS Glue nos dirigimos a ETL jobs y Visual ETL para crear el script
 
-[VER "job_transform_aws.py"](/Sesion10/Pipeline_AWS_Students_Full/scripts/job_transform_aws.py)
+[VER "job_transform_aws.py"](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/scripts/job_transform_aws.py)
 
 Nos estuvo dando errores, por lo que al revisar en CloudWatch nos dimos cuenta que faltó darle permisos a rol que se creó de poder ejecutar Scripts y escribir en S3.
 
-![Rol_Policy](/Sesion10/Pipeline_AWS_Students_Full/images/image10.png)
+![Rol_Policy](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image10.png)
 
 Volvemos a correr el job y el script termina de ejecutarse correctamente
 
-![job_run_summary](/Sesion10/Pipeline_AWS_Students_Full/images/image11.png)
+![job_run_summary](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image11.png)
 
 ## 4️⃣ Consulta en Athena
 
-[VER "00_create_analytics_db.sql"](/Sesion10/Pipeline_AWS_Students_Full/sql/00_create_analytics_db.sql)
+[VER "00_create_analytics_db.sql"](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/sql/00_create_analytics_db.sql)
 
-![00_create_analytics](/Sesion10/Pipeline_AWS_Students_Full/images/image12.png)
+![00_create_analytics](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image12.png)
 
-[VER "10_create_sales_curated.sql"](/Sesion10/Pipeline_AWS_Students_Full/sql/00_create_analytics_db.sql)
+[VER "10_create_sales_curated.sql"](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/sql/00_create_analytics_db.sql)
 
-![10_create_sales_curateds](/Sesion10/Pipeline_AWS_Students_Full/images/image13.png)
+![10_create_sales_curateds](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image13.png)
 
-[VER "20_kpi_sales_summary.sql"](/Sesion10/Pipeline_AWS_Students_Full/sql/20_kpi_sales_summary.sql)
+[VER "20_kpi_sales_summary.sql"](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/sql/20_kpi_sales_summary.sql)
 
-![20_kpi_sales_summary](/Sesion10/Pipeline_AWS_Students_Full/images/image14.png)
+![20_kpi_sales_summary](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image14.png)
 
-[VER "20_kpi_sales_summary.sql"](/Sesion10/Pipeline_AWS_Students_Full/sql/20_kpi_sales_summary.sql)
+[VER "20_kpi_sales_summary.sql"](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/sql/20_kpi_sales_summary.sql)
 
-![20_kpi_sales_summary](/Sesion10/Pipeline_AWS_Students_Full/images/image14.png)
+![20_kpi_sales_summary](/grupo10_sutran/Sesion10/Pipeline_AWS_Students_Full/images/image14.png)
 
 
 
