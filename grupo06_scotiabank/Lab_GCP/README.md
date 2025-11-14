@@ -21,7 +21,13 @@ En este laboratorio implementamos un clúster Dataproc en Google Cloud Platform 
 
 Ingresamos a [cloud.google.com](https://cloud.google.com) y activamos la cuenta con créditos gratuitos para nuevos usuarios.
 
+<<<<<<< HEAD
 
+=======
+<p align="center">
+    <img width="60%" src="./evidences/procesos.jpeg">
+</p>
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 
 ### 1.2 Creación del proyecto
 
@@ -29,6 +35,7 @@ Dentro de la consola:
 
 1. Accedimos al panel de **Proyectos**.
 2. Creamos el proyecto llamado: **Lab GCP Grupo 6**.
+<<<<<<< HEAD
   
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_02_NombreProyecto.png">
@@ -42,12 +49,17 @@ Dentro de la consola:
 </p>
 
 
+=======
+3. Registramos el **ID del proyecto:** `lab-gcp-grupo-6`.
+
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ### 1.3 Habilitación de APIs necesarias
 
 Desde **APIs & Services**, habilitamos:
 
 * **Cloud Dataproc API**
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_03_APIsyServicios.png">
 </p>
@@ -68,20 +80,26 @@ Desde **APIs & Services**, habilitamos:
     <img width="60%" src="./evidences/Evidencia_07_HabilitarDataprox.jpeg">
 </p>
 
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ### 1.4 Configuración de permisos IAM
 
 Validamos que nuestra cuenta contaba con permisos de **Editor**, necesario para operar Dataproc.
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_08_BuscarIAM.png">
 </p>
 
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ---
 
 ## 🗄️ 2. Creación del Bucket en Google Cloud Storage (GCS)
 
 En **Cloud Storage**:
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_09_CloudStorage.png">
 </p>
@@ -104,16 +122,26 @@ En **Cloud Storage**:
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_12_CrearBucket-Final.png">
 </p>
+=======
+1. Creamos un bucket exclusivo para el laboratorio con el nombre `sin-grupo6-bucket-1`.
+2. Seleccionamos la región correspondiente a Chile `southamerica-west1 (Santiago)`.
+3. Mantenemos la política de privacidad por defecto.
+4. Subimos el archivo de datos `flights.csv` que posteriormente utilizaremos en HDFS y Spark.
+
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ---
 
 ## 🧩 3. Creación del Clúster en Dataproc
 
 Abrimos **Cloud Shell** para ejecutar los comandos.
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_17_Cluster_Iniciar.png">
 </p>
 
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ### 3.1 Autenticación
 
 Nos autenticamos correctamente en GCP:
@@ -154,6 +182,7 @@ gcloud dataproc clusters create cluster-grupo-6 \
   --project lab-gcp-grupo-6
 ```
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_18_Cluster-Consola1.png">
 </p>
@@ -161,13 +190,18 @@ gcloud dataproc clusters create cluster-grupo-6 \
     <img width="60%" src="./evidences/Evidencia_19_Cluster-Consola2.png">
 </p>
 
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 Una vez aprovisionado, ingresamos al entorno de JupyerLab siguiento la ruta:
 
 **Dataproc → Clúster → Interfaces Web → JupyterLab**
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_20_ClusterEntorno_Menu.png">
 </p>
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ---
 
 ## 📂 4. Gestión de archivos con HDFS
@@ -187,9 +221,12 @@ Confirmamos la estructura inicial de HDFS:
 ```bash
 hadoop fs -ls /
 ```
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_21_ClusterEntorno_Terminal1.png">
 </p>
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 
 ### 4.3 Creación del directorio de trabajo
 
@@ -198,9 +235,12 @@ Creamos el directorio para almacenar los archivos del laboratorio:
 ```bash
 hadoop fs -mkdir /laboratorio2
 ```
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_22_ClusterEntorno_Terminal2.png">
 </p>
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 
 ### 4.4 Carga del archivo CSV a HDFS
 
@@ -212,10 +252,13 @@ hadoop fs -copyFromLocal /flights.csv /laboratorio2
 
 Con esto dejamos los datos listos para ser usados por Spark.
 
+<<<<<<< HEAD
 <p align="center">
     <img width="60%" src="./evidences/Evidencia_23_ClusterEntorno_Terminal3.png">
 </p>
 
+=======
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
 ---
 
 ## 📘 5. Ejecución de Notebooks en Spark
@@ -234,6 +277,7 @@ Luego los abrimos en JupyterLab y ejecutamos:
 
 ---
 
+<<<<<<< HEAD
 ## ❌ Errores
 
 En la fase de ejecución del notebook tuvimos un error que no supimos resolver y eso truncó el desarrollo de la actividad, el código asociado a este error era:
@@ -244,3 +288,80 @@ WARN YarnScheduler: Initial job has not accepted any resources; check your clust
 
 Seguiremos intentando la ejecución completa del laboratorio.
 
+=======
+## 📡 6. Kafka en el clúster
+
+Desde la terminal del clúster configuramos el entorno de Kafka.
+
+### 6.1 Creación del topic “retrasos”
+
+```bash
+/usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server micluster-w-0:9092 \
+--create --replication-factor 1 --partitions 1 --topic retrasos
+```
+
+### 6.2 Verificación del topic
+
+```bash
+/usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server micluster-w-0:9092 --list
+```
+
+Confirmamos que **retrasos** fue creado correctamente.
+
+### 6.3 Inicio del productor
+
+```bash
+/usr/lib/kafka/bin/kafka-console-producer.sh --broker-list micluster-w-0:9092 --topic retrasos
+```
+
+Enviamos varios mensajes de prueba en formato JSON:
+
+```json
+{"dest": "GRX", "arr_delay": 2.6}
+{"dest": "MAD", "arr_delay": 5.4}
+{"dest": "GRX", "arr_delay": 1.5}
+{"dest": "MAD", "arr_delay": 20.0}
+```
+
+### 6.4 Inicio del consumidor
+
+```bash
+/usr/lib/kafka/bin/kafka-console-consumer.sh --bootstrap-server micluster-w-0:9092 --topic retrasos --from-beginning
+```
+
+Verificamos que todos los mensajes enviados desde el productor fueran recibidos correctamente.
+
+---
+
+## 📊 7. Validación del procesamiento en Spark Streaming
+
+Ejecutamos el notebook **ReadStream_lab.ipynb**, donde observamos la llegada en tiempo real de los mensajes publicados en Kafka.
+
+En **ConsutarParquet_lab.ipynb** revisamos que los resultados procesados fueron almacenados satisfactoriamente en formato Parquet dentro del bucket asignado.
+
+---
+
+## 🧹 8. Apagado del clúster
+
+Finalmente, para evitar costos adicionales, eliminamos el clúster:
+
+```bash
+gcloud dataproc clusters delete micluster --region us-east1
+```
+
+---
+
+## ✅ Conclusiones
+
+Completamos exitosamente la implementación de un entorno Big Data en GCP, utilizando Hadoop, Spark y Kafka sobre un clúster Dataproc. Procesamos datos estáticos y flujos en tiempo real, validando tanto la infraestructura como la correcta integración de cada componente.
+
+---
+
+Si quieres, también puedo preparar:
+
+📌 Una versión aún más narrativa ("bitácora del laboratorio")
+📌 Un README con capturas de pantalla incluidas
+📌 Una versión académica estilo informe o monografía
+
+¿Deseas alguna de estas opciones?
+>>>>>>> 53f96be19d1003ca6bed8ede34e1bdebb8661826
