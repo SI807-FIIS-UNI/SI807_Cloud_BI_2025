@@ -1,0 +1,16 @@
+gcloud beta dataproc clusters create micluster \
+  --enable-component-gateway \
+  --bucket bucket-prueba-mia \
+  --region us-east1 \
+  --zone us-east1-c \
+  --master-machine-type n1-standard-2 \
+  --master-boot-disk-size 500 \
+  --num-workers 2 \
+  --worker-machine-type n1-standard-2 \
+  --worker-boot-disk-size 500 \
+  --image-version 2.1-debian11 \
+  --properties spark:spark.jars.packages=org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.3 \
+  --optional-components JUPYTER,ZOOKEEPER \
+  --max-age 14400s \
+  --initialization-actions 'gs://goog-dataproc-initialization-actions-europe-west1/kafka/kafka.sh' \
+  --project hadoop-spark-lab2
