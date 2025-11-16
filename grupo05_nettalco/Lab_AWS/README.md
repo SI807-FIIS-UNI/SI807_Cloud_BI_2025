@@ -64,7 +64,7 @@ Una vez que tenemos claro qué necesita acceder el Crawler, procedemos a crear l
     "Version": "2012-10-17",
     "statement": [
         {
-            'Effect": "Allow",
+            "Effect": "Allow",
             "Action": [
               "s3:GetObject",
               "s3:Putobject",
@@ -201,5 +201,6 @@ print("✅ Transformación completada. Datos guardados en ruta de destino.")
 
 ```
 ![Evidencia Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/Script_ejecuccion_exitosa.jpg)
+
 
 
