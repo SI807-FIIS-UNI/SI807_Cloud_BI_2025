@@ -14,3 +14,16 @@ El bucket de S3 funciona como data lake. Ahí almacenan tanto los datos crudos (
 - **Block Public Access:** Habilitado  
 - **Bucket versioning:** Deshabilitado  
 - **Default encryption:** Deshabilitado  
+
+Dentro del bucket, se creó la siguiente estructura de carpetas:
+
+```
+├── data/
+│   └── raw/
+├── evidencias/
+├── script/
+└── README.md
+```
+![Bucket](/grupo05_nettalco/Lab_AWS/evidencias/S3_archive_subidos.jpg)
+
+# 🤖 2. Configuración del Crawler en AWS Glue
