@@ -27,3 +27,26 @@ Dentro del bucket, se creó la siguiente estructura de carpetas:
 ![Bucket](/grupo05_nettalco/Lab_AWS/evidencias/S3_archive_subidos.jpg)
 
 # 🤖 2. Configuración del Crawler en AWS Glue
+A continuación, se utiliza un crawler de Glue para explorar automáticamente la estructura de los datos y alimentar el Glue Data Catalog con los metadatos.
+## ⚙️ Campos configurados al crear el Crawler
+
+Se completaron los siguientes campos requeridos:
+- **Name**: crawler_grupo5
+
+- **Data source**: S3
+
+- **S3 path**: s3://s3-grupo-5-vf/archive/
+
+- **IAM role**: AWSGlueServiceRole-grupo5 (rol creado con permisos específicos para acceder al bucket)
+
+- **Schedule**: Ejecutar bajo demanda (no programado automáticamente)
+
+- **Database**: base_prueba (base de datos creada en Glue para almacenar los metadatos)
+
+- **Output**: Sobrescribir tablas existentes en caso de cambios detectados
+
+
+Una vez se completa la configuración del crawler, lo ejecutan manualmente para que explore el bucket, detecte el archivo 'Amazon Sale Report.csv' y genere automáticamente en el Glue Data Catalog una tabla con la estructura de columnas y tipos de datos correspondiente. De esta manera, establecen un 
+esquema organizado que facilita futuras etapas de procesamiento y análisis.
+
+![Crawler](/grupo05_nettalco/Lab_AWS/evidencias/Creacion_crawler.jpg)
