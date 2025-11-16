@@ -110,7 +110,7 @@ En esta parte avanzamos con la creación de un **script en Python** que será ej
 
 Después de completar esta etapa, lo que sigue es validar que el job se ejecute sin errores y que los archivos Parquet generados estén correctamente organizados en el bucket.
 
-![Evidencia job](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_04_Job.png)
+![Evidencia job](/grupo05_nettalco/Lab_AWS/evidencias/Base_AWS_Glue.jpg)
 
 En esta parte nos enfocamos en definir claramente qué hará el script del Glue Job. Aquí debemos indicar que el objetivo del código es limpiar los datos, renombrar columnas, normalizar formatos de fecha, convertir tipos de datos y generar particiones por año y mes, con el fin de mejorar el rendimiento en las consultas posteriores.
 
@@ -201,6 +201,89 @@ print("✅ Transformación completada. Datos guardados en ruta de destino.")
 
 ```
 ![Evidencia Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/Script_ejecuccion_exitosa.jpg)
+
+| Parámetro  | Descripción                      | Ejemplo                                             |
+| ---------- | -------------------------------- | --------------------------------------------------- |
+| `JOB_NAME` | Nombre del job en Glue           | `job-transform-orders`                              |
+| `SOURCE`   | Ruta S3 de origen (archivo CSV)  | `s3://s3-grupo-5-vf/archive/Amazon Sale Report.csv` |
+| `TARGET`   | Ruta S3 destino (salida Parquet) | `s3://s3-grupo-5-vf/curated/`                       |
+
+
+![Evidencia Parquets](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_11_Parquets.png)
+
+## 5. Consumo de datos en AWS Athena
+
+Una vez transformados los datos y almacenados en formato Parquet, se procedió a crear una tabla externa en Athena que permita consultarlos eficientemente.
+
+```sql
+DROP TABLE IF EXISTS base_prueba.orders_parquet
+
+```
+
+![Drop Table Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/SQL_drop_ejecuccion.jpg)
+
+```sql
+DROP TABLE IF EXISTS base_prueba.orders_parquet
+
+CREATE EXTERNAL TABLE IF NOT EXISTS base_prueba.orders_parquet (
+    index_id               int,
+    order_id               string,
+    order_date             date,
+    order_status           string,
+    fulfilment_type        string,
+    sales_channel          string,
+    ship_service_level     string,
+    style                  string,
+    sku                    string,
+    category               string,
+    size                   string,
+    asin                   string,
+    courier_status         string,
+    quantity               int,
+    currency_code          string,
+    amount                 double,
+    ship_city              string,
+    ship_state             string,
+    ship_postal_code       double,
+    ship_country           string,
+    promotion_ids          string,
+    is_b2b                 boolean,
+    fulfilled_by           string,
+    amount_numeric         double
+)
+PARTITIONED BY (
+    anio                   int,
+    mes                    string
+)
+STORED AS PARQUET
+LOCATION 's3://s3-grupo-5-vf/curated/'
+TBLPROPERTIES ('parquet.compression'='SNAPPY');
+
+
+MSCK REPAIR TABLE base_prueba.orders_parquet;
+
+SELECT *
+FROM base_prueba.orders_parquet
+LIMIT 100;
+```
+![Creacion_Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/SQL_create_ejecuccion.jpg)
+## 🧰 Actualización de particiones
+
+Después de crear la tabla, se debe ejecutar el siguiente comando para que Athena reconozca las nuevas particiones generadas por el Glue Job:
+
+```sql
+MSCK REPAIR TABLE base_prueba.orders_parquet;
+```
+![Creacion_Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/SQL_refresh_ejecuccion.jpg)
+
+## 🔎 Consulta de verificación
+
+```sql
+SELECT *
+FROM base_prueba.orders_parquet
+LIMIT 100;
+```
+![Evidencia_Consulta](/grupo05_nettalco/Lab_AWS/evidencias/SQL_selected_ejecuccion.jpg)
 
 
 
