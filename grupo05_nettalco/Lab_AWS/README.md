@@ -110,7 +110,7 @@ En esta parte avanzamos con la creación de un **script en Python** que será ej
 
 Después de completar esta etapa, lo que sigue es validar que el job se ejecute sin errores y que los archivos Parquet generados estén correctamente organizados en el bucket.
 
-![Evidencia job](/grupo05_nettalco/Lab_AWS/evidencias/Base_AWS_Glue.jpg)
+![Evidencia job](/grupo05_nettalco/Lab_AWS/evidencias/AWS_Glue_evidencia.jpg)
 
 En esta parte nos enfocamos en definir claramente qué hará el script del Glue Job. Aquí debemos indicar que el objetivo del código es limpiar los datos, renombrar columnas, normalizar formatos de fecha, convertir tipos de datos y generar particiones por año y mes, con el fin de mejorar el rendimiento en las consultas posteriores.
 
@@ -177,13 +177,12 @@ df2 = (df
             F.to_date("order_date_raw", "MM/dd/yyyy")
         )
     )
-
-# 🔍 Crear particiones derivadas
+    # 🔍 Crear particiones derivadas
     .withColumn("anio", F.year("order_date"))
     .withColumn("mes", F.date_format("order_date", "MM"))
     # 💰 Convertir monto numérico
     .withColumn("amount_numeric", F.col("amount").cast("double"))
-    # ⚙️ Filtrar registros con fechas válidas
+    # ⚙ Filtrar registros con fechas válidas
     .filter(F.col("order_date").isNotNull())
     # Eliminar celdas vacías en la columna de montos
     .withColumn(
@@ -197,8 +196,7 @@ df2 = (df
     .partitionBy("anio","mes")
     .parquet(args["TARGET"]))
 
-print("✅ Transformación completada. Datos guardados en ruta de destino.")
-
+print("✅ Transformación completada. Datos guardados en ruta de destino.")
 ```
 ![Evidencia Ejecucion](/grupo05_nettalco/Lab_AWS/evidencias/Script_ejecuccion_exitosa.jpg)
 
@@ -209,7 +207,7 @@ print("✅ Transformación completada. Datos guardados en ruta de destino.")
 | `TARGET`   | Ruta S3 destino (salida Parquet) | `s3://s3-grupo-5-vf/curated/`                       |
 
 
-![Evidencia Parquets](/grupo06_scotiabank/Lab_AWS/evidences/Evidencia_11_Parquets.png)
+![Evidencia Parquets](/grupo05_nettalco/Lab_AWS/evidencias/evidencia_parquets.jpg)
 
 ## 5. Consumo de datos en AWS Athena
 
@@ -284,6 +282,7 @@ FROM base_prueba.orders_parquet
 LIMIT 100;
 ```
 ![Evidencia_Consulta](/grupo05_nettalco/Lab_AWS/evidencias/SQL_selected_ejecuccion.jpg)
+
 
 
 
