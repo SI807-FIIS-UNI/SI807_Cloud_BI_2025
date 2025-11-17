@@ -247,13 +247,13 @@ Subir un Archivo de Datos Local a HDFS:
 Este comando copia un archivo desde el sistema de archivos local del master (donde se ejecuta la terminal) a HDFS.
 
 ```bash
-hadoop fs -mkdir /laboratorio2
+hadoop fs -mkdir/laboratorio2
 ```
 
 Subir archivo:
 
 ```bash
-hadoop fs -copyFromLocal /flights.csv /laboratorio2
+hadoop fs -copyFromLocal/flights.csv/laboratorio2
 ```
 
 Preparación de Notebooks:
@@ -265,14 +265,15 @@ Asegúrate de que los siguientes notebooks estén subidos a tu bucket de GCS (no
   
 Abrir el archivo ConsultaSparkDF y validar cargar el cvs al un dataframe de Spark
 
-[!spark](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/evidenciaHDFS.png)
+
+![spark](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/hdfs2_iamgen.jpg)
 ---
 
 ### b. Configuración y Uso de Apache Kafka
 El clúster ya incluye Kafka gracias a la acción de inicialización. Ejecutaremos los siguientes comandos desde la misma terminal de JupyterLab.
 
 Crear un Tópico (Topic): 
-Creamos el topic retrasos para simular datos de streaming.:
+Creamos el topic "retrasos2" para simular datos de streaming.:
 
 ```bash
 /usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server micluster-w-0:9092 --create --replication-factor 1 --partitions 1 --topic retrasos
@@ -290,6 +291,7 @@ Abre una nueva terminal en JupyterLab para que esta se mantenga activa y puedas 
 ```bash
 /usr/lib/kafka/bin/kafka-console-producer.sh --broker-list micluster-w-0:9092 --topic retrasos
 ```
+![topic](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/evidenciaHDFS.png)
 
 Ejemplos de mensajes JSON:
 Ingresa estos mensajes en la terminal del productor, uno por línea:
