@@ -1,0 +1,6 @@
+cod_tarifa,descripcion,nivel_tension,segmento_objetivo,cargo_fijo,cargo_energia,cargo_hp,cargo_fp,incluye_demanda,estado_tarifa,fecha_inicio_vigencia
+BT5_RES,Tarifa residencial BT5 simple,BT,RESIDENCIAL,5.0,0.6,0.0,0.0,N,ACTIVO,2018-01-01
+BT5_GEN,Tarifa BT5 usuario general,BT,USUARIO_GENERAL,6.0,0.62,0.0,0.0,N,ACTIVO,2018-01-01
+BT4_COM,Tarifa BT4 comercio pequeño,BT,COMERCIAL/OTROS/AGRICOLA,10.0,0.65,0.0,0.0,N,ACTIVO,2018-01-01
+MT2_GEN,Tarifa MT2 general (demanda y energía),MT,COMERCIAL/INDUSTRIAL/GOBIERNO/MUNICIPALIDAD,120.0,0.45,0.2,0.18,S,ACTIVO,2018-01-01
+MT2_AP,Tarifa MT2 alumbrado público,MT,ALUMBRADO_PUBLICO,80.0,0.4,0.18,0.16,S,ACTIVO,2018-01-01

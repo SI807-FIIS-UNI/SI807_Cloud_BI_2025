@@ -1,0 +1,23 @@
+CREATE TABLE gold_db.gold_facturacion_teorica_mes (
+  id_suministro       BIGINT,
+  id_medidor          BIGINT,
+  anio_mes            VARCHAR,
+  energia_total_kwh   DOUBLE,
+  demanda_max_kw      DOUBLE,
+  n_registros         BIGINT,
+  n_registros_error   BIGINT,
+  pct_registros_error DOUBLE,
+  nivel_tension       VARCHAR,
+  distrito            VARCHAR,
+  tipo_cliente        VARCHAR,
+  cod_tarifa          VARCHAR,
+  cargo_energia       DOUBLE,
+  cargo_fijo          DOUBLE,
+  facturacion_teorica DOUBLE,
+  n_segmento          BIGINT,
+  q1                  DOUBLE,
+  q3                  DOUBLE,
+  iqr                 DOUBLE,
+  umbral_superior     DOUBLE,
+  es_atipico          INTEGER
+);
