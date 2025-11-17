@@ -1,6 +1,6 @@
 # Laboratorio GCP_GRUPO 5: Levantar Cluster Hadoop utilizando Google Cloud Platform 
 
-## 1. **Introducción**
+## 📖 1. **Introducción**
 
 En esta guía, aprenderás a crear y configurar un clúster de procesamiento de datos en Google Cloud Platform (GCP). Utilizaremos Google Cloud Dataproc para desplegar de manera eficiente un entorno que soporte:
 
