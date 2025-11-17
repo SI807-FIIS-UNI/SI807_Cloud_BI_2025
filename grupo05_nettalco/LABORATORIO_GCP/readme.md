@@ -71,7 +71,7 @@ Si aún no tienes una cuenta, regístrate a través del siguiente enlace. GCP of
 
 Una vez registrado, accederás a la **Consola de Google Cloud** para comenzar a gestionar tus recursos.
 
-[!captura de la consola](/imagen_02.jpg)
+[!captura de la consola](/grupo05_nettalco/LABORATORIO_GCP/imagen002_consola.png)
 
 ### b. **Crear un Proyecto**
 
