@@ -137,7 +137,7 @@ Una vez creado el *bucket*, subiremos los archivos que el clúster usará para e
 2. Selecciona los *scripts* de Spark y los *datasets* de prueba desde tu máquina local.
 3. Haz clic en **"Abrir"** para iniciar la subida.
 
-[!subir archivo](/imagen_07.jpg)
+![subir archivo](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/archivos_bucket.png)
 
 ---
 
