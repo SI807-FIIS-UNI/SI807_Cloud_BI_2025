@@ -67,22 +67,27 @@ Si aún no tienes una cuenta, regístrate a través del siguiente enlace. GCP of
 **Enlace de registro:**
 [https://cloud.google.com/](https://cloud.google.com/)
 
-[!captura de pantalla del registro](/imagen_01.jpg)
 
 Una vez registrado, accederás a la **Consola de Google Cloud** para comenzar a gestionar tus recursos.
 
-[!captura de la consola](/grupo05_nettalco/LABORATORIO_GCP/imagen002_consola.png)
+![consola](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/imagen002_consola.png)
+
 
 ### b. **Crear un Proyecto**
 
 Todos los recursos en GCP deben estar contenidos dentro de un proyecto.
 
 1. Navega al selector de proyectos en la barra superior (junto al logo de Google Cloud).
+   ![captura de proyecto](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/imagen003_capturaProyecto.png)
+   
 2. Haz clic en **"Proyecto nuevo"** o **"Crear proyecto"**.
+
+![captura de proyecto](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/imagen004_capturaProyecto2.png)
+
 3. Asigna un nombre descriptivo al proyecto.
 4. **Guarda el ID del proyecto** (es único y lo necesitarás más adelante).
 
-[!captura de proyecto](/imagen_03.jpg)
+![captura de proyecto](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/id_proyecto.png)
 
 ### c. **Habilitar APIs Necesarias**
 
@@ -92,7 +97,7 @@ Debemos asegurar que el servicio Dataproc esté habilitado para poder crear el c
 2. Haz clic en **"Habilitar APIs y servicios"**.
 3. Busca y habilita la API: **Google Cloud Dataproc**.
 
-[!captura habilitar API](/imagen_04.jpg)
+![captura habilitar API](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/imagen006_APIS.png)
 
 ### d. **Configurar Permisos de IAM**
 
@@ -103,7 +108,7 @@ Verifica que tu cuenta de usuario tenga los permisos necesarios para crear y ges
     * **Editor** (cubre la mayoría de las operaciones)
     * **Dataproc Editor** (rol específico para el servicio)
 
-[!captura IAM](/imagen_05.jpg)
+![captura IAM](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/IAM_imagen00.png)
 
 ---
 
@@ -122,7 +127,7 @@ Un *bucket* es el contenedor fundamental de almacenamiento de objetos en GCS.
 5. Configura las opciones de privacidad y protección (generalmente, las opciones por defecto son suficientes para este tutorial).
 6. Haz clic en **"Crear"**.
 
-[!captura bucket](/imagen_06.jpg)
+![captura bucket](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/buckets_imagen00.png)
 
 ### b. **Subir Archivos de Prueba (*Scripts* y *Datasets*)**
 
@@ -145,7 +150,8 @@ En este paso, utilizaremos la herramienta de línea de comandos `gcloud` a trav�
 1.  Navega al servicio **Dataproc** en la Consola de GCP.
 2.  Haz clic en el icono **Cloud Shell** (terminal en la web) en la esquina superior de la Consola.
 
-[!abrir shell](/imagen_08.jpg)
+![abrir shell](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/ShellCluster_imagen00.png)
+
 
 ### b. **Configurar el Entorno en Cloud Shell**
 
@@ -161,6 +167,7 @@ Seleccionar proyecto: Reemplaza [ID_DEL_PROYECTO] con el ID que guardaste en el 
 ```bash
 gcloud config set project [ID_DEL_PROYECTO]
 ```
+![abrir shell](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/verificacionShell_imagen00.png)
 
 ### c. Comando de Creación del Clúster
 Comando base:
@@ -192,30 +199,6 @@ gcloud beta dataproc clusters create micluster \
  --project hadoop-spark-lab2
 ```
 
-
-
-
-
-
-```bash
-gcloud beta dataproc clusters create micluster \
-  --enable-component-gateway \
-  --bucket bucket-prueba-mia \
-  --region us-east1 \
-  --zone us-east1-c \
-  --master-machine-type n1-standard-2 \
-  --master-boot-disk-size 500 \
-  --num-workers 2 \
-  --worker-machine-type n1-standard-2 \
-  --worker-boot-disk-size 500 \
-  --image-version 2.1-debian11 \
-  --properties spark:spark.jars.packages=org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.3 \
-  --optional-components JUPYTER,ZOOKEEPER \
-  --max-age 14400s \
-  --initialization-actions 'gs://goog-dataproc-initialization-actions-europe-west1/kafka/kafka.sh' \
-  --project hadoop-spark-lab2
-```
-
 Nota:
 Si encuentras errores de sintaxis, considera ejecutar el comando por partes o verificar las versiones de la imagen y los packages de Spark.
 
@@ -223,7 +206,7 @@ Si encuentras errores de sintaxis, considera ejecutar el comando por partes o ve
 * Cambiar `--project` por tu ID.
 * Si falla, pegar línea por línea.
 
-[!captura creación cluster](/imagen_09.jpg)
+![captura creación cluster](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/creacionCluster_imagen00.png)
 
 ---
 
@@ -246,7 +229,7 @@ Utilizaremos la terminal de **JupyterLab**, que se ejecuta directamente en el no
 
 1. Abrir **JupyterLab** → **Terminal**.
 
-[!abrir jupyter](/imagen_10.jpg)
+![abrir jupyter](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/jupyterLab_imagen00.png)
 
 Obtener Permisos de Superusuario (para HDFS)::
 
@@ -279,7 +262,10 @@ Asegúrate de que los siguientes notebooks estén subidos a tu bucket de GCS (no
 * ConsultaSparkDF_lab.ipynb
 * ConsultarParquet_lab.ipynb
 * ReadStream_lab.ipynb
+  
+Abrir el archivo ConsultaSparkDF y validar cargar el cvs al un dataframe de Spark
 
+[!spark](/grupo05_nettalco/LABORATORIO_GCP/evidencias_gcp/evidenciaHDFS.png)
 ---
 
 ### b. Configuración y Uso de Apache Kafka
