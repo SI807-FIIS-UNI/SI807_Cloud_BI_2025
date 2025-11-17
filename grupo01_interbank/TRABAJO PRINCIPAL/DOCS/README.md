@@ -1,3 +1,6 @@
+# VIDEO DE LAS CONFIGURACIONES
+LINK : [video configuracion](https://drive.google.com/drive/folders/1L19x_wX0hwxIjKNr4SFnY9nE-gEJ5Fmr?usp=drive_link)
+
 # Parámetros de Costos Cloud
 
 
