@@ -3,6 +3,10 @@
 
 ---
 
+## Entregables
+
+- [Practica Calificada 3](3PC/README.md)
+
 ## Integrantes
 - **Jhon Carhuas Romero**  
 - **Navhi Andrade Saavedra**  
