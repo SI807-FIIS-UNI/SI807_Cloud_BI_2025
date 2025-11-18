@@ -1,72 +1,82 @@
-
-
-# 🧱 Arquitectura BI – Servicios Utilizados y Flujo ETL/DW/Visualización
-
-Este documento detalla los servicios cloud utilizados en el pipeline BI para extraer información desde la **SBS**, procesarla mediante un flujo **ETL batch**, almacenarla en un **Data Warehouse** y finalmente visualizarla en un dashboard analítico.
-
----
+# 🧱 Arquitectura BI – Servicios Utilizados y Flujo ETL/DW/Visualización (Versión Actualizada)
 
 ## 🔧 Servicios Utilizados y Función en el Flujo BI
 
-### **1. Cloud Run Jobs (ETL – Extracción / Ingesta)**
+### **1. Cloud Scheduler (Orquestación)**
 
-* Se utiliza para ejecutar periódicamente un contenedor encargado del **web scraping** desde la página de la SBS.
-* Corre en modo *serverless*, con escalamiento a cero → ideal para cargas batch.
-* Resultado: Archivos HTML/CSV/TXT o datos transformados mínimamente.
+* Programa la ejecución automática del pipeline (por ejemplo, diario o cada hora).
+* Dispara Cloud Run Jobs mediante HTTP o Pub/Sub.
 
-### **2. Cloud Storage (ETL – Ingesta / Capa Bronze)**
+### **2. Secret Manager (Gestión de credenciales)**
 
-* Almacena los archivos **raw** provenientes del scraping.
-* Representa la **capa Bronze** dentro de la arquitectura Medallion.
-* Proporciona versionamiento, bajo costo y disponibilidad.
+* Almacena secretos necesarios para scraping (tokens, URLs, claves internas).
+* Asegura que Cloud Run y Dataproc accedan a credenciales sin exponerlas en código.
 
-### **3. Dataproc Serverless (ETL – Transformación / Silver)**
+### **3. IAM (Identity and Access Management)**
 
-* Ejecuta los procesos de transformación mediante PySpark/Spark.
-* Limpia, estandariza y valida la data → **capa Silver**.
-* Crea datasets consolidados para análisis.
-
-### **4. BigQuery (Data Warehouse – Capa Gold)**
-
-* Sirve como repositorio analítico y columna vertebral del DW.
-* Crea tablas Gold optimizadas para dashboards.
-* Ejecuta SQL altamente eficiente con escalamiento automático.
-
-### **5. Looker Studio / Looker (Visualización)**
-
-* Conecta directamente con BigQuery.
-* Construye dashboards interactivos con KPIs, tendencias e indicadores finales.
-* Utiliza tablas Gold para minimizar costos y latencia de consulta.
+* Controla qué servicios pueden acceder a Storage, BigQuery y Secrets.
+* Aplica el principio de mínimo privilegio para seguridad del pipeline.
 
 ---
 
-## 🧬 Fases del Proceso BI (ETL → DW → Visualización)
+## 🔵 ETL – Ingesta
 
-### **ETL**
+### **4. Cloud Run Jobs**
 
-* *Extracción*: Cloud Run Jobs obtiene datos de la SBS.
-* *Carga RAW*: Cloud Storage almacena los datos iniciales.
-* *Transformación*: Dataproc Serverless ejecuta limpieza y enriquecimiento.
+* Ejecuta contenedores serverless encargados del scraping desde:
 
-### **DW**
+  * **SBS**
+  * **BCRP**
+  * **Scotiabank** (nuevo)
+* Extrae datos en batch y los guarda en Cloud Storage.
 
-* BigQuery almacena y organiza las tablas analíticas Gold.
-* Se aplican modelos lógicos, agregaciones y particiones según el caso.
+### **5. Cloud Storage (Capa Bronze)**
 
-### **Visualización**
-
-* Looker crea dashboards y reportes conectados directamente a BigQuery.
+* Almacena archivos crudos provenientes de las distintas fuentes.
+* Define la **capa Bronze** dentro del modelo Medallion.
 
 ---
 
-## 📌 Resumen Final
+## ⚙️ ETL – Transformación
 
-| Fase                        | Servicio            | Función                                     |
-| --------------------------- | ------------------- | ------------------------------------------- |
-| **Extracción**              | Cloud Run Jobs      | Scraping automático desde SBS               |
-| **Raw Storage (Bronze)**    | Cloud Storage       | Almacenamiento de datos crudos              |
-| **Transformación (Silver)** | Dataproc Serverless | Limpieza, enriquecimiento y estandarización |
-| **Data Warehouse (Gold)**   | BigQuery            | Tablas finales optimizadas para BI          |
-| **Visualización**           | Looker              | Dashboards para usuarios finales            |
+### **6. Dataproc Serverless (Capa Silver)**
+
+* Procesa y limpia los datos almacenados en la capa Bronze.
+* Estandariza formatos, genera tablas estructuradas Silver.
+* Corre sin necesidad de clústeres permanentes.
+
+---
+
+## 🟡 DW – Modelado y Capa Gold
+
+### **7. BigQuery**
+
+* Almacena las tablas finales Gold listas para analítica.
+* Permite agregar, enriquecer y modelar KPIs.
+* Se optimiza mediante particionamiento, clustering y control de costos.
+
+---
+
+## 🟢 Visualización
+
+### **8. Looker / Looker Studio**
+
+* Conectado directamente a BigQuery.
+* Construcción de dashboards con métricas clave de SBS, BCRP y Scotiabank.
+* Permite compartir insights de manera segura.
+
+---
+
+## 📌 Resumen Final Actualizado
+
+| Fase                        | Servicio             | Función                                          |
+| --------------------------- | -------------------- | ------------------------------------------------ |
+| **Orquestación**            | Cloud Scheduler      | Ejecuta el pipeline de forma programada          |
+| **Seguridad**               | Secret Manager / IAM | Manejo seguro de credenciales + permisos mínimos |
+| **Extracción**              | Cloud Run Jobs       | Scraping desde SBS, BCRP y Scotiabank            |
+| **Raw (Bronze)**            | Cloud Storage        | Almacena datos crudos                            |
+| **Transformación (Silver)** | Dataproc Serverless  | Limpieza y procesamiento Spark                   |
+| **Data Warehouse (Gold)**   | BigQuery             | Modelo analítico final                           |
+| **Visualización**           | Looker               | Dashboards interactivos                          |
 
 ---
