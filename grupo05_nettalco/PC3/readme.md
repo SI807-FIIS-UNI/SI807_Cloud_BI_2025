@@ -95,7 +95,7 @@ Una vez transformados los datos con Spark, el *job* se encarga de cargarlos en B
 
 ---
 
-## 🗂️ 7. Dashboard en Looker
+## 🗂️ 4. Dashboard en Looker
 Los resultados del procesamiento se visualizaron en la siguiente herramienta:
 ![9](/grupo05_nettalco/PC3/evidencias_pc3/img_009.png)
 
