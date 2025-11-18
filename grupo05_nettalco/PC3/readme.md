@@ -124,6 +124,8 @@ PySpark en Dataproc:
 | **comportamiento_clientes**             | Métricas de comportamiento: frecuencia de compra y promedio de prendas    |
 
 
+![10](/grupo05_nettalco/PC3/evidencias_pc3/img_010.png)
+
 ------------------------------------------------------------------------
 
 ## 📥 4.2 Evidencia de la carga en BigQuery
@@ -225,12 +227,16 @@ Se realizaron consultas para verificar:
 ## ✅ A) Validar conteo de registros por tabla
 
 ``` sql
-SELECT 
-  table_name,
-  row_count
+SELECT
+  table_id,
+  row_count,
+  size_bytes,
+  TIMESTAMP_MILLIS(creation_time) AS creation_time,
+  TIMESTAMP_MILLIS(last_modified_time) AS last_modified
 FROM `ventas_nettalco.__TABLES__`
 ORDER BY row_count DESC;
 ```
+![11](/grupo05_nettalco/PC3/evidencias_pc3/img_011.png)
 
 ## ✅ B) Revisar esquema
 
@@ -242,6 +248,7 @@ SELECT
 FROM `ventas_nettalco.INFORMATION_SCHEMA.COLUMNS`
 ORDER BY table_name;
 ```
+![12](/grupo05_nettalco/PC3/evidencias_pc3/img_012.png)
 
 ## ✅ C) Mostrar primeras filas
 
@@ -250,6 +257,7 @@ SELECT *
 FROM `ventas_nettalco.total_prendas_por_talla`
 LIMIT 10;
 ```
+![13](/grupo05_nettalco/PC3/evidencias_pc3/img_013.png)
 
 ------------------------------------------------------------------------
 
@@ -261,6 +269,7 @@ LIMIT 10;
 SELECT SUM(TOTAL_PRENDAS) AS total_prendas_suma
 FROM `ventas_nettalco.total_prendas_por_talla`;
 ```
+![14](/grupo05_nettalco/PC3/evidencias_pc3/img_014.png)
 
 ### **2️⃣ Top clientes por volumen**
 
@@ -272,6 +281,7 @@ FROM `ventas_nettalco.volumen_ventas_por_cliente`
 ORDER BY TOTAL_PRENDAS DESC
 LIMIT 10;
 ```
+![15](/grupo05_nettalco/PC3/evidencias_pc3/img_015.png)
 
 ### **3️⃣ Validación por franja horaria**
 
@@ -283,6 +293,7 @@ SELECT
 FROM `ventas_nettalco.tendencias_ventas_por_franja_horaria`
 GROUP BY FRANJA_HORARIA;
 ```
+![16](/grupo05_nettalco/PC3/evidencias_pc3/img_016.png)
 
 ### **4️⃣ Productos más vendidos**
 
@@ -294,6 +305,7 @@ FROM `ventas_nettalco.productos_mas_vendidos`
 ORDER BY TOTAL_PRENDAS DESC
 LIMIT 15;
 ```
+![17](/grupo05_nettalco/PC3/evidencias_pc3/img_017.png)
 
 ### **5️⃣ Eficiencia operativa**
 
@@ -308,7 +320,7 @@ FROM `ventas_nettalco.eficiencia_operativa`;
 
 ``` sql
 SELECT 
-  FECHA_TERMINO,
+  DATE(FECHA_TERMINO_TS) AS FECHA_TERMINO,
   ESTILO,
   TOTAL_PRENDAS,
   PROMEDIO_MOVIL
@@ -316,6 +328,7 @@ FROM `ventas_nettalco.prediccion_ventas`
 ORDER BY FECHA_TERMINO DESC
 LIMIT 20;
 ```
+![18](/grupo05_nettalco/PC3/evidencias_pc3/img_018.png)
 
 ### **7️⃣ Comportamiento del cliente**
 
@@ -327,6 +340,7 @@ SELECT
 FROM `ventas_nettalco.comportamiento_clientes`
 ORDER BY FRECUENCIA_COMPRA DESC;
 ```
+![19](/grupo05_nettalco/PC3/evidencias_pc3/img_019.png)
 
 ------------------------------------------------------------------------
 
