@@ -1,7 +1,8 @@
 # 🧪 Evidencias de despliegue
 A continuación, se presentan las evidencias de la implementación y el procesamiento de datos realizado en Google Cloud Platform (GCP).
 
-[![Play Video](https://img.shields.io/badge/Play-Video_PC3-blue?style=for-the-badge&logo=play)](./evidencias_pc3/Video-PC3.mp4)
+**LINK VIDEO EXPLICATIVO:**  [👉 VIDEO-PC3](./evidencias_pc3/Video-PC3.mp4)
+
 
 Esta sección ilustra el resultado del trabajo, que involucró el procesamiento de los datasets de la empresa Nettalco para el proyecto del Parcial, utilizando la infraestructura de Big Data desplegada en GCP.
 
