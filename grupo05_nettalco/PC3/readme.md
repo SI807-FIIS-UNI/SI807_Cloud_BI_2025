@@ -4,19 +4,54 @@ A continuación, se presentan las evidencias de la implementación y el procesam
 Esta sección ilustra el resultado del trabajo, que involucró el procesamiento de los datasets de la empresa Nettalco para el proyecto del Parcial, utilizando la infraestructura de Big Data desplegada en GCP.
 
 ## 🗂️ 1. Google Cloud Storage 
+## 💾 Configuración de Google Cloud Storage (GCS)
 
-![1](/grupo05_nettalco/PC3/evidencias_pc3/img_001.png)
+GCS actuará como nuestro sistema de archivos distribuido (donde almacenaremos los datos y los *scripts*).
 
+### a. **Crear un *Bucket* de GCS**
 
-![2](/grupo05_nettalco/PC3/evidencias_pc3/img_002.png)
+Un *bucket* es el contenedor fundamental de almacenamiento de objetos en GCS.
+
+1.  En la barra de búsqueda, escribimos y seleccionamos **"Cloud Storage"**.
+2.  Hacemos clic en **"Crear bucket"**.
+3.  Se asigna un nombre **único y global**
+4.  Se selecciona la **Región** donde se desplegará el clúster de Dataproc.
+5.  Configuramos las opciones de privacidad y protección .
+6.  Hacemos clic en **"Crear"**.
+
+![captura bucket](/grupo05_nettalco/PC3/evidencias_pc3/img_001.png)
+
+### b. **Subir Archivos de Prueba (*Scripts* y *Datasets*)**
+
+Una vez creado el *bucket*, subiremos los archivos que el clúster usará para el procesamiento.
+
+1.  Dentro de tu *bucket*, haz clic en **"Subir archivos"** o arrastra los archivos al navegador de carpetas.
+2.  Selecciona los *scripts* de Spark y los *datasets* de prueba desde tu máquina local.
+3.  Haz clic en **"Abrir"** para iniciar la subida.
+
+**Evidencia:** El *bucket* `nettalco-data-bd_grupo05` con los archivos CSV y los directorios de trabajo listos para ser utilizados por Dataproc.
+
+![bucket GCS con CSV](/grupo05_nettalco/PC3/evidencias_pc3/img_002.png)
+
+---
 
 ## 🗂️ 2. Cloud Shell
+En este paso, utilizaremos la herramienta de línea de comandos `gcloud` a través de **Cloud Shell** para construir y lanzar el clúster.
+
+### a. **Inicializar Cloud Shell y Desplegar el Clúster**
+
+1.  Navega al servicio **Dataproc** en la Consola de GCP.
+2.  Haz clic en el icono **Cloud Shell** (terminal en la web) en la esquina superior derecha de la Consola.
+3.  Una vez en Cloud Shell, ejecuta el comando de creación del clúster (mostrado a continuación) para iniciar el despliegue de los recursos.
+
+**Evidencia:** El Cloud Shell activo, mostrando los comandos de `gcloud dataproc clusters create` utilizados para configurar el entorno.
 
 ![3](/grupo05_nettalco/PC3/evidencias_pc3/img_003.png)
 
-## 🗂️ 3. Dataproc - clubster
+### b. **Comando de Despliegue**
+
 Utilizaremos la herramienta de línea de comandos gcloud en Cloud Shell o en la  terminal local para desplegar el clúster.
-## Comando de Despliegue:
+
 ```bash
 gcloud dataproc clusters create nettalco-cluster \
     --region=us-east1 \
@@ -36,17 +71,29 @@ gcloud dataproc clusters create nettalco-cluster \
 
 ![4](/grupo05_nettalco/PC3/evidencias_pc3/img_004.png)
 
-## 🗂️ 4. Dataproc - Clubster - Procesamiento
+## 🗂️ 3. Ejecución de Trabajos y Procesamiento de Datos(Dataproc) 
 
-![6](/grupo05_nettalco/PC3/evidencias_pc3/img_006.png)
+Una vez que el clúster `nettalco-cluster` está activo y los datos se encuentran en GCS, procedemos a ejecutar el *script* de Spark que realiza las transformaciones y la carga final de los datos. Utilizamos **JupyterLab** para la ejecución interactiva.
 
-## 🗂️ 5. Dataproc - clubster - carga a bigquery
+### a. **Ejecución del *Script* de Spark en JupyterLab**
 
-![7](/grupo05_nettalco/PC3/evidencias_pc3/img_007.png)
+El primer paso es ejecutar el *notebook* que contiene el código de **PySpark**. Este código lee los archivos CSV de Nettalco desde GCS, realiza las transformaciones y prepara los *datasets* para el análisis.
 
-## 🗂️ 6. Bigquery
+**Evidencia:** El entorno JupyterLab activo, mostrando el *notebook* `Procesamiento_nettalco.ipynb` con el código PySpark listo para la lectura y transformación de datos.
 
-![8](/grupo05_nettalco/PC3/evidencias_pc3/img_008.png)
+![Notebook_JupyterLab](/grupo05_nettalco/PC3/evidencias_pc3/img_006.png)
+
+### b. **Carga de Datos Procesados a BigQuery**
+
+Una vez transformados los datos con Spark, el *job* se encarga de cargarlos en BigQuery para su posterior consumo por herramientas de BI como Looker Studio. El clúster utiliza conectores Spark-BigQuery para realizar esta operación masiva.
+
+**Evidencia:** La terminal de JupyterLab mostrando los comandos de `bq load` o los resultados de las operaciones de carga de Spark, confirmando el estado **DONE** (Completado) para múltiples tablas de Nettalco.
+
+![Terminal de JupyterLab](/grupo05_nettalco/PC3/evidencias_pc3/img_007.png)
+
+> **Nota:** La evidencia muestra la exitosa finalización de la carga de *datasets* clave como `ventas_volumen_ventas_por_cliente`, `eficiencia_operativa`, e `indice_ventas_cliente`.
+
+---
 
 ## 🗂️ 7. Dashboard en Looker
 Los resultados del procesamiento se visualizaron en la siguiente herramienta:
