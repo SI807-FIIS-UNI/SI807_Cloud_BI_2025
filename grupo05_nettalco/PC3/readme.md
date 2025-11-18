@@ -376,7 +376,7 @@ La siguiente matriz resume la situación financiera actual del proyecto y el pot
 
 *Evidencia:* Matriz de Costos y Proyección de Uso (Cifras expresadas en Soles Peruanos: S/).
 
-![20](/grupo05_nettalco/PC3/evidencias_pc3/img_020.png)
+![21](/grupo05_nettalco/PC3/evidencias_pc3/img_021.png)
 
 | Indicador | Valor Mensual | Valor Anual Estimado |
 | :--- | :--- | :--- |
@@ -391,7 +391,7 @@ El análisis inicial revela que el *Procesamiento* (Dataproc) es el componente q
 
 *Evidencia:* Desglose detallado de Costos por Servicio (Almacenamiento, Procesamiento y Transferencia).
 
-![21](/grupo05_nettalco/PC3/evidencias_pc3/img_021.png)
+![22](/grupo05_nettalco/PC3/evidencias_pc3/img_022.png)
 
 | Servicio | Almacenamiento (S/) | Procesamiento (S/) | Transferencia (S/) | Total Mensual (S/) |
 | :--- | :--- | :--- | :--- | :--- |
@@ -407,7 +407,7 @@ Dado que el procesamiento (Dataproc) es el principal impulsor de costos, las sig
 
 *Evidencia:* Propuesta de Optimización de Costos detallando las estrategias, el ahorro estimado y el porcentaje de descuento.
 
-![22](/grupo05_nettalco/PC3/evidencias_pc3/img_022.png)
+![23](/grupo05_nettalco/PC3/evidencias_pc3/img_023.png)
 
 | Estrategia de Optimización | Implementación | Ahorro Mensual Estimado | % Ahorro |
 | :--- | :--- | :--- | :--- |
