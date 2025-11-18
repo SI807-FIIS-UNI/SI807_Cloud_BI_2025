@@ -365,3 +365,56 @@ Los resultados del procesamiento se visualizaron en la siguiente herramienta:
 ![9](/grupo05_nettalco/PC3/evidencias_pc3/img_009.png)
 
 **Link del Dashboard:** [Dashboard Looker Studio](https://lookerstudio.google.com/u/0/reporting/9139c4d1-2f52-4bd1-9e86-97b7554b2d58)
+
+## 💰 6. Matriz de Costos y Optimización Financiera
+
+Un componente crucial de cualquier despliegue en la nube es la gestión y optimización de costes. En esta sección, presentamos la matriz de costos actual del stack de Big Data, su desglose y las estrategias propuestas para lograr un ahorro significativo.
+
+### a. Proyección de Costos (Matriz Resumen)
+
+La siguiente matriz resume la situación financiera actual del proyecto y el potencial de ahorro estimado al implementar las políticas de optimización.
+
+*Evidencia:* Matriz de Costos y Proyección de Uso (Cifras expresadas en Soles Peruanos: S/).
+
+![20](/grupo05_nettalco/PC3/evidencias_pc3/img_020.png)
+
+| Indicador | Valor Mensual | Valor Anual Estimado |
+| :--- | :--- | :--- |
+| *Costo Mensual Actual* | S/ 1,625.63 | - |
+| *Costo Anual Estimado* | - | S/ 19,507.56 |
+| *Ahorro Potencial* | S/ 956.07/mes | - |
+| *Costo Optimizado (Estimado)* | S/ 669.56/mes | - |
+
+### b. Desglose de Costos por Servicio
+
+El análisis inicial revela que el *Procesamiento* (Dataproc) es el componente que representa la mayor parte del gasto (85.4%), seguido por la *Transferencia* de datos.
+
+*Evidencia:* Desglose detallado de Costos por Servicio (Almacenamiento, Procesamiento y Transferencia).
+
+![21](/grupo05_nettalco/PC3/evidencias_pc3/img_021.png)
+
+| Servicio | Almacenamiento (S/) | Procesamiento (S/) | Transferencia (S/) | Total Mensual (S/) |
+| :--- | :--- | :--- | :--- | :--- |
+| *BigQuery* | S/ 88.13 | S/ 468.75 | S/ 56.25 | S/ 613.13 |
+| *Cloud Storage* | S/ 43.13 | S/ 0.00 | S/ 31.88 | S/ 75.00 |
+| *Dataproc (Spark)* | S/ 0.00 | S/ 918.75 | S/ 18.75 | S/ 937.50 |
+| *Looker Studio* | S/ 0.00 | S/ 0.00 | S/ 0.00 | S/ 0.00 |
+| *TOTAL* | *S/ 131.26 (8.1%)* | *S/ 1,387.50 (85.4%)* | *S/ 106.88 (6.6%)* | *S/ 1,625.63* |
+
+### c. Propuesta de Optimización de Costos
+
+Dado que el procesamiento (Dataproc) es el principal impulsor de costos, las siguientes estrategias se enfocan en la eficiencia del cómputo y el ciclo de vida de los datos, con un potencial de ahorro total de *S/ 956.07 mensuales*.
+
+*Evidencia:* Propuesta de Optimización de Costos detallando las estrategias, el ahorro estimado y el porcentaje de descuento.
+
+![22](/grupo05_nettalco/PC3/evidencias_pc3/img_022.png)
+
+| Estrategia de Optimización | Implementación | Ahorro Mensual Estimado | % Ahorro |
+| :--- | :--- | :--- | :--- |
+| *Instancias Preemptibles en Dataproc* | Configurar workers como VMs preemptibles para trabajos tolerantes a fallos. | S/ 551.25 | -60% |
+| *Clúster con *Autoscaling** | Escalar automáticamente según demanda y programar el apagado en horarios inactivos. | S/ 229.69 | -25% |
+| *Lifecycle Policies en Cloud Storage* | Mover datos antiguos a clases de almacenamiento frías (Nearline/Coldline) después de 90 días. | S/ 21.56 | -50% |
+| *Particionamiento en BigQuery* | Particionar tablas por fecha para reducir la cantidad de datos escaneados en consultas. | S/ 140.63 | -30% |
+| *Compresión de Archivos CSV* | Convertir los archivos CSV a un formato columnar comprimido (Parquet o Avro). | S/ 12.94 | -30% |
+
+---
