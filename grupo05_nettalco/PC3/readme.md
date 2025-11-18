@@ -1,7 +1,7 @@
 # 🧪 Evidencias de despliegue
-En este laboratorio enseñan a implementar un pipeline de datos usando S3, Glue, IAM y Athena sobre AWS. 
-Paso a paso, se desarrollara desde la configuración segura del almacenamiento, hasta la automatización del catálogo,
-la transformación eficiente y el análisis con consultas SQL.
+A continuación, se presentan las evidencias de la implementación y el procesamiento de datos realizado en Google Cloud Platform (GCP).
+
+Esta sección ilustra el resultado del trabajo, que involucró el procesamiento de los datasets de la empresa Nettalco para el proyecto del Parcial, utilizando la infraestructura de Big Data desplegada en GCP.
 
 ## 🗂️ 1. Google Cloud Storage 
 El primer paso consistió en crear un bucket S3 que servirá como almacenamiento principal para los datos utilizados en el laboratorio.  
@@ -52,86 +52,7 @@ gcloud dataproc clusters create nettalco-cluster \
 ![8](/grupo05_nettalco/PC3/evidencias_pc3/img_008.png)
 
 ## 🗂️ 7. Dashboard en Looker
-
+Los resultados del procesamiento se visualizaron en la siguiente herramienta:
 ![9](/grupo05_nettalco/PC3/evidencias_pc3/img_009.png)
 
-
-```
-├── data/
-│   └── raw/
-├── evidencias/
-├── script/
-└── README.md
-```
-![1](/grupo05_nettalco/PC3/evidencias_pc3/img_001.png)
-
-
-```json
-{
-    "Version": "2012-10-17",
-    "statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-              "s3:GetObject",
-              "s3:Putobject",
-              "s3:ListBucket",
-              "s3:Deleteobject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::s3-grupo-5-vf/*"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "aws: ResourceAccount": "581983650106"
-                }
-            }
-        }
-    ]
-}
-```
-
-```sql
-DROP TABLE IF EXISTS base_prueba.orders_parquet
-
-CREATE EXTERNAL TABLE IF NOT EXISTS base_prueba.orders_parquet (
-    index_id               int,
-    order_id               string,
-    order_date             date,
-    order_status           string,
-    fulfilment_type        string,
-    sales_channel          string,
-    ship_service_level     string,
-    style                  string,
-    sku                    string,
-    category               string,
-    size                   string,
-    asin                   string,
-    courier_status         string,
-    quantity               int,
-    currency_code          string,
-    amount                 double,
-    ship_city              string,
-    ship_state             string,
-    ship_postal_code       double,
-    ship_country           string,
-    promotion_ids          string,
-    is_b2b                 boolean,
-    fulfilled_by           string,
-    amount_numeric         double
-)
-PARTITIONED BY (
-    anio                   int,
-    mes                    string
-)
-STORED AS PARQUET
-LOCATION 's3://s3-grupo-5-vf/curated/'
-TBLPROPERTIES ('parquet.compression'='SNAPPY');
-
-
-MSCK REPAIR TABLE base_prueba.orders_parquet;
-
-SELECT *
-FROM base_prueba.orders_parquet
-LIMIT 100;
-```
+**Link del Dashboard:** [Dashboard Looker Studio](https://lookerstudio.google.com/u/0/reporting/9139c4d1-2f52-4bd1-9e86-97b7554b2d58)
