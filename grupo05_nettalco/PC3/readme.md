@@ -4,9 +4,6 @@ A continuación, se presentan las evidencias de la implementación y el procesam
 Esta sección ilustra el resultado del trabajo, que involucró el procesamiento de los datasets de la empresa Nettalco para el proyecto del Parcial, utilizando la infraestructura de Big Data desplegada en GCP.
 
 ## 🗂️ 1. Google Cloud Storage 
-El primer paso consistió en crear un bucket S3 que servirá como almacenamiento principal para los datos utilizados en el laboratorio.  
-Este bucket será el origen desde el cual AWS Glue obtendrá los archivos para el proceso de catalogación y análisis.
-El bucket de S3 funciona como data lake. Ahí almacenan tanto los datos crudos (raw) como los procesados (curated).
 
 ![1](/grupo05_nettalco/PC3/evidencias_pc3/img_001.png)
 
