@@ -28,3 +28,11 @@ La arquitectura en GCP se representa de la siguiente manera:
 
 ### 🥇 Capa Oro  
 <img src="../3PC/Media/Fotos/Gráficos/M_Oro.png" width="480"/>
+
+## 💰 Costos del proyecto
+
+Los costos estimados mensualmente y proyectados anualmente se muestran en la matriz de costos:
+
+<img src="../3PC/Media/Fotos/Gráficos/Matriz_de_costos.png" width="480"/>
+
+Estos costos se calcularon utilizando la Google Cloud Pricing Calculator, la herramienta oficial de Google para estimar precios de servicios en la nube.
