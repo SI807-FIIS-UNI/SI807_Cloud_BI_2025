@@ -647,13 +647,13 @@ gcloud dataproc clusters update nettalco-cluster \
 
 Visto ya en las evidencias del readme.md de PC3 en 🗂️ 4.3 Validación de datos en BigQuery
 
-[Ver README de PC3](../PC3/README.md)
+[Ver README de PC3](../PC3/readme.md)
 
 ## 📊 Visor Bi en la nube
 
 Visto ya en las evidencias del readme.md de PC3 en 🗂️ 5. Dashboard en Looker
 
-[Ver README de PC3](../PC3/README.md)
+[Ver README de PC3](../PC3/readme.md)
 
 
 **Link del Dashboard:** [Dashboard Looker Studio](https://lookerstudio.google.com/u/0/reporting/9139c4d1-2f52-4bd1-9e86-97b7554b2d58)
