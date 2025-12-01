@@ -6,6 +6,7 @@
 ## Entregables
 
 - [Practica Calificada 3](3PC/README.md)
+- [Practica Calificada 4](4PC/README.md)
 
 ## Integrantes
 - **Jhon Carhuas Romero**  
