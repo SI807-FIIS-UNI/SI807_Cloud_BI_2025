@@ -666,6 +666,10 @@ Este es un costo extremadamente bajo considerando el valor del monitoreo.
 ---
 
 ## <a name="fase-3-alarmas"></a>7. FASE 3: IMPLEMENTACIÓN DE ALARMAS CLOUDWATCH
+<img width="1347" height="422" alt="image" src="https://github.com/user-attachments/assets/0f23c645-905d-40a1-8f5d-16495d1e4fcf" />
+<img width="1366" height="582" alt="image" src="https://github.com/user-attachments/assets/269e5214-15df-4589-b2c0-3ee969893a89" />
+<img width="1039" height="446" alt="image" src="https://github.com/user-attachments/assets/c6400727-2661-4e6c-b758-ae2be4c205c8" />
+<img width="1060" height="459" alt="image" src="https://github.com/user-attachments/assets/bbdf4009-de94-4f05-a650-eb7cfc69554c" />
 
 ### 7.1 Estrategia de Diseño de Alarmas
 
