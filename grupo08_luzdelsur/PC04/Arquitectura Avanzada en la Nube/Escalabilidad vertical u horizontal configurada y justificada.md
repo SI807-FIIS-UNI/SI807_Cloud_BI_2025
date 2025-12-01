@@ -1,4 +1,4 @@
-<img width="852" height="450" alt="image" src="https://github.com/user-attachments/assets/852c8759-e5fb-4ede-8585-b5113efb74ab" /># Arquitectura de Escalabilidad en AWS Glue para ETL del Data Lake  
+# Arquitectura de Escalabilidad en AWS Glue para ETL del Data Lake  
 Proyecto: Luz del Sur 
 ---
 
