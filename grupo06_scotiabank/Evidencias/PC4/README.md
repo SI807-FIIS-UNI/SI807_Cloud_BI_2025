@@ -158,9 +158,9 @@ La carga hacia el Data Lake se realiza a través de tres componentes principales
 
 | Módulo | Rol en la Carga | Ruta de evidencia |
 |--------|-----------------|-------------------|
-| **02_WebScraping** | Descarga automatizada de archivos desde la SBS y BCRP → sube a `gs://.../data/raw/` | `02_WebScraping/README.md` |
-| **03_ETL (bronce-dispatcher)** | Ingesta, limpieza inicial y tabulado → inserción a BigQuery (dataset `bronce`) | `03_ETL/README.md` |
-| **04_DataLake** | Organización física y políticas del bucket GCS (raw / trusted / refined) | `04_DataLake/README.md` |
+| **02_WebScraping** | Descarga automatizada de archivos desde la SBS y BCRP → sube a `gs://.../data/raw/` | [02_WebScraping](02_WebScraping/README.md) |
+| **03_ETL (bronce-dispatcher)** | Ingesta, limpieza inicial y tabulado → inserción a BigQuery (dataset `bronce`) | [03_ETL](03_ETL/README.md) |
+| **04_DataLake** | Organización física y políticas del bucket GCS (raw / trusted / refined) | [04_DataLake](04_DataLake/README.md) |
 
 
 
