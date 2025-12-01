@@ -190,8 +190,8 @@ simulando que se encuentran en el SFTP.
 <img width="1462" height="739" alt="image" src="https://github.com/user-attachments/assets/2a573f29-aa7c-4c37-947a-471d2886700b" />
 
 
-
-
+### Video Explicación
+Link: https://drive.google.com/drive/folders/1vS67PzOPFQ7-1tmHx-yFIBOES9BjJwFA?usp=drive_link
 
 
 
