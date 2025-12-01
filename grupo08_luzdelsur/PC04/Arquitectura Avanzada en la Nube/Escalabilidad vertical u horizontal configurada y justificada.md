@@ -1,8 +1,5 @@
 # Arquitectura de Escalabilidad en AWS Glue para ETL del Data Lake  
-Proyecto: Luz del Sur – Plataforma Mikhael  
-Autor: [Tu Nombre]  
-Fecha: [Fecha Actual]
-
+Proyecto: Luz del Sur 
 ---
 
 ## 1. Introducción
