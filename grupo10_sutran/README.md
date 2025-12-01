@@ -185,3 +185,112 @@ df.write \
   .save()
 ```
 
+
+# PC 4 – Seguridad, IAM, Redes y Gobernanza en Google Cloud Platform  
+
+Este documento presenta la configuración de seguridad, IAM, redes, firewall, políticas y auditoría implementadas en el proyecto.  
+Se incluyen capturas de pantalla como evidencia, siguiendo la rúbrica del curso.
+
+---
+
+## 2. Seguridad, IAM, Redes y Gobernanza
+
+---
+
+### 2.1 IAM Granular (Roles personalizados + Políticas JSON)
+
+Se definió un **rol personalizado** para restringir operaciones específicas sobre recursos del proyecto.  
+El rol fue creado mediante un archivo **JSON** y aplicado a través de CLI (gsutil), cumpliendo los requisitos de la rúbrica relacionados a políticas personalizadas.
+
+✔ Control de acceso granular  
+✔ Rol creado mediante JSON  
+✔ Aplicación vía CLI  
+✔ Principio de mínimo privilegio aplicado  
+
+**Evidencia:**  
+![01_rol_json.png](/grupo10_sutran/evidencias/PC4/01_rol_json.png)
+
+---
+
+### 2.2 Red VPC Personalizada (Subred pública y privada)
+
+Se diseñó e implementó una **VPC dedicada** al proyecto llamada `vpc-sutran-prod`, siguiendo buenas prácticas de arquitectura:
+
+- **Subred pública**: permite salida controlada a internet y acceso estrictamente administrado.  
+- **Subred privada**: aislada, utilizada para procesamiento interno (Dataproc, ETL, etc).  
+- Rango CIDR asignado de acuerdo al diseño del proyecto.
+
+✔ Segmentación correcta  
+✔ Separación de cargas públicas y privadas  
+✔ Buenas prácticas de arquitectura de red  
+
+**Evidencias:**  
+![02_subred01.png](/grupo10_sutran/evidencias/PC4/02_subred01.png)  
+![03_subred02.png](/grupo10_sutran/evidencias/PC4/03_subred02.png)
+
+---
+
+### 2.3 Reglas de Firewall configuradas según políticas del proyecto
+
+Se configuraron reglas de firewall alineadas al principio Zero Trust:
+
+#### **Regla 1 – fw-ssh-public**
+- Dirección: Entrada  
+- Acción: Permitir  
+- Origen: IP pública del desarrollador  
+- Protocolo: TCP 22  
+- Objetivo: permitir administración segura del cluster Dataproc
+
+#### **Regla 2 – fw-internal**
+- Dirección: Entrada  
+- Acción: Permitir  
+- Origen: 10.0.0.0/16 (rango interno de la VPC)  
+- Protocolos: TCP/UDP internos  
+- Objetivo: habilitar comunicación entre componentes internos
+
+✔ Permisos mínimos  
+✔ Acceso público limitado  
+✔ Tráfico interno habilitado correctamente  
+
+**Evidencias:**  
+![04_reglafirewall01.png](/grupo10_sutran/evidencias/PC4/04_reglafirewall01.png)  
+![05_reglafirewall02.png](/grupo10_sutran/evidencias/PC4/05_reglafirewall02.png)
+
+---
+
+### 2.4 Auditoría y Logging (Cloud Audit Logs)
+
+Se activó el sistema de Auditoría de Google Cloud que registra:
+
+- Cambios en IAM  
+- Actividades administrativas  
+- Accesos a datos  
+- Eventos del sistema  
+- Acciones denegadas por políticas
+
+Esto proporciona trazabilidad completa para gobernanza y seguridad.
+
+✔ Cloud Logging habilitado  
+✔ Auditoría activa  
+✔ Evidencias de logs generados  
+
+**Evidencias:**  
+![06_auditoria_logging.png](/grupo10_sutran/evidencias/PC4/06_auditoria_logging.png)  
+![07_auditoria_logging.png](/grupo10_sutran/evidencias/PC4/07_auditoria_logging.png)
+
+---
+
+## 2.5 Gobernanza aplicada
+
+Las decisiones de arquitectura siguen buenas prácticas de seguridad empresarial:
+
+- Política de mínimo privilegio  
+- Redes aisladas y segmentadas  
+- Reglas de firewall estrictas  
+- Auditoría activa  
+- Roles personalizados y controlados por JSON  
+- Configuración vía CLI para reproducibilidad  
+- Separación entre componentes públicos/privados  
+
+---
+
