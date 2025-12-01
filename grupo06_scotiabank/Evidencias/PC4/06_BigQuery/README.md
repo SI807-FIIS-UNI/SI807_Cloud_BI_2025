@@ -5,6 +5,8 @@
 
 ## 1️⃣ Validación de valores nulos críticos
 
+🔍 Detecta registros incompletos que podrían generar inconsistencias en los cálculos.
+
 ```sql
 SELECT *
 FROM `grupo6-scotiabank.oro.hecho_riesgo`
@@ -12,23 +14,13 @@ WHERE id_banco IS NULL
    OR id_fecha IS NULL
    OR id_moneda IS NULL
    OR id_indicador IS NULL
-   OR valor IS NULL;
+   OR valor IS NULL
+LIMIT 20;
 ```
 
+## 2️⃣ Validación semántica contra límites definidos (zona verde/amarilla/roja)
 
-## 2️⃣ Validación de duplicados en la tabla de hechos
-
-La clave de negocio debe ser única:
-
-```sql
-SELECT id_banco, id_fecha, id_moneda, id_indicador,
-       COUNT(*) AS repeticiones
-FROM `grupo6-scotiabank.oro.hecho_riesgo`
-GROUP BY 1, 2, 3, 4
-HAVING COUNT(*) > 1;
-```
-
-## 3️⃣ Validación semántica contra límites definidos (zona verde/amarilla/roja)
+📊 Clasifica valores del hecho en RIESGO, AMARILLO u ÓPTIMO, según límites definidos y el sentido del indicador (flag_limite).
 
 ```sql
 SELECT
@@ -50,32 +42,29 @@ SELECT
   END AS clasificacion
 FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
 JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
-JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco);
+JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco)
+LIMIT 20;
 ```
 
-## 4️⃣ Ranking de bancos por indicador (competitividad)
+## 3️⃣ Validación de cobertura temporal del dataset
+🕒 Verifica que cada indicador posea información continua y no tenga huecos temporales.
 ```sql
-SELECT
+SELECT 
   hr.id_indicador,
   i.nombre AS indicador,
-  hr.id_banco,
-  b.nombre AS banco,
-  hr.valor,
-  RANK() OVER(PARTITION BY hr.id_indicador ORDER BY hr.valor DESC) AS ranking
+  COUNT(DISTINCT hr.id_fecha) AS meses_reportados
 FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
-JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco)
-JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador);
-
-5️⃣ Validación de cobertura temporal (evolución del dataset)
-SELECT id_indicador, COUNT(DISTINCT id_fecha) AS meses_reportados
-FROM `grupo6-scotiabank.oro.hecho_riesgo`
-GROUP BY id_indicador
-ORDER BY 2 DESC;
+JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
+GROUP BY hr.id_indicador, i.nombre
+ORDER BY meses_reportados DESC
+LIMIT 20;
 ```
 
 # 🚀 KPIs Y MÉTRICAS — ANÁLISIS EVOLUTIVO
 
-## 6️⃣ KPI — Promedio histórico del indicador por banco
+## 4️⃣ KPI — Promedio histórico del indicador por banco
+
+📈 Mide el comportamiento agregado del indicador para cada banco a lo largo del tiempo.
 
 ```sql
 SELECT
@@ -88,44 +77,35 @@ FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
 JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco)
 JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
 GROUP BY 1,2,3,4
-ORDER BY 3, AVG(hr.valor) DESC;
+ORDER BY promedio_valor DESC
+LIMIT 20;
 ```
 
-## 7️⃣ KPI — Tendencia mensual (variación porcentual)
+## 5️⃣ KPI — Tendencia mensual por banco e indicador (variación porcentual)
+📉 Permite identificar si los valores mejoran o empeoran en el tiempo, mostrando la evolución del riesgo.
+
 ```sql
 WITH serie AS (
   SELECT
-    id_banco,
-    id_indicador,
-    id_fecha,
-    valor,
-    LAG(valor) OVER(PARTITION BY id_banco, id_indicador ORDER BY id_fecha) AS valor_prev
-  FROM `grupo6-scotiabank.oro.hecho_riesgo`
+    hr.id_banco,
+    b.nombre AS banco,
+    hr.id_indicador,
+    i.nombre AS indicador,
+    hr.id_fecha,
+    hr.valor,
+    LAG(hr.valor) OVER(PARTITION BY hr.id_banco, hr.id_indicador ORDER BY hr.id_fecha) AS valor_prev
+  FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
+  JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco)
+  JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
 )
 SELECT *,
        (valor - valor_prev) / NULLIF(valor_prev, 0) * 100 AS variacion_pct
-FROM serie;
+FROM serie
+LIMIT 20;
 ```
 
-## 8️⃣ KPI — Detección de alertas activas
-
-```
-SELECT *
-FROM (
-  SELECT
-    hr.*,
-    i.flag_limite,
-    CASE
-      WHEN i.flag_limite = 1 AND hr.valor < i.lim_amarillo_min THEN 'ALERTA'
-      WHEN i.flag_limite = 0 AND hr.valor > i.lim_amarillo_max THEN 'ALERTA'
-    END AS alerta
-  FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
-  JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
-)
-WHERE alerta IS NOT NULL;
-```
-
-## 9️⃣ KPI — Consolidado de salud financiera por banco
+## 6️⃣ KPI — Salud financiera consolidada por banco
+🏦 Resume cuántos indicadores están en estado óptimo, advertencia o riesgo para cada banco
 ```sql
 SELECT
   b.nombre AS banco,
@@ -136,5 +116,11 @@ FROM `grupo6-scotiabank.oro.hecho_riesgo` hr
 JOIN `grupo6-scotiabank.oro.dim_indicador` i USING(id_indicador)
 JOIN `grupo6-scotiabank.oro.dim_banco` b USING(id_banco)
 GROUP BY banco
-ORDER BY kpis_rojos DESC;
+ORDER BY kpis_rojos DESC
+LIMIT 20;
+
 ```
+# 🎥 Evidencia — Validaciones y KPIs en BigQuery
+
+[![Validaciones BigQuery](https://img.youtube.com/vi/BbjPsJvi9TI/0.jpg)](https://youtu.be/BbjPsJvi9TI)
+

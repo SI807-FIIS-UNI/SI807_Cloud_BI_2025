@@ -8,6 +8,9 @@ El objetivo de este trabajo es implementar un flujo funcional de sistema de inte
 - ✔ Generar un esquema estrella en BigQuery
 - ✔ Visualizar dashboards en Power BI
 
+Información de implementación estructurada de recursos GCP en 👉 [IMPLEMENTACION.md](01_Ambiente_GCP/IMPLEMENTACION.md)
+
+
 ### Estructura de Carpetas
 
 ```json
@@ -35,19 +38,20 @@ La solución integra servicios básicos, avanzados y complementarios para soport
 
 ### ✔️ Servicios utilizados y evidencias de costos
 
-Durante la implementación se hizo uso real de los siguientes servicios en la nube (monto total invertido demostrado en gastos de GCP):
+Durante la implementación se hizo uso de los siguientes servicios en la nube:
 
-| Servicio                 | Costo (S/.) | Rol dentro de la Arquitectura                                       |
-|--------------------------|-------------|----------------------------------------------------------------------|
-| **Networking**           | 1.19        | Comunicación segura entre servicios, API y rutas privadas            |
-| **BigQuery**             | 3.37        | Almacenamiento analítico, consultas SQL, datasets trusted/refined    |
-| **BigQuery Reservation** | 12.64       | Reserva de slots para consultas de alto rendimiento                  |
-| **Dataproc**             | 21.27       | Procesamiento distribuido con PySpark                                |
-| **Compute Engine**       | 6.37        | Nodo de soporte/worker para ejecución puntual                        |
-| **Cloud Storage**        | 0.30        | Data Lake multicapa: raw → trusted → refined                         |
-| **Cloud Run**            | 18.76       | Servicios serverless para tareas auxiliares y componentes            |
-| **Cloud Run Functions**  | 0.10        | Funciones event-driven para automatización                           |
-| **Cloud Build**          | 0.00        | Construcción automática de artefactos                                |
+| Servicio                 | Rol dentro de la Arquitectura                                       |
+|--------------------------|----------------------------------------------------------------------|
+| **Networking**           | Comunicación segura entre servicios, gestión de VPC, subredes y rutas privadas |
+| **BigQuery**             | Motor analítico central para consultas SQL, creación de datasets y capas trusted/refined |
+| **BigQuery Reservation** | Reserva de slots para consultas de alto rendimiento y procesamiento optimizado |
+| **Dataproc**             | Procesamiento distribuido mediante PySpark para ETL y preparación de datos |
+| **Compute Engine**       | Nodo de soporte y ejecución de tareas auxiliares o procesos puntuales |
+| **Cloud Storage**        | Data Lake multicapa (raw → trusted → refined) para almacenamiento estructurado y no estructurado |
+| **Cloud Run**            | Ejecución de servicios serverless para microcomponentes y automatización |
+| **Cloud Run Functions**  | Funciones event-driven para orquestación y tareas desencadenadas por eventos |
+| **Cloud Build**          | Construcción, empaquetado y despliegue automático de artefactos y pipelines |
+                            
 
 ![1-facturacion_Servicios](Evidencias_generales\1-Facturacion_Actual.png)
 
@@ -138,4 +142,70 @@ Para la observabilidad, el servicio de Loggins de GCP esta activado por defecto.
 
 ![Logging](Evidencias_generales/3-Observabilidad.png)
 
+
+## 🧩 5. Consultas SQL y Validación del Modelo de Riesgo
+
+Esta sección documenta las validaciones ejecutadas sobre la tabla central de hechos hecho_riesgo y sus dimensiones asociadas dentro del Data Warehouse desarrollado en Google BigQuery.
+
+📘 Evidencia de Validación en [06_BigQuery](06_BigQuery/README.md).
+
+### 🔍 5.1 Validación de Calidad de Datos
+
+
+#### **(Script 1) Validación de valores nulos críticos**
+- Verifica la existencia de registros incompletos en las claves de negocio y campos numéricos.  
+**Objetivo:** asegurar que no existan hechos sin referencia dimensional.
+![Evidencia_SQL1](06_BigQuery/Evidencias/1-SQL-Script1.png)
+
+
+
+#### **(Script 2) Validación semántica contra límites definidos**
+- Clasifica cada valor como **Óptimo / Amarillo / Riesgo** según los umbrales definidos para cada indicador.  
+**Objetivo:** comprobar que los datos se interpretan correctamente antes de alimentar visualizaciones como semáforos o tacómetros en Power BI.
+
+![Evidencia_SQL2](06_BigQuery/Evidencias/1-SQL-Script2.png)
+
+
+#### **(Script 3) Validación de cobertura temporal del dataset**
+- Revisa que cada indicador tenga registros en múltiples periodos, evitando series incompletas.  
+**Objetivo:** garantizar que los análisis evolutivos no tengan huecos que distorsionen el análisis.
+
+![Evidencia_SQL3](06_BigQuery/Evidencias/1-SQL-Script3.png)
+
+
+### 📊 5.2 KPIs y Métricas Financieras
+
+#### **(Script 4) KPI — Promedio histórico del indicador por banco**
+- Calcula el valor medio de cada indicador por entidad bancaria.  
+**Objetivo:** ofrecer una referencia sólida para evaluar el comportamiento relativo de cada banco.
+
+![Evidencia_SQL4](06_BigQuery/Evidencias/1-SQL-Script4.png)
+
+
+#### **(Script 5) KPI — Tendencia mensual (variación porcentual)**
+- Analiza la evolución del valor del indicador mes a mes usando funciones de ventana (`LAG`).  
+**Objetivo:** identificar si la situación financiera del banco mejora o empeora en el tiempo.  
+
+![Evidencia_SQL5](06_BigQuery/Evidencias/1-SQL-Script5.png)
+
+#### **(Script 6) KPI — Consolidado de salud financiera por banco**
+- Resume la cantidad de indicadores en zonas **verde**, **amarilla** y **roja** para cada entidad financiera.  
+**Objetivo:** facilitar una visión global del riesgo institucional y priorizar acciones preventivas.
+
+![Evidencia_SQL6](06_BigQuery/Evidencias/1-SQL-Script6.png)
+
+
+Los resultados obtenidos a partir de estos scripts se encuentran documentados mediante:
+
+✔ Tablas con resultados visibles  
+✔ Video demostrativo del proceso  
+✔ Scripts SQL subidos al repositorio
+
+
+Con la ejecución validada de los scripts:
+
+| Categoría | Scripts | Resultado |
+|----------|---------|-----------|
+| Calidad de datos | 1–3 | Dataset íntegro y consistente |
+| KPIs financieros | 4–6 | Métricas confiables para análisis |
 
