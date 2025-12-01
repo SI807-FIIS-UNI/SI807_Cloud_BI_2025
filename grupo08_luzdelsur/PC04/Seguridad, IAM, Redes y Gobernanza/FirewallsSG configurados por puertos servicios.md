@@ -173,6 +173,7 @@ Por lo tanto:
 ---
 
 # 🛡️ 5. Diseño del Firewall oficial del proyecto
+<img width="1337" height="341" alt="image" src="https://github.com/user-attachments/assets/60eb7ad8-f27c-4035-9bf0-76dc40453b80" />
 
 Se creó un Security Group que representa la política de firewall del futuro Data Lake.
 
@@ -243,6 +244,7 @@ Copiar código
 - No expone la base de datos a Internet
 
 ---
+<img width="1340" height="394" alt="image" src="https://github.com/user-attachments/assets/28b72006-f69d-4518-b0b5-8c2cdae00853" />
 
 ## 7.4 Glue Interno (si se requiere en el futuro)
 
