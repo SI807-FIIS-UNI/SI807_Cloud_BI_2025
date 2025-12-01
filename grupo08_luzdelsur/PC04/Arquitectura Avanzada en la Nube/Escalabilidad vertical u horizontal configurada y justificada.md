@@ -1,4 +1,4 @@
-# Arquitectura de Escalabilidad en AWS Glue para ETL del Data Lake  
+<img width="852" height="450" alt="image" src="https://github.com/user-attachments/assets/852c8759-e5fb-4ede-8585-b5113efb74ab" /># Arquitectura de Escalabilidad en AWS Glue para ETL del Data Lake  
 Proyecto: Luz del Sur 
 ---
 
@@ -67,6 +67,8 @@ Este job sirve como base para demostrar la escalabilidad real del sistema.
 ---
 
 ## 4. Configuración de Escalabilidad Horizontal
+
+<img width="852" height="450" alt="image" src="https://github.com/user-attachments/assets/b94b9ef2-c341-4e48-8916-24e3fdb7f0de" />
 
 El job de Glue ha sido configurado con **tres workers paralelos**, lo que constituye el mecanismo principal de escalado horizontal.
 
