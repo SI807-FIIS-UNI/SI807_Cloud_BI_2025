@@ -1,8 +1,8 @@
-# Alta Disponibilidad (Multi-AZ) y Disaster Recovery (Multi-Región) en el Data Lake de Luz del Sur – Proyecto Mikhael
+# Alta Disponibilidad (Multi-AZ) y Disaster Recovery (Multi-Región) en el Data Lake de Luz del Sur
 
 ## 1. Introducción
 
-Este documento describe con profundidad técnica cómo se implementó la **Alta Disponibilidad (HA)** y el **Disaster Recovery (DR)** dentro de la arquitectura del Data Lake de Luz del Sur (Mikhael), utilizando servicios nativos de AWS como **Amazon S3, AWS Glue, Amazon Athena y S3 Cross-Region Replication (CRR)**.
+Este documento describe con profundidad técnica cómo se implementó la **Alta Disponibilidad (HA)** y el **Disaster Recovery (DR)** dentro de la arquitectura del Data Lake de Luz del Sur, utilizando servicios nativos de AWS como **Amazon S3, AWS Glue, Amazon Athena y S3 Cross-Region Replication (CRR)**.
 
 El objetivo es demostrar que la solución se encuentra correctamente configurada para:
 
@@ -93,6 +93,7 @@ De esta forma, si la región `sa-east-1` colapsa completamente:
 ---
 
 ## 4. Configuración Paso a Paso del DR (CRR)
+<img width="1031" height="460" alt="image" src="https://github.com/user-attachments/assets/292e0094-651f-44ba-9844-ee1a9ef4ce0c" />
 
 A continuación se documenta el proceso realizado.
 
@@ -110,6 +111,7 @@ Esto permite:
 - Replicación adecuada incluyendo marker deletes y eventos de reversionado.
 
 ---
+<img width="1336" height="428" alt="image" src="https://github.com/user-attachments/assets/c3b42f52-90fd-4d83-8bf3-bdd2036ed2fe" />
 
 ### 4.2 Paso 1: Crear el bucket destino en la región de DR
 
@@ -182,6 +184,7 @@ Este rol permite:
 - Manejo de metadatos y markers  
 
 ---
+<img width="1294" height="341" alt="image" src="https://github.com/user-attachments/assets/f3c5d8b1-c255-4f34-9808-39a05ef048a9" />
 
 ### 4.5 Paso 4: Elección sobre “Replicar objetos existentes”
 
