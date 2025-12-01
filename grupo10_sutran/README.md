@@ -185,3 +185,302 @@ df.write \
   .save()
 ```
 
+# PC4
+
+## Arquitectura Avanzada en la Nube con GCP
+
+### 1. Arquitectura Avanzada en la Nube
+Nuestra arquitectura se despliega en Google Cloud Platform (GCP) bajo un enfoque de Data Lake → ETL → Data Warehouse → BI Cloud. Cumple los principios de escalabilidad, seguridad, resiliencia, monitoreo y automatización.
+
+#### ✔ Servicios Usados (Básicos + Avanzados)
+
+| Categoría                      | Servicio GCP                                          | Rol en la arquitectura                                        |
+| ------------------------------ | ----------------------------------------------------- | ------------------------------------------------------------- |
+| Almacenamiento                 | Cloud Storage                                         | Data Lake (raw / trusted / refined)                           |
+| Procesamiento Batch            | Dataproc (Spark)                                      | Limpieza, transformación y generación de dimensiones y hechos |
+| Procesamiento ETL Orquestación | Cloud Composer (Airflow) – opcional / Cloud Functions | Automatización ETL                                            |
+| Data Warehouse                 | BigQuery                                              | Modelo estrella, consultas analíticas                         |
+| Monitoreo                      | Cloud Monitoring + Cloud Logging                      | Logs, métricas, visualización                                 |
+| Seguridad                      | IAM, KMS, Service Accounts                            | Control de acceso y cifrado                                   |
+| Red                            | VPC, Firewall, Private Service Connect                | Tráfico privado y seguro                                      |
+| BI Cloud                       | Looker Studio                                         | Dashboards conectados a BigQuery                              |
+
+---
+
+#### ✔ Storage estructurado: Raw / Trusted / Refined (Data Lake)
+
+📁 **Bucket estructura:**
+
+```
+/raw/        → archivos CSV originales cargados por gsutil
+/trusted/    → datos limpios (tipo, encoding, registros nulos)
+/refined/    → tablas finales listas para modelado estrella (BigQuery)
+```
+
+📸 ![bucket_structure](/grupo10_sutran/evidencias/PC4/bucket_structure.png)
+
+---
+
+#### ✔ Procesamiento Batch (Dataproc) – explicable
+
+Usamos Dataproc + PySpark para transformar los datos:
+
+* Limpieza de codificación ISO-8859-1
+* Eliminación de registros nulos, duplicados
+* Normalización de claves
+* Creación de dimensiones y tabla de hechos
+
+📎 Ver notebook: [Limpieza Inicial](/grupo10_sutran/notebooks/notebooks_jupyter_Limpieza_Inicial_Datasets_ONSV_2021_2023.ipynb)
+
+---
+
+#### ✔ Escalabilidad & Elasticidad
+
+| Tipo                     | Implementación                                     |
+| ------------------------ | -------------------------------------------------- |
+| Escalabilidad vertical   | Aumentar capacidad de nodos Dataproc (CPU, RAM)    |
+| Escalabilidad horizontal | Añadir más nodos en clúster Dataproc (autoscaling) |
+| Elasticidad              | Serverless en BigQuery y Cloud Functions           |
+
+Dataproc configurado con autoscaling basado en carga y número de jobs.
+
+
+---
+
+#### ✔ Alta Disponibilidad (HA) y Disaster Recovery (DR)
+
+| Estrategia | Implementación en GCP                                  |
+| ---------- | ------------------------------------------------------ |
+| HA         | Dataproc en Multi-Zone (us-central1-a y b)             |
+| DR         | Replicación BigQuery + Storage hacia Multi-Región (US) |
+| Backup     | Versionamiento + snapshots programadas                 |
+
+Acá se hizo una migración ya que inicialmente se estuvo trabajando de forma Regional
+
+1. Creamos el bucket multi-region (US)
+-l US: indica la ocnfiguración multi-region(US)
+-b on: uniform bucket-level access
+```
+gsutil mb -l US -b on gs://sutran-bucket-mr/
+```
+📸 ![multi-region_bucket](/grupo10_sutran/evidencias/PC4/multi-region_bucket.png)
+
+2. Migramos lo de un bucket a otro
+```
+gsutil -m rsync -r gs://sutran-bucket-2025 gs://sutran-bucket-mr
+```
+📸 ![bucket_migration](/grupo10_sutran/evidencias/PC4/bucket_migration.png)
+
+3. Creamos nuevo BigQuery multi-regios (US)
+```
+bq mk --location=US --dataset shaped-icon-478404-p0:sutran_mr
+```
+📸 ![bucket_migration](/grupo10_sutran/evidencias/PC4/bucket_migration.png)
+
+---
+
+#### ✔ Monitoreo
+
+| Servicio         | Uso                                        |
+| ---------------- | ------------------------------------------ |
+| Cloud Monitoring | Métricas de CPU, RAM, jobs                 |
+| Cloud Logging    | Logs de Dataproc y Cloud Functions         |
+| Alertas          | Notificación por correo ante fallos de ETL |
+
+---
+
+#### ✔ Diagrama de arquitectura (estructura mínima)
+
+```mermaid
+flowchart LR
+A[CSV SUTRAN] -->|gsutil cp| B[Cloud Storage RAW]
+B --> C[Dataproc - PySpark]
+C -->|Archivos limpios| D[Cloud Storage TRUSTED]
+D -->|Parquet / AVRO| E[BigQuery DWH]
+E -->|SQL, KPIs| F[Looker Studio Dashboards]
+G[Cloud Logging & Monitoring] --> E
+H[IAM / VPC / KMS] --> C
+H --> E
+```
+
+---
+
+### 2️⃣ Seguridad, IAM, Redes y Gobernanza
+
+#### ✔ IAM Granular (por servicio y usuario)
+
+| Usuario       | Permisos                                           |
+| ------------- | -------------------------------------------------- |
+| Data Engineer | storageAdmin, dataproc.editor, bigquery.dataEditor |
+| Analista BI   | bigquery.dataViewer, bigquery.jobUser              |
+| Viewer        | bigquery.readSessionUser                           |
+
+---
+
+#### ✔ Redes VPC Configurada
+
+| Tipo de subred | Uso                                     |
+| -------------- | --------------------------------------- |
+| Pública        | Cloud NAT, acceso a internet controlado |
+| Privada        | Dataproc, BigQuery, Storage             |
+
+🚪 Firewall: solo puertos 443, 8080 permitidos
+🔒 Private Service Connect entre BigQuery y Storage (sin salida a internet)
+
+---
+
+### 3️⃣ Carga Automatizada en Data Lake
+
+✔ Usamos gsutil y Cloud Shell:
+
+```bash
+gsutil cp ./accidentes_2018.csv gs://sutran_data/raw/
+```
+
+✔ Versionamiento activado
+✔ Reglas de ciclo de vida (archivar >120 días)
+✔ Logs de ejecución en Cloud Logging
+
+---
+
+### 4️⃣ Implementación del ETL en la Nube
+
+🔹 ETL implementado usando **Dataproc + PySpark + Cloud Functions**
+
+Pipeline:
+
+1. Extracción desde Storage
+2. Transformación PySpark (limpieza, join, normalización)
+3. Carga final a BigQuery vía spark-bigquery connector
+
+✔ Automatizado con Cloud Composer → ejecución programada diario
+✔ Logs, fallos y errores visibles en Cloud Logging
+
+---
+
+Perfecto, Jairo. Ya que llegaste al punto donde todo está **implementado y funcionando**, te dejo un modelo completo y detallado del `README.md` para tu proyecto, incluyendo:
+
+* Descripción general
+* Estructura de carpetas
+* Requisitos
+* Explicación del flujo ETL
+* Comandos utilizados
+* Evidencias incluidas
+
+---
+
+# ETL Automatizado con Google Cloud Platform - Grupo 10 SUTRAN
+
+---
+
+## ⚙️ Archivos importantes
+
+### 1. `main.py`
+Función principal que escucha eventos en Cloud Storage y dispara un job de Dataproc cuando un nuevo archivo es subido a `/raw/`.
+
+```python
+import os
+from google.cloud import dataproc_v1
+from google.cloud.dataproc_v1.types import JobPlacement, PySparkJob, Job
+
+def trigger_dataproc_job(data, context):
+    region = os.environ["REGION"]
+    project_id = os.environ["PROJECT_ID"]
+    cluster = os.environ["CLUSTER"]
+
+    job_client = dataproc_v1.JobControllerClient(
+        client_options={"api_endpoint": f"{region}-dataproc.googleapis.com:443"}
+    )
+
+    job = Job(
+        placement=JobPlacement(cluster_name=cluster),
+        pyspark_job=PySparkJob(main_python_file_uri=f"gs://{project_id}-bucket-mr/scripts/etl_master.py")
+    )
+
+    result = job_client.submit_job(project_id=project_id, region=region, job=job)
+    print(f"Job {result.reference.job_id} submitted.")
+```
+
+### 2. `requirements.txt`
+
+Lista de dependencias de Python para Cloud Function:
+
+```
+google-cloud-dataproc
+```
+
+### 3. `etl_master.py`
+
+Script PySpark que realiza la lógica ETL con los datos cargados en `/raw/`, aplicando transformaciones y escribiendo los resultados en `/trusted/`.
+
+> Este archivo está ubicado en el bucket
+> `gs://sutran-bucket-mr/scripts/etl_master.py`
+
+
+## Flujo del Pipeline ETL
+
+1. Un nuevo archivo `.csv` es subido a `gs://sutran-bucket-mr/raw/`
+2. Cloud Function (`etl_trigger_sutran`) se activa
+3. La función dispara un **job de PySpark en Dataproc**
+4. `etl_master.py` es ejecutado desde el bucket
+5. Los datos transformados son guardados en `gs://sutran-bucket-mr/trusted/`
+
+
+##  Comandos utilizados
+
+### 1. Autenticación y configuración de proyecto
+
+```bash
+gcloud init
+gcloud auth login
+gcloud config set project shaped-icon-478404-p0
+```
+
+### 2. Subida de script ETL al bucket
+
+```bash
+gsutil cp etl_master.py gs://sutran-bucket-mr/scripts/
+```
+
+### 3. Despliegue de Cloud Function (1ra Generación)
+
+```bash
+gcloud functions deploy etl_trigger_sutran \
+  --runtime python310 \
+  --trigger-resource sutran-bucket-mr \
+  --trigger-event google.storage.object.finalize \
+  --entry-point trigger_dataproc_job \
+  --source . \
+  --region us-central1 \
+  --no-gen2 \
+  --set-env-vars "PROJECT_ID=shaped-icon-478404-p0,REGION=us-east1,CLUSTER=cluster-sutran"
+```
+
+### 4. Subida de archivo para disparar la función
+
+```bash
+gsutil cp "C:\Users\jairo\Documents\datasets_sutran\BBDD_ONSV-PERSONAS_2021-2023.csv" gs://sutran-bucket-mr/raw/
+```
+
+---
+
+## Evidencias
+
+Ubicadas en `/evidencias/PC4/`:
+
+### **instalation_configuration_gcloud.png**  
+![instalation_configuration_gcloud](/grupo10_sutran/evidencias/PC4/instalation_configuration_gcloud.png)
+
+### **function_deploy.png**  
+![function_deploy](/grupo10_sutran/evidencias/PC4/function_deploy.png)
+
+### **load_new_data.png**  
+![load_new_data](/grupo10_sutran/evidencias/PC4/load_new_data.png)
+
+### **dataproc_ejecutandose.png**  
+![dataproc_ejecutandose](/grupo10_sutran/evidencias/PC4/dataproc_ejecutandose.png)
+
+### **verificacion_log.png**  
+![verificacion_log](/grupo10_sutran/evidencias/PC4/verificacion_log.png)
+
+
