@@ -302,7 +302,7 @@ cálculo de métricas, KPIs y funciones avanzadas se encuentran en:
 
 Accesibles desde los siguientes enlaces:
 
-- [01_validacion.sql](/grupo10_sutran/scripts/01_validacion.sql)
+- [01_validacion.sql](/grupo10_sutran/scripts/01_validacion_calidad.sql)
 - [02_join_modelo_estrella.sql](/grupo10_sutran/scripts/02_join_modelo_estrella.sql)
 - [03_kpis.sql](/grupo10_sutran/scripts/03_kpis.sql)
 - [04_funciones_ventana.sql](/grupo10_sutran/scripts/04_funciones_ventana.sql)
