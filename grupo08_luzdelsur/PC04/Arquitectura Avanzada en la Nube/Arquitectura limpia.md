@@ -768,6 +768,9 @@ IAM controla **quién puede hacer qué** en toda la arquitectura.
 
 ## <a name="flujo-datos"></a>10. FLUJO DE DATOS COMPLETO
 
+<img width="2021" height="786" alt="Diagrama claro flujos dependencias orígenes y destinos" src="https://github.com/user-attachments/assets/835736e7-a4de-43a5-b330-308697d9d784" />
+
+
 ### 10.1 Flujo End-to-End
 
 ```
