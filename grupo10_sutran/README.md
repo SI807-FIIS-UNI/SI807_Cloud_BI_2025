@@ -293,6 +293,31 @@ Las decisiones de arquitectura siguen buenas prácticas de seguridad empresarial
 - Separación entre componentes públicos/privados  
 
 ---
+## 3. Scripts SQL del Proyecto
+
+Todos los scripts SQL utilizados en el proceso de validación, construcción del modelo estrella,
+cálculo de métricas, KPIs y funciones avanzadas se encuentran en:
+
+**`/grupo10_sutran/scripts/`**
+
+Accesibles desde los siguientes enlaces:
+
+- [01_validacion.sql](/grupo10_sutran/scripts/01_validacion_calidad.sql)
+- [02_join_modelo_estrella.sql](/grupo10_sutran/scripts/02_join_modelo_estrella.sql)
+- [03_kpis.sql](/grupo10_sutran/scripts/03_kpis.sql)
+- [04_funciones_ventana.sql](/grupo10_sutran/scripts/04_funciones_ventana.sql)
+- [05_ranking.sql](/grupo10_sutran/scripts/05_ranking.sql)
+- [06_ctes.sql](/grupo10_sutran/scripts/06_ctes.sql)
+
+Cada script contiene consultas ejecutadas en BigQuery, organizadas según la rúbrica:
+
+- **Validación de datos:** conteos, duplicados, nulos, tipos.  
+- **Modelo estrella:** cruces completos entre hechos y dimensiones.  
+- **KPIs:** agregaciones, tasas, métricas críticas.  
+- **Funciones avanzadas:** LAG, RANK, OVER, PARTITION BY.  
+- **CTEs:** análisis multi-dimensional con WITH.  
+
+Las evidencias de ejecución (resultados y capturas de pantalla) están almacenadas en la carpeta `/evidencias/PC4/`.
 
 # PC4
 
