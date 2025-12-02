@@ -492,18 +492,7 @@ Pipeline:
 
 ---
 
-Perfecto, Jairo. Ya que llegaste al punto donde todo está **implementado y funcionando**, te dejo un modelo completo y detallado del `README.md` para tu proyecto, incluyendo:
-
-* Descripción general
-* Estructura de carpetas
-* Requisitos
-* Explicación del flujo ETL
-* Comandos utilizados
-* Evidencias incluidas
-
----
-
-# ETL Automatizado con Google Cloud Platform - Grupo 10 SUTRAN
+# ETL Automatizado
 
 ---
 
