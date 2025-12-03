@@ -593,3 +593,16 @@ Ubicadas en `/evidencias/PC4/`:
 ![verificacion_log](/grupo10_sutran/evidencias/PC4/verificacion_log.png)
 
 
+---
+
+## PRUEBA DE FUNCIONAMIENTO EN EXPOSICIÓN
+
+*LINK DEL DASHBOARD LOOKER STUDIO*
+https://lookerstudio.google.com/s/mY2VSnEyR3U
+
+
+### **modificación de registros (modificando fallecidos a lesionados)**  
+![modificación de registros](/grupo10_sutran/evidencias/PC4/prueba_01.png)
+
+### **verificación en el dashboar lookerd**  
+![verificación](/grupo10_sutran/evidencias/PC4/prueba_02.png)
