@@ -1,4 +1,4 @@
-## 4_Costos – Análisis y optimización del entorno en Azure
+# Costos – Análisis y optimización del entorno en Azure
 
 En esta carpeta se documenta el **comportamiento de costos** del entorno completo desplegado en Azure para el proyecto del dashboard, así como una **proyección a 6 meses** y las **acciones de optimización** propuestas.
 
