@@ -1,27 +1,65 @@
-# Transformacion de datos
+# **Proceso de Transformación de Datos**
 
-Primero creamos una instancia llamada "transformacion" para hacer nuestros jupyter notebooks para testear la transformacion y lugo ya descargarla para python
+A continuación, se describe el flujo utilizado para desarrollar, probar y desplegar la transformación de datos mediante JupyterLab y Google BigQuery, siguiendo la arquitectura *Medallion* (Bronce → Plata → Oro).
 
-![creacion de la instancia](Pruebas/I001.png)
+---
 
-Una vez creado damos click en "Abrir JupyterLab"
+## **1. Creación del Entorno de Trabajo**
 
-![Imagen señalando el boton a clickear](Pruebas/I002.png)
+Primero, se crea una instancia denominada **“transformacion”**, la cual se utilizará para ejecutar JupyterLab y realizar las pruebas de transformación de datos antes de generar el script final en Python.
 
-Una vez dentro del JupyterLab, SELECCIONAMOS "fILE" -> "new" -> "notebook"
+![Creación de la instancia](Pruebas/I001.png)
 
-![Imagen señalando file, new y noteboook antes del click](Pruebas/I003.png)
+Una vez creada la instancia, seleccionamos **“Abrir JupyterLab”**.
 
-Luego de eso nos pedirá seleccionar el kernel y lo dejamos con ipykernel y damos "SELECT"
+![Botón para abrir JupyterLab](Pruebas/I002.png)
 
-![Imagen mostrando la pantallita de selecciónd e kernel](Pruebas/I004.png)
+---
 
-Ahora damos click derecho al notebook y le ponemos el nombre que deseemos
+## **2. Configuración Inicial en JupyterLab**
 
-![Imagen mostrando la opcion para cambiar nombre](Pruebas/I005.png)
+Dentro de JupyterLab, procedemos a crear un nuevo cuaderno:
 
-En este caso tendremos dos notebooks:
+1. Seleccionamos **File → New → Notebook**.
+2. Elegimos el kernel por defecto (**ipykernel**) y presionamos **Select**.
 
-- [Notebook transformación de Bronce a Plata]()
-- [Notebook transformación de Plata a Oro]()
+![Selección de File → New → Notebook](Pruebas/I003.png)
+
+![Pantalla de selección del kernel](Pruebas/I004.png)
+
+Posteriormente, asignamos un nombre al cuaderno haciendo clic derecho sobre él y seleccionando la opción para renombrarlo.
+
+![Opción para renombrar el notebook](Pruebas/I005.png)
+
+---
+
+## **3. Creación de las Bases de Datos en BigQuery (Bronce, Plata y Oro)**
+
+Antes de iniciar la transformación, es necesario crear tres *datasets* en BigQuery, correspondientes a las capas de la arquitectura *Medallion*. Esto permitirá cargar automáticamente los datos procesados a cada capa.
+
+1. Ingresamos a BigQuery y seleccionamos **“Crear Conjunto de Datos”**.
+
+   ![Opción para crear conjunto de datos](Pruebas/I006.png)
+
+2. Completamos la información solicitada para las capas Bronce, Plata y Oro.
+
+   ![Formulario de creación del dataset Bronce](Pruebas/I007.png)
+
+3. Finalmente, los tres datasets deben visualizarse de la siguiente manera:
+
+   ![Vista de los datasets creados](Pruebas/I008.png)
+
+---
+
+## **4. Desarrollo de la Transformación**
+
+El procesamiento completo —desde la capa Bronce hasta la capa Oro— se implementó en un único notebook:
+
+* **Notebook de Transformación Bronce → Plata → Oro**
+  [Medallion.ipynb](Medallion.ipynb)
+
+Una vez finalizada la transformación y verificados los resultados, el notebook se exportó como script en Python, para ser utilizado posteriormente dentro del orquestador.
+
+* **Script en Python de la Transformación Bronce → Plata → Oro**
+  [Medallion.py](Script/Medallion.py)
 
