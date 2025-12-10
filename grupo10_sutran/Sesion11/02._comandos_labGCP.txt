@@ -1,0 +1,10 @@
+Abrir sesión con el usuario hdfs: sudo -u hdfs bash
+
+Listar directorios: hadoop fs -ls /
+Crear directorio/carpeta: hadoop fs -mkdir /nuevo_directorio
+Cargar archivos en HDFS: hadoop fs -copyFromLocal /ruta/local/archivo.txt /directorio_en_hdfs/
+
+
+Crear Topic: /usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server micluster-w-0:9092 --create --replication-factor 1 --partitions 1 --topic retrasos 
+verificar Topic: /usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server micluster-w-0:9092 –list
+Usar consumidor: /usr/lib/kafka/bin/kafka-console-consumer.sh --bootstrap-server micluster-w-0:9092 --topic retrasos --from-beginning 
