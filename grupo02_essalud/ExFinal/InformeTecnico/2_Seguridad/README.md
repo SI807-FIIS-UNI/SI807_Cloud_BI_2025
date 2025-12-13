@@ -38,9 +38,9 @@ gcloud projects add-iam-policy-binding $PROJECT \
 
 ### Pruebas
 
-![](../../4PC/Media/Fotos/Pruebas/SE001.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE001.png)
 
-![](../../4PC/Media/Fotos/Pruebas/SE002.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE002.png)
 
 
 ## 2) IAM por *servicio* y Service Accounts
@@ -66,7 +66,7 @@ gcloud projects add-iam-policy-binding $PROJECT \
 ```
 
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE003.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE003.png)
 
 ---
 
@@ -81,8 +81,8 @@ nano policy.json
 ```
 
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE004.png)
-![](../../4PC/Media/Fotos/Pruebas/SE005.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE004.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE005.png)
 
 ---
 
@@ -109,8 +109,8 @@ gcloud compute networks subnets create ${VPC_NAME}-private \
 ```
 
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE006.png)
-![](../../4PC/Media/Fotos/Pruebas/SE007.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE006.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE007.png)
 
 ---
 
@@ -140,9 +140,9 @@ gcloud compute firewall-rules create allow-dataproc-ui \
 ```
 
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE008.png)
-![](../../4PC/Media/Fotos/Pruebas/SE009.png)
-![](../../4PC/Media/Fotos/Pruebas/SE010.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE008.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE009.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE010.png)
 
 ---
 
@@ -175,7 +175,7 @@ gsutil kms encryption -k projects/$PROJECT/locations/$LOCATION/keyRings/$KEYRING
 ```
 
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE011.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE011.png)
 ---
 
 ## 7) Auditoría activa
@@ -187,14 +187,14 @@ Pasos rápidos:
 1. Habilitar Data Access audit logs para servicios relevantes
 
 ### PASOS:
-![](../../4PC/Media/Fotos/Pruebas/SE012.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE012.png)
 
-![](../../4PC/Media/Fotos/Pruebas/SE013.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE013.png)
 
 * Activando la escritura y visualización de las apps principales
-![](../../4PC/Media/Fotos/Pruebas/SE014.png)
-![](../../4PC/Media/Fotos/Pruebas/SE015.png)
-![](../../4PC/Media/Fotos/Pruebas/SE016.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE014.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE015.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE016.png)
 
 2. Crear sink para exportar logs:
 
@@ -212,7 +212,7 @@ SINK_SA=$(gcloud logging sinks describe sink-audit --project=$PROJECT --format='
 gsutil iam ch ${SINK_SA}:objectCreator gs://audit-logs-${PROJECT}
 ```
 ### Pruebas
-![](../../4PC/Media/Fotos/Pruebas/SE017.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE017.png)
 
 ---
 
@@ -226,7 +226,7 @@ gcloud compute networks subnets update vpc-essalud-private \
 ```
 
 ### Prueba
-![](../../4PC/Media/Fotos/Pruebas/SE018.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE018.png)
 
 
 2. Comprobando la conexión
@@ -238,7 +238,7 @@ gcloud compute networks subnets describe vpc-essalud-private \
 ```
 
 ### Prueba
-![](../../4PC/Media/Fotos/Pruebas/SE019.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE019.png)
 
 ---
 
@@ -246,7 +246,7 @@ gcloud compute networks subnets describe vpc-essalud-private \
 
 1. Consola IAM Final
 
-![](../../4PC/Media/Fotos/Pruebas/SE020.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE020.png)
 
 
 2. Comprobar funcionamiento en terminal
@@ -255,15 +255,15 @@ gcloud compute networks subnets describe vpc-essalud-private \
 gcloud projects get-iam-policy $PROJECT
 ```
 
-![](../../4PC/Media/Fotos/Pruebas/SE021.png)
-![](../../4PC/Media/Fotos/Pruebas/SE022.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE021.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE022.png)
 
 ```bash
 gcloud compute firewall-rules list
 ```
 
-![](../../4PC/Media/Fotos/Pruebas/SE023.png)
-![](../../4PC/Media/Fotos/Pruebas/SE024.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE023.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE024.png)
 
 ```bash
 gcloud kms keyrings list --location=us-central1 --project=$PROJECT
@@ -271,19 +271,19 @@ gcloud kms keyrings list --location=us-central1 --project=$PROJECT
 gcloud kms keys list   --location=us-central1   --keyring=kr-essalud   --project=$PROJECT
 ```
 
-![](../../4PC/Media/Fotos/Pruebas/SE025.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE025.png)
 
 ```bash
 gsutil ls -L -b gs://grupo2-essalud-datalake
 ```
 
-![](../../4PC/Media/Fotos/Pruebas/SE026.png)
-![](../../4PC/Media/Fotos/Pruebas/SE027.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE026.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE027.png)
 
 ```bash
 gcloud logging sinks list
 ```
 
-![](../../4PC/Media/Fotos/Pruebas/SE026.png)
-![](../../4PC/Media/Fotos/Pruebas/SE027.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE026.png)
+![](../../../4PC/Media/Fotos/Pruebas/SE027.png)
 

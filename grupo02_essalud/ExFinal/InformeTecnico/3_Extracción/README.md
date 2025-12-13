@@ -4,19 +4,19 @@
 ## Creación del Bucket
 
 1. Entramos a la consola de Google Cloud  
-   <img src="../../3PC/Media/Fotos/Pruebas/S01.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S01.png" width="600"/>
 
 2. Entramos a la terminal  
-   <img src="../../3PC/Media/Fotos/Pruebas/S02.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S02.png" width="600"/>
 
 3. Creamos un archivo Python para ejecutar el código de creación de buckets  
    ```
    nano crear_buckets.py
    ```  
-   <img src="../../3PC/Media/Fotos/Pruebas/S03.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S03.png" width="600"/>
 
 4. Luego vemos esta pantalla:  
-   <img src="../../3PC/Media/Fotos/Pruebas/S04.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S04.png" width="600"/>
 
 5. Pegamos el código correspondiente en el archivo 
 
@@ -66,33 +66,33 @@
 
     ```
 
-   <img src="../../3PC/Media/Fotos/Pruebas/S05.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S05.png" width="600"/>
 
 6. Guardamos con **CTRL + O**, luego **ENTER** y salimos con **CTRL + X**  
-   <img src="../../3PC/Media/Fotos/Pruebas/S06.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S06.png" width="600"/>
 
 7. Ejecutamos el script con:  
    ```
     python3 crear_buckets.py
     ``` 
-   <img src="../../3PC/Media/Fotos/Pruebas/S07.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S07.png" width="600"/>
 
 8. ¡Listo! Bucket creado con sus carpetas correspondientes  
-   <img src="../../3PC/Media/Fotos/Pruebas/S08.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S08.png" width="600"/>
 
 ---
 
 ## Subida de Archivos a la Carpeta **bronce**
 
 1. Entramos a la carpeta **bronce** en Cloud Storage  
-   <img src="../../3PC/Media/Fotos/Pruebas/S09.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S09.png" width="600"/>
 
 2. Seleccionamos **Subir** → **Subir Archivos**  
-   <img src="../../3PC/Media/Fotos/Pruebas/S10.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S10.png" width="600"/>
 
 3. Elegimos los archivos a subir y hacemos clic en **Abrir**  
-   <img src="../../3PC/Media/Fotos/Pruebas/S11.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S11.png" width="600"/>
 
 4. ¡Y listo!  
-   <img src="../../3PC/Media/Fotos/Pruebas/S12.png" width="600"/>
+   <img src="../../../3PC/Media/Fotos/Pruebas/S12.png" width="600"/>
 

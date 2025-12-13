@@ -1,12 +1,12 @@
 # 🚀 Habilitación Inicial
 
 ## 1️. Entramos al bash de GCP  
-<img src="../../3PC/Media/Fotos/Pruebas/H01.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H01.png" width="550"/>
 
 ---
 
 ## 2️. Una vez abierto el bash veremos las líneas donde ingresaremos los comandos  
-<img src="../../3PC/Media/Fotos/Pruebas/H02.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H02.png" width="550"/>
 
 ---
 
@@ -29,7 +29,7 @@ TEMP_PATH="gs://${DATALAKE_BUCKET}/temp"
 SCRIPTS_PATH="gs://${DATALAKE_BUCKET}/scripts"
 ``` 
 
-<img src="../../3PC/Media/Fotos/Pruebas/H03.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H03.png" width="550"/>
 
 ---
 
@@ -45,13 +45,13 @@ gcloud services enable \
   iam.googleapis.com \
   serviceusage.googleapis.com
 ``` 
-<img src="../../3PC/Media/Fotos/Pruebas/H04.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H04.png" width="550"/>
 
 ---
 
 ### 4.1 Verificamos las APIs activadas  
 Ejecutamos: **gcloud services list --enabled**  
-<img src="../../3PC/Media/Fotos/Pruebas/H05.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H05.png" width="550"/>
 
 ---
 
@@ -61,7 +61,7 @@ gsutil ls gs://${DATALAKE_BUCKET} || echo "Bucket no existe"
 gsutil cp -Z /dev/null "${TEMP_PATH}/placeholder.txt"
 gsutil cp -Z /dev/null "${SCRIPTS_PATH}/placeholder.txt"
 ``` 
-<img src="../../3PC/Media/Fotos/Pruebas/H05.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H05.png" width="550"/>
 
 ---
 
@@ -100,10 +100,10 @@ gcloud projects add-iam-policy-binding $PROJECT \
   --member="serviceAccount:${SA_FULL}" \
   --role="roles/iam.serviceAccountUser"
 ``` 
-<img src="../../3PC/Media/Fotos/Pruebas/H07.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H07.png" width="550"/>
 
 ### ✔️ Posible error y solución  
-<img src="../../3PC/Media/Fotos/Pruebas/H08.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H08.png" width="550"/>
 
 ---
 
@@ -112,7 +112,7 @@ gcloud projects add-iam-policy-binding $PROJECT \
 gcloud projects get-iam-policy $PROJECT --flatten="bindings[].members" \
   --format='table(bindings.role, bindings.members)'
 ``` 
-<img src="../../3PC/Media/Fotos/Pruebas/H09.png" width="550"/>
+<img src="../../../3PC/Media/Fotos/Pruebas/H09.png" width="550"/>
 
 
 
