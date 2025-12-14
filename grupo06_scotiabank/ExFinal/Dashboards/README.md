@@ -135,7 +135,7 @@ gcloud iam service-accounts keys create \
 
 La clave se genera en el directorio de ejecución de Cloud Shell.
 
-Descarga a entorno local
+### Descarga a entorno local
 ```bash
 cloudshell download sa-visualizacion-dashboard-key.json
 ```
@@ -184,4 +184,133 @@ Descargar el archivo .pbix desde el repositorio.
 3) Reconfigurar el origen de datos en Power BI.
 
 4) Actualizar el modelo y visualizar los KPIs.
+
+Revisar los archivos en la carpeta docs/.
+
+## 11. Tableros Analíticos y Enfoque de Benchmarking
+
+La solución de Business Intelligence desarrollada se materializa en cinco tableros analíticos integrados, construidos sobre la capa oro del Data Warehouse en Google BigQuery y consumidos desde Power BI. Estos tableros permiten abordar de manera directa las problemáticas identificadas en el negocio, particularmente la falta de consolidación de información, el alto esfuerzo manual y la limitada capacidad de explicar y comparar los indicadores de riesgo y desempeño financiero del banco.
+
+Cada tablero cumple un rol específico dentro del proceso de análisis, combinando indicadores operativos, gerenciales y comparativos, y habilitando un enfoque de benchmarking bancario frente al sistema financiero.
+
+### 11.1. Tablero 1 – Apetito de Riesgo Consolidado
+
+Este tablero proporciona una vista ejecutiva y centralizada del perfil de riesgo del banco para un periodo determinado (año y mes), permitiendo evaluar de forma inmediata el cumplimiento de los límites de apetito de riesgo definidos por la entidad.
+
+Se visualizan los siguientes indicadores clave:
+
+- Morosidad
+
+- Ratio de Capital Global
+
+- Loans to Deposits
+
+- Ratio de Liquidez
+
+- Sensibilidad al Tipo de Cambio
+
+- Crecimiento de la Cartera de Créditos
+
+El uso de visualizaciones tipo gauge y semáforos facilita identificar si cada KPI se encuentra dentro de rangos aceptables, en zona de alerta o en situación crítica.
+Este tablero responde directamente a la problemática de dificultad para explicar las variaciones del capital y del perfil de riesgo, al consolidar en una sola vista los principales indicadores regulatorios y de gestión.
+
+Desde el enfoque de benchmarking, permite contrastar el desempeño del banco frente a umbrales prudenciales del sistema financiero (SBS/Basilea), funcionando como punto de referencia para análisis comparativos posteriores.
+
+![7.1](Evidencias/7.1-Tablero1.png)
+
+### 11.2. Tablero 2 – Apetito de Riesgo Financiero y Operativo
+
+El segundo tablero profundiza en el análisis del riesgo financiero y operativo, incorporando variables que impactan directamente en la estabilidad patrimonial y en la eficiencia operativa del banco.
+
+Incluye indicadores como:
+
+- Morosidad
+
+- Loans to Deposits
+
+- Ratio de Capital Global
+
+- Pérdidas Operativas
+
+La integración de pérdidas operativas permite ampliar el análisis más allá del riesgo crediticio, abordando la problemática de falta de una visión integral del riesgo y reduciendo la dependencia de reportes aislados por área.
+
+En términos de benchmarking, este tablero facilita evaluar qué tan eficiente es el banco en el control de pérdidas y en el uso de su capital, comparándolo con prácticas observadas en el sector bancario.
+
+![7.2](Evidencias/7.2-Tablero2.png)
+
+### 11.3. Tablero 3 – Riesgo de Crecimiento, Liquidez y Mercado
+
+El tercer tablero se orienta a analizar el equilibrio entre crecimiento del negocio y sostenibilidad financiera, incorporando riesgos de mercado y fondeo.
+
+Los principales KPIs visualizados son:
+
+- Crecimiento de la Cartera de Créditos
+
+- Participación de Depósitos
+
+- Ratio de Liquidez
+
+- Sensibilidad al Tipo de Cambio
+
+Este tablero permite identificar si el crecimiento del crédito está adecuadamente respaldado por la captación de depósitos y si el banco mantiene una exposición controlada frente a variaciones cambiarias.
+Atiende directamente la problemática de falta de consolidación para la toma de decisiones, al integrar crecimiento, liquidez y mercado en un único análisis.
+
+Desde el enfoque comparativo, habilita el benchmarking de estrategias de crecimiento y gestión de liquidez entre el banco y otras entidades del sistema financiero.
+
+![7.3](Evidencias/7.3-Tablero3.png)
+
+### 11.4. Tablero 4 – Comparativo Histórico Multibanco por Indicador
+
+Este tablero introduce un análisis histórico y comparativo, permitiendo evaluar la evolución de los principales indicadores de riesgo y desempeño financiero en el tiempo.
+
+El usuario puede seleccionar:
+
+- Un indicador específico
+
+- Uno o varios bancos del sistema financiero
+
+- Un rango temporal determinado
+
+La visualización temporal facilita identificar tendencias estructurales, cambios en el perfil de riesgo y brechas de desempeño entre el banco y sus competidores.
+Este tablero responde a la problemática de poco control sobre indicadores comparativos externos, al integrar información sectorial en una plataforma analítica centralizada.
+
+![7.4](Evidencias/7.4-Tablero4.png)
+
+### 11.5. Tablero 5 – Comparativo Evolutivo Detallado por Banco
+
+El quinto tablero permite realizar un análisis granular y dinámico, mostrando la evolución mensual de los indicadores seleccionados para distintos bancos.
+
+Este enfoque facilita:
+
+- Detectar variaciones abruptas
+
+- Analizar volatilidad de indicadores
+
+- Evaluar el impacto de eventos macroeconómicos o regulatorios
+
+Desde la perspectiva de benchmarking, este tablero permite medir la resiliencia y capacidad de adaptación del banco frente a sus competidores, aportando una visión comparativa de corto y mediano plazo que no es posible obtener mediante reportes estáticos.
+
+![7.5](Evidencias/7.5-Tablero5.png)
+
+## Conclusión
+
+La solución de Business Intelligence implementada consolida y automatiza la gestión de indicadores financieros y de riesgo del banco, permitiendo un monitoreo efectivo del apetito de riesgo y un análisis comparativo frente al sistema financiero mediante cinco tableros analíticos. El uso de BigQuery y Power BI reduce el esfuerzo manual, mejora la consistencia de los datos y fortalece la toma de decisiones estratégicas y regulatorias. Adicionalmente, la gestión controlada de accesos mediante cuentas de servicio garantiza la seguridad de la información, eliminando credenciales temporales una vez concluido el periodo de uso.
+
+## Eliminación de Claves de la Cuenta de Servicio (Post-Evaluación)
+
+En cumplimiento de buenas prácticas de seguridad, las claves de la cuenta de servicio deben eliminarse una vez finalizado el periodo de uso o evaluación.
+
+Consideraciones
+
+- Cada cuenta de servicio puede tener un máximo de 10 claves activas.
+
+- Se recomienda eliminar claves antiguas antes de generar nuevas.
+
+Comando CLI para eliminar una clave existente
+```bash
+gcloud iam service-accounts keys delete KEY_ID \
+  --iam-account=sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com
+```
+
+Este comando revoca inmediatamente el acceso asociado a la clave, asegurando el principio de mínimo privilegio y evitando accesos no autorizados posteriores.
 
