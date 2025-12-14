@@ -314,3 +314,33 @@ gcloud iam service-accounts keys delete KEY_ID \
 
 Este comando revoca inmediatamente el acceso asociado a la clave, asegurando el principio de mínimo privilegio y evitando accesos no autorizados posteriores.
 
+## Replicación para el Docente
+
+### Rol otorgado
+
+Las claves de acceso para las cuentas de usuario deberan ser descargadas en el dispositivo del usuario y evitar ser compartidas o subidas a un repositorio público. Por tal motivo se asigno un rol de administrador de cuentas de servicio lo que le permite crear su propia clave de acceso para replicación del Dashboard.
+
+```bash
+gcloud projects add-iam-policy-binding grupo6-scotiabank --member=user:fgarcia@webconceptos.com  --role="roles/iam.serviceAccountKeyAdmin"
+```
+![8](Evidencias/8-Rol_para_clave.png)
+
+Con este rol el usuario puede:
+
+- Crear claves
+
+- Eliminar claves
+
+- Descargar el JSON al momento de crearlas
+
+Replicar:
+```bash
+gcloud iam service-accounts keys create sa-visualizacion-dashboard-key.json \
+  --iam-account=sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com
+```
+
+Descargar Clave:
+
+```bash
+cloudshell download sa-visualizacion-dashboard-key.json
+```
