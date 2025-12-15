@@ -1,6 +1,6 @@
 # **Proceso de Transformación de Datos**
 
-A continuación, se describe el flujo utilizado para desarrollar, probar y desplegar la transformación de datos mediante JupyterLab y Google BigQuery, siguiendo la arquitectura *Medallion* (Bronce → Plata → Oro).
+A continuación, se describe el flujo utilizado para desarrollar, probar y desplegar la transformación de datos mediante JupyterLab y Google BigQuery, siguiendo la arquitectura *etl_script* (Bronce → Plata → Oro).
 
 ---
 
@@ -35,7 +35,7 @@ Posteriormente, asignamos un nombre al cuaderno haciendo clic derecho sobre él 
 
 ## **3. Creación de las Bases de Datos en BigQuery (Bronce, Plata y Oro)**
 
-Antes de iniciar la transformación, es necesario crear tres *datasets* en BigQuery, correspondientes a las capas de la arquitectura *Medallion*. Esto permitirá cargar automáticamente los datos procesados a cada capa.
+Antes de iniciar la transformación, es necesario crear tres *datasets* en BigQuery, correspondientes a las capas de la arquitectura *etl_script*. Esto permitirá cargar automáticamente los datos procesados a cada capa.
 
 1. Ingresamos a BigQuery y seleccionamos **“Crear Conjunto de Datos”**.
 
@@ -56,10 +56,10 @@ Antes de iniciar la transformación, es necesario crear tres *datasets* en BigQu
 El procesamiento completo —desde la capa Bronce hasta la capa Oro— se implementó en un único notebook:
 
 * **Notebook de Transformación Bronce → Plata → Oro**
-  [Medallion.ipynb](Medallion.ipynb)
+  [etl_script.ipynb](etl_script.ipynb)
 
 Una vez finalizada la transformación y verificados los resultados, el notebook se exportó como script en Python, para ser utilizado posteriormente dentro del orquestador.
 
 * **Script en Python de la Transformación Bronce → Plata → Oro**
-  [Medallion.py](Script/Medallion.py)
+  [etl_script.py](Script/etl_script.py)
 
