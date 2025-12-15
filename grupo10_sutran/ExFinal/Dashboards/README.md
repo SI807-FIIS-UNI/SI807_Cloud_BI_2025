@@ -3,35 +3,6 @@
 
 ---
 
-## 0) Evidencias 
-
-
-- **EVIDENCIA 01:** Estructura en BigQuery (dataset + tablas + vista)
-  - `![EVIDENCIA_01](./evidencias/evidencia_01.png)`
-
-- **EVIDENCIA 02:** Conexión en Looker Studio a BigQuery (fuente de datos)
-  - `![EVIDENCIA_02](./evidencias/evidencia_02.png)`
-
-- **EVIDENCIA 03:** Control “Selecciona un periodo” funcionando (antes/después)
-  - `![EVIDENCIA_03](./evidencias/evidencia_03.png)`
-
-- **EVIDENCIA 04:** Página 1 – Principal
-  - `![EVIDENCIA_04](./evidencias/evidencia_04.png)`
-
-- **EVIDENCIA 05:** Página 2 – Personas
-  - `![EVIDENCIA_05](./evidencias/evidencia_05.png)`
-
-- **EVIDENCIA 06:** Página 3 – Vehículos
-  - `![EVIDENCIA_06](./evidencias/evidencia_06.png)`
-
-- **EVIDENCIA 07:** Página 4 – Vías
-  - `![EVIDENCIA_07](./evidencias/evidencia_07.png)`
-
-- **EVIDENCIA 08:** Página 5 – Tendencias
-  - `![EVIDENCIA_08](./evidencias/evidencia_08.png)`
-
----
-
 ## 1) Requisitos
 
 ### 1.1 Cuenta / acceso
@@ -194,11 +165,11 @@ END
 
 
 **En `dim_vehiculo` :**
-![looker011.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/looker011.png)
+![looker11.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/looker11.png)
 
 
 **En `hechos_siniestros`:**
-![looker012.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/looker012.png)
+![looker12.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/looker12.png)
 
 
 
@@ -273,7 +244,7 @@ Ruta: **Insertar → Gráfico → Google Maps → Mapa de calor**
 - Intensidad/Métrica: **Recuento de `id_siniestro`**
 
 **EVIDENCIA (página Principal):**
-![evidencia04.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia04.png)
+![evidencia_04.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia_04.png)
 
 ---
 
@@ -313,7 +284,7 @@ Ruta: **Insertar → Gráfico → Tarjeta**
 - (Opcional) Filtro: `tipo_persona = "CONDUCTOR"`
 
 **EVIDENCIA (página Personas):**
-![evidencia05.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia05.png)
+![evidencia_05.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia_05.png)
 
 ---
 
@@ -341,7 +312,7 @@ Ruta: **Insertar → Gráfico → Tarjeta**
 - Métrica: `COUNT(id_siniestro)`
 
 **EVIDENCIA (página Vehículos):**
-![evidencia06.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia06.png)
+![evidencia_06.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia_06.png)
 
 ---
 
@@ -365,7 +336,7 @@ Ruta: **Insertar → Gráfico → Tarjeta**
 - Métrica: `COUNT(id_siniestro)`
 
 **EVIDENCIA (página Vías):**
-![evidencia07.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia07.png)
+![evidencia_07.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia_07.png)
 
 ---
 
@@ -394,7 +365,7 @@ Ruta: **Insertar → Gráfico → Tarjeta**
 - Métrica: `Record Count`
 
 **EVIDENCIA (página Tendencias):**
-![evidencia08.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia08.png)
+![evidencia_08.png](/grupo10_sutran/ExFinal/Dashboards/evidencias/evidencia_08.png)
 
 
 
