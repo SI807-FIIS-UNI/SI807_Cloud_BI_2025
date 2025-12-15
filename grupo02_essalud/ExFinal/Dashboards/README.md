@@ -3,6 +3,17 @@
 Este apartado describe el **proceso de conexión, modelado visual y diseño del dashboard** en Power BI, utilizando como fuente de datos la tabla final de KPIs almacenada en **BigQuery**. El objetivo es transformar los datos procesados en información clara y accionable para la toma de decisiones en salud.
 
 ---
+Datos de conexión (pasos más adelante)
+
+* Account: **service-account@grupo2-essalud.iam.gserviceaccount.com**
+
+* Clave: [Contenido del JSON](Clave.json)
+
+**OJO**: La clave de conexión será cambiada el **21/12/2025**
+
+---
+
+---
 
 ## 1. Objetivo de la Visualización
 
@@ -60,9 +71,10 @@ Para garantizar una conexión segura, se utiliza una **Service Account** de Goog
 
 ![Copiando contenido del JSON](Pruebas/I009.png)
 
+
 ![Pegando credenciales y conectando](Pruebas/I010.png)
 
----
+
 
 ### 2.4 Selección de la Tabla de KPIs
 
