@@ -11,32 +11,9 @@ El sistema ingesta datos transaccionales de retail, los procesa mediante **Datap
 ## 🏗️ Arquitectura de Solución
 
 La solución sigue el patrón "Medallion Architecture" (Raw → Curated → Analytics).
-```mermaid
-graph LR
-    subgraph "Ingesta & Eventos"
-        A[Archivos CSV] -->|Upload| B(Cloud Storage)
-        B -->|Trigger| C{Cloud Functions}
-        C -->|Pub/Sub Message| D[Topic: etl-notifications]
-    end
-    
-    subgraph "Procesamiento Seguro (VPC Privada)"
-        D -->|Trigger Job| E[Dataproc Serverless]
-        E -->|Lectura Segura KMS| B
-        E -->|Transformación PySpark| F[(BigQuery)]
-    end
-    
-    subgraph "Capa de Datos (BigQuery)"
-        F -->|Raw Layer| G[Tablas Externas]
-        F -->|Curated Layer| H[Tablas Nativas Particionadas]
-        H -->|Analytics Layer| I[Cubo OLAP / Vistas Materializadas]
-    end
-    
-    subgraph "Consumo & Gobierno"
-        I -->|Visualización| J[Looker Studio]
-        K[Cloud Composer] -->|Orquestación DAG| E
-        L[Cloud Monitoring] -->|Alertas| M[Email]
-    end
-```
+
+<img width="1803" height="708" alt="Arquitectura_GCP_PC4 (1)" src="https://github.com/user-attachments/assets/d612f590-82ff-498b-998e-bbcf9122e8ce" />
+
 
 ---
 
