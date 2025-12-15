@@ -153,6 +153,6 @@ AS diferencia_integridad;
 
 - **Curso**: Inteligencia de Negocios (SI807)
 - **Universidad**: Universidad Nacional de Ingeniería (UNI)
-- **Semestre**: 2025-0
+- **Semestre**: 2025-2
 
 ---
