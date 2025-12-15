@@ -16,16 +16,16 @@
 Ingresar los siguientes parámetros:
 
 ```
-Servidor (Server): tu-servidor.database.windows.net
-Base de Datos (Database): nombre_base_datos
+Servidor (Server): sql-server-grupo03.database.windows.net
+Base de Datos (Database): grupo03_credicorp
 ```
 
 #### Paso 3: Autenticación
 
 1. Seleccionar **"Base de datos"**
 2. Ingresar:
-   - **Nombre de usuario:** tu_usuario
-   - **Contraseña:** tu_contraseña
+   - **Nombre de usuario:** rootadmin
+   - **Contraseña:** Pa$$12345678
 3. Click en **"Conectar"**
 
 #### Paso 4: Selección de Tablas
