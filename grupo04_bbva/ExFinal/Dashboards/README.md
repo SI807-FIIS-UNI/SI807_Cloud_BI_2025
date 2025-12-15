@@ -28,6 +28,7 @@ Actualmente, el enlace muestra error (404) debido a una limitación del entorno 
 ## 3) Incidente: servicio no disponible por consumo de crédito (Azure Free Trial)
 
 Durante el proceso de aprendizaje y despliegue en Azure, **no se gestionó adecuadamente el consumo de recursos** y el crédito del **plan gratuito (Free Trial)** se agotó.  
+
 Como consecuencia, algunos recursos dejaron de estar disponibles, impactando el acceso público del dashboard.
 
 Para sustentar esto se adjunta evidencia del estado de crédito y el consumo por recurso.
@@ -39,23 +40,23 @@ Para sustentar esto se adjunta evidencia del estado de crédito y el consumo por
 
 ### ¿Por qué el Firewall puede ser tan costoso?
 Es relativamente común que **Azure Firewall** consuma gran parte de un crédito pequeño (como el Free Trial) porque suele tener:
-- costo base por hora (según SKU),
-- costo por procesamiento/transferencia de datos,
-- y recursos asociados (IP pública, reglas, logging).
+- Costo base por hora (según SKU),
+- Costo por procesamiento/transferencia de datos,
+- Y recursos asociados (IP pública, reglas, logging).
 
 En entornos académicos o de prueba, si no es estrictamente necesario, conviene:
-- apagar/eliminar el firewall cuando no se use,
-- usar alternativas más simples (NSG + reglas de red),
-- revisar SKUs y monitorear costos desde Cost Management.
+- Apagar/eliminar el firewall cuando no se use,
+- Usar alternativas más simples (NSG + reglas de red),
+- Revisar SKUs y monitorear costos desde Cost Management.
 
 ---
 
 ## 4) Nota de integridad del entregable (PC4)
 
 Aunque el despliegue público ya no esté accesible por el agotamiento del crédito, se recalca que:
-- **no se modificó nada del entregable** después de la presentación de la **PC4**,
-- el sistema **funciona exactamente igual** a como fue demostrado (ETL, carga, KPIs y frontend),
-- el inconveniente corresponde únicamente a disponibilidad del entorno cloud por falta de crédito.
+- **No se modificó nada del entregable** después de la presentación de la **PC4**,
+- El sistema **funciona exactamente igual** a como fue demostrado en el día de la sustentación de la **PC4** (ETL, carga, KPIs y frontend),
+- El inconveniente corresponde únicamente a disponibilidad del entorno cloud por falta de crédito.
 
 ---
 
