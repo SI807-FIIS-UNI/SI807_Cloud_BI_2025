@@ -7,7 +7,7 @@ Datos de conexión (pasos más adelante)
 
 * Account: **service-account@grupo2-essalud.iam.gserviceaccount.com**
 
-* Clave: [Contenido del JSON](Clave.json)
+* Clave: Se envió al privado
 
 **OJO**: La clave de conexión será cambiada el **21/12/2025**
 
