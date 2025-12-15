@@ -6,6 +6,11 @@ El proyecto implementa una arquitectura de **Inteligencia de Negocios en la nube
 
 ---
 
+* [Informe final](ExFinal/Informe_Tecnico/FINAL_G2_SI807.pdf)
+
+
+---
+
 ## Estructura del Proyecto
 
 Cada sección del informe documenta una fase específica del ciclo de vida del dato. Los enlaces permiten acceder al detalle técnico y funcional de cada etapa.
