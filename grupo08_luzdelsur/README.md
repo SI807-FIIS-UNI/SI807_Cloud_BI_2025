@@ -1,355 +1,231 @@
-# 🌩️ Proyecto Cloud BI – Luz del Sur (Facturación Atípica)
+# 🌩️ Proyecto Cloud BI – Luz del Sur: Detección de Facturación Atípica en Lima Metropolitana
 
-Repositorio del proyecto de **Inteligencia de Negocios en la Nube** basado en datos de **Luz del Sur** sobre clientes, suministros y facturación eléctrica en **Lima Metropolitana**.
+Repositorio oficial del proyecto **“Facturación Atípica”**, desarrollado por el **Grupo 08** del curso **SI807 – Sistemas de Inteligencia de Negocios** de la **Facultad de Ingeniería Industrial y de Sistemas (FIIS)** de la **Universidad Nacional de Ingeniería (UNI)**, en colaboración con **Luz del Sur**.
 
-El objetivo es implementar un pipeline **RAW → BRONZE → SILVER → GOLD → Dashboard** en **AWS + Power BI** para detectar y visualizar **casos de facturación atípica**.
+Este proyecto implementa un **pipeline de datos Cloud-Native**, basado en la **arquitectura Medallion (RAW → BRONZE → SILVER → GOLD)**, desplegado sobre **Amazon Web Services (AWS)**, con el objetivo de detectar, analizar y visualizar **casos de facturación eléctrica atípica** en Lima Metropolitana mediante técnicas estadísticas robustas, segmentación comercial y visualización geoespacial en **Power BI**.
 
-## Estructura del Proyecto
+---
+
+## 📚 Contexto y Justificación del Proyecto
+
+Luz del Sur requiere una solución escalable y automatizada para identificar **facturaciones inusuales** que puedan derivar de errores en medidores inteligentes, posibles casos de fraude energético o cambios abruptos en patrones de consumo. 
+
+El enfoque tradicional basado en umbrales absolutos no es suficiente en un entorno con cientos de miles de suministros heterogéneos. Por ello, se propone una solución basada en **segmentación dinámica** y **detección estadística de anomalías**, que compara cada cliente con su grupo referente (por tipo de cliente y nivel de tensión).
+
+> **Innovación clave**: Uso del **rango intercuartílico (IQR)** para definir umbrales adaptativos por segmento y período, eliminando falsos positivos en clientes de alto consumo legítimo.
+
+---
+
+## 🏗️ Arquitectura Técnica en AWS
+
+La solución se despliega íntegramente en **Amazon Web Services (AWS)**, utilizando una arquitectura **100% serverless** que garantiza escalabilidad, bajo costo operativo y trazabilidad total del dato.
+
+### Componentes Principales
+
+| Capa | Servicio AWS | Función |
+|------|--------------|--------|
+| **Almacenamiento** | Amazon S3 | Data Lake con estructura Medallion (`raw/`, `bronze/`, `silver/`, `gold/`) |
+| **Gobierno de Datos** | AWS Glue Data Catalog | Catálogo unificado de metadatos (`lds_raw`, `lds_curated`) |
+| **Transformación** | AWS Glue Jobs (PySpark) | ETL batch: limpieza, tipado, joins, cálculo de tarifas y detección de anomalías |
+| **Data Warehouse** | Amazon Redshift Serverless | Almacén analítico con esquema estrella optimizado para Power BI |
+| **Consultas Ad-hoc / QA** | Amazon Athena | Validación de calidad y perfilamiento de datos |
+| **Consumo BI** | Power BI Desktop | Dashboard ejecutivo mediante conector nativo a Redshift |
+| **Orquestación** | Amazon EventBridge + AWS Lambda | Automatización de pipelines batch |
+| **Seguridad** | AWS IAM | Gestión de roles con principio de mínimos privilegios |
+| **Observabilidad** | Amazon CloudWatch | Centralización de logs y métricas |
+
+> **Región**: `sa-east-1` (São Paulo, Brasil), elegida por su baja latencia en Perú, presencia de PoPs en Lima y cumplimiento normativo regional.
+
+---
+
+## 📂 Estructura del Repositorio
+
 ```text
-grupo08_LuzdelSur/Luz_del_Sur
+grupo08_LuzdelSur/
 │
-├── etl/                  # Scripts y procesos de integración cloud
-│   ├── scripts/
-│   └── logs/
-│   └── raw/
+├── etl/                    # Ingeniería de datos (código y procesos)
+│   ├── scripts/            # Scripts PySpark (Bronze → Silver → Gold)
+│   ├── logs/               # Registros de ejecución de Glue Jobs
+│   └── raw/                # Muestras locales de datos crudos (solo para pruebas)
 │
-├── dw/                   # Data warehouse cloud
-│   ├── ddl/
-│   └── consultas/
+├── dw/                     # Lógica de datos y consultas
+│   ├── ddl/                # Scripts de creación de bases y tablas externas
+│   └── consultas/          # Queries SQL para vistas y validación (KPIs)
 │
-├── dashboard/            # Dashboards y visualizaciones
-│   ├── evidencias/
-│   └── publicacion/
+├── dashboard/              # Capa de visualización
+│   ├── evidencias/         # Capturas del dashboard final
+│   └── publicacion/        # Archivo .pbix listo para presentación
 │
-├── docs/                 # Documentación técnica
+├── docs/                   # Documentación técnica y de gestión
 │   ├── arquitectura_cloud.pdf
 │   ├── bitacora_tecnica.md
 │   ├── costos_cloud.xlsx
-│   └── informe_final.pdf
+│   └── informe_final.pdf   # Documento oficial del proyecto (PC4)
 │
-└── README.md
+└── README.md               # Este archivo
 ```
----
-
-## Requerimientos   
----
-## ☁️ Cuenta AWS, costos y entorno
-
-- **Cuenta AWS:** se utilizó una cuenta personal con créditos gratuitos y control de costos.
-- **Región:** 'sa-east-1' (debe ser consistente entre S3, Glue y Athena).
-- **Servicios usados:** S3, Glue (Data Catalog + Jobs), Athena, IAM.
-- **Control de costos:**
-  - Uso de datos reducidos (~82k filas en acumulado).
-  - Formato Parquet en Bronze/Silver/Gold para minimizar bytes escaneados.
-  - Creación de un *Workgroup* en Athena con límite de gasto recomendado.
-
-## 🔌 Archivo ODBC (DSN) para Athena → Power BI
-
-Se configuró un **Data Source Name (DSN)** en Windows usando el driver:
-
-- **Driver:** *Simba Amazon Athena ODBC Driver 2.x (64-bit)*
-- **Nombre DSN:** `athena_luzdelsur`
-
-Parámetros principales:
-
-- **AWS Region:** `[sa-east-1]`
-- **S3 Output Location:**
-```text
-  s3://lds-s3-bucket-demo/athena_results/
-```
-
-## 🎯 Objetivos
-- Diseñar y desplegar un **data lake** en S3 siguiendo la **arquitectura Medallion**.
-- Automatizar la ingesta y limpieza con **AWS Glue (Data Catalog + Jobs)**.
-- Modelar datos de consumo y facturación mensual en capas **Silver** y **Gold**.
-- Detectar **facturación atípica** mediante reglas estadísticas (IQR).
-- Exponer los datos a **Power BI** vía **Amazon Athena (ODBC)** y construir un dashboard analítico.
-
-## 🏗️ Arquitectura AWS
-
-Servicios principales:
-
-- **Amazon S3**: almacenamiento por capas (`raw/`, `bronze/`, `silver/`, `gold/`, `athena_results/`).
-- **AWS Glue Data Catalog**: bases `raw_db`, `bronze_db`, `silver_db`, `gold_db`.
-- **AWS Glue Studio / Jobs**: transformación CSV → Parquet y limpieza de esquemas.
-- **Amazon Athena**: consultas SQL, creación de tablas externas y *views*.
-- **Power BI Desktop**: conexión vía **ODBC Athena** y construcción del dashboard.
-
-
-Bucket principal:
-
-    lds-s3-bucket-demo/
-    ├── raw/
-    │   ├── cliente/
-    │   ├── suministro/
-    │   ├── medidor/
-    │   ├── sector/
-    │   ├── tarifa/
-    │   ├── tarifa_asignacion/
-    │   └── acumulado/          # consumo mensual 2022–2025
-    ├── bronze/
-    │   ├── bronze_cliente/
-    │   ├── bronze_suministro/
-    │   ├── bronze_medidor/
-    │   ├── bronze_sector/
-    │   ├── bronze_tarifa/
-    │   ├── bronze_tarifa_asignacion/
-    │   └── bronze_acumulado/   
-    ├── silver/
-    |   ├── consumo_mensual/
-    ├── gold/
-    |   ├── facturacion_teorica_mes/
-    └── athena_results/
- 
-
-## 🧱 Modelo de Datos (capas)
-### BRONZE
-BRONZE (datos limpios, 1:1 RAW)
-
-Tablas principales (Parquet):
-- bronze_cliente
-- bronze_suministro
-- bronze_medidor
-- bronze_sector
-- bronze_tarifa
-- bronze_asignacion_tarifa
-- bronze_acumulado (consumo mensual por medidor y suministro)
----
-### SILVER
-- consumo_mensual
-
-```sql
-    CREATE DATABASE IF NOT EXISTS silver_db;
-    CREATE TABLE silver_db.silver_consumo_mensual
-    WITH (
-    external_location = 's3://lds-s3-bucket-demo/silver/consumo_mensual/',
-    format = 'PARQUET',
-    write_compression = 'SNAPPY'
-    ) AS
-    SELECT
-    id_suministro,
-    id_medidor,
-    anio_mes,
-    energia_total_kwh,
-    demanda_max_kw,
-    n_registros,
-    n_registros_error,
-    n_registros_error * 1.0 / NULLIF(n_registros, 0) AS pct_registros_error
-    FROM bronze_db.bronze_acumulado;
-```
-
-Grano: (id_suministro, id_medidor, anio_mes)
-Campos: energía mensual, demanda máxima, registros esperados, % de registros con error.
 
 ---
 
-### GOLD
-```sql
-    CREATE DATABASE IF NOT EXISTS gold_db;
-    DROP TABLE IF EXISTS gold_db.gold_facturacion_teorica_mes;
-    CREATE TABLE gold_db.gold_facturacion_teorica_mes
-    WITH (
-    external_location = 's3://lds-s3-bucket-demo/gold/facturacion_teorica_mes/',
-    format = 'PARQUET',
-    write_compression = 'SNAPPY'
-    ) AS
-    WITH base AS (
-    SELECT
-        cm.id_suministro,
-        cm.id_medidor,
-        cm.anio_mes,
-        cm.energia_total_kwh,
-        cm.demanda_max_kw,
-        cm.n_registros,
-        cm.n_registros_error,
-        cm.pct_registros_error,
-        s.nivel_tension,
-        s.distrito,
-        c.tipo_cliente,
-        atf.cod_tarifa,
-        t.cargo_energia,
-        t.cargo_fijo,
-        (cm.energia_total_kwh * t.cargo_energia) + t.cargo_fijo AS facturacion_teorica
-    FROM silver_db.silver_consumo_mensual cm
-    JOIN bronze_db.bronze_suministro s
-        ON cm.id_suministro = s.id_suministro
-    JOIN bronze_db.bronze_cliente c
-        ON s.id_cliente = c.id_cliente
-    JOIN bronze_db.bronze_asignacion_tarifa atf
-        ON atf.id_suministro = s.id_suministro
-    AND atf.estado_asignacion = 'ACTIVO'
-    JOIN bronze_db.bronze_tarifa t
-        ON t.cod_tarifa = atf.cod_tarifa
-    ),
-    seg AS (
-    SELECT
-        *,
-        COUNT(*) OVER (
-        PARTITION BY tipo_cliente, nivel_tension, anio_mes
-        ) AS n_segmento,
-        approx_percentile(facturacion_teorica, 0.25) OVER (
-        PARTITION BY tipo_cliente, nivel_tension, anio_mes
-        ) AS q1,
-        approx_percentile(facturacion_teorica, 0.75) OVER (
-        PARTITION BY tipo_cliente, nivel_tension, anio_mes
-        ) AS q3
-    FROM base
-    ),
-    bounds AS (
-    SELECT
-        *,
-        (q3 - q1) AS iqr,
-        q3 + 1.5 * (q3 - q1) AS umbral_superior
-    FROM seg
-    )
-    SELECT
-    *,
-    CASE
-        WHEN n_segmento >= 30
-        AND facturacion_teorica > umbral_superior
-        THEN 1 ELSE 0
-    END AS es_atipico
-    FROM bounds;
+## 🧱 Pipeline de Datos: Arquitectura Medallion
+
+### 🥉 Capa BRONZE (`lds_raw`)
+
+- **Origen**: Archivos CSV planos (`cliente`, `suministro`, `medidor`, `tarifa`, `acumulado`, etc.)
+- **Almacenamiento**: `s3://s1807-cloud-bi-grupo08/raw/`
+- **Características**:
+  - Ingesta 1:1 sin transformaciones de negocio
+  - Particionamiento por periodo (`anio_mes`)
+  - Actúa como **fuente de verdad inmutable**
+- **Control de Calidad**:
+  - Validación de nulos en claves primarias
+  - Verificación de integridad temporal (`fecha_retiro ≥ fecha_instalacion`)
+  - Detección de valores negativos en `energia_total_kwh`
+
+**Ejemplo de validación en PySpark**:
+```python
+# Validación de consistencia temporal en medidores
+inconsistencias = df.filter(F.col("fecha_retiro") < F.col("fecha_instalacion"))
+print(f"Registros inconsistentes: {inconsistencias.count()}")
 ```
-- Integra Silver + cliente + suministro + tarifa.
-- Calcula facturacion_teorica = energía × cargo_energía + cargo_fijo.
-- Calcula métricas por segmento (tipo_cliente, nivel_tension, anio_mes) usando IQR: Q1, Q3, IQR, umbral superior.
-- Bandera es_atipico para casos sobre Q3 + 1.5 × IQR en segmentos con n_segmento ≥ 30.
 
 ---
 
-### Vistas KPI:  
-- vw_facturacion_atipica_detalle
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_facturacion_atipica_detalle AS
-    SELECT
-    g.id_suministro,
-    g.id_medidor,
-    g.anio_mes,
-    SUBSTR(g.anio_mes, 1, 4) AS anio,
-    SUBSTR(g.anio_mes, 6, 2) AS mes,
-    s.zona,           -- zona (cono) derivada del distrito
-    g.distrito,
-    g.tipo_cliente,
-    g.nivel_tension,
-    g.cod_tarifa,
-    g.energia_total_kwh,
-    g.demanda_max_kw,
-    g.n_registros,
-    g.n_registros_error,
-    g.pct_registros_error,
-    g.facturacion_teorica,
-    g.n_segmento,
-    g.q1,
-    g.q3,
-    g.iqr,
-    g.umbral_superior,
-    g.es_atipico
-    FROM gold_db.gold_facturacion_teorica_mes g
-    JOIN bronze_db.bronze_suministro s
-    ON g.id_suministro = s.id_suministro;
-```
-- vw_kpi_atipicos_mes
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_kpi_atipicos_mes AS
-    SELECT
-    anio_mes,
-    SUBSTR(anio_mes, 1, 4) AS anio,
-    SUBSTR(anio_mes, 6, 2) AS mes,
-    COUNT(*) AS total_registros,
-    COUNT_IF(es_atipico = 1) AS total_atipicos,
-    COUNT_IF(es_atipico = 1) * 100.0 / COUNT(*) AS porcentaje_atipicos
-    FROM gold_db.gold_facturacion_teorica_mes
-    GROUP BY anio_mes;
-```
-- vw_kpi_atipicos_zona_mes
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_kpi_atipicos_zona_mes AS
-    SELECT
-    anio_mes,
-    anio,
-    mes,
-    zona,
-    COUNT(*) AS total_registros,
-    COUNT_IF(es_atipico = 1) AS total_atipicos,
-    COUNT_IF(es_atipico = 1) * 100.0 / COUNT(*) AS porcentaje_atipicos
-    FROM gold_db.vw_facturacion_atipica_detalle
-    GROUP BY anio_mes, anio, mes, zona;
-```
-- vw_kpi_atipicos_distrito_mes
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_kpi_atipicos_distrito_mes AS
-    SELECT
-    anio_mes,
-    anio,
-    mes,
-    distrito,
-    COUNT(*) AS total_registros,
-    COUNT_IF(es_atipico = 1) AS total_atipicos,
-    COUNT_IF(es_atipico = 1) * 100.0 / COUNT(*) AS porcentaje_atipicos
-    FROM gold_db.vw_facturacion_atipica_detalle
-    GROUP BY anio_mes, anio, mes, distrito;
-```
-- vw_kpi_atipicos_zona_anual
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_kpi_atipicos_zona_anual AS
-    SELECT
-    anio,
-    zona,
-    COUNT(*) AS total_registros,
-    COUNT_IF(es_atipico = 1) AS total_atipicos,
-    COUNT_IF(es_atipico = 1) * 100.0 / COUNT(*) AS porcentaje_atipicos
-    FROM gold_db.vw_facturacion_atipica_detalle
-    GROUP BY anio, zona;
-```
+### 🥈 Capa SILVER (`lds_curated`)
 
-- vw_kpi_atipicos_distrito_anual
-```sql
-    CREATE OR REPLACE VIEW gold_db.vw_kpi_atipicos_distrito_anual AS
-    SELECT
-    anio,
-    distrito,
-    COUNT(*) AS total_registros,
-    COUNT_IF(es_atipico = 1) AS total_atipicos,
-    COUNT_IF(es_atipico = 1) * 100.0 / COUNT(*) AS porcentaje_atipicos
-    FROM gold_db.vw_facturacion_atipica_detalle
-    GROUP BY anio, distrito;
-```
+- **Propósito**: Dataset limpio, tipado y listo para joins
+- **Formato**: Apache Parquet + compresión Snappy
+- **Tabla principal**: `consumo_mensual`
+- **Grano**: `(id_suministro, id_medidor, anio_mes)`
+- **Métricas**:
+  - `energia_total_kwh`
+  - `demanda_max_kw`
+  - `n_registros`, `n_registros_error`, `pct_registros_error`
+
 ---
 
-## 📊 KPI principal
-Definición:
-Proporción de suministros cuya facturación teórica mensual es significativamente mayor que la de clientes similares, de acuerdo con la regla:
+### 🥇 Capa GOLD (`lds_curated`)
 
-facturacion_teorica > Q3 + 1.5 × IQR
-(segmentando por tipo_cliente, nivel_tension y anio_mes).
+- **Propósito**: Datos listos para BI, con lógica de negocio y detección de anomalías
+- **Tabla principal**: `facturacion_teorica_mes`
+- **Cálculo de facturación teórica**:
+  ```text
+  facturacion_teorica = (energia_total_kwh × cargo_energia) + cargo_fijo
+  ```
 
-Métricas clave:
-- % de atípicos por mes
-- Número de atípicos por distrito y zona (cono)
-- Facturación total y promedio por segmento
-- Ranking de distritos / zonas más críticos
+- **Lógica de detección de anomalías (IQR)**:
+  1. Segmentación por `(tipo_cliente, nivel_tension, anio_mes)`
+  2. Cálculo de `Q1`, `Q3`, `IQR = Q3 - Q1`
+  3. Umbral superior: `Q3 + 1.5 × IQR`
+  4. Bandera: `es_atipico = 1` si `facturacion_teorica > umbral_superior` **y** `n_segmento ≥ 30`
 
-## 🔄 Exportar datos de Athena a Power BI
+> ✅ El umbral de 30 registros por segmento asegura robustez estadística (evita outliers en grupos pequeños).
 
-### Exportar a Power BI
+---
 
-Conexión directa vía ODBC 
-- Instalar driver ODBC Athena 2.x.
-- Crear DSN athena_luzdelsur.
+## 📊 Modelo Dimensional y Vistas Analíticas
 
-En Power BI:
-- Obtener datos → ODBC → athena_luzdelsur.
-- Seleccionar vistas de gold_db (ej. vw_facturacion_atipica_detalle).
-- Modo de conexión: Import (dataset se almacena dentro del .pbix).
+El modelo final se implementa en **Amazon Redshift Serverless** como un **Esquema Estrella** optimizado para Power BI:
 
+- **Tabla de hechos central**: `vw_facturacion_atipicos`
+  - Contiene métricas granulares y banderas de anomalía (`es_atipico`)
+- **Vistas agregadas (dimensiones de análisis)**:
+  - `vw_kpi_atipicos_zona_anual`
+  - `vw_kpi_atipicos_distrito_mes`
+  - `vw_kpi_atipicos_mes`
 
+Estas vistas permiten:
+- Tendencias temporales (% de atípicos por mes)
+- Comparación geoespacial (por cono y distrito)
+- Drill-down detallado para auditorías de campo
 
+---
 
-## 🧑‍💻 Autores
-Proyecto: Luz del Sur – Facturación Atípica  
-Curso: Sistema de Inteligencia de Negocios - SI807
-Integrantes: 
-```texto 
-Hernández Jahir, Gordillo Mikhael y Enciso Frey
-```
+## 🔌 Conexión Power BI → Amazon Redshift
+
+### Requisitos Técnicos
+
+- **Conector**: Conector nativo de Power BI para Amazon Redshift
+- **Endpoint**: `workgroup.<id>.us-east-1.redshift-serverless.amazonaws.com`
+- **Base de datos**: `dev`
+- **Esquema**: `bi` (contiene las vistas lógicas)
+
+### Configuración en Power BI
+
+1. **Obtener datos** → **Amazon Redshift**
+2. Ingresar credenciales y seleccionar vistas en esquema `bi`
+3. **Modo de conexión**: **Import** (dataset embebido en `.pbix`)
+4. **Modelo relacional**: Relaciones uno a muchos entre vistas maestras y tabla de hechos
+
+> La conexión directa a Redshift (vs. Athena) garantiza **mejor rendimiento en joins complejos** y **estabilidad en dashboards ejecutivos**.
+
+---
+
+## ☁️ Gestión de Costos y Eficiencia Operativa
+
+### Supuestos Técnicos (Baseline)
+
+| Parámetro | Valor |
+|----------|-------|
+| Medidores | 500,000 |
+| Registros/día | 12 millones |
+| Volumen mensual (crudo) | ~72 GB |
+| Volumen optimizado (Parquet) | ~25 GB |
+
+### Costo Mensual Proyectado (TCO)
+
+| Categoría | Costo (S/ con IGV) |
+|----------|------------------|
+| Almacenamiento y ETL (S3, Glue, Athena) | S/ 224.00 |
+| Data Warehouse (Redshift Serverless) | S/ 2,810.50 |
+| Visualización (QuickSight/Power BI) | Depende de licencias Microsoft |
+| **Total Estimado** | **S/ 7,671.81** (con QuickSight Enterprise) |
+
+> **Nota**: Si Luz del Sur ya cuenta con licencias de Power BI Pro, este costo se reduce significativamente.
+
+### Escalabilidad Financiera
+
+Al triplicar el volumen de datos (36M registros/día), el costo solo se incrementa en **2.16x**, demostrando la **no linealidad** y eficiencia del modelo serverless de AWS.
+
+---
+
+## 🛡️ Seguridad y Gobernanza
+
+- **Principio de mínimos privilegios**: roles IAM definidos (`bi-admin`, `bi-data-engineer`, `bi-analyst`)
+- **Cifrado**: habilitado en tránsito (TLS) y en reposo (SSE-S3)
+- **Soberanía de datos**: procesamiento en región sudamericana (`sa-east-1`)
+- **Cumplimiento**: AWS cumple con ISO 27001, SOC 2 y PCI DSS
+- **Auditoría**: logs centralizados en CloudWatch
+
+---
+
+## 🔄 Orquestación y Automatización
+
+- **Amazon EventBridge**: agenda la ejecución diaria del pipeline
+- **AWS Lambda**: valida la llegada de archivos a `raw/` y dispara Glue Jobs
+- **Flujo batch**: diseñado para reprocesamiento histórico y escalado futuro a tiempo real (con Kinesis)
+
+---
+
+## 🧑‍💻 Equipo de Trabajo – Grupo 08
+
+| Rol | Integrante |
+|-----|-----------|
+| **Data Engineering & Cloud Architecture** | Enciso Quichca, Frey Mauricio |
+| **Data Modeling, QA & Statistical Logic** | Gordillo Inocente, Mikhael León |
+| **Business Intelligence & Dashboard Design** | Hernández Hernández, Jahir Alejandro |
+
+**Curso**: SI807 – Sistemas de Inteligencia de Negocios  
+**Facultad**: Ingeniería Industrial y de Sistemas – UNI  
+**Fecha de entrega**: 21 de noviembre de 2025
+
+---
+
+## 📄 Documentación Adjunta
+
+- **Informe Técnico Completo**: [`docs/informe_final.pdf`](docs/informe_final.pdf)
+- **Análisis Financiero**: [`docs/costos_cloud.xlsx`](docs/costos_cloud.xlsx)
+
+---
+
+> 💡 Este proyecto demuestra cómo una arquitectura **serverless, escalable y económica** en AWS puede resolver problemas reales del sector energético, combinando **ingeniería de datos rigurosa**, **estadística aplicada** y **visualización estratégica**, todo ello dentro de un marco académico con impacto industrial.
