@@ -102,7 +102,7 @@ El proyecto considera prácticas sostenibles como:
 
 * Roger Salvador Loayza Segura
 * Francisco Leonel Grijalva Parra
-* **Daniel Mauricio Otero Vicente**
+* Daniel Mauricio Otero Vicente
 
 ---
 
