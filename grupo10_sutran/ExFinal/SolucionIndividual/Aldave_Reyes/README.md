@@ -11,5 +11,14 @@
 
 Usando GCP, puedes realizar análisis avanzados en tiempo real, identificar patrones en ventas por región, segmento de cliente y tipo de producto, y luego optimizar el mix de productos y estrategias de ventas, lo que te ayudará a maximizar la rentabilidad.
 
-### Carga de csv utilizando CLI
-!()[]
+### Carga de csv utilizando CLI Y Ejecucion de EDA
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_1.png)
+
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_2.png)
+
+## 3.2 Transformación y Modelo Dimensional – PLATA y ORO
+***Se hace una limpieza***
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_10.png?raw=true)
+
+![]()
+
