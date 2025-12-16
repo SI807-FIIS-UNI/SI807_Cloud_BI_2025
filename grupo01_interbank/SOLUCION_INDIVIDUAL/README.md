@@ -49,25 +49,95 @@ El dataset dado se trata de accidentes de transito que se han visto desde el per
 
 ## TABLAS DE HECHOS Y DIMENSIONES EN PLATA
 
+<img width="1902" height="974" alt="image" src="https://github.com/user-attachments/assets/ccd80572-23fc-4420-b73c-7b84fa0248bb" />
+
+<img width="1888" height="475" alt="image" src="https://github.com/user-attachments/assets/96a20427-e647-4f99-b40d-66e7f8af78e9" />
+
 
 
 ## PROCESAMIENTO Y GENERACION DE KPIs 
 
+<img width="1581" height="848" alt="image" src="https://github.com/user-attachments/assets/38f6671a-b64f-438e-bf12-a149b1ffe786" />
 
-
-## EVIDENCIAS DE ETL
+### KPI 1: Accidentes y Severidad Promedio por Estado y Ciudad (kpi_ubicacion_severidad)
+Este KPI te permite analizar el impacto de los accidentes a nivel geográfico.
+```sql
+CREATE OR REPLACE TABLE
+  `mypersonalproject-481202.Oro23.kpi_ubicacion_severidad` AS
+SELECT
+  l.State,
+  l.City,
+  COUNT(f.Accident_Key) AS Total_Accidentes,
+  AVG(f.Severity) AS Severidad_Promedio,
+  SUM(f.Duration_min) AS Duracion_Total_Minutos
+FROM
+  `mypersonalproject-481202.Plata23.fact_accidentes` AS f
+INNER JOIN
+  `mypersonalproject-481202.Plata23.dim_ubicacion` AS l
+  ON f.Location_Key = l.Location_Key
+GROUP BY
+  1, 2
+ORDER BY
+  Total_Accidentes DESC;
+```
+### KPI 2: Top Horas Críticas y Severidad (kpi_top_horas_criticas)
+Este KPI identifica las horas del día más peligrosas o con mayor concentración de accidentes y severidad.
+```sql
+CREATE OR REPLACE TABLE
+  `mypersonalproject-481202.Oro23.kpi_top_horas_criticas` AS
+SELECT
+  t.Day_of_Week,
+  t.Hour_of_Day,
+  t.Sunrise_Sunset,
+  COUNT(f.Accident_Key) AS Total_Accidentes,
+  AVG(f.Severity) AS Severidad_Promedio,
+  AVG(f.Duration_min) AS Duracion_Promedio_Minutos
+FROM
+  `mypersonalproject-481202.Plata23.fact_accidentes` AS f
+INNER JOIN
+  `mypersonalproject-481202.Plata23.dim_tiempo` AS t
+  ON f.Time_Key = t.Time_Key
+GROUP BY
+  1, 2, 3
+ORDER BY
+  Total_Accidentes DESC, Severidad_Promedio DESC
+LIMIT 24; 
+```
+### KPI 3: Accidentes y Severidad por Clima (kpi_clima_severidad)
+Este KPI analiza la correlación entre las condiciones meteorológicas y el número/impacto de los accidentes.
 
 ```sql
-
+CREATE OR REPLACE TABLE
+  `mypersonalproject-481202.Oro23.kpi_clima_severidad` AS
+SELECT
+  c.Weather_Condition,
+  COUNT(f.Accident_Key) AS Total_Accidentes,
+  AVG(f.Severity) AS Severidad_Promedio,
+  AVG(f.Distance_mi) AS Distancia_Promedio_Afectada
+FROM
+  `mypersonalproject-481202.Plata23.fact_accidentes` AS f
+INNER JOIN
+  `mypersonalproject-481202.Plata23.dim_clima` AS c
+  ON f.Weather_Key = c.Weather_Key
+GROUP BY
+  1
+ORDER BY
+  Total_Accidentes DESC;
 ```
 
 # PREGUNTA 3.3
 
 ## DASHBOARDS CONECTADOS A LA CAPA ORO
 
+## CONEXION
+<img width="1901" height="852" alt="image" src="https://github.com/user-attachments/assets/0b0d32c4-6645-467e-afb7-2903ec86969d" />
+
+
 ### DASHBOARD 1
+<img width="1071" height="615" alt="image" src="https://github.com/user-attachments/assets/6b2bc528-dc12-4658-867d-6bbebfc4eb95" />
 
 ### DASHBOARD 2
 
+<img width="1061" height="667" alt="image" src="https://github.com/user-attachments/assets/872868fb-d6cb-4ca2-9edb-49f9d3e4a63e" />
 
 
