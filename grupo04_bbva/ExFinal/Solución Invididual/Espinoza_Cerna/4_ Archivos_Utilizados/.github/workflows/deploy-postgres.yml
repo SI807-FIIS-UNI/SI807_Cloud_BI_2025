@@ -1,0 +1,48 @@
+name: 'Deploy: PostgreSQL Schema'
+
+on:
+  workflow_dispatch:
+
+env:
+  PG_SERVER_NAME: 'pg-demo-dashboard-004'
+  PG_ADMIN_USER: 'adminuser'
+  PG_ADMIN_PASSWORD: 'SecurePass123!'
+  DB_NAME: 'data_oro_db'
+  RESOURCE_GROUP: 'rg-demo-dashboard'
+  SQL_PATH: './2-database/query.sql'
+
+jobs:
+  deploy-schema:
+    runs-on: ubuntu-latest
+    name: Deploy PostgreSQL Schema
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+
+      - name: Get PostgreSQL FQDN
+        id: get_pg_fqdn
+        run: |
+          PG_FQDN=$(az postgres flexible-server show --resource-group ${{ env.RESOURCE_GROUP }} --name ${{ env.PG_SERVER_NAME }} --query fullyQualifiedDomainName -o tsv)
+          echo "PG_FQDN=$PG_FQDN" >> $GITHUB_OUTPUT
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Run SQL script
+        env:
+          PGPASSWORD: ${{ secrets.PG_ADMIN_PASSWORD }}
+        run: |
+          psql "host=${{ steps.get_pg_fqdn.outputs.PG_FQDN }} port=5432 dbname=${{ env.DB_NAME }} user=${{ env.PG_ADMIN_USER }} password=${{ env.PG_ADMIN_PASSWORD }} sslmode=require" \
+            -f "${{ env.SQL_PATH }}"
+
+      - name: Azure Logout
+        run: az logout
+        if: always()

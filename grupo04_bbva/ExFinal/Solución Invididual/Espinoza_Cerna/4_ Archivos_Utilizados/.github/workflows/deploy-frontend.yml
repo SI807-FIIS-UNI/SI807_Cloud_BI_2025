@@ -1,0 +1,62 @@
+name: 'CI/CD: Frontend to Static Web App'
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '3-frontend/**'
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: 'rg-demo-dashboard'
+  BACKEND_APP_NAME: 'demo-backend-api'
+  SWA_NAME: 'demo-dashboard-frontend-004'
+  APP_LOCATION: './5-frontend'
+  OUTPUT_LOCATION: 'dist' # Carpeta de build (ej. dist, build)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: '{"clientId":"${{ secrets.ARM_CLIENT_ID }}","clientSecret":"${{ secrets.ARM_CLIENT_SECRET }}","subscriptionId":"${{ secrets.ARM_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.ARM_TENANT_ID }}"}'
+
+      - name: Create .env file with backend URL
+        run: |
+          BACKEND_URL="https://$(az containerapp show --name ${{ env.BACKEND_APP_NAME }} --resource-group ${{ env.RESOURCE_GROUP }} --query properties.configuration.ingress.fqdn -o tsv)"
+          echo "VITE_API_BASE_URL=${BACKEND_URL}" > ${{ env.APP_LOCATION }}/.env
+          echo "Backend URL set to ${BACKEND_URL}"
+
+      - name: Install dependencies and build
+        run: |
+          cd ${{ env.APP_LOCATION }}
+          npm install
+          npm run build
+
+      - name: Get Static Web App Deployment Token
+        id: get_token
+        run: |
+          TOKEN=$(az staticwebapp secrets list --name ${{ env.SWA_NAME }} --resource-group ${{ env.RESOURCE_GROUP }} --query properties.apiKey -o tsv)
+          echo "TOKEN=$TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Deploy to Azure Static Web App
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.get_token.outputs.TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "${{ env.APP_LOCATION }}/${{ env.OUTPUT_LOCATION }}"
+          api_location: "" # No API for this SWA
+          output_location: "" # Handled by app_location
