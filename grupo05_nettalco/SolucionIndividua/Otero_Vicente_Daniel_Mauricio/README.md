@@ -160,7 +160,7 @@ El archivo está dentro de la carpeta scripts
 ## carga de las dimensiones a google cloude 
 
 <img width="1910" height="774" alt="Captura de pantalla 2025-12-16 011456" src="https://github.com/user-attachments/assets/9568b125-de53-4e4c-ace8-1144cf5f7f23" />
-
+🔗 [Script ETL – `ETL (2).py`](./Scripts/etl%20(2).py)
 ## Justificación de los KPIs 
 El objetivo principal del proyecto es analizar el fenómeno de inasistencia a citas médicas (no-show), identificar patrones temporales, demográficos y sociales, y evaluar el impacto de acciones preventivas como los recordatorios vía SMS.
 Para ello, se definieron KPIs en la capa ORO, organizados en dos dashboards complementarios: uno ejecutivo y otro analítico.
