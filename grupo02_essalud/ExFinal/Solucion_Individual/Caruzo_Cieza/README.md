@@ -245,6 +245,9 @@ En esta etapa se realizó la **conversión del CSV a formato Parquet**, optimiza
 
 `raw_to_processed.py`
 
+
+**Nota**: Los scripts se encuentran subidos en el bucket en la carpeta /scripts y en el github tambien en la carpeta /scripts
+
 Principales acciones realizadas:
 
 - Lectura del CSV desde GCS  
@@ -590,7 +593,7 @@ Conectarse a la capa oro evita cálculos redundantes en la herramienta de visual
 
 **[CAPTURA AQUÍ: ventana de conexión Power BI a BigQuery]**  
 
-
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-16%20010831.png)
 
 
 ---
@@ -599,7 +602,7 @@ Conectarse a la capa oro evita cálculos redundantes en la herramienta de visual
 
 ### 🎯 Objetivo
 
-Brindar una visión rápida y clara del impacto global del No-Show para la toma de decisiones gerenciales.
+Medir impacto global del No-Show y evaluar efectividad del SMS.
 
 ### 📌 Visualizaciones incluidas
 
@@ -625,17 +628,18 @@ Brindar una visión rápida y clara del impacto global del No-Show para la toma 
 
 ---
 
-#### Tabla Resumen
+#### Gráfico de Barras - No-Show por Canal (SMS)
 
-- Fuente: `kpi_no_show_lead_time`  
-- Métricas: total de citas, no-shows y tasa  
+- Fuente: `kpi_no_show_canal`  
+- Eje X: `descripcion_canal`  
+- Valor: `tasa_no_show_pct`  
 
 **Justificación de diseño:**  
-Los indicadores tipo *card* permiten una lectura inmediata del problema, mientras que el análisis por anticipación identifica puntos de intervención temprana.
+Los indicadores tipo *card* permiten una lectura inmediata del problema, mientras que el análisis por anticipación identifica puntos de intervención temprana y el análisis de canal permite evaluar el impacto del envío de SMS como mecanismo de confirmación para reducir el No-Show.
 
 **[CAPTURA AQUÍ: Dashboard Ejecutivo completo]**
 
-
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-16%20014536.png)
 
 ---
 
@@ -676,7 +680,7 @@ La combinación de gráficos permite detectar simultáneamente **frecuencia**, *
 
 **[CAPTURA AQUÍ: Dashboard Analítico completo]**
 
-
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-16%20014640.png)
 
 ---
 
@@ -712,24 +716,3 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
