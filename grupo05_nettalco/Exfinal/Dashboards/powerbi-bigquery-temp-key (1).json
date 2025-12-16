@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "nettalco-data-478503",
+  "private_key_id": "e56d2012967b5f5e0294ebc0b1254a5070d99967",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC7ApwqkuK9+zkw\nXWMg7DsevjULjXiwYwwQS4DZmlR7TXJw/Ooq9SbqebJLT5b5bHR+zSmvGZXy9F3U\nS8d5ymJi3339NmlxHc5YJ14pqTkm1r1wGQcKKfbF1eqZBXUjB02YncREXEBPQ8S1\nCr9X/sUlzrFrkh4T+2tKXH1mYBaJ20TO1I/3XXiU0qJ+UwdvEvSpRCvQ3Oy/M7CE\n0TVCUMlQNHn7NWbIAp/ajTIiAAXy3ugkxT0BNXSVwmkvWdDEJWlPku3c7eQCUFWl\ngWV5x61cthFLBJvzuM8S7JBKEF0N+icFPWPUihjrbv834c2GLpaV6LdUkKdFCCLV\nXSyjIVbNAgMBAAECggEASSk5PTKfwCFTe0ddq5iffGR/Thi3mZH2Oz2+l+LXoDFp\nTyiy18F2yw53IR1u+/9hB+Zto1IIJrdRKefHjy8NFI9Is9IgqB84BabJINVSRY6H\nKB6ycVh/cWBB2kGXVO/bfJRkHzZT9m6VuxoMR3mlWSgmouXUHI8kpz/N00pOJvnV\nGrY05X0IKst4FIKRg6q7eCi1D9jK/EDcOKeT6iPEsQYvf9oG/7vSFIwBva1KsNkv\nKHYI/489YuR0FByfx7tTvnqY4RM82mJEm6vAYVMqCSBv168QN9w7XMXkVBRAPIT2\ni4JZpBCKstOJFXk/B09JaCtKjXxsB5t5wIKKWvD+xQKBgQDb4a5Vmjb+wOaKRPQm\nOMkTlP0anLurWBliCmKwgJrMzsZ3nC1nmnyPEHUkqziyzNRBFvK7MiI2wN7Kufxt\n4L3MGQ0SjUrm85UuVosyJBobaOy9pBgs7yW4sdsTtuLzhKJoAno7+qc9yPjo1Jjq\nX+k4hGNpvxhN9BkFB1hRqPa6/wKBgQDZuqSmOPxxgJKm8mb6Jtbz85h7IHD8VmZW\nAvnH3gVbbE2aeBkIRr9AFW2mOXOjfBya6oERCOUK3i/DZYMMy7/swPVkp7YZoLer\nP4Bt70TBljloBRIydfy+heEy/MAyCxfVNlW1/YzMqbkOa30povU2X9WdDhYsXUUr\n9p08DfPqMwKBgG6CbIYlbcJ33OZdZX/YRmcLGHJJl6C0NH2rzpH68NJCkkkHO2K4\nqCWXFekKDQMAIyVbjT88ISn3oYGuHAp1S67KYGGUlbKhdbbGVEstDdn80A8369aZ\nkxHSgdLUthfB74XqyNhgT7Gj0kXio8AX2DVJhFVfb62uIuz+FgtkqiytAoGATTZE\nN3JUC8hFuZCS9jkZ129Wbqulhcb6CZyKiddxXOd+ab4XWnkET6yJsv4CxUI5PrLU\nzH60AvOiSo/QNpR23nXbUDOtf08gc0lUuSe14VTtzLanql9vHv2JTDSXz+dhL0pS\ngPSGnvm9V6DExSQ2A29e6JBbSqZU5m9ReT+VdUMCgYBMMgFZagtGp5fgKyRk7Ynn\n6uF5bLbBiOKZlTYipyHovzHr3FQ+2UR0IkG7YO8V7P7Zv5AQT4KaJgDyfJxbg3VZ\nvEftJCyGyGb5EseI0b3Fyf5CdRqeM+zcKFgeP6bzHBSWJRg9aOfkWcG7Sl6GM7sM\n/4NEHbKAMJAbzhpuepz4AA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "powerbi-bigquery-temp@nettalco-data-478503.iam.gserviceaccount.com",
+  "client_id": "107369588549334699311",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/powerbi-bigquery-temp%40nettalco-data-478503.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
