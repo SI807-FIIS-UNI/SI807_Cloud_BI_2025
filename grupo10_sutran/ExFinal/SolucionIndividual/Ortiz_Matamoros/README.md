@@ -96,8 +96,21 @@ Se evidencia que se realizo correctamente el proceso ETL y se muestran los logs
 
 ## 3.1. Crear 2 dashboards 
 
+Una vez tenido los KPIS y el modelo Estrella en el BigQuery se procede a entrar a Looker Studio y conectarlo a nuestro BigQuery para extraer la Data para los Dashboard
 
+![dashboard01](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard01.png)
+![dashboard02](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard02.png)
+![dashboard03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard03.png)
+![dashboard04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard04.png)
 
 ## 3.2. Incluir KPIs 
 
+Para la generacion de los graficos tambien se incluyeron los kpis generados por los script de phyton
+
+![dashboard05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard05.png)
+
+Link del Looker: https://lookerstudio.google.com/reporting/329ed44d-f811-4222-ba37-f2e30b2afa53
+
 ## 3.3. Sustento de diseño
+
+El diseño se separó en dos dashboards para facilitar la lectura y la toma de decisiones. El Dashboard 1 (Resumen Ejecutivo) concentra en la parte superior tarjetas KPI (volumen, retrasos promedio y porcentajes clave) y debajo una tendencia temporal, permitiendo evaluar rápidamente el estado general y su evolución. El Dashboard 2 (Análisis Operacional) profundiza el diagnóstico con rankings por aerolínea, top rutas y aeropuertos de origen, lo que ayuda a identificar focos de retraso y priorizar acciones. En ambos casos se consumen tablas ORO agregadas para asegurar rendimiento, consistencia y simplicidad en la visualización.
