@@ -1,0 +1,40 @@
+2025-12-16 05:49:13,889 - INFO - 
+====================================
+2025-12-16 05:49:13,890 - INFO -          INICIO DE PROCESO ELT        
+2025-12-16 05:49:13,890 - INFO - ====================================
+2025-12-16 05:49:13,890 - INFO - 
+[ETAPA 1/4: STAGING] Iniciando carga a tabla Staging: ef-si807u-20220018k.plata.staging_flights
+2025-12-16 05:49:20,266 - INFO - [ETAPA 1/4: STAGING] Carga a Staging finalizada. Filas cargadas: 484551
+2025-12-16 05:49:20,267 - INFO - 
+[ETAPA 2/4: DIMENSIONES] --- Iniciando creación de Tablas de Dimensión (PLATA) ---
+2025-12-16 05:49:20,267 - INFO - Creando Dimensión: Tiempo...
+2025-12-16 05:49:22,260 - INFO - [ETAPA 2/4] 1. Dimensión Tiempo creada.
+2025-12-16 05:49:22,260 - INFO - Creando Dimensión: Aerolínea...
+2025-12-16 05:49:26,358 - INFO - [ETAPA 2/4] 2. Dimensión Aerolínea creada.
+2025-12-16 05:49:26,362 - INFO - Creando Dimensión: Aeropuerto (Origen/Destino)...
+2025-12-16 05:49:28,615 - INFO - [ETAPA 2/4] 3. Dimensión Aeropuerto (Origen/Destino) creada.
+2025-12-16 05:49:28,615 - INFO - Creando Dimensión: Causa (Estática)...
+2025-12-16 05:49:31,506 - INFO - [ETAPA 2/4] 4. Dimensión Causa (Estática) creada.
+2025-12-16 05:49:31,508 - INFO - 
+[ETAPA 3/4: HECHOS] --- Iniciando creación de la Tabla de Hechos (PLATA) ---
+2025-12-16 05:49:31,508 - INFO - ATENCIÓN: Esta etapa es la más larga debido al JOIN de 500K filas. La tabla estará PARTICIONADA y CLUSTERIZADA.
+2025-12-16 06:02:27,264 - INFO - 
+====================================
+2025-12-16 06:02:27,264 - INFO -          INICIO DE PROCESO ELT        
+2025-12-16 06:02:27,265 - INFO - ====================================
+2025-12-16 06:02:27,265 - INFO - 
+[ETAPA 1/4: STAGING] Iniciando carga a tabla Staging: ef-si807u-20220018k.plata.staging_flights
+2025-12-16 06:02:27,401 - ERROR - Error fatal en el proceso ELT: 404 POST https://bigquery.googleapis.com/bigquery/v2/projects/ef-si807u-20220018k/jobs?prettyPrint=false: Not found: Dataset ef-si807u-20220018k:plata
+2025-12-16 06:15:06,758 - INFO - ===== INICIO ETL FLIGHT DELAY =====
+2025-12-16 06:15:07,251 - INFO - Dataset plata listo
+2025-12-16 06:15:07,540 - INFO - Dataset oro listo
+2025-12-16 06:15:07,540 - INFO - Cargando STAGING desde bronce/processed
+2025-12-16 06:15:17,220 - INFO - STAGING cargado correctamente
+2025-12-16 06:25:57,862 - INFO - ===== INICIO ETL FLIGHT DELAY =====
+2025-12-16 06:25:58,235 - INFO - Dataset plata listo
+2025-12-16 06:25:58,535 - INFO - Dataset oro listo
+2025-12-16 06:26:06,915 - INFO - STAGING cargado
+2025-12-16 06:26:14,363 - INFO - Dimensiones creadas
+2025-12-16 06:26:18,456 - INFO - FACT creada
+2025-12-16 06:26:26,065 - INFO - KPIs creados en ORO
+2025-12-16 06:26:26,065 - INFO - ===== ETL FINALIZADO CORRECTAMENTE =====

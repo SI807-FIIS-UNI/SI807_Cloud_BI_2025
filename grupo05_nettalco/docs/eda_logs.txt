@@ -1,0 +1,66 @@
+2025-12-16 01:45:53,451 - INFO - Iniciando EDA para el archivo: gs://bi-examen-final/bronce/raw/Flight_delay.csv
+2025-12-16 02:12:45,570 - INFO - Iniciando EDA desde archivo local: ./Flight_delay.csv
+2025-12-16 02:12:51,170 - INFO - --- HEAD (Primeras 5 filas) ---
+2025-12-16 02:12:51,264 - INFO - 
+   DayOfWeek        Date  DepTime  ArrTime  CRSArrTime UniqueCarrier                 Airline  FlightNum TailNum  ActualElapsedTime  CRSElapsedTime  AirTime  ArrDelay  DepDelay Origin                         Org_Airport Dest                                Dest_Airport  Distance  TaxiIn  TaxiOut  Cancelled CancellationCode  Diverted  CarrierDelay  WeatherDelay  NASDelay  SecurityDelay  LateAircraftDelay
+0          4  03-01-2019     1829     1959        1925            WN  Southwest Airlines Co.       3920  N464WN                 90              90       77        34        34    IND  Indianapolis International Airport  BWI  Baltimore-Washington International Airport       515       3       10          0                N         0             2             0         0              0                 32
+1          4  03-01-2019     1937     2037        1940            WN  Southwest Airlines Co.        509  N763SW                240             250      230        57        67    IND  Indianapolis International Airport  LAS              McCarran International Airport      1591       3        7          0                N         0            10             0         0              0                 47
+2          4  03-01-2019     1644     1845        1725            WN  Southwest Airlines Co.       1333  N334SW                121             135      107        80        94    IND  Indianapolis International Airport  MCO               Orlando International Airport       828       6        8          0                N         0             8             0         0              0                 72
+3          4  03-01-2019     1452     1640        1625            WN  Southwest Airlines Co.        675  N286WN                228             240      213        15        27    IND  Indianapolis International Airport  PHX    Phoenix Sky Harbor International Airport      1489       7        8          0                N         0             3             0         0              0                 12
+4          4  03-01-2019     1323     1526        1510            WN  Southwest Airlines Co.          4  N674AA                123             135      110        16        28    IND  Indianapolis International Airport  TPA                 Tampa International Airport       838       4        9          0                N         0             0             0         0              0                 16
+2025-12-16 02:12:51,265 - INFO - 
+--- INFO (Tipos de Datos y Nulos) ---
+2025-12-16 02:12:51,828 - INFO - 
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 484551 entries, 0 to 484550
+Data columns (total 29 columns):
+ #   Column             Non-Null Count   Dtype 
+---  ------             --------------   ----- 
+ 0   DayOfWeek          484551 non-null  int64 
+ 1   Date               484551 non-null  object
+ 2   DepTime            484551 non-null  int64 
+ 3   ArrTime            484551 non-null  int64 
+ 4   CRSArrTime         484551 non-null  int64 
+ 5   UniqueCarrier      484551 non-null  object
+ 6   Airline            484551 non-null  object
+ 7   FlightNum          484551 non-null  int64 
+ 8   TailNum            484551 non-null  object
+ 9   ActualElapsedTime  484551 non-null  int64 
+ 10  CRSElapsedTime     484551 non-null  int64 
+ 11  AirTime            484551 non-null  int64 
+ 12  ArrDelay           484551 non-null  int64 
+ 13  DepDelay           484551 non-null  int64 
+ 14  Origin             484551 non-null  object
+ 15  Org_Airport        483374 non-null  object
+ 16  Dest               484551 non-null  object
+ 17  Dest_Airport       483072 non-null  object
+ 18  Distance           484551 non-null  int64 
+ 19  TaxiIn             484551 non-null  int64 
+ 20  TaxiOut            484551 non-null  int64 
+ 21  Cancelled          484551 non-null  int64 
+ 22  CancellationCode   484551 non-null  object
+ 23  Diverted           484551 non-null  int64 
+ 24  CarrierDelay       484551 non-null  int64 
+ 25  WeatherDelay       484551 non-null  int64 
+ 26  NASDelay           484551 non-null  int64 
+ 27  SecurityDelay      484551 non-null  int64 
+ 28  LateAircraftDelay  484551 non-null  int64 
+dtypes: int64(20), object(9)
+memory usage: 107.2+ MB
+
+2025-12-16 02:12:52,329 - INFO - 
+--- Estadísticas Descriptivas de Retrasos (Minutos) ---
+2025-12-16 02:12:52,673 - INFO -             ArrDelay       DepDelay   CarrierDelay   WeatherDelay       NASDelay  SecurityDelay  LateAircraftDelay
+count  484551.000000  484551.000000  484551.000000  484551.000000  484551.000000  484551.000000      484551.000000
+mean       60.907764      57.498086      17.419440       3.153284      13.599421       0.082033          26.653587
+std        56.975420      55.991012      39.417893      19.503657      31.454655       1.884774          40.535994
+min        15.000000       6.000000       0.000000       0.000000       0.000000       0.000000           0.000000
+25%        25.000000      23.000000       0.000000       0.000000       0.000000       0.000000           0.000000
+50%        42.000000      40.000000       2.000000       0.000000       1.000000       0.000000          13.000000
+75%        76.000000      72.000000      19.000000       0.000000      13.000000       0.000000          36.000000
+max      1707.000000    1710.000000    1707.000000    1148.000000    1357.000000     392.000000        1254.000000
+2025-12-16 02:12:52,673 - INFO - 
+KPI EDA: Porcentaje de vuelos con retraso en salida (>0 min): 100.00%
+2025-12-16 02:13:09,869 - INFO - 
+Archivo procesado guardado localmente en: ./processed_Flight_delay.csv
+2025-12-16 02:13:09,869 - INFO - EDA finalizado. Listo para subir a GCS y continuar con el ETL.
