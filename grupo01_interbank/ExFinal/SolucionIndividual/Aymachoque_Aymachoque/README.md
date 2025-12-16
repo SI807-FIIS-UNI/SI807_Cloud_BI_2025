@@ -87,15 +87,4 @@ Contenido confirmado en `raw/`:
 
 ---
 
-## 3) Bronce (3.1) — Ingesta + EDA
-### 3.1.1 Creación del bucket (CLI)
-Se usó el prefijo solicitado por el caso y se agregó timestamp para unicidad:
-
-```bash
-REGION="us-east-1"
-BUCKET_PREFIX="exfinal-aymachoque"
-BUCKET="${BUCKET_PREFIX}-$(date +%s)"
-
-aws s3 mb "s3://$BUCKET" --region "$REGION"
-aws s3api head-bucket --bucket "$BUCKET"
 
