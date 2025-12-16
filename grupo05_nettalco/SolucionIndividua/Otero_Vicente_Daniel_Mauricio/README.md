@@ -288,3 +288,6 @@ Justificación: Analiza si la presencia de condiciones médicas específicas inf
 Pregunta que responde:
 
 ¿Los pacientes con ciertas condiciones médicas asisten más o menos a sus citas?
+
+
+## Elaboración del Dashboard 
