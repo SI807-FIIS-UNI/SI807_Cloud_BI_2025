@@ -1,0 +1,14 @@
+## 3.1 Justificación de la Elección Tecnológica (Google Cloud Platform)
+
+Para la implementación de la solución de Inteligencia de Negocios del caso **"Superstore Sales"**, se seleccionó **Google Cloud Platform (GCP)** basándose en los siguientes criterios técnicos:
+
+1.  **Arquitectura Data Lake (Cloud Storage):**
+    * Se eligió **Google Cloud Storage (GCS)** por su alta disponibilidad y capacidad de almacenamiento de objetos no estructurados (CSV).
+    * Permite implementar la arquitectura **Medallion (Bronce, Plata, Oro)** mediante una estructura jerárquica de carpetas (`/raw`, `/processed`, `/curated`) de manera nativa y segura.
+
+2.  **Agilidad en Ingesta (Cloud Shell + CLI):**
+    * El uso de **Cloud Shell** proporciona un entorno Linux efímero y seguro, con herramientas preinstaladas como `gsutil` y `Python`.
+    * Esto permite realizar la ingestión de datos y el análisis exploratorio (EDA) sin latencia de configuración local, cumpliendo con el requisito de despliegue 100% en la nube.
+
+3.  **Integración Nativa para Analítica:**
+    * GCP ofrece la integración más eficiente hacia **BigQuery** (Data Warehouse Serverless), lo cual es crítico para las siguientes fases de transformación y modelado dimensional, minimizando los tiempos de transferencia de datos (ETL).
