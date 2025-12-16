@@ -160,7 +160,7 @@ El archivo está dentro de la carpeta scripts
 ## carga de las dimensiones a google cloude 
 
 <img width="1910" height="774" alt="Captura de pantalla 2025-12-16 011456" src="https://github.com/user-attachments/assets/9568b125-de53-4e4c-ace8-1144cf5f7f23" />
-🔗 [Script ETL – `etl (2).py`](./Scripts/etl.py)
+🔗 [Script ETL – `etl.py`](./Scripts/etl.py)
 
 
 ## Justificación de los KPIs 
