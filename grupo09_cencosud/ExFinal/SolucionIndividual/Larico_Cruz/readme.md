@@ -1,4 +1,4 @@
-# 🛒 Retail Analytics Data Lakehouse (GCP)
+# 🛒 Retail Analytics 
 
 ## 📂 Estructura del Proyecto
 ```
