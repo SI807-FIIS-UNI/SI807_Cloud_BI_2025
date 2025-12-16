@@ -291,3 +291,10 @@ Pregunta que responde:
 
 
 ## Elaboración del Dashboard 
+**Conexión con de Bigquery y con Looker estudio**
+se selecciona la opción de conectar con bigquery 
+<img width="1920" height="1080" alt="Captura de pantalla (238)" src="https://github.com/user-attachments/assets/4a9808a5-05b7-4029-9557-28275c605a82" />
+
+y luego se selecciona el proyecto , la tabla (en este caso el oro donde se encuentran los KPIs y seleccionados el que nos interesa) , en este caso seleccionaremos el kpi global, ya que es el principal y tiene una visión general del caso 
+<img width="1920" height="1080" alt="Captura de pantalla (239)" src="https://github.com/user-attachments/assets/2f376ee4-eaab-40ff-ac3c-64588a191ecd" />
+
