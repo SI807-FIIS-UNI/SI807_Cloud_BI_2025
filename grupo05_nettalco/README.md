@@ -118,7 +118,11 @@ PROCESSED_FILE="processed_Flight_delay.csv"
 gcloud storage cp $PROCESSED_FILE gs://$BUCKET_NAME/bronce/processed/$PROCESSED_FILE
 ```
 
+VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 
+![1](/grupo05_nettalco/EVIDENCIAS/31.png)
+
+![1](/grupo05_nettalco/EVIDENCIAS/31.png)
 
 
 MODELO ESTRELLA MINIMO:
