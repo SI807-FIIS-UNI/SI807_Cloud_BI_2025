@@ -3,27 +3,29 @@
 **Curso:** Sistema de Inteligencia de Negocios
 **Caso:** Retail / Superstore
 
+---
+
 ## 3.1 Ingestión y Estructuración (Capa Bronce)
 
-### Justificación Tecnológica (GCP)
-Para resolver la problemática de **control de desempeño comercial y estacionalidad**, se seleccionó **Google Cloud Platform**:
-1.  **Cloud Storage (Data Lake):** Permite almacenar la data histórica (`train.csv`) separando capas (Raw/Processed) para asegurar la integridad de los datos antes de calcular la rentabilidad.
-2.  **Cloud Shell (CLI):** Se utilizó para la ingesta rápida y la ejecución del script de validación (EDA), permitiendo detectar patrones sin necesidad de montar servidores costosos.
+### 1. Justificación de la Arquitectura (GCP)
+Para la implementación de la solución BI, se seleccionó **Google Cloud Platform** bajo una arquitectura **Data Lake Serverless**:
+* **Cloud Storage:** Almacenamiento escalable para la implementación de la arquitectura *Medallion* (Capas Raw, Processed, Curated).
+* **Cloud Shell (CLI):** Ingesta ágil de datos mediante `gsutil`, permitiendo un despliegue inmediato sin configuración de servidores locales.
+* **BigQuery:** Motor analítico seleccionado para el procesamiento masivo de datos (ETL) y modelado dimensional.
 
-### Estructura del Data Lake
-- **Bucket:** `gs://superstore-examen-callupe`
-- **Jerarquía:**
-  - `/bronce/raw`: Dataset original (Fuente Kaggle).
-  - `/bronce/processed`: Espacio reservado para limpieza de duplicados.
-  - `/bronce/curated`: Espacio reservado para dimensiones (Cliente, Producto).
+### 2. Estructura del Data Lake
+Se configuró el bucket `gs://superstore-examen-callupe` con la siguiente jerarquía:
+* `/bronce/raw`: Almacena el dataset original `train.csv`.
+* `/bronce/processed`: Destino de datos limpios y normalizados (Capa Plata).
+* `/bronce/curated`: Almacén de tablas dimensionales y de hechos (Capa Oro).
 
-### Análisis Exploratorio de Datos (EDA)
-Se desarrolló un script en Python (`src/eda_superstore.py`) alineado a los KPIs del caso:
-1.  **Top 10 Productos:** Se identificaron los productos con mayor impacto en ingresos.
-2.  **Rentabilidad Regional:** Se agrupó `Profit` por `Region` para detectar zonas críticas.
-3.  **Estacionalidad:** Se validó la columna `Order Date` para asegurar que se puedan extraer métricas semanales/mensuales en la siguiente etapa.
-4.  **Calidad:** Se confirmó que los campos `Sales` y `Profit` no contienen valores nulos.
+### 3. Análisis Exploratorio de Datos (EDA)
+Se ejecutó un script en Python (`src/eda_superstore.py`) para validar la calidad de los datos antes de su procesamiento.
+* **Hallazgo Crítico:** Se detectó que el dataset suministrado contiene la métrica de **Ventas (`Sales`)** pero no incluye márgenes de ganancia (`Profit`).
+* **KPIs Preliminares:**
+    1.  **Volumen de Ventas por Región:** Identificación de las zonas geográficas con mayor facturación.
+    2.  **Top Productos:** Ranking de los 5 productos con mayor generación de ingresos.
+    3.  **Estacionalidad:** Validación de la columna `Order Date` para análisis temporal (Tendencia anual).
+* **Calidad de Datos:** Se verificó la inexistencia de valores nulos en la columna `Sales` para asegurar la integridad de los cálculos financieros.
 
-### Evidencias
-- **Código Fuente:** Ver `/src/eda_superstore.py`.
-- **Capturas:** Ver carpeta `/docs` (Estructura de carpetas, CLI `gsutil` y ejecución del EDA).
+> **Evidencias:** Ver capturas de pantalla de la estructura de carpetas, comandos CLI y resultados del EDA en la carpeta `/docs`.
