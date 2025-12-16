@@ -25,10 +25,43 @@ Se seleccionó **Google Cloud Platform (GCP)** sobre otras alternativas (AWS/Azu
 
 Se construyó un **Modelo Estrella Mínimo** para optimizar las consultas analíticas:
 
-### Componentes
-- **Tabla de Hechos (`fact_calidad_aire`):** Contiene las métricas numéricas (AQI, PM2.5, NO2) y claves foráneas.
-- **Dimensión Ciudad (`dim_ciudad`):** Catálogo único de ciudades con IDs subrogados para normalizar nombres.
-- **Dimensión Tiempo (`dim_tiempo`):** Desglose de fechas (Año, Mes, Día) para facilitar el análisis temporal (Drill-down).
+📖 Diccionario de Datos del Modelo Estrella
+
+#### 1. Tabla de Hechos: `fact_calidad_aire`
+Contiene las mediciones diarias y las métricas químicas. Se conecta a las dimensiones a través de IDs numéricos.
+
+| Tipo | Campo | Descripción |
+| :--- | :--- | :--- |
+| **FK** | `id_ciudad` | Llave foránea conectada a `dim_ciudad`. |
+| **FK** | `id_tiempo` | Llave foránea conectada a `dim_tiempo`. |
+| **Métrica** | `AQI` | Índice de Calidad del Aire (Valor numérico global). |
+| **Métrica** | `PM2_5` | Partículas finas (< 2.5 µm). Principal agente de riesgo. |
+| **Métrica** | `PM10` | Partículas respirables (< 10 µm). |
+| **Métrica** | `NO2` | Dióxido de Nitrógeno (Tráfico vehicular). |
+| **Métrica** | `SO2` | Dióxido de Azufre (Industria). |
+| **Métrica** | `CO` | Monóxido de Carbono. |
+| **Métrica** | `O3` | Ozono troposférico. |
+| **Métrica** | `Benzene`, `Toluene`, `Xylene` | Compuestos BTX (Tóxicos industriales). |
+| **Atributo** | `AQI_Bucket` | Categoría textual del aire (Good, Moderate, Severe). |
+
+#### 2. Dimensión: `dim_ciudad`
+Catálogo maestro de ubicaciones geográficas.
+
+| Tipo | Campo | Descripción |
+| :--- | :--- | :--- |
+| **PK** | `id_ciudad` | Llave primaria subrogada (Auto-incremental). |
+| **Atributo** | `City` | Nombre estandarizado de la ciudad (Ej: "Delhi"). |
+
+#### 3. Dimensión: `dim_tiempo`
+Desglose cronológico para facilitar el análisis temporal (Drill-down).
+
+| Tipo | Campo | Descripción |
+| :--- | :--- | :--- |
+| **PK** | `id_tiempo` | Llave primaria subrogada (YYYYMMDD). |
+| **Atributo** | `Date` | Fecha completa (Formato DATE). |
+| **Atributo** | `anio` | Año (Ej: 2020). |
+| **Atributo** | `mes` | Número de mes (1-12). |
+| **Atributo** | `dia` | Día del mes (1-31). |
 ### Justificación Técnica
 Este diseño reduce la redundancia de datos (normalización de dimensiones) y mejora el rendimiento de BigQuery al permitir agregaciones rápidas sobre la tabla de hechos, cumpliendo con los estándares de Data Warehousing moderno.
 
@@ -66,6 +99,5 @@ Se implementaron **2 Dashboards** en Looker Studio y scripts de evidencia estát
 - **Sustentación:** Los técnicos necesitan identificar "dónde" y "qué". El mapa de calor resalta en rojo las ciudades críticas, y las barras apiladas descomponen la mezcla química para elegir la estrategia de mitigación adecuada.
 # Link de Dashboard: 
 https://lookerstudio.google.com/reporting/061c979c-610e-459e-9ac6-8bfbb79e763c
-# Rama:
-gabrielcabanac-patch-8
+# Rama: gabrielcabanac-patch-8
 Los scripts ejecutados se encuentran en la carpeta docs
