@@ -186,91 +186,30 @@ El archivo está dentro de la carpeta scripts
 🔗 [Script ETL – `etl.py`](./Scripts/etl.py)
 
 
-## Justificación de los KPIs 
-El objetivo principal del proyecto es analizar el fenómeno de inasistencia a citas médicas (no-show), identificar patrones temporales, demográficos y sociales, y evaluar el impacto de acciones preventivas como los recordatorios vía SMS.
-Para ello, se definieron KPIs en la capa ORO, organizados en dos dashboards complementarios: uno ejecutivo y otro analítico.
-## KPI Global
-**Total de Citas**
+## 📊 Justificación de los KPIs
 
-Definición: Número total de citas registradas.
+Los KPIs fueron definidos con el objetivo de analizar el fenómeno de inasistencia a citas médicas (*no-show*), identificar patrones temporales, demográficos, sociales y clínicos, y evaluar el impacto de acciones preventivas como los recordatorios vía SMS.  
+Estos indicadores se implementaron en la **capa ORO** y se consumen a través de **dos dashboards complementarios**: uno ejecutivo y otro analítico.
 
-Justificación: Proporciona el contexto general del volumen de atención médica. Es necesario para interpretar correctamente las tasas de inasistencia y evitar conclusiones sesgadas por tamaño de muestra.
-**Total de No-Show**
+---
 
-Definición: Número total de citas a las que el paciente no asistió.
+### 🧾 KPIs Definidos
 
-Justificación: Representa el impacto absoluto del problema. Cada no-show implica pérdida de recursos médicos, tiempo y costos operativos.
-**Tasa de No-Show**
+| Categoría | KPI | Dimensión / Segmentación | Definición | Justificación | Pregunta que responde |
+|----------|-----|--------------------------|------------|---------------|------------------------|
+| Global | Total de Citas | — | Número total de citas registradas. | Proporciona contexto sobre el volumen de atención médica y evita interpretaciones sesgadas de las tasas. | ¿Cuál es el volumen total de citas? |
+| Global | Total de No-Show | — | Número total de citas no atendidas. | Representa el impacto absoluto del problema en términos de recursos y costos operativos. | ¿Cuántas citas se pierden por inasistencia? |
+| Global | Tasa de No-Show | — | Proporción de citas no atendidas respecto al total. | KPI principal del negocio; permite comparar periodos, zonas y grupos poblacionales. | ¿Qué tan grave es el problema del no-show? |
+| Global | Tasa de Asistencia | — | Complemento de la tasa de no-show. | Presenta una visión positiva del desempeño del sistema y facilita la comunicación ejecutiva. | ¿Qué tan eficiente es el sistema de citas? |
+| Temporal | No-Show por Tiempo | Fecha | Evolución de la tasa de no-show a lo largo del tiempo. | Permite identificar tendencias, estacionalidades y periodos críticos. | ¿Existen fechas con mayor inasistencia? |
+| Comunicación | Impacto del SMS | SMS recibido (Sí / No) | Comparación de no-show según envío de SMS. | Evalúa la efectividad de los recordatorios como estrategia preventiva. | ¿Los SMS reducen la inasistencia? |
+| Demográfico | No-Show por Rango de Edad | Edad segmentada | Comparación de no-show por grupos etarios. | Identifica grupos de mayor riesgo para diseñar acciones focalizadas. | ¿Qué edades faltan más a sus citas? |
+| Demográfico | No-Show por Género | Género | Comparación de no-show entre géneros. | Analiza diferencias de comportamiento y posibles brechas de acceso. | ¿Existen diferencias de asistencia por género? |
+| Geográfico | No-Show por Ubicación | Neighbourhood | Tasa de no-show por zona geográfica. | Detecta zonas críticas relacionadas con acceso, distancia o factores socioeconómicos. | ¿Qué barrios concentran más inasistencias? |
+| Clínico | No-Show por Condiciones Médicas | Condiciones clínicas | Análisis de no-show según condiciones de salud. | Apoya decisiones clínicas y la gestión de pacientes crónicos. | ¿Las condiciones médicas influyen en la asistencia? |
 
-Definición: Proporción de citas no atendidas respecto al total de citas.
+---
 
-Justificación: Es el KPI principal del negocio. Permite medir la gravedad del problema y comparar periodos, zonas o grupos poblacionales de forma homogénea.
-
-**Tasa de Asistencia**
-
-Definición: Complemento de la tasa de no-show.
-
-Justificación: Ofrece una visión positiva orientada al desempeño del sistema de salud y facilita la comunicación de resultados a nivel ejecutivo.
-
-## KPIs Temporales
-**No-Show por Tiempo**
-
-Dimensión: Tiempo (fecha).
-
-Justificación: Permite analizar la evolución de la inasistencia a lo largo del tiempo e identificar tendencias, estacionalidades o periodos críticos con mayor tasa de no-show.
-
-Pregunta que responde:
-
-¿Existen fechas o periodos donde la inasistencia aumenta significativamente?
-
-## KPIs de Comunicación
-**Impacto del SMS**
-
-Dimensión: SMS recibido (Sí / No).
-
-Justificación: Evalúa la efectividad de los recordatorios vía SMS como estrategia preventiva. Este KPI permite validar si la comunicación activa reduce la tasa de no-show y justificar su uso o mejora.
-
-Pregunta que responde:
-
-¿Los recordatorios SMS reducen realmente la inasistencia?
-
-## KPIs Demográficos
-**No-Show por Rango de Edad**
-
-Dimensión: Edad (segmentada).
-
-Justificación: Permite identificar grupos etarios con mayor riesgo de inasistencia y diseñar estrategias focalizadas según el perfil del paciente.
-
-Pregunta que responde:
-
-¿Qué rangos de edad presentan mayor tasa de no-show?
-
-**No-Show por Género**
-
-Dimensión: Género.
-
-Justificación: Analiza posibles diferencias de comportamiento entre géneros y contribuye a estudios de equidad y accesibilidad en la atención médica.
-## KPIs Geográficos
-**No-Show por Ubicación (Neighbourhood)**
-
-Dimensión: Zona geográfica.
-
-Justificación: Permite detectar zonas con mayores problemas de asistencia, lo que puede estar relacionado con barreras de acceso, distancia, transporte o condiciones socioeconómicas.
-
-Pregunta que responde:
-
-¿Existen barrios con mayor concentración de inasistencias?
-
-**KPIs Clínicos**
-No-Show por Condiciones Médicas
-
-Dimensión: Condiciones clínicas (hipertensión, diabetes, alcoholismo, discapacidad).
-
-Justificación: Analiza si la presencia de condiciones médicas específicas influye en la asistencia a citas, apoyando decisiones clínicas y de gestión de pacientes crónicos.
-
-Pregunta que responde:
-
-¿Los pacientes con ciertas condiciones médicas asisten más o menos a sus citas?
 
 
 ## Elaboración del Dashboard 
