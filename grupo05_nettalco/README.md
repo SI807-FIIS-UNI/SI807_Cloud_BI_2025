@@ -102,7 +102,7 @@ gcloud storage cp $NUEVO_ARCHIVO gs://$BUCKET_NAME/bronce/raw/$NUEVO_ARCHIVO
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen11.png)
 
-COMPROBAMOS QUE SE ENCUENTRA CARGADO EL CSV:
+# COMPROBAMOS QUE SE ENCUENTRA CARGADO EL CSV:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen12.png)
 
