@@ -216,3 +216,5 @@ CREATE TABLE fact_transaccion_producto (
 <img width="1600" height="899" alt="image" src="https://github.com/user-attachments/assets/f92f0295-a495-4b77-9838-13d812a3ca6d" />
 
 - Link del Dashboard: https://yellow-meadow-0f17f000f.3.azurestaticapps.net/
+
+Obs: Demora un poco en cargar el JSON
