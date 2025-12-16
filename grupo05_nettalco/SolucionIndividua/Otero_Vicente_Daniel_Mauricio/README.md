@@ -40,6 +40,43 @@ Google Cloud proporciona mecanismos robustos de Identity and Access Management (
 GCP ofrece un entorno ampliamente utilizado tanto en la industria como en entornos académicos, lo que permite aplicar buenas prácticas reales de Data Engineering. La experiencia adquirida en este proyecto es directamente transferible a escenarios profesionales de analítica y BI.
 
 ## Fase 1 : Creación buckets en google cloud
+## 🏗️ Arquitectura Medallion
+
+La arquitectura del proyecto sigue el enfoque **Medallion**, separando los datos por niveles de madurez:
+
+- **Capa Bronce**: Datos crudos y procesados iniciales.
+- **Capa Plata**: Datos limpios y transformados.
+- **Capa Oro**: Datos analíticos listos para KPIs y dashboards.
+
+---
+
+## 🥉 Capa Bronce – Inicialización del Data Lake
+
+En esta capa se almacena la información en su estado inicial, preservando la trazabilidad del dato.
+
+### Comandos de creación del bucket y estructura
+
+```bash
+# Verificar proyecto activo
+gcloud config get-value project
+
+# Definir variables
+BUCKET_NAME="bi-examen-dataset-mauricio-otero"
+REGION="us-central1"
+
+# Crear bucket en Google Cloud Storage
+gcloud storage buckets create gs://$BUCKET_NAME \
+  --location=$REGION \
+  --uniform-bucket-level-access
+
+# Crear estructura de la Capa Bronce
+gcloud storage cp /dev/null gs://$BUCKET_NAME/bronce/raw/.keep
+gcloud storage cp /dev/null gs://$BUCKET_NAME/bronce/processed/.keep
+gcloud storage cp /dev/null gs://$BUCKET_NAME/bronce/curated/.keep
+
+# Verificar estructura
+gcloud storage ls gs://$BUCKET_NAME/bronce/
+
 En esta parte creamos el bucket con nombre "bi-examen-dataset-mauricio-otero", y luego dentro del bucket creamos la carpeta cobre con las 3 carpetas raw , processed y curated
 aquí una visualización del codigo que se empleo para realizar esta fase  : 
 ## Imagen de la visualizaciónd del codigo empleado para crear el bucket y la carpeta cobre:
