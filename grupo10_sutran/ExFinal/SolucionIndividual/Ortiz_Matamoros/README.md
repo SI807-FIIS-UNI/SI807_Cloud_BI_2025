@@ -71,21 +71,32 @@ Una vez estando en JupiterLab se procede a ejecutar los scripts correspondientes
 
 ## 2.3. Procesar y generar KPIS
 
-Una vez teniendo el modelo estrella en nuestro servicio BigQuery, generamos KPIs 
+Una vez teniendo el modelo estrella en nuestro servicio BigQuery, generamos KPIs usando scripts de Python en Jupiter
 
-
+![kpi01](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi01.png)
+![kpi02](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi02.png)
+![kpi03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi03.png)
+![kpi04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi04.png)
+![kpi05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi05.png)
 
 ## 2.4. Evidencias de ETL y Logs 
 
-Se evidencia que se realizo correctamente el proceso ETL
+Se evidencia que se realizo correctamente el proceso ETL y se muestran los logs
 
 ![evidenciaetl01](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl01.png)
 ![evidenciaetl02](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl02.png)
+![evidenciaetl03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl03.png)
+![evidenciaetl04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl04.png)
+![evidenciaetl05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl05.png)
+![evidenciaetl06](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl06.png)
+![evidenciaetl07](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl07.png)
 
 
 ### 3. Visualización de KPIS - Dashboards
 
 ## 3.1. Crear 2 dashboards 
+
+
 
 ## 3.2. Incluir KPIs 
 
