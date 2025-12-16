@@ -6,7 +6,7 @@ set -e
 # ==============================
 PROJECT_ID="final-julio-alvarez"
 PROJECT_NAME="Final Julio Alvarez"
-BILLING_ACCOUNT="011771-C8B653-A0A413"
+BILLING_ACCOUNT="XXXXX-XXXXXX-XXXXXX" # Reemplazar con el ID de cuenta de facturación real
 
 REGION="us-east1"
 BUCKET_NAME="final-julio-alvarez-bucket"
