@@ -1,0 +1,8 @@
+Calidad_Aire,Total_Dias
+Moderate,8829
+Satisfactory,8224
+Unknown,4681
+Poor,2781
+Very Poor,2337
+Good,1341
+Severe,1338

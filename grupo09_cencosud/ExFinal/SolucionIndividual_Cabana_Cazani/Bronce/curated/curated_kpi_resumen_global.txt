@@ -1,0 +1,2 @@
+Total_Ciudades,Total_Registros,AQI_Promedio_Hist,AQI_Maximo_Reg,Peor_Ciudad
+26,29531,140.07720700281061,2049,Ahmedabad
