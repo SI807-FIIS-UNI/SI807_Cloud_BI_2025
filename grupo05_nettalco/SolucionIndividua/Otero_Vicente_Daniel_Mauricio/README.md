@@ -5,5 +5,6 @@ aquí una visualización del codigo que se empleo para realizar esta fase  :
 ## Imagen de la visualizaciónd del codigo empleado para crear el bucket y la carpeta cobre:
 <img width="1913" height="964" alt="Captura de pantalla 2025-12-15 201044" src="https://github.com/user-attachments/assets/1724a440-768b-4783-b0ac-fe6c118116a6" />
 Lo cual resulta en la plataforma google cloude con esto :
-## Visualización del bucket con las carpetas en la plataforma google cloude
+## Visualización del bucket con las carpetas en la plataforma google cloude: 
+
 <img width="533" height="761" alt="Captura de pantalla 2025-12-15 201639" src="https://github.com/user-attachments/assets/10aa210a-c5cf-4241-859e-f621a3fdfff9" />
