@@ -50,3 +50,6 @@ nano scripts / EDA.py
 
 
 Luego del análisis exploratorio de datos (EDA), se generó una versión limpia del dataset que fue almacenada en la capa BRONCE/processed para su posterior modelado dimensional.
+
+<img width="1920" height="1080" alt="Captura de pantalla (235)" src="https://github.com/user-attachments/assets/385444c9-af93-4c03-aa91-4cd10d5302e0" />
+
