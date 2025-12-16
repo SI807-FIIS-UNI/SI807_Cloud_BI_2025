@@ -117,3 +117,39 @@ El dashboard permite un análisis tanto ejecutivo como detallado, con filtros po
 ![page1](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/visualizations/page1.png)
 ![page2](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/visualizations/page2.png)
 
+
+------
+
+## Automatización con Cloud Functions
+
+Se implementó una función en Python (Gen1) que se activa automáticamente al cargar archivos en la carpeta `/raw/` del bucket.
+
+**Funcionalidad:**
+- Registra el nombre del archivo recibido y la hora
+- Guarda un log de actividad en `/docs/upload_log.txt` dentro del bucket
+
+
+### PASOS PARA EJECUTARLO
+
+1.  En tu carpeta local
+
+Guarda allí:
+- main.py (el código de la función)
+- requirements.txt (solo contiene google-cloud-storage)
+
+2. Navega a esa carpeta desde PowerShell
+
+Esto es en mi caso
+```
+cd "C:\Users\jairo\Documents\Proyectos\aradiel_25-2\SI807_Cloud_BI_2025\grupo10_sutran\ExFinal\SolucionIndividual\DelRio_Gutierrez\scripts\cloud_function"
+```
+
+3. Ejecuta el comando de despliegue desde ahí:
+
+Lo ejecuto en línea ya que en powershell los saltos de línea lo detecta mal
+```
+gcloud functions deploy etl_trigger_retail --runtime python310 --trigger-resource retail-transactions-final --trigger-event google.storage.object.finalize --entry-point trigger_etl --source . --region us-central1 --no-gen2 --set-env-vars "PROJECT_ID=shaped-icon-478404-p0,BUCKET_NAME=retail-transactions-final"
+```
+
+Deploy para Cloud Functions
+![image12](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/evidencias/image12.png)
