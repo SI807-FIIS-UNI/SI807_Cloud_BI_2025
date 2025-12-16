@@ -33,7 +33,9 @@ VISTA EN GOOGLE CLOUD STORAGE:
 CREACION DE LAS CARPETAS BRONCE:
 
 *bronce/raw
+
 *bronce/processed
+
 *bronce/curated
 
 ![1](/grupo05_nettalco/EVIDENCIAS/6.png)
