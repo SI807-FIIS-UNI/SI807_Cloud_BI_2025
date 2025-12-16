@@ -39,7 +39,7 @@ gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
 
 VISTA EN GOOGLE CLOUD STORAGE:
 
-![1](/grupo05_nettalco/EVIDENCIAS/5.png)
+![1](/grupo05_nettalco/EVIDENCIAS/40.png)
 
 CREACION DE LAS CARPETAS BRONCE:
 
@@ -49,17 +49,19 @@ CREACION DE LAS CARPETAS BRONCE:
 
 *bronce/curated
 
-![1](/grupo05_nettalco/EVIDENCIAS/6.png)
+![1](/grupo05_nettalco/EVIDENCIAS/41.png)
 
 VISUALIZACION EN GCS:
 
-![1](/grupo05_nettalco/EVIDENCIAS/7.png)
+![1](/grupo05_nettalco/EVIDENCIAS/42.png)
 
 CARGA DEL CSV USANDO CLI:
 
-![1](/grupo05_nettalco/EVIDENCIAS/8.png)
+![1](/grupo05_nettalco/EVIDENCIAS/43.png)
 
+![1](/grupo05_nettalco/EVIDENCIAS/44.png)
 
+![1](/grupo05_nettalco/EVIDENCIAS/45.png)
 
 CAMBIAMOS LA DIRECCION DEL ARCHIVO:
 
