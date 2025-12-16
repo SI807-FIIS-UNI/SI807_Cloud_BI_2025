@@ -1,0 +1,3 @@
+ETL Silver ejecutado correctamente.
+Dimension Pacientes: 62298 filas.
+Hechos Citas: 110526 filas.
