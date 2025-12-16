@@ -5,7 +5,9 @@ USO DE GCP:
 ![1](/grupo05_nettalco/EVIDENCIAS/1.png)
 
 INICIAR EL CLI DE GCP:
+
 Id del proyecto: ef-si807u-20220018k
+
 ![1](/grupo05_nettalco/EVIDENCIAS/2.png)
 
 USO DEL CLI PARA CONFIGURAR EL PROYECTO COMO PRINCIPAL:
@@ -14,9 +16,13 @@ USO DEL CLI PARA CONFIGURAR EL PROYECTO COMO PRINCIPAL:
 
 CREACION DEL BUCKET:
 
+```bash
 BUCKET_NAME="bi-examen-final"
 
 gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
+
+```
+
 
 ![1](/grupo05_nettalco/EVIDENCIAS/4.png)
 
@@ -47,11 +53,17 @@ CAMBIAMOS LA DIRECCION DEL ARCHIVO:
 Pasamos el archivo de la dirección base /home/r_loayza_s/ al gcs
 
 
+```bash
 BUCKET_NAME="bi-examen-final" 
 NUEVO_ARCHIVO="Flight_delay.csv"
 gcloud storage cp $NUEVO_ARCHIVO gs://$BUCKET_NAME/bronce/raw/$NUEVO_ARCHIVO
+
+```
+
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen10.png)
+
 CARGA COMPLETADA:
+
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen11.png)
 
 COMPROBAMOS QUE SE ENCUENTRA CARGADO EL CSV:
@@ -75,8 +87,13 @@ CREAMOS LAS CARPETAS:
 
 CREACION DEL EDA Y EL PROCESO ETL:
 
-pip install pandas google-cloud-storage fsspec gcsfs 
+```bash
+BUCKET_NAME="bi-examen-final"
+gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
+pip install pandas google-cloud-storage fsspec gcsfs
 python scripts/eda.py
+```
+
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen18.png)
 
@@ -93,9 +110,12 @@ SUBIDA DEL ARCHIVO A GCS:
 
 Comando para copiar el archivo procesado de Cloud Shell a GCS
 
+```bash
 BUCKET_NAME="bi-examen-final"
 PROCESSED_FILE="processed_Flight_delay.csv"
 gcloud storage cp $PROCESSED_FILE gs://$BUCKET_NAME/bronce/processed/$PROCESSED_FILE
+```
+
 
 
 
