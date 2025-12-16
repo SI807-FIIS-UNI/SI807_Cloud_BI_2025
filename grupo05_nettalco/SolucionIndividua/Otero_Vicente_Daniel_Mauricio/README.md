@@ -16,3 +16,5 @@ Despues de eso se suben los archivos para luego subirlos al Bucket para realizar
 ## subida de archivos al bucket de google cloude : 
 se usan los comandos para subir el csv a google cloude para su posterior análisis 
 <img width="1609" height="93" alt="Captura de pantalla 2025-12-15 202713" src="https://github.com/user-attachments/assets/a1f2a12a-45e9-4690-a65c-af68244d1b83" />
+
+<img width="1920" height="1080" alt="Captura de pantalla (234)" src="https://github.com/user-attachments/assets/803d548c-bb21-4c0b-9d6d-893f39142907" />
