@@ -18,3 +18,23 @@ Creamos el servicio
 
 
 ## 2. 
+
+Esperamos a que carga, 
+
+<img width="2559" height="1400" alt="image" src="https://github.com/user-attachments/assets/9efe8961-4686-4ab0-811a-7101551ca2e8" />
+
+Para que funcione, y use los datos de la capa de oro necesitamso hacer lo siguiente
+
+<img width="2559" height="1342" alt="image" src="https://github.com/user-attachments/assets/c3b4a831-801f-435e-9235-cb68634a07a3" />
+
+Completar como esta en la tercera fila. 
+
+- https://victorious-pond-0ba9dcb0f.3.azurestaticapps.net
+- Seleccionamos los 8
+- *
+- *
+- 86400
+
+y le damos en guardar.
+
+
