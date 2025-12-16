@@ -13,3 +13,6 @@ Despues de eso se suben los archivos para luego subirlos al Bucket para realizar
 ## Subida de archivos en Cloud Shell Editor : 
 
 <img width="957" height="967" alt="Captura de pantalla 2025-12-15 202455" src="https://github.com/user-attachments/assets/96b09aad-cd48-4d78-a97b-837f0db9a927" />
+## subida de archivos al bucket de google cloude : 
+se usan los comandos para subir el csv a google cloude para su posterior análisis 
+<img width="1609" height="93" alt="Captura de pantalla 2025-12-15 202713" src="https://github.com/user-attachments/assets/a1f2a12a-45e9-4690-a65c-af68244d1b83" />
