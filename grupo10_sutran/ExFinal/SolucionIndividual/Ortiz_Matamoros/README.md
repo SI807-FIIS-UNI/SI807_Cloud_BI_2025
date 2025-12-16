@@ -49,13 +49,38 @@ Dandonos como resultados lo siguiente:
 
 ## 2.1. Construir un modelo estrella
 
-Para la construccion de un modelo estrella minimo se tuvo que recurrir a usar el servicio de dataproc para crear un cluster y ejecutar jupiter con el cual se podra realizar la transformacion de la Data
+Para la construccion de un modelo estrella minimo se tuvo que recurrir a usar el servicio de dataproc para crear un cluster y ejecutar jupiter con el cual se podra realizar la transformacion de la Data, este cluster fue creado usando CLI con los siguiente comandos
+
+![evidencia09](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidencia09.png)
+
+Luego de eso ingresamos a JupiterLab y creamos un notebook para generar el modelo estrella
+
+![evidencia10](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidencia10.png)
+
 
 ## 2.2. General tablas de dimensión y hechos
 
+Una vez estando en JupiterLab se procede a ejecutar los scripts correspondientes a la limpieza de los datos y la creación de las tablas de dimensiones y hechos para armar el modelo estrella
+
+![etl01](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/etl01.png)
+![etl02](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/etl02.png)
+![etl03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/etl03.png)
+![etl04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/etl04.png)
+![etl05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/etl05.png)
+
+
 ## 2.3. Procesar y generar KPIS
 
+Una vez teniendo el modelo estrella en nuestro servicio BigQuery, generamos KPIs 
+
+
+
 ## 2.4. Evidencias de ETL y Logs 
+
+Se evidencia que se realizo correctamente el proceso ETL
+
+![evidenciaetl01](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl01.png)
+![evidenciaetl02](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/evidenciaetl02.png)
 
 
 ### 3. Visualización de KPIS - Dashboards
