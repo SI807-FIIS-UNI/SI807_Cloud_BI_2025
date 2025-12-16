@@ -1,8 +1,9 @@
 # Solución Individual - Examen Final
+
 ## 3️⃣ Arquitectura del Pipeline
 
 CSV (Kaggle)  
-|
+|  
 CAPA BRONCE (Azure Blob / Raw)  
 |  
 EDA (Calidad de Datos)  
@@ -32,7 +33,7 @@ El script:
 
 Evidencias  
 
-![evidencia1]("./evidencia1.jpeg")
+![evidencia1](evidencia1.jpeg)
 
 ---
 
@@ -55,9 +56,10 @@ El EDA analiza:
 
 Evidencias  
 
-![evidencia2]("./evidencia2.jpeg")
+![evidencia2](evidencia2.jpeg)
 
-![evidencia3]("./evidencia3.jpeg")
+![evidencia3](evidencia3.jpeg)
+
 ---
 
 ## 6️⃣ Capa PLATA – Modelo Dimensional
@@ -87,7 +89,7 @@ Dimensiones
 
 Evidencias  
 
-![evidencia4]("evidencia4.jpeg")
+![evidencia4](evidencia4.jpeg)
 
 ---
 
@@ -109,7 +111,4 @@ KPIs Generados
 
 Evidencias  
 
-![evidencia5]("evidencia5.jpeg")
----
-
-
+![evidencia5](evidencia5.jpeg)
