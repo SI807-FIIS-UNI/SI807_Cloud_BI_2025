@@ -18,3 +18,8 @@ se usan los comandos para subir el csv a google cloude para su posterior anális
 <img width="1609" height="93" alt="Captura de pantalla 2025-12-15 202713" src="https://github.com/user-attachments/assets/a1f2a12a-45e9-4690-a65c-af68244d1b83" />
 
 <img width="1920" height="1080" alt="Captura de pantalla (234)" src="https://github.com/user-attachments/assets/803d548c-bb21-4c0b-9d6d-893f39142907" />
+
+## FASE 2 : IMPLEMMENTACIÓN DE EDA SIMPLE : 
+en esta parte vamos a realizar un Análsis exploratorio de datos de manera simple, para ver el comportamiento de los datos el archivo lo llamaremos EDA.py, pero antes se crean las carpetas doc y Script para almancenar imagenes y código de lo que resulte del EDA y el proceso ETL que se implementará luego y además se descargan las librerías pandas ,  matplotlib ,  fsspec  y gcsfs para realizar el correcto EDA
+## Creación de carpetas
+<img width="1514" height="786" alt="Captura de pantalla 2025-12-15 203416" src="https://github.com/user-attachments/assets/ba398e3d-e6a7-40c9-a1c6-f79e4ec07634" />
