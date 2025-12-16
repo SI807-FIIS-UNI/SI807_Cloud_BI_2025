@@ -339,19 +339,3 @@ LIMIT 12;
   }
 }
 ```
-
----
-
-## ✉️ Contacto
-
-**Estudiante**: [Tu Nombre]  
-**Email**: [Tu Email]  
-**GitHub**: [Tu GitHub] (opcional)
-
----
-
-**Fecha de Entrega**: [Fecha]  
-**Versión del Documento**: 1.0  
-**Proyecto**: Business Intelligence - AWS Medallion Architecture
-
----
