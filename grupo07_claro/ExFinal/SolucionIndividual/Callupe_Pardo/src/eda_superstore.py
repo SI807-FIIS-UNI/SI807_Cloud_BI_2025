@@ -1,27 +1,40 @@
-# Script de Análisis Exploratorio de Datos (EDA) - Caso Superstore
-# Autor: Callupe Pardo
-# Ejecutado en: Google Cloud Shell
+# Script de Análisis Exploratorio (EDA) - Caso Superstore
+# Objetivo: Validación preliminar de KPIs (Top productos, Rentabilidad y Estacionalidad)
 
 import pandas as pd
 
-print("--- INICIO REPORTE: SUPERSTORE SALES ---")
-# Carga del dataset desde el entorno local de Cloud Shell
-# Encoding latin-1 para soportar caracteres especiales
+print("--- REPORTE INICIAL: SUPERSTORE SALES ---")
+print("Cargando dataset...")
+
+# 1. Carga y limpieza inicial
+# Usamos encoding 'latin-1' por si hay tildes y parseamos fechas
 df = pd.read_csv('train.csv', encoding='latin-1')
 
-print("\n1. VISTA PREVIA DE DATOS (HEAD):")
-print(df.head(5))
+# Convertimos Order Date a datetime para analizar estacionalidad
+df['Order Date'] = pd.to_datetime(df['Order Date'], format='%d/%m/%Y', errors='coerce')
 
-print("\n2. DIMENSIONES DEL DATASET:")
-print(f"Filas: {df.shape[0]}, Columnas: {df.shape[1]}")
+print(f"\n[INFO] Registros cargados: {df.shape[0]}")
+print(f"[INFO] Columnas detectadas: {df.shape[1]}")
 
-print("\n3. ESTADÍSTICAS DESCRIPTIVAS (Ventas):")
-print(df['Sales'].describe())
+print("\n--- KPI 1: RENTABILIDAD POR REGIÓN ---")
+# Agrupamos por región sumando Ganancia (Profit) y Ventas (Sales)
+kpi_region = df.groupby('Region')[['Sales', 'Profit']].sum().sort_values(by='Profit', ascending=False)
+print(kpi_region)
 
-print("\n4. TOP 5 REGIONES POR VENTAS:")
-print(df.groupby('Region')['Sales'].sum().sort_values(ascending=False).head(5))
+print("\n--- KPI 2: TOP 10 PRODUCTOS (Por Ventas) ---")
+# Identificamos los productos estrella
+top_products = df.groupby('Product Name')['Sales'].sum().sort_values(ascending=False).head(10)
+print(top_products)
 
-print("\n5. VALIDACIÓN DE CALIDAD (Nulos):")
-print(df.isnull().sum())
+print("\n--- KPI 3: PATRONES DE ESTACIONALIDAD (Ventas por Año) ---")
+# Extraemos el año para ver volumen general
+df['Year'] = df['Order Date'].dt.year
+print(df.groupby('Year')['Sales'].sum())
 
-print("--- FIN DEL REPORTE ---")
+print("\n--- VALIDACIÓN DE CALIDAD DE DATOS ---")
+# Chequeamos si hay nulos en campos críticos
+nulos = df[['Sales', 'Profit', 'Region', 'Order Date']].isnull().sum()
+print("Valores Nulos encontrados:")
+print(nulos)
+
+print("\n--- FIN DEL EDA ---")
