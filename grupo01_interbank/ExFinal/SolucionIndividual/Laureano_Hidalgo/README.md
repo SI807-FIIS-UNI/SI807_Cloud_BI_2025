@@ -12,6 +12,7 @@ Mediante el notebook procedmos a limpiar el csv (Scripts en otro archivo)
 <img width="1903" height="950" alt="image" src="https://github.com/user-attachments/assets/77202a9b-eed6-44ec-9c13-e4aac6a6b7ab" />
 
 Donde obtenemos las siguientes estadisticas:
+
 <img width="675" height="531" alt="image" src="https://github.com/user-attachments/assets/a85c2449-d1f9-48b6-afdf-3316bf8638e1" />
 
 Creandose asi el archivo en el processed
@@ -24,6 +25,10 @@ Ahora procedemos a cargar la información en tabla de SQL.
 Para esto usaremos BigQuery.
 Creamos la tabla.
 <img width="1656" height="819" alt="image" src="https://github.com/user-attachments/assets/be1c4e19-8d25-4fee-bd9a-40b26c448734" />
+
+Con la tabla ya ingresada, creamos las dimensiones y la tabla de hechos para hacer el estrella (Scripts en otro archivo)
+
+
 
 
 
