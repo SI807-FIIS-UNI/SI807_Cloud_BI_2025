@@ -114,8 +114,11 @@ print("📄 Ruta local: /databricks/driver/superstore_dashboard.json")
 print("☁️ Guardado en ORO: wasbs://oro@.../superstore_dashboard.json")
 ```
 # Vemos que se guardo en la capa oro
-<img width="2559" height="908" alt="image" src="https://github.com/user-attachments/assets/47ce516f-e320-478d-a351-4cfac744bd4e" />
 
+<img width="2559" height="1386" alt="image" src="https://github.com/user-attachments/assets/09c430fd-fd9c-457c-802f-287b2bd7c54b" />
+
+El josn generado es superstore_dashboard.json
+que se usara para realizar el dashboard y los kpis
 
 # Logs
 
