@@ -61,22 +61,31 @@ El dataset contiene información histórica de citas médicas, incluyendo:
 La arquitectura implementada sigue un enfoque **Data Lake + Data Warehouse**, estructurado en capas:
 
 CSV (Kaggle)
+
    ↓
+   
 GCS - BRONCE
+
    ├── raw
    ├── processed
    └── curated
    ↓
+   
 BigQuery - PLATA
+
    ├── Dimensiones
    └── Tabla de Hechos
    ↓
+   
 BigQuery - ORO
+
    ├── KPIs agregados
    ↓
 Power BI
+
    ├── Dashboard Ejecutivo
    └── Dashboard Analítico
+   
 
 
 **[CAPTURA AQUÍ: diagrama general de arquitectura o estructura de buckets]**
@@ -136,4 +145,5 @@ Los principales indicadores generados en la capa oro son:
 Estos KPIs alimentan directamente los dashboards ejecutivos y analíticos.
 
 ---
+
 
