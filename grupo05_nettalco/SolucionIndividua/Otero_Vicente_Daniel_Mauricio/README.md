@@ -53,7 +53,8 @@ La arquitectura del proyecto sigue el enfoque **Medallion**, separando los datos
 ## 🥉 Capa Bronce – Inicialización del Data Lake
 
 En esta capa se almacena la información en su estado inicial, preservando la trazabilidad del dato.
-
+creamos el bucket con nombre "bi-examen-dataset-mauricio-otero", y luego dentro del bucket creamos la carpeta cobre con las 3 carpetas raw , processed y curated
+aquí una visualización del codigo que se empleo para realizar esta fase  : 
 ### Comandos de creación del bucket y estructura
 
 ```bash
@@ -79,9 +80,6 @@ gcloud storage ls gs://$BUCKET_NAME/bronce/
 ```
 
 
-
-En esta parte creamos el bucket con nombre "bi-examen-dataset-mauricio-otero", y luego dentro del bucket creamos la carpeta cobre con las 3 carpetas raw , processed y curated
-aquí una visualización del codigo que se empleo para realizar esta fase  : 
 ## Imagen de la visualizaciónd del codigo empleado para crear el bucket y la carpeta cobre:
 <img width="1913" height="964" alt="Captura de pantalla 2025-12-15 201044" src="https://github.com/user-attachments/assets/1724a440-768b-4783-b0ac-fe6c118116a6" />
 
