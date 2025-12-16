@@ -196,7 +196,12 @@ Este enfoque asegura:
 - Evidencia clara de ingestión  
 
 **[CAPTURA AQUÍ: ejecución del comando `gsutil cp`]**  
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201237.png)
+
 **[CAPTURA AQUÍ: `gsutil ls bronce/raw`]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202306.png)
 
 ---
 
@@ -219,7 +224,8 @@ Principales acciones realizadas:
 El formato Parquet es columnar, comprimido y ampliamente utilizado en soluciones de BI Cloud, mejorando tiempos de lectura y consumo de recursos.
 
 **[CAPTURA AQUÍ: ejecución del script raw_to_processed.py]**  
-**[CAPTURA AQUÍ: archivo Parquet en bronce/processed]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202311.png)
 
 ---
 
@@ -241,8 +247,9 @@ Validaciones aplicadas:
 **Justificación técnica:**  
 La capa curated garantiza un dataset consistente y confiable para análisis, sin aplicar aún lógica de negocio compleja.
 
-**[CAPTURA AQUÍ: ejecución del script processed_to_curated.py]**  
-**[CAPTURA AQUÍ: archivo Parquet en bronce/curated]**
+**[CAPTURA AQUÍ: ejecución del script processed_to_curated.py]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202843.png)
 
 ---
 
@@ -279,9 +286,25 @@ El EDA incluyó:
 El EDA permite detectar patrones, validar supuestos y reducir riesgos antes del modelado dimensional.
 
 **[CAPTURA AQUÍ: ejecución del script de EDA]**  
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202958.png)
+
 **[CAPTURA AQUÍ: archivo estadisticas.csv]**  
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20203239.png)
+
+
 **[CAPTURA AQUÍ: gráfico de distribución de edad]**  
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20203330.png)
+
 **[CAPTURA AQUÍ: heatmap de correlaciones]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20203306.png)
+
+**[CAPTURA AQUÍ: nulos]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20203205.png)
 
 ---
 
@@ -293,9 +316,11 @@ Todas las ejecuciones fueron registradas y almacenadas como evidencia del proces
 - Archivos CSV con resultados del EDA  
 - Imágenes generadas  
 
-Estos archivos fueron almacenados en la carpeta **docs** del bucket.
+Estos archivos fueron almacenados en la carpeta **docs** del cloud shell y luego pasadas a Github.
 
 **[CAPTURA AQUÍ: contenido de la carpeta docs en el bucket]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202843.png)
 
 ## 3.2 Transformación y Modelo Dimensional – PLATA y ORO
 
@@ -398,7 +423,8 @@ Principales transformaciones realizadas:
 El uso de un modelo estrella optimiza consultas analíticas, reduce la complejidad de *joins* y es el estándar en soluciones BI empresariales.
 
 **[CAPTURA AQUÍ: ejecución del script curated_to_plata_star.py]**  
-**[CAPTURA AQUÍ: tablas PLATA creadas en BigQuery]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20204520.png)
 
 ---
 
@@ -447,7 +473,8 @@ Este script:
 - Garantiza consistencia de métricas para visualización  
 
 **[CAPTURA AQUÍ: ejecución del script plata_to_oro_kpis.py]**  
-**[CAPTURA AQUÍ: tablas ORO creadas en BigQuery]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20213801.png)
 
 ---
 
@@ -459,9 +486,7 @@ Durante la ejecución del proceso se generaron evidencias que validan la correct
 - Tablas creadas en BigQuery (PLATA y ORO)  
 - Timestamps de ejecución  
 
-Estas evidencias fueron almacenadas en la carpeta **docs** del bucket.
-
-**[CAPTURA AQUÍ: carpeta docs con evidencias ETL]**
+Estas evidencias fueron almacenadas en la carpeta **docs** del github.
 
 
 ## 3.3 Visualización de KPIs – Dashboards
@@ -497,7 +522,8 @@ El flujo de conexión fue el siguiente:
 Conectarse a la capa oro evita cálculos redundantes en la herramienta de visualización y asegura que los dashboards consuman métricas oficiales y validadas.
 
 **[CAPTURA AQUÍ: ventana de conexión Power BI a BigQuery]**  
-**[CAPTURA AQUÍ: selección del dataset dw_oro]**
+
+
 
 ---
 
@@ -616,6 +642,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
 
 **[CAPTURA AQUÍ: vista general del proyecto completo]**
+
 
 
 
