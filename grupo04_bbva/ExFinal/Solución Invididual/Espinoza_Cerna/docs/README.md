@@ -8,6 +8,9 @@ docs/                     # Evidencias globales del proyecto
 ├── etl_logs/             # Logs de ejecución de los procesos ETL (Plata y Oro)
 └── dashboards/           # Capturas y justificación de dashboards y KPIs
 ```
+# Cli_ingestion
+
+# EDA
 
 # Modelo estrella y Creación de tablas hechos y dimensiones
 
@@ -17,5 +20,10 @@ docs/                     # Evidencias globales del proyecto
 
 #  Recursos utilizados
 <img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/063a2fd0-a8f2-428f-a1f9-71c7cc5c3cdc" />
+
+# ETL logs
+
+# Dashboards
+
 
 
