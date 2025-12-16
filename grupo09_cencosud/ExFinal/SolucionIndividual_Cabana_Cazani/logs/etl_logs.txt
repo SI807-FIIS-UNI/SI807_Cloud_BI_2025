@@ -1,3 +1,51 @@
+📜 INICIANDO GENERACIÓN DE LOGS MAESTROS...
+Fecha de ejecución: Tue Dec 16 01:24:21 AM UTC 2025
+Bucket: bi-examen-final-examen-bi-final-1765847142
+--------------------------------------------------
+ 
+>>> EJECUTANDO PASO 1: ETL MODELO ESTRELLA (etl_estrella.py)
+/home/yuricabanacazani/Examen-BI-Final/src/etl_estrella.py:41: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  dim_ciudad.to_gbq(f'{DATASET}.dim_ciudad', project_id=PROJECT_ID, if_exists='replace')
+/home/yuricabanacazani/Examen-BI-Final/src/etl_estrella.py:47: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  dim_tiempo.to_gbq(f'{DATASET}.dim_tiempo', project_id=PROJECT_ID, if_exists='replace')
+/home/yuricabanacazani/Examen-BI-Final/src/etl_estrella.py:56: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  fact[cols_fact].to_gbq(f'{DATASET}.fact_calidad_aire', project_id=PROJECT_ID, if_exists='replace')
+/home/yuricabanacazani/Examen-BI-Final/src/etl_estrella.py:63: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  kpi1.to_gbq(f'{DATASET}.kpi_top_ciudades', project_id=PROJECT_ID, if_exists='replace')
 🚀 INICIANDO ETL MODELO ESTRELLA (Bucket: bi-examen-final-examen-bi-final-1765847142)
 ✅ Columnas corregidas (ej: PM2.5 -> PM2_5)
 ❌ ERROR: cannot insert Date, already exists
+ 
+>>> EJECUTANDO PASO 2: KPIs ADICIONALES (kpis_extra.py)
+/home/yuricabanacazani/Examen-BI-Final/src/kpis_extra.py:45: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  kpi_global.to_gbq(f'{DATASET}.kpi_resumen_global', project_id=PROJECT_ID, if_exists='replace')
+/home/yuricabanacazani/Examen-BI-Final/src/kpis_extra.py:51: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  kpi_dist.to_gbq(f'{DATASET}.kpi_distribucion_calidad', project_id=PROJECT_ID, if_exists='replace')
+/home/yuricabanacazani/Examen-BI-Final/src/kpis_extra.py:60: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  kpi_mix.to_gbq(f'{DATASET}.kpi_mix_contaminantes', project_id=PROJECT_ID, if_exists='replace')
+🚀 GENERANDO KPIS EXTRA (Bucket: bi-examen-final-examen-bi-final-1765847142)
+--> Generando KPI Resumen Global...
+--> Generando KPI Distribución...
+--> Generando KPI Mix Contaminantes...
+✅ KPIS EXTRA CREADOS EXITOSAMENTE
+ 
+>>> EJECUTANDO PASO 3: CONTAMINANTE DOMINANTE (kpi_dominante.py)
+/home/yuricabanacazani/Examen-BI-Final/src/kpi_dominante.py:50: FutureWarning: to_gbq is deprecated and will be removed in a future version. Please use pandas_gbq.to_gbq instead: https://pandas-gbq.readthedocs.io/en/latest/api.html#pandas_gbq.to_gbq
+  kpi_dominante.to_gbq(f'{DATASET}.kpi_contaminante_dominante', project_id=PROJECT_ID, if_exists='replace')
+🚀 CALCULANDO CONTAMINANTE DOMINANTE (Bucket: bi-examen-final-examen-bi-final-1765847142)
+--> Comparando químicos por ciudad...
+✅ KPI CONTAMINANTE DOMINANTE CREADO
+        City Contaminante_Principal  Concentracion_Promedio
+0  Ahmedabad                  PM2_5               46.643634
+1     Aizawl                   PM10               23.146195
+2  Amaravati                   PM10               71.945710
+3   Amritsar                   PM10              109.258485
+4  Bengaluru                   PM10               68.326620
+ 
+>>> EJECUTANDO PASO 4: TÓXICOS BTX (kpi_btx.py)
+python3: can't open file '/home/yuricabanacazani/Examen-BI-Final/src/kpi_btx.py': [Errno 2] No such file or directory
+ 
+>>> EJECUTANDO PASO 5: ORGANIZACIÓN DE CARPETAS (exportar_todo.py)
+python3: can't open file '/home/yuricabanacazani/Examen-BI-Final/src/exportar_todo.py': [Errno 2] No such file or directory
+--------------------------------------------------
+✅ PIPELINE FINALIZADO EXITOSAMENTE
