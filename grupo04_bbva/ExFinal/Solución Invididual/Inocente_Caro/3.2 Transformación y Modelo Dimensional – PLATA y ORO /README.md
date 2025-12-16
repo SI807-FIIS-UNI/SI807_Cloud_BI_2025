@@ -1,7 +1,24 @@
  
 # Modelo Estrella -> Capa Plata
+
 ## Justificación
 
+Para la capa PLATA, implementé un modelo estrella mínimo, compuesto por una tabla de hechos (f_ventas) y tres dimensiones (dim_tiempo, dim_cliente, dim_producto). Esta elección responde a criterios técnicos fundamentados en escalabilidad, rendimiento y mantenibilidad:
+
+1. Alto rendimiento en consultas analíticas:
+El modelo estrella elimina las complejas uniones en cascada del modelo normalizado (3FN), reduciendo el número de joins a solo tres (uno por dimensión), lo que mejora significativamente el tiempo de respuesta en agregaciones típicas de BI (por ejemplo: "ventas por región y categoría"). Esto es crítico en entornos de visualización interactiva como Power BI o dashboards en React.
+
+2. Simplicidad y claridad para el negocio:
+La estructura estrella —con una tabla central de hechos rodeada de dimensiones descriptivas— es intuitiva para analistas y stakeholders, facilitando la comprensión del modelo sin necesidad de expertise en diseño de bases de datos. Por ejemplo, dim_tiempo expone directamente anio, mes, y dia, evitando cálculos repetitivos en el frontend.
+
+3. Escalabilidad horizontal:
+El modelo permite añadir nuevas dimensiones (como dim_ubicacion o dim_promocion) sin alterar la estructura existente, simplemente extendiendo las claves foráneas en f_ventas. Esto garantiza evolución a futuro sin refactorización costosa.
+
+4. Optimización para procesamiento en la nube:
+Al usar formatos columnares (Parquet) y claves de particionado (fecha_id), el modelo se alinea con las mejores prácticas de Azure Data Lake: lecturas eficientes, compresión nativa y soporte para predicate pushdown. Las dimensiones pequeñas (dim_tiempo, dim_producto) se benefician de broadcast joins en Spark, mejorando aún más el rendimiento del ETL.
+
+5. Garantía de integridad sin sobreingeniería:
+Se optó por usar los identificadores naturales del dominio (Customer ID, Product ID, fecha_id = YYYYMMDD) como claves primarias, evitando surrogate keys innecesarios para este contexto académico. Esto mantiene la trazabilidad con la fuente original y reduce complejidad, sin sacrificar la unicidad ni la integridad referencial (validada mediante dropDuplicates() y filter() en las capas bronce/curated y plata).
 
 <img width="1681" height="837" alt="image" src="https://github.com/user-attachments/assets/b160668f-eaa4-47ff-83e0-9fdca7b6bd01" />
 
