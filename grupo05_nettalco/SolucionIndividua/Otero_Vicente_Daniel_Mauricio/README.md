@@ -148,3 +148,8 @@ SMS recibidos
 Permite analizar:
 
 Efectividad de mensajes SMS en reducir el no-show
+
+## Proceso ETL 
+El archivo está dentro de la carpeta scripts
+<img width="1319" height="173" alt="Captura de pantalla 2025-12-15 214332" src="https://github.com/user-attachments/assets/34663646-5d4e-42d1-9e5b-15eda6f47d12" />
+
