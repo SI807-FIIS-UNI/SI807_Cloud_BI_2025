@@ -9,4 +9,10 @@ docs/                     # Evidencias globales del proyecto
 └── dashboards/           # Capturas y justificación de dashboards y KPIs
 ```
 
-IMPORTANTE: Registrará evidencias del trabajo realizado (asegúrese de mostrar fecha y hora).
+# Modelo estrella y Creación de tablas hechos y dimensiones
+
+<img width="1568" height="1283" alt="Untitled" src="https://github.com/user-attachments/assets/0795607f-b94d-4047-80a3-1491f4d00d92" />
+
+<img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/429badd9-b2f4-414c-9bcc-1ef93c878ace" />
+
+
