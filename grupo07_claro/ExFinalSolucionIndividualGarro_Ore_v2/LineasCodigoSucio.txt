@@ -1,0 +1,744 @@
+Welcome to Cloud Shell! Type "help" to get started, or type "gemini" to try prompting with Gemini CLI.
+Your Cloud Platform project in this session is set to examen-final-bi-2025-garroore.
+Use `gcloud config set project [PROJECT_ID]` to change to a different project.
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ ^C
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ # 1. Definimos las variables con tus datos reales
+export PROJECT_ID="examen-final-bi-2025-garroore"
+export BUCKET_NAME="bucket-examen-final-bi-2025-garroore"
+export REGION="us-central1"
+
+# 2. Confirmamos que Cloud Shell apunte a tu proyecto (por seguridad)
+gcloud config set project $PROJECT_ID
+
+# 3. Creamos el Bucket (Tu Data Lake)
+gcloud storage buckets create gs://$BUCKET_NAME --location=$REGION
+
+# 4. Verificamos que se creó correctamente
+echo "Tu bucket es: gs://$BUCKET_NAME"
+Updated property [core/project].
+Creating gs://bucket-examen-final-bi-2025-garroore/...
+Tu bucket es: gs://bucket-examen-final-bi-2025-garroore
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ ^C
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ # 1. Crear un archivo vacío temporal
+touch .keep
+
+# 2. Crear las "carpetas" subiendo este archivo a las rutas que pide el examen
+gcloud storage cp .keep gs://$BUCKET_NAME/bronce/raw/
+gcloud storage cp .keep gs://$BUCKET_NAME/bronce/processed/
+gcloud storage cp .keep gs://$BUCKET_NAME/bronce/curated/
+
+# 3. Verificar que se crearon
+gcloud storage ls -r gs://$BUCKET_NAME/bronce/
+Copying file://.keep to gs://bucket-examen-final-bi-2025-garroore/bronce/raw/.keep
+  Completed files 1/1 | 0B                                                                                          
+Copying file://.keep to gs://bucket-examen-final-bi-2025-garroore/bronce/processed/.keep
+  Completed files 1/1 | 0B                                                                                          
+Copying file://.keep to gs://bucket-examen-final-bi-2025-garroore/bronce/curated/.keep
+  Completed files 1/1 | 0B                                                                                          
+gs://bucket-examen-final-bi-2025-garroore/bronce/:
+
+gs://bucket-examen-final-bi-2025-garroore/bronce/curated/:
+gs://bucket-examen-final-bi-2025-garroore/bronce/curated/.keep
+
+gs://bucket-examen-final-bi-2025-garroore/bronce/processed/:
+gs://bucket-examen-final-bi-2025-garroore/bronce/processed/.keep
+
+gs://bucket-examen-final-bi-2025-garroore/bronce/raw/:
+gs://bucket-examen-final-bi-2025-garroore/bronce/raw/.keep
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ # Mover el archivo de la terminal al bucket
+gcloud storage cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/dataset_citas.csv
+
+# Verificar que está ahí
+gcloud storage ls gs://$BUCKET_NAME/bronce/raw/
+Copying file://KaggleV2-May-2016.csv to gs://bucket-examen-final-bi-2025-garroore/bronce/raw/dataset_citas.csv
+  Completed files 1/1 | 10.2MiB/10.2MiB                                                                             
+gs://bucket-examen-final-bi-2025-garroore/bronce/raw/.keep
+gs://bucket-examen-final-bi-2025-garroore/bronce/raw/dataset_citas.csv
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ ^C
+willian_garro_o@cloudshell:~ (examen-final-bi-2025-garroore)$ # 1. Crear estructura de carpetas local (según enunciado)
+# Reemplaza 'TuApellido' si quieres, pero así sirve para el examen
+mkdir -p SolucionIndividual/Garro_Willian/docs
+cd SolucionIndividual/Garro_Willian/
+
+# 2. Crear un entorno virtual para Python (para no romper nada)
+python3 -m venv venv
+source venv/bin/activate
+
+# 3. Instalar las librerías necesarias (pandas, google cloud, etc.)
+pip install pandas google-cloud-storage google-cloud-bigquery db-dtypes pyarrow
+Collecting pandas
+  Using cached pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+Collecting google-cloud-storage
+  Using cached google_cloud_storage-3.7.0-py3-none-any.whl.metadata (14 kB)
+Collecting google-cloud-bigquery
+  Using cached google_cloud_bigquery-3.39.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting db-dtypes
+  Using cached db_dtypes-1.5.0-py3-none-any.whl.metadata (3.4 kB)
+Collecting pyarrow
+  Using cached pyarrow-22.0.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.2 kB)
+Collecting numpy>=1.26.0 (from pandas)
+  Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.1/62.1 kB 2.1 MB/s eta 0:00:00
+Collecting python-dateutil>=2.8.2 (from pandas)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas)
+  Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas)
+  Using cached tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting google-auth<3.0.0,>=2.26.1 (from google-cloud-storage)
+  Downloading google_auth-2.45.0-py2.py3-none-any.whl.metadata (6.8 kB)
+Collecting google-api-core<3.0.0,>=2.27.0 (from google-cloud-storage)
+  Using cached google_api_core-2.28.1-py3-none-any.whl.metadata (3.3 kB)
+Collecting google-cloud-core<3.0.0,>=2.4.2 (from google-cloud-storage)
+  Downloading google_cloud_core-2.5.0-py3-none-any.whl.metadata (3.1 kB)
+Collecting google-resumable-media<3.0.0,>=2.7.2 (from google-cloud-storage)
+  Downloading google_resumable_media-2.8.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting requests<3.0.0,>=2.22.0 (from google-cloud-storage)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting google-crc32c<2.0.0,>=1.1.3 (from google-cloud-storage)
+  Downloading google_crc32c-1.8.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl.metadata (1.7 kB)
+Collecting packaging>=24.2.0 (from google-cloud-bigquery)
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core<3.0.0,>=2.27.0->google-cloud-storage)
+  Downloading googleapis_common_protos-1.72.0-py3-none-any.whl.metadata (9.4 kB)
+Collecting protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<7.0.0,>=3.19.5 (from google-api-core<3.0.0,>=2.27.0->google-cloud-storage)
+  Downloading protobuf-6.33.2-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting proto-plus<2.0.0,>=1.22.3 (from google-api-core<3.0.0,>=2.27.0->google-cloud-storage)
+  Downloading proto_plus-1.26.1-py3-none-any.whl.metadata (2.2 kB)
+Collecting grpcio<2.0.0,>=1.33.2 (from google-api-core[grpc]<3.0.0,>=2.11.1->google-cloud-bigquery)
+  Downloading grpcio-1.76.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.7 kB)
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]<3.0.0,>=2.11.1->google-cloud-bigquery)
+  Downloading grpcio_status-1.76.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting cachetools<7.0,>=2.0.0 (from google-auth<3.0.0,>=2.26.1->google-cloud-storage)
+  Downloading cachetools-6.2.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth<3.0.0,>=2.26.1->google-cloud-storage)
+  Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth<3.0.0,>=2.26.1->google-cloud-storage)
+  Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.22.0->google-cloud-storage)
+  Downloading charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3.0.0,>=2.22.0->google-cloud-storage)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3.0.0,>=2.22.0->google-cloud-storage)
+  Downloading urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+Collecting certifi>=2017.4.17 (from requests<3.0.0,>=2.22.0->google-cloud-storage)
+  Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+Collecting typing-extensions~=4.12 (from grpcio<2.0.0,>=1.33.2->google-api-core[grpc]<3.0.0,>=2.11.1->google-cloud-bigquery)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth<3.0.0,>=2.26.1->google-cloud-storage)
+  Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+Using cached pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.4 MB)
+Using cached google_cloud_storage-3.7.0-py3-none-any.whl (303 kB)
+Using cached google_cloud_bigquery-3.39.0-py3-none-any.whl (259 kB)
+Using cached db_dtypes-1.5.0-py3-none-any.whl (18 kB)
+Using cached pyarrow-22.0.0-cp312-cp312-manylinux_2_28_x86_64.whl (47.7 MB)
+Using cached google_api_core-2.28.1-py3-none-any.whl (173 kB)
+Downloading google_auth-2.45.0-py2.py3-none-any.whl (233 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 233.3/233.3 kB 8.7 MB/s eta 0:00:00
+Downloading google_cloud_core-2.5.0-py3-none-any.whl (29 kB)
+Downloading google_crc32c-1.8.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl (33 kB)
+Downloading google_resumable_media-2.8.0-py3-none-any.whl (81 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 81.3/81.3 kB 5.9 MB/s eta 0:00:00
+Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 47.7 MB/s eta 0:00:00
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 6.3 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 19.6 MB/s eta 0:00:00
+Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.7/64.7 kB 6.2 MB/s eta 0:00:00
+Using cached tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+Downloading cachetools-6.2.4-py3-none-any.whl (11 kB)
+Downloading certifi-2025.11.12-py3-none-any.whl (159 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 159.4/159.4 kB 15.1 MB/s eta 0:00:00
+Downloading charset_normalizer-3.4.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 153.5/153.5 kB 9.4 MB/s eta 0:00:00
+Downloading googleapis_common_protos-1.72.0-py3-none-any.whl (297 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 297.5/297.5 kB 20.4 MB/s eta 0:00:00
+Downloading grpcio-1.76.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 43.4 MB/s eta 0:00:00
+Downloading grpcio_status-1.76.0-py3-none-any.whl (14 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.0/71.0 kB 5.3 MB/s eta 0:00:00
+Downloading proto_plus-1.26.1-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.2/50.2 kB 4.4 MB/s eta 0:00:00
+Downloading protobuf-6.33.2-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 323.3/323.3 kB 24.5 MB/s eta 0:00:00
+Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.3/181.3 kB 15.5 MB/s eta 0:00:00
+Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading urllib3-2.6.2-py3-none-any.whl (131 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 131.2/131.2 kB 11.2 MB/s eta 0:00:00
+Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.1/83.1 kB 6.3 MB/s eta 0:00:00
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.6/44.6 kB 2.0 MB/s eta 0:00:00
+Installing collected packages: pytz, urllib3, tzdata, typing-extensions, six, pyasn1, pyarrow, protobuf, packaging, numpy, idna, google-crc32c, charset_normalizer, certifi, cachetools, rsa, requests, python-dateutil, pyasn1-modules, proto-plus, grpcio, googleapis-common-protos, google-resumable-media, pandas, grpcio-status, google-auth, google-api-core, db-dtypes, google-cloud-core, google-cloud-storage, google-cloud-bigquery
+Successfully installed cachetools-6.2.4 certifi-2025.11.12 charset_normalizer-3.4.4 db-dtypes-1.5.0 google-api-core-2.28.1 google-auth-2.45.0 google-cloud-bigquery-3.39.0 google-cloud-core-2.5.0 google-cloud-storage-3.7.0 google-crc32c-1.8.0 google-resumable-media-2.8.0 googleapis-common-protos-1.72.0 grpcio-1.76.0 grpcio-status-1.76.0 idna-3.11 numpy-2.3.5 packaging-25.0 pandas-2.3.3 proto-plus-1.26.1 protobuf-6.33.2 pyarrow-22.0.0 pyasn1-0.6.1 pyasn1-modules-0.4.2 python-dateutil-2.9.0.post0 pytz-2025.2 requests-2.32.5 rsa-4.9.1 six-1.17.0 typing-extensions-4.15.0 tzdata-2025.3 urllib3-2.6.2
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ ^C
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ cat <<EOF > eda.py
+import pandas as pd
+import sys
+from google.cloud import storage
+import io
+
+# Recibimos el nombre del bucket como argumento
+BUCKET_NAME = sys.argv[1]
+FILE_PATH = "bronce/raw/dataset_citas.csv"
+
+def run_eda():
+    print(f"--- INICIANDO EDA PARA: {FILE_PATH} ---")
+    
+    # 1. Conectar a Cloud Storage y descargar el archivo en memoria
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+    blob = bucket.blob(FILE_PATH)
+    content = blob.download_as_string()
+    
+    # 2. Leer con Pandas
+    df = pd.read_csv(io.BytesIO(content))
+
+    # 3. Generar Reporte de Calidad
+    buffer = io.StringIO()
+    
+    buffer.write("=== REPORTE EDA (EVIDENCIA) ===\n")
+    buffer.write(f"Filas: {df.shape[0]}, Columnas: {df.shape[1]}\n\n")
+    
+    buffer.write("--- 1. Primeras 5 filas ---\n")
+    buffer.write(df.head().to_string() + "\n\n")
+    
+    buffer.write("--- 2. Tipos de Datos e Info ---\n")
+    df.info(buf=buffer)
+    buffer.write("\n\n")
+    
+    buffer.write("--- 3. Conteo de Nulos ---\n")
+    nulls = df.isnull().sum()
+    buffer.write(nulls[nulls > 0].to_string() if nulls.sum() > 0 else "Sin nulos encontrados")
+    buffer.write("\n\n")
+
+    buffer.write("--- 4. Estadisticas Numericas ---\n")
+    buffer.write(df.describe().to_string() + "\n")
+
+EOF run_eda()= "__main__":ncia guardada en: docs/evidencia_eda.txt")
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ ^C
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python eda.py $BUCKET_NAME
+--- INICIANDO EDA PARA: bronce/raw/dataset_citas.csv ---
+=== REPORTE EDA (EVIDENCIA) ===
+Filas: 110527, Columnas: 14
+
+--- 1. Primeras 5 filas ---
+      PatientId  AppointmentID Gender          ScheduledDay        AppointmentDay  Age      Neighbourhood  Scholarship  Hipertension  Diabetes  Alcoholism  Handcap  SMS_received No-show
+0  2.987250e+13        5642903      F  2016-04-29T18:38:08Z  2016-04-29T00:00:00Z   62    JARDIM DA PENHA            0             1         0           0        0             0      No
+1  5.589978e+14        5642503      M  2016-04-29T16:08:27Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             0         0           0        0             0      No
+2  4.262962e+12        5642549      F  2016-04-29T16:19:04Z  2016-04-29T00:00:00Z   62      MATA DA PRAIA            0             0         0           0        0             0      No
+3  8.679512e+11        5642828      F  2016-04-29T17:29:31Z  2016-04-29T00:00:00Z    8  PONTAL DE CAMBURI            0             0         0           0        0             0      No
+4  8.841186e+12        5642494      F  2016-04-29T16:07:23Z  2016-04-29T00:00:00Z   56    JARDIM DA PENHA            0             1         1           0        0             0      No
+
+--- 2. Tipos de Datos e Info ---
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 110527 entries, 0 to 110526
+Data columns (total 14 columns):
+ #   Column          Non-Null Count   Dtype  
+---  ------          --------------   -----  
+ 0   PatientId       110527 non-null  float64
+ 1   AppointmentID   110527 non-null  int64  
+ 2   Gender          110527 non-null  object 
+ 3   ScheduledDay    110527 non-null  object 
+ 4   AppointmentDay  110527 non-null  object 
+ 5   Age             110527 non-null  int64  
+ 6   Neighbourhood   110527 non-null  object 
+ 7   Scholarship     110527 non-null  int64  
+ 8   Hipertension    110527 non-null  int64  
+ 9   Diabetes        110527 non-null  int64  
+ 10  Alcoholism      110527 non-null  int64  
+ 11  Handcap         110527 non-null  int64  
+ 12  SMS_received    110527 non-null  int64  
+ 13  No-show         110527 non-null  object 
+dtypes: float64(1), int64(8), object(5)
+memory usage: 11.8+ MB
+
+
+--- 3. Conteo de Nulos ---
+Sin nulos encontrados
+
+--- 4. Estadisticas Numericas ---
+          PatientId  AppointmentID            Age    Scholarship   Hipertension       Diabetes     Alcoholism        Handcap   SMS_received
+count  1.105270e+05   1.105270e+05  110527.000000  110527.000000  110527.000000  110527.000000  110527.000000  110527.000000  110527.000000
+mean   1.474963e+14   5.675305e+06      37.088874       0.098266       0.197246       0.071865       0.030400       0.022248       0.321026
+std    2.560949e+14   7.129575e+04      23.110205       0.297675       0.397921       0.258265       0.171686       0.161543       0.466873
+min    3.921784e+04   5.030230e+06      -1.000000       0.000000       0.000000       0.000000       0.000000       0.000000       0.000000
+25%    4.172614e+12   5.640286e+06      18.000000       0.000000       0.000000       0.000000       0.000000       0.000000       0.000000
+50%    3.173184e+13   5.680573e+06      37.000000       0.000000       0.000000       0.000000       0.000000       0.000000       0.000000
+75%    9.439172e+13   5.725524e+06      55.000000       0.000000       0.000000       0.000000       0.000000       0.000000       1.000000
+max    9.999816e+14   5.790484e+06     115.000000       1.000000       1.000000       1.000000       1.000000       4.000000       1.000000
+
+
+[EXITO] Evidencia guardada en: docs/evidencia_eda.txt
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ ^C
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python etl_silver.py $BUCKET_NAME $PROJECT_ID
+python: can't open file '/home/willian_garro_o/SolucionIndividual/Garro_Willian/etl_silver.py': [Errno 2] No such file or directory
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python etl_silver.py $BUCKET_NAME $PROJECT_ID
+python: can't open file '/home/willian_garro_o/SolucionIndividual/Garro_Willian/etl_silver.py': [Errno 2] No such file or directory
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python eda.py $BUCKET_NAME
+--- INICIANDO EDA PARA: bronce/raw/dataset_citas.csv ---
+Traceback (most recent call last):
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/eda.py", line 53, in <module>
+    run_eda()
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/eda.py", line 17, in run_eda
+    content = blob.download_as_string()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1651, in download_as_string
+    return self.download_as_bytes(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1530, in download_as_bytes
+    self._prep_and_do_download(
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 4659, in _prep_and_do_download
+    self._do_download(
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1094, in _do_download
+    response = download.consume(transport, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/download.py", line 280, in consume
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/_request_helpers.py", line 107, in wait_and_retry
+    return func()
+           ^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/download.py", line 253, in retriable_request
+    result = transport.request(method, url, **request_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/transport/requests.py", line 537, in request
+    self.credentials.before_request(auth_request, method, url, request_headers)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 228, in before_request
+    self._blocking_refresh(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+    self.refresh(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 365, in refresh
+    self._refresh_token(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/compute_engine/credentials.py", line 139, in _refresh_token
+    self._retrieve_info(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/compute_engine/credentials.py", line 112, in _retrieve_info
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: Unexpected response from metadata server: service account info is missing 'email' field.
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ gcloud auth application-default login
+
+You are running on a Google Compute Engine virtual machine.
+The service credentials associated with this virtual machine
+will automatically be used by Application Default
+Credentials, so it is not necessary to use this command.
+
+If you decide to proceed anyway, your user credentials may be visible
+to others with access to this virtual machine. Are you sure you want
+to authenticate with your personal account?
+
+Do you want to continue (Y/n)?  y
+
+Go to the following link in your browser, and complete the sign-in prompts:
+
+    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fapplicationdefaultauthcode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login&state=llP6oAIGpSGxz8sVezQ3KDgInayrVi&prompt=consent&token_usage=remote&access_type=offline&code_challenge=JrRASas522Ka3szwvREJUULgLHwWcUjmUhMDNU1Ohb8&code_challenge_method=S256
+
+Once finished, enter the verification code provided in your browser: 4/0ATX87lOQx7y7WvgJaCvUJ-Uej7W6wMxYiKm5UUUQVIRAl1Mi8yy5Yl2b7ISeqtD2f3K7pw
+ERROR: gcloud crashed (Warning): Scope has changed from "https://www.googleapis.com/auth/sqlservice.login openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/cloud-platform" to "openid https://www.googleapis.com/auth/userinfo.email".
+
+If you would like to report this issue, please run the following command:
+  gcloud feedback
+
+To check gcloud for common problems, please run the following command:
+  gcloud info --run-diagnostics
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python etl_silver.py $BUCKET_NAME $PROJECT_ID
+--- INICIO ETL SILVER (Transformación a Modelo Estrella) ---
+Descargando datos crudos desde: gs://bucket-examen-final-bi-2025-garroore/bronce/raw/dataset_citas.csv
+Traceback (most recent call last):
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/etl_silver.py", line 87, in <module>
+    run_etl_silver()
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/etl_silver.py", line 21, in run_etl_silver
+    df = pd.read_csv(io.BytesIO(blob.download_as_string()))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1651, in download_as_string
+    return self.download_as_bytes(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1530, in download_as_bytes
+    self._prep_and_do_download(
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 4659, in _prep_and_do_download
+    self._do_download(
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/blob.py", line 1094, in _do_download
+    response = download.consume(transport, timeout=timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/download.py", line 280, in consume
+    return _request_helpers.wait_and_retry(retriable_request, self._retry_strategy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/_request_helpers.py", line 107, in wait_and_retry
+    return func()
+           ^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/api_core/retry/retry_unary.py", line 147, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/storage/_media/requests/download.py", line 253, in retriable_request
+    result = transport.request(method, url, **request_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/transport/requests.py", line 537, in request
+    self.credentials.before_request(auth_request, method, url, request_headers)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 228, in before_request
+    self._blocking_refresh(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+    self.refresh(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/credentials.py", line 365, in refresh
+    self._refresh_token(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/compute_engine/credentials.py", line 139, in _refresh_token
+    self._retrieve_info(request)
+  File "/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/auth/compute_engine/credentials.py", line 112, in _retrieve_info
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: Unexpected response from metadata server: service account info is missing 'email' field.
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ # 1. Aseguramos que el login esté hecho (hazlo de nuevo por si acaso)
+gcloud auth application-default login --no-launch-browser
+
+# (Aquí te pedirá que copies un enlace largo en otra pestaña, te loguees, y pegues el código de vuelta en la terminal. HAZLO).
+
+# 2. OBLIGAMOS a Python a leer el archivo local (Esta es la solución mágica)
+export GOOGLE_APPLICATION_CREDENTIALS="/home/$USER/.config/gcloud/application_default_credentials.json"
+
+# 3. Verificamos que la variable se guardó
+echo $GOOGLE_APPLICATION_CREDENTIALS
+
+You are running on a Google Compute Engine virtual machine.
+The service credentials associated with this virtual machine
+will automatically be used by Application Default
+Credentials, so it is not necessary to use this command.
+
+If you decide to proceed anyway, your user credentials may be visible
+to others with access to this virtual machine. Are you sure you want
+to authenticate with your personal account?
+
+Do you want to continue (Y/n)?  y
+
+Go to the following link in your browser, and complete the sign-in prompts:
+
+    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fapplicationdefaultauthcode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login&state=3Xjrdkr1JD0J8voJ84N2dWTzjgVWBm&prompt=consent&token_usage=remote&access_type=offline&code_challenge=uByot1547gZAG5_f8--tGjFATuuv35CCztkdg50tWQw&code_challenge_method=S256
+
+Once finished, enter the verification code provided in your browser: 4/0ATX87lPcW595F_eHQviGwkT0rqT92VvGZYT1hZsFeb_nTTXQ8Ss6uPugOz0y_6WMm5vtZQ
+
+Credentials saved to file: [/tmp/tmp.Cnv29OAHgL/application_default_credentials.json]
+
+These credentials will be used by any library that requests Application Default Credentials (ADC).
+API [cloudresourcemanager.googleapis.com] not enabled on project [examen-final-bi-2025-garroore]. Would you like to 
+enable and retry (this will take a few minutes)? (y/N)?  y
+
+Enabling service [cloudresourcemanager.googleapis.com] on project [examen-final-bi-2025-garroore]...
+Operation "operations/acat.p2-167509029582-bc1f2b33-d6c4-4886-b9da-ff323afc928c" finished successfully.
+
+Quota project "examen-final-bi-2025-garroore" was added to ADC which can be used by Google client libraries for billing and quota. Note that some services may still bill the project owning the resource.
+/home/willian_garro_o/.config/gcloud/application_default_credentials.json
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ export GOOGLE_APPLICATION_CREDENTIALS="/tmp/tmp.Cnv29OAHgL/application_default_credentials.json"
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python etl_silver.py $BUCKET_NAME $PROJECT_ID
+--- INICIO ETL SILVER (Transformación a Modelo Estrella) ---
+Descargando datos crudos desde: gs://bucket-examen-final-bi-2025-garroore/bronce/raw/dataset_citas.csv
+ -> Guardado en GCS: bronce/processed/dim_paciente.csv
+ -> Guardado en GCS: bronce/processed/fact_citas.csv
+/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/bigquery/_pandas_helpers.py:484: FutureWarning: Loading pandas DataFrame into BigQuery will require pandas-gbq package version 0.26.1 or greater in the future. Tried to import pandas-gbq and got: No module named 'pandas_gbq'
+  warnings.warn(
+ -> Cargado en BigQuery: examen-final-bi-2025-garroore.silver_layer.dim_paciente
+/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/bigquery/_pandas_helpers.py:484: FutureWarning: Loading pandas DataFrame into BigQuery will require pandas-gbq package version 0.26.1 or greater in the future. Tried to import pandas-gbq and got: No module named 'pandas_gbq'
+  warnings.warn(
+ -> Cargado en BigQuery: examen-final-bi-2025-garroore.silver_layer.fact_citas
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ python etl_gold.py $BUCKET_NAME $PROJECT_ID
+--- INICIO ETL GOLD (Cálculo de KPIs) ---
+Ejecutando consulta analítica en BigQuery...
+/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/bigquery/table.py:1994: UserWarning: BigQuery Storage module not found, fetch data with the REST endpoint instead.
+  warnings.warn(
+
+--- Top 5 Barrios con más citas ---
+     Neighbourhood Gender    Rango_Edad  Total_Citas  Cantidad_Faltas  Promedio_Espera_Dias  Tasa_NoShow_Porc
+0   JARDIM CAMBURI      F  36-60 Adulto         2199              431             19.443383              19.6
+1   JARDIM CAMBURI      F    60+ Senior         1439              237             21.219597             16.47
+2      MARIA ORTIZ      F  36-60 Adulto         1344              269             13.529762             20.01
+3      MARIA ORTIZ      F   18-35 Joven         1010              271             12.743564             26.83
+4  JARDIM DA PENHA      F  36-60 Adulto          999              145             10.450450             14.51
+
+-> KPI guardado en GCS: bronce/curated/kpi_resumen_noshow.csv
+/home/willian_garro_o/SolucionIndividual/Garro_Willian/venv/lib/python3.12/site-packages/google/cloud/bigquery/_pandas_helpers.py:484: FutureWarning: Loading pandas DataFrame into BigQuery will require pandas-gbq package version 0.26.1 or greater in the future. Tried to import pandas-gbq and got: No module named 'pandas_gbq'
+  warnings.warn(
+-> KPI disponible en BigQuery: examen-final-bi-2025-garroore.gold_layer.kpi_resumen
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ ls -l docs/
+total 12
+-rw-rw-r-- 1 willian_garro_o willian_garro_o 3495 Dec 16 06:55 evidencia_eda.txt
+-rw-rw-r-- 1 willian_garro_o willian_garro_o  680 Dec 16 07:42 log_etl_gold.txt
+-rw-rw-r-- 1 willian_garro_o willian_garro_o   98 Dec 16 07:21 log_etl_silver.txt
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ # Empaquetar todo el contenido de tu carpeta actual en un archivo llamado "Solucion_Examen.zip"
+zip -r Solucion_Examen.zip . -x "venv/*"
+  adding: etl_gold.py (deflated 51%)
+  adding: etl_silver.py (deflated 53%)
+  adding: docs/ (stored 0%)
+  adding: docs/evidencia_eda.txt (deflated 70%)
+  adding: docs/log_etl_silver.txt (deflated 9%)
+  adding: docs/log_etl_gold.txt (deflated 56%)
+  adding: eda.py (deflated 52%)
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ ls -l docs/
+total 16
+-rw-rw-r-- 1 willian_garro_o willian_garro_o 3495 Dec 16 06:55 evidencia_eda.txt
+-rw-rw-r-- 1 willian_garro_o willian_garro_o  680 Dec 16 07:42 log_etl_gold.txt
+-rw-rw-r-- 1 willian_garro_o willian_garro_o   98 Dec 16 07:21 log_etl_silver.txt
+-rw-r--r-- 1 willian_garro_o willian_garro_o 3003 Dec 16 07:49 README.md
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ zip -r Solucion_Examen.zip . -x "venv/*"
+updating: etl_gold.py (deflated 51%)
+updating: etl_silver.py (deflated 53%)
+updating: docs/ (stored 0%)
+updating: docs/evidencia_eda.txt (deflated 70%)
+updating: docs/log_etl_silver.txt (deflated 9%)
+updating: docs/log_etl_gold.txt (deflated 56%)
+updating: eda.py (deflated 52%)
+  adding: docs/README.md (deflated 48%)
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ 
+(venv) willian_garro_o@cloudshell:~/SolucionIndividual/Garro_Willian (examen-final-bi-2025-garroore)$ history
+    1  # 1. Definir variables automáticas
+    2  export PROJECT_ID=$(gcloud config get-value project)
+    3  export BUCKET_NAME="${PROJECT_ID}-examen-final-bi"
+    4  export REGION="us-central1"
+    5  # 2. Crear el Bucket (Si ya existe, dará error, no importa)
+    6  gsutil mb -l $REGION gs://$BUCKET_NAME/ || echo "El bucket ya existe"
+    7  # 3. Crear carpetas de la arquitectura
+    8  touch .gitkeep
+    9  gsutil cp .gitkeep gs://$BUCKET_NAME/bronce/
+   10  gsutil cp .gitkeep gs://$BUCKET_NAME/plata/
+   11  gsutil cp .gitkeep gs://$BUCKET_NAME/oro/
+   12  gsutil cp .gitkeep gs://$BUCKET_NAME/scripts/
+   13  # 4. Mover el archivo CSV a la carpeta Bronce
+   14  gsutil cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw_data.csv
+   15  # 5. Crear Dataset en BigQuery
+   16  bq --location=$REGION mk -d --description "DW Examen BI" ${PROJECT_ID}:dw_citas_medicas || echo "El dataset ya existe"
+   17  echo "✅ CONFIGURACIÓN LISTA. Tu bucket es: $BUCKET_NAME"
+   18  # 1. Instalar librerías necesarias (rápido)
+   19  pip install pandas google-cloud-storage google-cloud-bigquery db-dtypes pyarrow --upgrade --quiet
+   20  # 2. Crear script de EDA (Análisis Exploratorio)
+   21  cat <<EOF > scripts/eda.py
+   22  import pandas as pd
+   23  import os
+   24  BUCKET_NAME = os.environ.get('BUCKET_NAME')
+   25  def run_eda():
+   26      print("--- 🔎 INICIANDO EDA (CAPA BRONCE) ---")
+   27      uri = f'gs://{BUCKET_NAME}/bronce/raw_data.csv'
+   28      try:
+   29          df = pd.read_csv(uri)
+   30          print(f"✅ Archivo leído correctamente. Filas: {len(df)}")
+   31          
+   32          # Validaciones clave
+   33          neg_age = df[df['Age'] < 0]
+   34          if not neg_age.empty:
+   35              print(f"⚠️ ALERTA: Se detectaron {len(neg_age)} registros con edad negativa.")
+   36          
+   37          dups = df.duplicated().sum()
+   38          print(f"ℹ️ Duplicados encontrados: {dups}")
+   39          
+   40          # Reporte de nulos
+   41          print("ℹ️ Nulos por columna:")
+   42          print(df.isnull().sum())
+   43          
+   44      except Exception as e:
+   45          print(f"❌ Error leyendo archivo: {e}")
+   46  if __name__ == "__main__":
+   47      run_eda()
+   48  EOF
+   49  # 3. Crear script ETL SILVER (Transformación a Modelo Estrella)
+   50  cat <<EOF > scripts/etl_silver.py
+   51  import pandas as pd
+   52  import os
+   53  BUCKET_NAME = os.environ.get('BUCKET_NAME')
+   54  def process_silver():
+   55      print("\n--- 🔨 INICIANDO ETL SILVER (Transformación) ---")
+   56      
+   57      # Lectura
+   58      df = pd.read_csv(f'gs://{BUCKET_NAME}/bronce/raw_data.csv')
+   59      
+   60      # Limpieza
+   61      df.rename(columns={
+   62          'AppointmentID': 'appointment_id', 'PatientId': 'patient_id',
+   63          'Gender': 'gender', 'ScheduledDay': 'scheduled_day',
+   64          'AppointmentDay': 'appointment_day', 'Age': 'age',
+   65          'Neighbourhood': 'neighbourhood', 'Scholarship': 'scholarship',
+   66          'Hipertension': 'hypertension', 'Diabetes': 'diabetes',
+   67          'Alcoholism': 'alcoholism', 'Handcap': 'handicap',
+   68          'SMS_received': 'sms_received', 'No-show': 'no_show'
+   69      }, inplace=True)
+   70      # Filtros y Conversiones
+   71      df = df[df['age'] >= 0]
+   72      df['scheduled_day'] = pd.to_datetime(df['scheduled_day'])
+   73      df['appointment_day'] = pd.to_datetime(df['appointment_day'])
+   74      df['is_noshow'] = df['no_show'].apply(lambda x: 1 if x == 'Yes' else 0)
+   75      # --- MODELO ESTRELLA ---
+   76      
+   77      # Dimensión Tiempo
+   78      dim_time = pd.DataFrame()
+   79      dim_time['date_id'] = df['appointment_day'].dt.strftime('%Y%m%d')
+   80      dim_time['full_date'] = df['appointment_day'].dt.date
+   81      dim_time['day_name'] = df['appointment_day'].dt.day_name()
+   82      dim_time = dim_time.drop_duplicates()
+   83      # Dimensión Paciente
+   84      dim_patient = df[['patient_id', 'gender', 'age', 'scholarship', 'hypertension', 'diabetes']].drop_duplicates(subset=['patient_id'], keep='last')
+   85      # Dimensión Ubicación
+   86      dim_location = pd.DataFrame(df['neighbourhood'].unique(), columns=['neighbourhood'])
+   87      dim_location['location_id'] = range(1, len(dim_location) + 1)
+   88      # Tabla de Hechos
+   89      fact = df.merge(dim_location, on='neighbourhood', how='left')
+   90      fact['date_id'] = fact['appointment_day'].dt.strftime('%Y%m%d')
+   91      fact = fact[['appointment_id', 'patient_id', 'location_id', 'date_id', 'sms_received', 'is_noshow']]
+   92      # Guardar en GCS (Plata)
+   93      dim_time.to_csv(f'gs://{BUCKET_NAME}/plata/dim_time.csv', index=False)
+   94      dim_patient.to_csv(f'gs://{BUCKET_NAME}/plata/dim_patient.csv', index=False)
+   95      dim_location.to_csv(f'gs://{BUCKET_NAME}/plata/dim_location.csv', index=False)
+   96      fact.to_csv(f'gs://{BUCKET_NAME}/plata/fact_appointments.csv', index=False)
+   97      print("✅ Archivos Plata generados en Cloud Storage.")
+   98  if __name__ == "__main__":
+   99      process_silver()
+  100  EOF
+  101  # 4. EJECUTAR TODO
+  102  echo ">>> Ejecutando Scripts..."
+  103  python3 scripts/eda.py
+  104  python3 scripts/etl_silver.py
+  105  # 5. CARGAR A BIGQUERY
+  106  echo ">>> Cargando a BigQuery..."
+  107  bq load --autodetect --source_format=CSV --replace dw_citas_medicas.dim_time gs://$BUCKET_NAME/plata/dim_time.csv
+  108  bq load --autodetect --source_format=CSV --replace dw_citas_medicas.dim_patient gs://$BUCKET_NAME/plata/dim_patient.csv
+  109  bq load --autodetect --source_format=CSV --replace dw_citas_medicas.dim_location gs://$BUCKET_NAME/plata/dim_location.csv
+  110  bq load --autodetect --source_format=CSV --replace dw_citas_medicas.fact_appointments gs://$BUCKET_NAME/plata/fact_appointments.csv
+  111  echo "🏁 FASE BRONCE Y PLATA COMPLETADA."
+  112  # --- 1. DETECCION AUTOMÁTICA DEL PROYECTO Y BUCKET ---
+  113  try:
+  114  except:
+  115  # --- 3. PROCESAMIENTO (PLATA) ---
+  116  def process_silver():
+  117  # --- 4. CARGA A BIGQUERY ---
+  118  def load_bigquery():
+  119  if __name__ == "__main__":;     upload_bronze()     process_silver()
+  120  nano examen_final.py
+  121  python3 examen_final.py
+  122  rm examen_final.py
+  123  cat README.md
+  124  # 1. Definimos las variables con tus datos reales
+  125  export PROJECT_ID="examen-final-bi-2025-garroore"
+  126  export BUCKET_NAME="bucket-examen-final-bi-2025-garroore"
+  127  export REGION="us-central1"
+  128  # 2. Confirmamos que Cloud Shell apunte a tu proyecto (por seguridad)
+  129  gcloud config set project $PROJECT_ID
+  130  # 3. Creamos el Bucket (Tu Data Lake)
+  131  gcloud storage buckets create gs://$BUCKET_NAME --location=$REGION
+  132  # 4. Verificamos que se creó correctamente
+  133  echo "Tu bucket es: gs://$BUCKET_NAME"
+  134  # 1. Crear un archivo vacío temporal
+  135  touch .keep
+  136  # 2. Crear las "carpetas" subiendo este archivo a las rutas que pide el examen
+  137  gcloud storage cp .keep gs://$BUCKET_NAME/bronce/raw/
+  138  gcloud storage cp .keep gs://$BUCKET_NAME/bronce/processed/
+  139  gcloud storage cp .keep gs://$BUCKET_NAME/bronce/curated/
+  140  # 3. Verificar que se crearon
+  141  gcloud storage ls -r gs://$BUCKET_NAME/bronce/
+  142  # Mover el archivo de la terminal al bucket
+  143  gcloud storage cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/dataset_citas.csv
+  144  # Verificar que está ahí
+  145  gcloud storage ls gs://$BUCKET_NAME/bronce/raw/
+  146  # 1. Crear estructura de carpetas local (según enunciado)
+  147  # Reemplaza 'TuApellido' si quieres, pero así sirve para el examen
+  148  mkdir -p SolucionIndividual/Garro_Willian/docs
+  149  cd SolucionIndividual/Garro_Willian/
+  150  # 2. Crear un entorno virtual para Python (para no romper nada)
+  151  python3 -m venv venv
+  152  source venv/bin/activate
+  153  # 3. Instalar las librerías necesarias (pandas, google cloud, etc.)
+  154  pip install pandas google-cloud-storage google-cloud-bigquery db-dtypes pyarrow
+  155  cat <<EOF > eda.py
+import pandas as pd
+import sys
+from google.cloud import storage
+import io
+
+# Recibimos el nombre del bucket como argumento
+BUCKET_NAME = sys.argv[1]
+FILE_PATH = "bronce/raw/dataset_citas.csv"
+
+def run_eda():
+    print(f"--- INICIANDO EDA PARA: {FILE_PATH} ---")
+    
+    # 1. Conectar a Cloud Storage y descargar el archivo en memoria
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+    blob = bucket.blob(FILE_PATH)
+    content = blob.download_as_string()
+    
+    # 2. Leer con Pandas
+    df = pd.read_csv(io.BytesIO(content))
+
+    # 3. Generar Reporte de Calidad
+    buffer = io.StringIO()
+    
+    buffer.write("=== REPORTE EDA (EVIDENCIA) ===\n")
+    buffer.write(f"Filas: {df.shape[0]}, Columnas: {df.shape[1]}\n\n")
+    
+    buffer.write("--- 1. Primeras 5 filas ---\n")
+    buffer.write(df.head().to_string() + "\n\n")
+    
+    buffer.write("--- 2. Tipos de Datos e Info ---\n")
+    df.info(buf=buffer)
+    buffer.write("\n\n")
+    
+    buffer.write("--- 3. Conteo de Nulos ---\n")
+    nulls = df.isnull().sum()
+    buffer.write(nulls[nulls > 0].to_string() if nulls.sum() > 0 else "Sin nulos encontrados")
+    buffer.write("\n\n")
+
+    buffer.write("--- 4. Estadisticas Numericas ---\n")
+    buffer.write(df.describe().to_string() + "\n")
+
+    # 4. Mostrar en pantalla y guardar en archivo
+    reporte = buffer.getvalue()
+    print(reporte)
+    
+    # Guardar evidencia en la carpeta docs (Requisito del examen)
+    with open("docs/evidencia_eda.txt", "w") as f:
+        f.write(reporte)
+    print("\n[EXITO] Evidencia guardada en: docs/evidencia_eda.txt")
+
+if __name__ == "__main__":
+    run_eda()
+EOF
+
+  156  python eda.py $BUCKET_NAME
+  157  python etl_silver.py $BUCKET_NAME $PROJECT_ID
+  158  python eda.py $BUCKET_NAME
+  159  gcloud auth application-default login
+  160  python etl_silver.py $BUCKET_NAME $PROJECT_ID
+  161  # 1. Aseguramos que el login esté hecho (hazlo de nuevo por si acaso)
+  162  gcloud auth application-default login --no-launch-browser
+  163  # (Aquí te pedirá que copies un enlace largo en otra pestaña, te loguees, y pegues el código de vuelta en la terminal. HAZLO).
+  164  # 2. OBLIGAMOS a Python a leer el archivo local (Esta es la solución mágica)
+  165  export GOOGLE_APPLICATION_CREDENTIALS="/home/$USER/.config/gcloud/application_default_credentials.json"
+  166  # 3. Verificamos que la variable se guardó
+  167  echo $GOOGLE_APPLICATION_CREDENTIALS
+  168  export GOOGLE_APPLICATION_CREDENTIALS="/tmp/tmp.Cnv29OAHgL/application_default_credentials.json"
+  169  python etl_silver.py $BUCKET_NAME $PROJECT_ID
+  170  python etl_gold.py $BUCKET_NAME $PROJECT_ID
+  171  ls -l docs/
+  172  # Empaquetar todo el contenido de tu carpeta actual en un archivo llamado "Solucion_Examen.zip"
+  173  zip -r Solucion_Examen.zip . -x "venv/*"
+  174  ls -l docs/
+  175  zip -r Solucion_Examen.zip . -x "venv/*"
+  176  history
