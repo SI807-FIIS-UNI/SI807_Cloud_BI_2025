@@ -1,5 +1,9 @@
  
 # Modelo Estrella -> Capa Plata
+## Justificación
+
+
+<img width="1681" height="837" alt="image" src="https://github.com/user-attachments/assets/b160668f-eaa4-47ff-83e0-9fdca7b6bd01" />
 
 ```bash
 # ✅ Leer desde bronce/curated (entrada para PLATA)
