@@ -52,11 +52,17 @@ El dataset contiene información histórica de citas médicas, incluyendo:
 
 **Nota:** El dataset fue cargado mediante CLI directamente a la capa **bronce/raw**.
 
-`curl -L -o ~/noshowappointments.zip  https://www.kaggle.com/api/v1/datasets/download/joniarroba/noshowappointments`
+```bash 
+curl -L -o ~/noshowappointments.zip  https://www.kaggle.com/api/v1/datasets/download/joniarroba/noshowappointments
+```
 
-```unzip noshowappointments.zip```
+```bash
+unzip noshowappointments.zip
+```
 
-```gsutil cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/```
+```bash
+gsutil cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/
+```
 
 **[CAPTURA AQUÍ: archivo CSV cargado en bronce/raw vía `gsutil cp`]**
 
@@ -674,6 +680,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
