@@ -50,7 +50,10 @@ print("✅ Capa PLATA generada.")
 ## Se guarda en la capa plata 
 <img width="2559" height="1466" alt="image" src="https://github.com/user-attachments/assets/d0038ab9-e565-47e0-813c-7e545ffddf7f" />
 
-# Capa Oro -> Generamos el Json y lo guardamos en la capa de oro 
+# Capa Oro 
+
+## Generamos el Json y lo guardamos en la capa de oro 
+
 ```bash
 import json
 
@@ -113,12 +116,107 @@ print(f"✅ JSON detallado generado con {len(json_records)} registros.")
 print("📄 Ruta local: /databricks/driver/superstore_dashboard.json")
 print("☁️ Guardado en ORO: wasbs://oro@.../superstore_dashboard.json")
 ```
-# Vemos que se guardo en la capa oro
+### Vemos que se guardo en la capa oro
 
 <img width="2559" height="1386" alt="image" src="https://github.com/user-attachments/assets/09c430fd-fd9c-457c-802f-287b2bd7c54b" />
 
 El josn generado es superstore_dashboard.json
 que se usara para realizar el dashboard y los kpis
+
+## GENERAR KPIs PARA CAPA ORO 
+
+Se creo los kpis_resumen.json que seran consumidos por el dashboard para su visualización.
+
+<img width="2559" height="1388" alt="image" src="https://github.com/user-attachments/assets/67a0ca13-ac4d-4911-8935-d7d4aed6c124" />
+
+```bash
+print("📈 Generando KPIs precalculados para capa ORO...")
+
+# Leer datos limpios
+df = spark.read.parquet("wasbs://bronce@azuresi807miguel.blob.core.windows.net/curated/superstore.parquet")
+
+# Calcular KPIs globales
+total_filas = df.count()
+agg_result = df.agg(
+    F.sum("Sales").alias("total_ventas"),
+    F.sum("Profit").alias("total_utilidad"),
+    F.countDistinct("Order ID").alias("total_ordenes"),
+    F.countDistinct("Customer ID").alias("total_clientes"),
+    F.sum("Quantity").alias("total_articulos"),
+    F.count(F.when(F.col("Profit") < 0, 1)).alias("ordenes_con_perdida")
+).collect()[0]
+
+# Extraer y calcular
+total_ventas = float(agg_result["total_ventas"])
+total_utilidad = float(agg_result["total_utilidad"])
+total_ordenes = int(agg_result["total_ordenes"])
+total_clientes = int(agg_result["total_clientes"])
+total_articulos = int(agg_result["total_articulos"])
+ordenes_con_perdida = int(agg_result["ordenes_con_perdida"])
+
+margen_promedio = (total_utilidad / total_ventas) * 100 if total_ventas > 0 else 0.0
+ticket_promedio = total_ventas / total_ordenes if total_ordenes > 0 else 0.0
+pct_perdida = (ordenes_con_perdida / total_filas) * 100 if total_filas > 0 else 0.0
+
+# Top categorías
+top_categorias = (df.groupBy("Category")
+                  .agg(F.sum("Sales").alias("ventas"))
+                  .orderBy(F.desc("ventas"))
+                  .limit(3)
+                  .collect())
+top_categorias_dict = {row["Category"]: float(row["ventas"]) for row in top_categorias}
+
+# Construir diccionario de KPIs
+kpis_resumen = {
+    "metadata": {
+        "descripcion": "KPIs precalculados para dashboard - Generado desde script Python",
+        "generado_el": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "fuente": "bronce/curated/superstore.parquet"
+    },
+    "kpis": {
+        "total_ventas": round(total_ventas, 2),
+        "total_utilidad": round(total_utilidad, 2),
+        "margen_promedio_pct": round(margen_promedio, 2),
+        "total_ordenes": total_ordenes,
+        "total_clientes": total_clientes,
+        "ticket_promedio": round(ticket_promedio, 2),
+        "total_articulos_vendidos": total_articulos,
+        "pct_ordenes_con_perdida": round(pct_perdida, 2)
+    },
+    "top_categorias_por_ventas": top_categorias_dict
+}
+
+# Guardar KPIs en ORO como JSON
+dbutils.fs.put(
+    "wasbs://oro@azuresi807miguel.blob.core.windows.net/kpis_resumen.json",
+    json.dumps(kpis_resumen, indent=2, ensure_ascii=False),
+    overwrite=True
+)
+
+# Opcional: también guardar como Parquet (más eficiente para Spark)
+kpis_df = spark.createDataFrame([(
+    total_ventas,
+    total_utilidad,
+    margen_promedio,
+    total_ordenes,
+    total_clientes,
+    ticket_promedio,
+    total_articulos,
+    pct_perdida
+)], [
+    "total_ventas", "total_utilidad", "margen_promedio_pct",
+    "total_ordenes", "total_clientes", "ticket_promedio",
+    "total_articulos_vendidos", "pct_ordenes_con_perdida"
+])
+
+kpis_df.write.mode("overwrite").parquet(
+    "wasbs://oro@azuresi807miguel.blob.core.windows.net/kpis_resumen.parquet"
+)
+
+print("✅ KPIs precalculados guardados en ORO:")
+print("   - kpis_resumen.json")
+print("   - kpis_resumen.parquet")
+```
 
 # Logs
 
