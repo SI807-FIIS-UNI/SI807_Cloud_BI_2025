@@ -4,7 +4,8 @@ Este repositorio contiene los scripts necesarios para construir un **modelo dime
 
 Imagen de referencia del modelo estrella:
 
-<img width="461" height="644" alt="Modelo estrella" src="https://github.com/user-attachments/assets/abaf9ade-f737-4bfc-91f9-de7d152c8a8c" />
+<img width="1568" height="1283" alt="Untitled" src="https://github.com/user-attachments/assets/6dbfc29b-11a6-4e23-82a0-7ffcca5d4996" />
+
 
 A continuación, se detallan los scripts SQL utilizados para crear las dimensiones, la tabla de hechos y una vista semántica para análisis.
 
