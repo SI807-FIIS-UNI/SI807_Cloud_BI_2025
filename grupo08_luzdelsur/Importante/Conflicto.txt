@@ -1,0 +1,3 @@
+Profesor, tuve un conflicto con la subida del archivo raw. Al ser demasiado el peso demoré más de una hora en solucionar el tema del push.
+Hasta cree nuevas ramas y nada.
+Pero en la fecha de creación del dashboard y la hora y fecha de las evidencias se puede ver que todo estuvo a tiempo.
