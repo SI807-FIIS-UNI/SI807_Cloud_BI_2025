@@ -33,13 +33,13 @@ El proyecto finaliza con un dashboard interactivo en **Looker Studio**, alimenta
 
 ### 1. Inicializar el entorno de GCP mediante CLI
 
-INICIAR EL CLI DE GCP:
-
+```bash
 Id del proyecto: ef-si807u-20220018k
+```
 
 ![1](/grupo05_nettalco/EVIDENCIAS/2.png)
 
-USO DEL CLI PARA CONFIGURAR EL PROYECTO COMO PRINCIPAL:
+# USO DEL CLI PARA CONFIGURAR EL PROYECTO COMO PRINCIPAL:
 
 ```bash
 gcloud config set project ef-si807u-20220018k
@@ -47,11 +47,10 @@ gcloud config set project ef-si807u-20220018k
 
 ![1](/grupo05_nettalco/EVIDENCIAS/3.png)
 
-CREACION DEL BUCKET:
+# CREACION DEL BUCKET:
 
 ```bash
 BUCKET_NAME="bi-examen-final"
-
 gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
 
 ```
@@ -59,25 +58,25 @@ gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
 
 ![1](/grupo05_nettalco/EVIDENCIAS/4.png)
 
-VISTA EN GOOGLE CLOUD STORAGE:
+# VISTA EN GOOGLE CLOUD STORAGE:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/40.png)
 
-CREACION DE LAS CARPETAS BRONCE:
+# CREACION DE LAS CARPETAS BRONCE:
 
-*bronce/raw
+- bronce/raw
 
-*bronce/processed
+- bronce/processed
 
-*bronce/curated
+- bronce/curated
 
 ![1](/grupo05_nettalco/EVIDENCIAS/41.png)
 
-VISUALIZACION EN GCS:
+# VISUALIZACION EN GCS:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/42.png)
 
-CARGA DEL CSV USANDO CLI:
+# CARGA DEL CSV USANDO CLI:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/43.png)
 
@@ -85,7 +84,7 @@ CARGA DEL CSV USANDO CLI:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/45.png)
 
-CAMBIAMOS LA DIRECCION DEL ARCHIVO:
+# CAMBIAMOS LA DIRECCION DEL ARCHIVO:
 
 Pasamos el archivo de la dirección base /home/r_loayza_s/ al gcs
 
@@ -99,7 +98,7 @@ gcloud storage cp $NUEVO_ARCHIVO gs://$BUCKET_NAME/bronce/raw/$NUEVO_ARCHIVO
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen10.png)
 
-CARGA COMPLETADA:
+# CARGA COMPLETADA:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen11.png)
 
@@ -109,20 +108,20 @@ COMPROBAMOS QUE SE ENCUENTRA CARGADO EL CSV:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen13.png)
 
-ABRIMOS EL EDITOR DE GOOGLE CLOUD:
+# ABRIMOS EL EDITOR DE GOOGLE CLOUD:
 
 
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen14.png)
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen15.png)
 
-CREAMOS LAS CARPETAS:
+# CREAMOS LAS CARPETAS:
 
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen16.png)
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen17.png)
 
-CREACION DEL EDA Y EL PROCESO ETL:
+# CREACION DEL EDA Y EL PROCESO ETL:
 
 ```bash
 BUCKET_NAME="bi-examen-final"
@@ -135,12 +134,12 @@ python scripts/eda.py
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen18.png)
 
 
-SCRIPT DEL EDA EN PYTHON:
+# SCRIPT DEL EDA EN PYTHON:
 
 - [🐍 Scripts EDA](./grupo05_nettalco/scripts) - Código Python para la EDA minima
 
 
-SUBIDA DEL ARCHIVO A GCS:
+# SUBIDA DEL ARCHIVO A GCS:
 
 Comando para copiar el archivo procesado de Cloud Shell a GCS
 
@@ -150,7 +149,7 @@ PROCESSED_FILE="processed_Flight_delay.csv"
 gcloud storage cp $PROCESSED_FILE gs://$BUCKET_NAME/bronce/processed/$PROCESSED_FILE
 ```
 
-SCRIPT DEL EDA EN PYTHON:
+# SCRIPT DEL EDA EN PYTHON:
 
 - [🐍 Scripts ETL](./grupo05_nettalco/scripts) - Código Python para la Transformacion y Carga
 
@@ -162,12 +161,12 @@ VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 ![1](/grupo05_nettalco/EVIDENCIAS/32.png)
 
 
-MODELO ESTRELLA MINIMO:
+# MODELO ESTRELLA MINIMO:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen19.png)
 
 
-DASHBOARD 1:
+# DASHBOARD 1:
 
 Aquí tienes la documentación detallada para el Dashboard 1, explicando el contexto de negocio y la justificación técnica de los campos seleccionados.
 
@@ -244,7 +243,7 @@ Aquí puedes acceder a los tableros interactivos en vivo:
 [![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_1-4285F4?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/4660d5a4-bd76-490a-9cb2-ce4a1f4b8ea4)
 
 
-DASHBOARD 2:
+# DASHBOARD 2:
 
 Aquí tienes la documentación detallada para el Dashboard 2, manteniendo el mismo formato profesional y estructura que el anterior.
 
