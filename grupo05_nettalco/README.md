@@ -102,9 +102,7 @@ python scripts/eda.py
 
 SCRIPT DEL EDA EN PYTHON:
 
-### 📂 Estructura del Proyecto
-
-- [🐍 Scripts ETL](./grupo05_nettalco/scripts) - Código Python para la extracción y carga.
+- [🐍 Scripts EDA](./grupo05_nettalco/scripts) - Código Python para la EDA minima
 
 
 SUBIDA DEL ARCHIVO A GCS:
@@ -117,6 +115,11 @@ PROCESSED_FILE="processed_Flight_delay.csv"
 gcloud storage cp $PROCESSED_FILE gs://$BUCKET_NAME/bronce/processed/$PROCESSED_FILE
 ```
 
+SCRIPT DEL EDA EN PYTHON:
+
+- [🐍 Scripts ETL](./grupo05_nettalco/scripts) - Código Python para la Transformacion y Carga
+
+
 VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/31.png)
@@ -127,6 +130,8 @@ VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 MODELO ESTRELLA MINIMO:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen19.png)
+
+
 
 
 
