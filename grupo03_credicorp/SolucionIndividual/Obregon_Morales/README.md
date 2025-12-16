@@ -33,7 +33,7 @@ El script:
 
 Evidencias  
 
-![evidencia1](evidencia5.jpeg)
+![evidencia1](EvidenciaSubidaCSV.jpeg)
 
 ---
 
@@ -58,7 +58,7 @@ Evidencias
 
 ![evidencia2](evidencia1.jpeg)
 
-
+![evidencia6](evidencia4.jpeg)
 ---
 
 ## 6️⃣ Capa PLATA – Modelo Dimensional
@@ -113,4 +113,4 @@ KPIs Generados
 
 Evidencias  
 
-![evidencia5](evidencia5.jpeg)
+![evidencia5](evidenciaOro.jpeg)
