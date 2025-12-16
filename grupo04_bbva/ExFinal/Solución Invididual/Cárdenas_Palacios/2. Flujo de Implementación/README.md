@@ -209,6 +209,6 @@ CREATE TABLE fact_transaccion_producto (
 
 ## 7. Dashboard Funcional
 
-
+<img width="1600" height="864" alt="image" src="https://github.com/user-attachments/assets/a89a6f28-28a2-4a65-9d12-e1a9033f53a5" />
 
 Link del Dashboard: https://yellow-meadow-0f17f000f.3.azurestaticapps.net/
