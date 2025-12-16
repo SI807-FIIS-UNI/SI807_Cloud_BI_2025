@@ -21,14 +21,14 @@ Carga de archivos exitosa
 
 ### CRACION DEL CLUSTER
 
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/crear_cluster.sh)
+[VER AQUI EL SCRIPT UTILIZADO PARA CREAL EL CLUSTER TEMPORAL](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/crear_cluster.sh)
 
 ### Análisis exploratorio (EDA)
 
 Se ejecutó un análisis exploratorio inicial del dataset original ubicado en la carpeta `/raw` del bucket `retail-transactions-final`. El objetivo fue revisar estructura, tipos de datos, valores únicos y campos faltantes, sin realizar transformaciones.
 
 **Notebook usado:** `01_eda_raw_dataset.ipynb`
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/01_eda_raw_dataset.ipynb)
+[VER AQUI EL SCRIPT UTILIZADO ANALIZAR LA DATA](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/01_eda_raw_dataset.ipynb)
 
 ![image5](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/evidencias/image5.png)
 
@@ -41,7 +41,7 @@ Se construyó la capa `trusted` utilizando PySpark sobre Dataproc, realizando:
 
 **Ruta del archivo limpio:**  
 `gs://retail-transactions-final/trusted/retail_trusted.parquet`
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/02_trusted_dataset.ipynb)
+[VER AQUI EL SCRIPT UTILIZADO PARA LIMPIAR LA DATA](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/02_trusted_dataset.ipynb)
 
 **Notebook:** `02_trusted_dataset.ipynb`
 
@@ -59,7 +59,7 @@ Durante el proceso ETL tuve unos problemas con el kernel lo que se ve reflejado 
 ![image8](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/evidencias/image8.png)
 
 
-### CREACIÓN DEL ESQUEMA ALMACENADO ES REFINED
+### CREACIÓN DEL ESQUEMA ESTRELLA ALMACENADO EN LA CARPETA REFINED
 
 | Tabla                  | Columnas sugeridas                                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -69,7 +69,7 @@ Durante el proceso ETL tuve unos problemas con el kernel lo que se ve reflejado 
 | **dim_tienda**         | City, Store_Type                                                                                             |
 | **dim_cliente**        | Customer_Name, Customer_Category                                                                             |
 
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/03_refined_modelo_estrella.ipynb)
+[VER AQUI EL SCRIPT UTILIZADO PARA ARMAR EL ESTRELLA](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/03_refined_modelo_estrella.ipynb)
 
 ![image9](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/evidencias/image9.png)
 
@@ -89,12 +89,12 @@ Durante el proceso ETL tuve unos problemas con el kernel lo que se ve reflejado 
 
 ![image11](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/evidencias/image11.png)
 
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/05_kpis.ipynb)
+[VER AQUI EL SCRIPT UTILIZADO PARA CREAR LOS KPIS](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/05_kpis.ipynb)
 
 ACA SUBIMOS LOS KPIS A BIGQUERY PARA VISUALIZARLOS LUEGO EN EL LOOKER STUDIO
 
 **Notebook usado:** `06_kpis_to_bigquery.ipynb`
-[VER AQUI EL SCRIPT UTIALIZADO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/06_kpis_to_bigquery.ipynb)
+[VER AQUI EL SCRIPT UTILIZADO PARA CARGAR LOS KPIS A BIGQUERY](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/scripts/06_kpis_to_bigquery.ipynb)
 
 
 ### VISUALIZACIÓN DASHBOARD LOOKERSTUDIO
@@ -107,6 +107,13 @@ Los KPIs generados en la capa oro fueron cargados a BigQuery y visualizados en d
 - kpi_frecuencia_compras
 - kpi_promociones
 
+**Justificación del diseño:**
+El dashboard permite un análisis tanto ejecutivo como detallado, con filtros por tienda, temporada y promoción para facilitar decisiones comerciales.
 
+**Dashboard:** [LINK DE LOOKER COMPARTIDO](https://lookerstudio.google.com/reporting/7057ae85-e6c4-4cf0-8721-d51c63501a43)
 
-**Dashboard:** [[inserta aquí el enlace de tu dashboard una vez creado]](https://lookerstudio.google.com/reporting/7057ae85-e6c4-4cf0-8721-d51c63501a43)
+**EN PDF** [LINK DE LOOKER COMPARTIDO](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/docs/DASHBOARD_JAIRO.pdf)
+
+![page1](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/visualizations/page1.png)
+![page2](/grupo10_sutran/ExFinal/SolucionIndividual/DelRio_Gutierrez/visualizations/page2.png)
+
