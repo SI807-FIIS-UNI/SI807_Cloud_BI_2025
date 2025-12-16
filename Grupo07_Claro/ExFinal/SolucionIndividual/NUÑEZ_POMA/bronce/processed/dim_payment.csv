@@ -1,0 +1,5 @@
+id_payment,payment_method
+1,Cash
+2,Credit Card
+3,Debit Card
+4,Mobile Payment
