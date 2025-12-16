@@ -12,6 +12,10 @@
 Usando GCP, puedes realizar análisis avanzados en tiempo real, identificar patrones en ventas por región, segmento de cliente y tipo de producto, y luego optimizar el mix de productos y estrategias de ventas, lo que te ayudará a maximizar la rentabilidad.
 
 ### Carga de csv utilizando CLI Y Ejecucion de EDA
+
+[Visualizacion del Jupyter](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/65345a3cdc57425c0a683e84fcb6c0925f4efbee/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/readstream.ipynb)
+
+
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_1.png)
 
  ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_2.png)
@@ -36,23 +40,30 @@ Este proyecto incluye un análisis detallado de las ventas utilizando Power BI. 
 
 Este análisis proporciona KPIs clave, incluyendo ventas totales, margen, top productos, top regiones, ventas por segmento, y tendencia mensual.
 
-***Ventas Totales por Producto**
+**Ventas Totales por Producto**
+
 Este KPI muestra la distribución de las ventas totales entre los diferentes productos. En el gráfico, vemos que un pequeño número de productos genera la mayor parte de las ventas, lo que puede indicar que algunos productos están dominando el mercado. Es fundamental identificar estos productos para optimizar el inventario y las estrategias de ventas.
+
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_15.png)
 
-***Ventas Totales por Región**
+**Ventas Totales por Región**
+
 El gráfico muestra cómo las ventas están distribuidas entre las diferentes regiones. De acuerdo con los resultados, algunas regiones como West y East tienen mayores ventas, lo que sugiere que podrían ser las áreas clave para enfocarse en estrategias de marketing y expansión. Optimizar la oferta de productos y las campañas en estas regiones puede incrementar la rentabilidad.
 
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_16.png)
 
-***Ventas Totales por Segmento**
+**Ventas Totales por Segmento**
+
 Este KPI visualiza las ventas totales por segmento de cliente. La visualización indica que el segmento Consumer tiene la mayor participación en las ventas, lo que sugiere que este grupo representa la mayor fuente de ingresos. A través de este análisis, podemos enfocar los esfuerzos de ventas y personalizar las ofertas para maximizar los ingresos en este segmento.
 
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_17.png)
 
-***Ventas Mensuales por Mes**
+**Ventas Mensuales por Mes**
+
 El gráfico de ventas mensuales muestra cómo las ventas fluctúan a lo largo del año. Se observa una tendencia estacional, con picos de ventas en ciertos meses, como noviembre y diciembre. Esto puede estar relacionado con el comportamiento de compra de los consumidores, como las compras de fin de año. Identificar estos picos puede ayudar a mejorar la gestión del inventario y las promociones durante estos meses clave.
+
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_18.png)
 
 
 ![]()
+
