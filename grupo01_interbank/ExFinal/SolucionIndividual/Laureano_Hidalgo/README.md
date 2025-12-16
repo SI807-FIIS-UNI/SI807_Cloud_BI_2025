@@ -102,6 +102,8 @@ Ahora procedemos a utilizar las tablas creada para hacer los dashboards, para el
 
 Con ello, generamos los dashboards
 
+<img width="1222" height="561" alt="image" src="https://github.com/user-attachments/assets/9dad508e-b144-4ac9-a32d-c6bb81d230a8" />
+
 
 
 
