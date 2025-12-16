@@ -29,3 +29,19 @@ Se ejecutó un script en Python (`src/eda_superstore.py`) para validar la calida
 * **Calidad de Datos:** Se verificó la inexistencia de valores nulos en la columna `Sales` para asegurar la integridad de los cálculos financieros.
 
 > **Evidencias:** Ver capturas de pantalla de la estructura de carpetas, comandos CLI y resultados del EDA en la carpeta `/docs`.
+---
+## 3.2. Transformación y Modelo Dimensional (Capas Silver y Gold)
+
+### 🏗 Arquitectura
+1.  **Capa Silver:** Limpieza de fechas y datos nulos (`silver_ventas`).
+2.  **Capa Gold:** Modelo Estrella con tablas de dimensiones y hechos (`fact_ventas`).
+
+### 💻 Scripts (Ver carpeta src/)
+* `etl_modelo.sql`: Transformación en BigQuery.
+* `kpis_oro.py`: Cálculo de métricas en Python.
+
+### 📸 Evidencias
+![Modelo SQL](docs/evidencia_sql_modelo.png)
+![KPIs Python](docs/evidencia_python_kpis.png)
+![Storage Curated](docs/evidencia_storage_final.png)
+![Storage Processed](docs/evidencia_storage_processed.png)
