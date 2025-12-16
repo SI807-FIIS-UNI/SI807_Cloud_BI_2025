@@ -212,19 +212,24 @@ Esta estructura permite:
 
 El archivo CSV fue cargado directamente a la subcapa **bronce/raw** utilizando la línea de comandos, cumpliendo el requisito de carga por CLI.
 
-```bash
-gsutil cp KaggleV2-May-2016.csv gs://dl-bi-examen-caruzo/bronce/raw/
-```
-
 Este enfoque asegura:
 
 - Reproducibilidad del proceso  
 - Automatización  
 - Evidencia clara de ingestión  
 
+
+```bash
+gsutil cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/
+```
+
 **[CAPTURA AQUÍ: ejecución del comando `gsutil cp`]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201237.png)
+
+```bash
+gsutil ls gs://$BUCKET_NAME/bronce/raw/
+```
 
 **[CAPTURA AQUÍ: `gsutil ls bronce/raw`]**
 
@@ -250,6 +255,11 @@ Principales acciones realizadas:
 **Justificación técnica:**  
 El formato Parquet es columnar, comprimido y ampliamente utilizado en soluciones de BI Cloud, mejorando tiempos de lectura y consumo de recursos.
 
+
+```bash
+python raw_to_processed.py | tee raw_processed.log
+```
+
 **[CAPTURA AQUÍ: ejecución del script raw_to_processed.py]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202311.png)
@@ -273,6 +283,10 @@ Validaciones aplicadas:
 
 **Justificación técnica:**  
 La capa curated garantiza un dataset consistente y confiable para análisis, sin aplicar aún lógica de negocio compleja.
+
+```bash
+python processed_to_curated.py | tee processed_curated.log
+```
 
 **[CAPTURA AQUÍ: ejecución del script processed_to_curated.py]**
 
@@ -312,6 +326,10 @@ El EDA incluyó:
 **Justificación técnica:**  
 El EDA permite detectar patrones, validar supuestos y reducir riesgos antes del modelado dimensional.
 
+```bash
+python eda_bronce_curated.py | tee eda.log
+```
+
 **[CAPTURA AQUÍ: ejecución del script de EDA]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202958.png)
@@ -319,7 +337,6 @@ El EDA permite detectar patrones, validar supuestos y reducir riesgos antes del 
 **[CAPTURA AQUÍ: archivo estadisticas.csv]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20203239.png)
-
 
 **[CAPTURA AQUÍ: gráfico de distribución de edad]**  
 
@@ -343,9 +360,9 @@ Todas las ejecuciones fueron registradas y almacenadas como evidencia del proces
 - Archivos CSV con resultados del EDA  
 - Imágenes generadas  
 
-Estos archivos fueron almacenados en la carpeta **docs** del cloud shell y luego pasadas a Github.
+Estos archivos log, png y csv fueron almacenados en el cloud shell y puestos en la carpeta /logs de este github.
 
-**[CAPTURA AQUÍ: contenido de la carpeta docs en el bucket]**
+**[CAPTURA AQUÍ: contenido de los archivos log png y csv en el Cloud Shell]**
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20202843.png)
 
@@ -458,6 +475,10 @@ Principales transformaciones realizadas:
 **Justificación técnica:**  
 El uso de un modelo estrella optimiza consultas analíticas, reduce la complejidad de *joins* y es el estándar en soluciones BI empresariales.
 
+```bash
+python curated_to_plata_star.py
+```
+
 **[CAPTURA AQUÍ: ejecución del script curated_to_plata_star.py]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20204520.png)
@@ -514,6 +535,10 @@ Este script:
 - Genera tablas agregadas en el dataset ORO  
 - Garantiza consistencia de métricas para visualización  
 
+```bash
+python plata_to_oro_kpis.py
+```
+
 **[CAPTURA AQUÍ: ejecución del script plata_to_oro_kpis.py]**  
 
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20213801.png)
@@ -528,7 +553,7 @@ Durante la ejecución del proceso se generaron evidencias que validan la correct
 - Tablas creadas en BigQuery (PLATA y ORO)  
 - Timestamps de ejecución  
 
-Estas evidencias fueron almacenadas en la carpeta **docs** del github.
+Estas evidencias fueron almacenadas en la carpeta **docs** y **logs** del github.
 
 
 ## 3.3 Visualización de KPIs – Dashboards
@@ -687,6 +712,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
