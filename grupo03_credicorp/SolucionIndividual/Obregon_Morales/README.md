@@ -35,6 +35,10 @@ Evidencias
 
 ![evidencia1](EvidenciaSubidaCSV.jpeg)
 
+En la nube se visualizan los archivos csv subidos:
+
+![evidencia1](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/feature/grupo03-ExFinal-Obregon-Morales/grupo03_credicorp/SolucionIndividual/Obregon_Morales/aws.jpeg)
+
 ---
 
 ##  Capa BRONCE – Análisis Exploratorio (EDA)
@@ -92,6 +96,9 @@ dimensiones
 hechos
 ![evidencia3](evidencia3.jpeg)
 
+En la nube se visualizan los archivos csv subidos:
+
+![evidencia1](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/feature/grupo03-ExFinal-Obregon-Morales/grupo03_credicorp/SolucionIndividual/Obregon_Morales/aws%20plata.jpeg)
 
 ---
 
