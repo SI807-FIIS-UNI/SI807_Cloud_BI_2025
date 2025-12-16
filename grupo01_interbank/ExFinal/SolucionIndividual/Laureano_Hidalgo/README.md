@@ -104,6 +104,8 @@ Con ello, generamos los dashboards
 
 <img width="1222" height="561" alt="image" src="https://github.com/user-attachments/assets/9dad508e-b144-4ac9-a32d-c6bb81d230a8" />
 
+Link Dashboards: https://lookerstudio.google.com/reporting/ed6b735d-4bf4-43b3-91c4-0089e8cd3a96
+
 
 
 
