@@ -52,7 +52,9 @@ El dataset contiene información histórica de citas médicas, incluyendo:
 
 **Nota:** El dataset fue cargado mediante CLI directamente a la capa **bronce/raw**.
 
-**[CAPTURA AQUÍ: archivo CSV cargado en bronce/raw vía `gsutil ls`]**
+**[CAPTURA AQUÍ: archivo CSV cargado en bronce/raw vía `gsutil cp`]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201237.png)
 
 ---
 
@@ -89,6 +91,8 @@ Power BI
 
 
 **[CAPTURA AQUÍ: diagrama general de arquitectura o estructura de buckets]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201004.png)
 
 ---
 
@@ -172,6 +176,8 @@ Esta estructura permite:
 - Mantener trazabilidad del dato  
 
 **[CAPTURA AQUÍ: `gsutil ls gs://dl-bi-examen-caruzo/bronce/`]**
+
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20213801.png)
 
 ---
 
@@ -610,6 +616,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
 
 **[CAPTURA AQUÍ: vista general del proyecto completo]**
+
 
 
 
