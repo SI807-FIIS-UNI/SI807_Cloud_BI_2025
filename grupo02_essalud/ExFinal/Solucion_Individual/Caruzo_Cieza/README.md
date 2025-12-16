@@ -525,6 +525,7 @@ Conectarse a la capa oro evita cálculos redundantes en la herramienta de visual
 
 
 
+
 ---
 
 ## 3.3.3 Dashboard 1 – Visión Ejecutiva del No-Show
@@ -567,6 +568,8 @@ Los indicadores tipo *card* permiten una lectura inmediata del problema, mientra
 
 **[CAPTURA AQUÍ: Dashboard Ejecutivo completo]**
 
+
+
 ---
 
 ## 3.3.4 Dashboard 2 – Análisis Demográfico y Temporal
@@ -606,6 +609,8 @@ La combinación de gráficos permite detectar simultáneamente **frecuencia**, *
 
 **[CAPTURA AQUÍ: Dashboard Analítico completo]**
 
+
+
 ---
 
 ## 3.3.5 Reproducibilidad de la Visualización
@@ -641,7 +646,6 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
 
-**[CAPTURA AQUÍ: vista general del proyecto completo]**
 
 
 
