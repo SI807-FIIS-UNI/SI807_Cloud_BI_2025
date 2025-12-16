@@ -86,9 +86,10 @@ BigQuery - PLATA
    
 BigQuery - ORO
 
-   ├── KPIs agregados
+   └── KPIs agregados
    
    ↓
+   
 Power BI
 
    ├── Dashboard Ejecutivo
@@ -652,6 +653,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
