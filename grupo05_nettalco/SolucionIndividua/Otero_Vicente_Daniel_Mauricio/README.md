@@ -76,8 +76,8 @@ gcloud storage cp /dev/null gs://$BUCKET_NAME/bronce/curated/.keep
 
 # Verificar estructura
 gcloud storage ls gs://$BUCKET_NAME/bronce/
+```
 
-""
 
 
 En esta parte creamos el bucket con nombre "bi-examen-dataset-mauricio-otero", y luego dentro del bucket creamos la carpeta cobre con las 3 carpetas raw , processed y curated
