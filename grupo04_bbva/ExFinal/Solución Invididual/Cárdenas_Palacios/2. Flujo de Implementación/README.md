@@ -50,21 +50,18 @@ az storage blob upload `
 
 - Definir KPIs
 
-| KPI | Descripción | Fórmula (SQL / DAX / Pseudocódigo) | Grano recomendado |
-|---|---|---|---|
-| Ticket promedio (Average Ticket) | Promedio de gasto por transacción. | `AVG(Total_Cost)` | Global / por tienda / por ciudad / por promoción |
-| Ingreso total (Total Revenue) | Suma de ventas totales. | `SUM(Total_Cost)` | Día/mes/año, tienda, ciudad, tipo_tienda |
-| Unidades totales | Total de items comprados. | `SUM(Total_Items)` | Día/mes/año, tienda, ciudad, tipo_tienda |
-| Unidades por ticket (Items per Ticket) | Promedio de unidades por transacción. | `AVG(Total_Items)` | Global / por tienda / por ciudad |
-| Top productos (por ingreso) | Ranking de productos que más venden en dinero. | `SUM(Total_Cost) por Product` (tras explotar lista) y `ORDER BY DESC` | Producto, mes, tienda/ciudad |
-| Top productos (por unidades) | Ranking de productos más comprados por volumen. | `COUNT(Product) o SUM(unidades_producto)` tras explotar lista | Producto, mes, tienda/ciudad |
-| Frecuencia de compra (por cliente) | Qué tan seguido compra un cliente (transacciones por periodo). | `COUNT(Transaction_ID) por Customer_Name en periodo` | Cliente, mes |
-| Recencia (días desde última compra) | Días desde la última compra del cliente hasta “hoy” o fin del dataset. | `DATEDIFF(max(Date_cliente), fecha_referencia)` | Cliente |
-| Horas pico | Horas con más transacciones (o más ingresos). | `HOUR(Date)` y `COUNT(Transaction_ID)` (o `SUM(Total_Cost)`) por hora | Hora del día, día/mes |
-| Tasa de descuento | Proporción de tickets con descuento aplicado. | `SUM(CASE WHEN Discount_Applied=True THEN 1 ELSE 0 END) / COUNT(*)` | Mes, tienda/ciudad, tipo_tienda |
-| Impacto de promociones | Comparar ingreso promedio con promoción vs sin promoción. | `AVG(Total_Cost WHERE Promotion!='None') - AVG(Total_Cost WHERE Promotion='None')` | Promoción, mes, tienda |
-| Mix por método de pago | Participación de cada método de pago en tickets o ingresos. | `% tickets: COUNT(*) por Payment_Method / COUNT(*) total` o `% ingreso: SUM(Total_Cost) por método / SUM(Total_Cost)` | Mes, ciudad, tienda |
-| Combo frecuente (opcional) | Pares/sets de productos que aparecen juntos en un ticket. | Por cada `Transaction_ID`, generar combinaciones de productos y contar: `COUNT(*) por (prodA, prodB)` | Par de productos, mes |
+| # | KPI | Descripción | Fórmula | Columnas Utilizadas |
+|---|-----|-------------|---------|---------------------|
+| 1 | **Revenue Total** | Ingresos totales generados por todas las transacciones | `SUM(total_cost)` | `total_cost` |
+| 2 | **Ticket Promedio** | Monto promedio gastado por transacción | `AVG(total_cost)` | `total_cost` |
+| 3 | **Unidades Promedio por Transacción** | Cantidad promedio de items vendidos por transacción | `AVG(total_items)` | `total_items` |
+| 4 | **Total de Transacciones** | Número total de transacciones realizadas | `COUNT(transaction_id)` | `transaction_id` |
+| 5 | **Tasa de Descuento** | Porcentaje de transacciones con descuento aplicado | `(COUNT(discount_applied = TRUE) / COUNT(*)) * 100` | `discount_applied` |
+| 6 | **Revenue con Descuento** | Ingresos totales de transacciones con descuento | `SUM(total_cost WHERE discount_applied = TRUE)` | `total_cost`, `discount_applied` |
+| 7 | **Precio Promedio por Item** | Precio promedio por unidad vendida | `SUM(total_cost) / SUM(total_items)` | `total_cost`, `total_items` |
+| 8 | **Transacciones por Cliente** | Número promedio de compras por cliente | `COUNT(transaction_id) / COUNT(DISTINCT cliente_id)` | `transaction_id`, `cliente_id` |
+| 9 | **Revenue por Tienda** | Ingresos totales por ubicación de tienda | `SUM(total_cost) GROUP BY tienda_id` | `total_cost`, `tienda_id` |
+| 10 | **Tasa de Conversión de Promociones** | Porcentaje de transacciones que usaron alguna promoción | `(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100` | `promocion_id` |
 
 ## 3. Crear el PostgreSQL
 
@@ -225,14 +222,35 @@ CREATE INDEX idx_fact_fecha_tienda ON fact_transacciones(tiempo_id, tienda_id);
 ```
 
 <img width="398" height="195" alt="image" src="https://github.com/user-attachments/assets/a1ac7ff2-5ad6-4646-ba42-5ddc20619acd" />
+<img width="1500" height="931" alt="image" src="https://github.com/user-attachments/assets/bdbc1bfa-4987-45dc-be04-5b9b3f2860fb" />
 
-## 
+## 4. Crear el Databricks
 
-##
+<img width="886" height="450" alt="image" src="https://github.com/user-attachments/assets/8bf4b66a-5c43-48aa-a283-c60717960991" />
+
+### 4.1. Crear el Cluster
+
+<img width="886" height="450" alt="image" src="https://github.com/user-attachments/assets/30d890af-c461-4eda-b97b-4b4bb35c0b59" />
+
+### 4.2. Crear y Subir los Notebooks
+
+<img width="1917" height="989" alt="image" src="https://github.com/user-attachments/assets/e6585de0-f2a9-4073-a9dd-06175a5a8eee" />
+
+### 4.3. Crear el Job
 
 
 
+## 5. Crear el Frontend
 
+<img width="886" height="459" alt="image" src="https://github.com/user-attachments/assets/b5fb3bdb-3287-4a32-9980-50948ded114c" />
 
+- Se realiza la codificacion del frontend y se genera la carpeta dist
 
-## 
+## 6. Se Crea el Static Web Apps
+
+<img width="886" height="450" alt="image" src="https://github.com/user-attachments/assets/cace53d0-e604-4898-8613-6a15db88e85b" />
+
+- Se sube el frontend a un repositorio privado. Para que lo reciba el static webapps.
+
+## 7. Dashboard Funcional
+Link del Dashboard: https://yellow-meadow-0f17f000f.3.azurestaticapps.net/
