@@ -104,7 +104,7 @@ SCRIPT DEL EDA EN PYTHON:
 
 ### 📂 Estructura del Proyecto
 
-- [🐍 Scripts ETL](./grupo05_nettalco/scripts/eda.py) - Código Python para la extracción y carga.
+- [🐍 Scripts ETL](./grupo05_nettalco/scripts) - Código Python para la extracción y carga.
 
 
 SUBIDA DEL ARCHIVO A GCS:
