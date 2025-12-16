@@ -1,22 +1,42 @@
-# Tabla de Hechos ...
+# Tabla de Hechos: `fact_flight_delays`
 
+En esta carpeta se documenta la **tabla de hechos** del modelo dimensional para el análisis de **retrasos de vuelos y sus causas**.  
+La tabla `fact_flight_delays` concentra las **métricas y atributos operativos** del vuelo (tiempos, demoras, distancia, cancelaciones y causas), y se relaciona con las dimensiones para permitir análisis por **fecha**, **aerolínea**, **aeropuerto de origen/destino** y **aeronave**.
+
+Su objetivo es responder preguntas como:
+- ¿Qué aerolíneas presentan mayores retrasos promedio?
+- ¿Qué rutas (origen → destino) se retrasan más?
+- ¿Qué causa de demora es más frecuente (clima, NAS, seguridad, etc.)?
+
+## Estructura de la tabla
 
 | Campo | Descripción |
-|------|------------|
-| `metricas_id` (PK) | Identificador único de la medición. |
-| `tiempo_id` (FK) | Clave foránea que relaciona el registro con la dimensión de tiempo. |
-| `geografia_id` (FK) | Clave foránea que vincula la medición con la localización geográfica. |
-| `servicio_n1_id` (FK) | Clave foránea que asocia la medición al servicio N1 correspondiente. |
-| `nro_fichas_rfo` | Número total de fichas de RFO registradas para los servicios N2 asociados al N1. |
-| `nro_fichas_rfo_ok` | Cantidad de fichas RFO cuyo estado fue validado como **OK**. |
-| `nro_sn2_sn1_dependencias` | Número de servicios N2 con dependencias definidas para un servicio N1. |
-| `nro_sn2_sn1` | Total de servicios N2 asociados a un servicio N1. |
-| `nro_features_desplegadas_calidad` | Features desplegadas que cumplen con los criterios de calidad. |
-| `nro_features_desplegadas` | Total de features desplegadas consideradas. |
-| `puntaje_total_adopcion_sn2` | Puntaje agregado de adopción de los servicios N2. |
-| `sn2_sn1_medidos` | Total de servicios N2 medidos del servicio N1. |
-| `total_vulnerabilidades_high` | Cantidad total de vulnerabilidades de alto riesgo detectadas. |
-| `total_lineas_codigo` | Total de líneas de código analizadas. |
+|------|-------------|
+| flight_delay_id (PK) | Identificador único del registro de retraso/vuelo. |
+| date_id (FK) | Clave foránea hacia `dim_date` (fecha programada del vuelo). |
+| airline_id (FK) | Clave foránea hacia `dim_airline` (aerolínea / carrier). |
+| origin_airport_id (FK) | Clave foránea hacia `dim_airport` (aeropuerto de origen). |
+| dest_airport_id (FK) | Clave foránea hacia `dim_airport` (aeropuerto de destino). |
+| aircraft_id (FK, nullable) | Clave foránea hacia `dim_aircraft` (aeronave). Puede ser nulo si no hay TailNum. |
+| flight_num | Número de vuelo. |
+| dep_time | Hora real de salida (local, formato hhmm). |
+| arr_time | Hora real de llegada (local, formato hhmm). |
+| crs_arr_time | Hora programada de llegada (local, formato hhmm). |
+| actual_elapsed_time | Tiempo real total del vuelo (min), incluye taxi-in/taxi-out. |
+| crs_elapsed_time | Tiempo estimado/programado del vuelo (min). |
+| air_time | Tiempo en el aire (min). |
+| arr_delay | Retraso en llegada (min): diferencia entre llegada real y programada. |
+| dep_delay | Retraso en salida (min). |
+| distance | Distancia entre aeropuertos (millas). |
+| taxi_in | Tiempo desde aterrizaje hasta puerta (min). |
+| taxi_out | Tiempo desde puerta hasta despegue (min). |
+| cancelled | Indica si el vuelo fue cancelado (true/false). |
+| diverted | Indica si el vuelo fue desviado (true/false). |
+| cancellation_code | Código/motivo de cancelación. |
+| carrier_delay | Demora atribuida a la aerolínea (min). |
+| weather_delay | Demora por clima (min). |
+| nas_delay | Demora por NAS (National Airspace/System) (min). |
+| security_delay | Demora por seguridad (min). |
+| late_aircraft_delay | Demora por llegada tardía de la aeronave (min). |
 
----
 
