@@ -316,3 +316,8 @@ Este tablero está orientado a toma de decisiones estratégicas y monitoreo gene
 
 <img width="1147" height="811" alt="Captura de pantalla 2025-12-16 024337" src="https://github.com/user-attachments/assets/1dc63610-913e-4091-9ef9-c7e70f227e7a" />
 
+
+### 📊 Dashboard 1: Visión General del No-Show
+> Monitoreo ejecutivo del comportamiento de inasistencia a citas médicas.
+
+[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_1-EA4335?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/32d39dc5-f9dc-4a10-bf30-bea3552ba2e8)
