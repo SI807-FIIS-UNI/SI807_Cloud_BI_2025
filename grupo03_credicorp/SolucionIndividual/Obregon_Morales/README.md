@@ -32,7 +32,7 @@ El script:
 
 Evidencias  
 
-![evidencia1](./evidencia1.png)
+![evidencia1]("./evidencia1.jpeg")
 
 ---
 
@@ -55,9 +55,9 @@ El EDA analiza:
 
 Evidencias  
 
-![evidencia2](./evidencia2.png)
+![evidencia2]("./evidencia2.jpeg")
 
-![evidencia3](./evidencia3.png)
+![evidencia3]("./evidencia3.jpeg")
 ---
 
 ## 6️⃣ Capa PLATA – Modelo Dimensional
@@ -87,7 +87,7 @@ Dimensiones
 
 Evidencias  
 
-![evidencia4](./evidencia4.png)
+![evidencia4]("evidencia4.jpeg")
 
 ---
 
@@ -109,7 +109,7 @@ KPIs Generados
 
 Evidencias  
 
-![evidencia5](./evidencia5.png)
+![evidencia5]("evidencia5.jpeg")
 ---
 
 
