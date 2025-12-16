@@ -125,70 +125,15 @@ Conteo de citas
 Posibles métricas derivadas (porcentaje de no-show)
 
 ## Tablas de Dimensión
-### Dimensión Tiempo – dim_time
 
-Propósito: Analizar el comportamiento de asistencia a lo largo del tiempo.
+| Dimensión | Nombre de la tabla | Propósito | Análisis que permite |
+|---------|------------------|-----------|----------------------|
+| Tiempo | `dim_time` | Analizar el comportamiento de asistencia a lo largo del tiempo. | Identificar meses o fechas con mayor inasistencia y evaluar tendencias temporales del no-show. |
+| Paciente | `dim_patient` | Analizar características demográficas y sociales del paciente. | Evaluar la relación entre edad y asistencia, diferencias por género y el impacto de factores sociales como la beca (Scholarship). |
+| Ubicación | `dim_neighbourhood` | Analizar la distribución geográfica de las citas médicas. | Identificar zonas con mayor tasa de inasistencia y posibles problemas de acceso o distancia. |
+| Condiciones Médicas | `dim_conditions` | Analizar si condiciones clínicas influyen en la asistencia a citas. | Evaluar la asistencia de pacientes con hipertensión, diabetes, alcoholismo o discapacidad. |
+| Comunicación | `dim_communication` | Evaluar el impacto de los recordatorios en la asistencia. | Analizar la efectividad de los mensajes SMS en la reducción del no-show. |
 
-Permite responder preguntas como:
-¿En qué meses hay más inasistencias?
-¿Existe una tendencia temporal en el no-show?
-
-### Dimensión Paciente – dim_patient
-
-Propósito: Analizar características demográficas y sociales del paciente.
-
-Incluye:
-
-  Edad
-  Género
-
-Condición de beca (Scholarship)
-
-Permite evaluar:
-
-Relación entre edad y asistencia
-
-Impacto de factores sociales en el no-show
-
-### Dimensión Ubicación – dim_neighbourhood
-
-Propósito: Analizar la distribución geográfica de las citas.
-
-Permite identificar:
-
-Zonas con mayor tasa de inasistencia
-
-Posibles problemas de acceso o distancia
-
-### Dimensión Condiciones Médicas – dim_conditions
-
-Propósito: Analizar si condiciones clínicas influyen en la asistencia.
-
-Incluye:
-
-Hipertensión
-
-Diabetes
-
-Alcoholismo
-
-Discapacidad
-
-Permite responder:
-
-¿Pacientes con ciertas condiciones faltan más o menos?
-
-### Dimensión Comunicación – dim_communication
-
-Propósito: Evaluar el impacto de recordatorios en la asistencia.
-
-Incluye:
-
-SMS recibidos
-
-Permite analizar:
-
-Efectividad de mensajes SMS en reducir el no-show
 
 ## Proceso ETL 
 El archivo está dentro de la carpeta scripts
