@@ -79,6 +79,8 @@ Una vez teniendo el modelo estrella en nuestro servicio BigQuery, generamos KPIs
 ![kpi04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi04.png)
 ![kpi05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi05.png)
 
+
+Link al Notebook
 ![ETL](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/ETL.ipynb)
 
 
@@ -106,6 +108,7 @@ Una vez tenido los KPIS y el modelo Estrella en el BigQuery se procede a entrar 
 ![dashboard03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard03.png)
 ![dashboard04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard04.png)
 
+Link al Notebook
 ![Kpis](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/Kpis.ipynb)
 
 ## 3.2. Incluir KPIs 
