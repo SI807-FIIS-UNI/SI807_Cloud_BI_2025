@@ -3,17 +3,22 @@ import logging
 from io import StringIO
 import matplotlib.pyplot as plt
 import os
+import subprocess
+
 
 # CONFIGURACIÓN
 
+INPUT_PATH = "KaggleV2-May-2016.csv"
+
 BUCKET_NAME = "bi-examen-dataset-mauricio-otero"
+OUTPUT_LOCAL = "noshow_processed.csv"
+OUTPUT_GCS = f"gs://{BUCKET_NAME}/bronce/processed/{OUTPUT_LOCAL}"
 
-INPUT_PATH = f"gs://{BUCKET_NAME}/bronce/raw/KaggleV2-May-2016.csv"
-OUTPUT_PATH = f"gs://{BUCKET_NAME}/bronce/processed/noshow_processed.csv"
+LOG_DIR = "docs"
+PLOTS_DIR = "docs"
+LOG_FILE = f"{LOG_DIR}/eda_logs.txt"
 
-LOG_FILE = "../docs/eda_logs.txt"
-PLOTS_DIR = "../docs"
-
+os.makedirs(LOG_DIR, exist_ok=True)
 os.makedirs(PLOTS_DIR, exist_ok=True)
 
 
@@ -25,27 +30,26 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-logging.info("INICIO EDA - NO SHOW APPOINTMENTS")
+logging.info("INICIO EDA - NO SHOW APPOINTMENTS (LOCAL)")
 
 try:
 
+    
     # LECTURA
 
-    print(" Leyendo dataset desde GCS...")
+    print(" Leyendo dataset LOCAL...")
     df = pd.read_csv(INPUT_PATH)
 
-    print(" Dataset cargado correctamente")
-    print(f" Filas: {df.shape[0]} | Columnas: {df.shape[1]}")
-
-    logging.info(f"Shape del dataset: {df.shape}")
+    print(f" Dataset cargado | Filas: {df.shape[0]} | Columnas: {df.shape[1]}")
+    logging.info(f"Shape: {df.shape}")
 
 
-    # EDA MÍNIMO (RÚBRICA)
+    # EXPLORACIÓN
 
     print("\n Columnas:")
     print(df.columns.tolist())
 
-    print("\n Valores nulos por columna:")
+    print("\n Nulos por columna:")
     print(df.isna().sum())
 
     logging.info("HEAD:")
@@ -59,60 +63,56 @@ try:
     logging.info("DESCRIBE:")
     logging.info("\n" + df.describe(include="number").to_string())
 
+    # LIMPIEZA
 
-    # LIMPIEZA BÁSICA
-
-    # Fechas
     df["ScheduledDay"] = pd.to_datetime(df["ScheduledDay"], errors="coerce")
     df["AppointmentDay"] = pd.to_datetime(df["AppointmentDay"], errors="coerce")
 
-    # Edad válida
     df = df[(df["Age"] >= 0) & (df["Age"] <= 120)]
-
-    # Normalizar No-show
     df["No-show"] = df["No-show"].map({"Yes": 1, "No": 0})
 
     df = df.drop_duplicates()
 
-    print("\n Limpieza básica aplicada")
-    print(f" Filas luego de limpieza: {df.shape[0]}")
-
-    logging.info("Limpieza básica completada")
+    print("\n Limpieza aplicada")
+    logging.info("Limpieza completada")
 
 
-    # GRÁFICOS (EVIDENCIA)
+    # GRÁFICOS
 
-    # Gráfico 1: Asistencia vs No-show
-    plt.figure()
-    df["No-show"].value_counts().plot(kind="bar")
-    plt.title("Asistencia vs No-Show")
-    plt.xlabel("No-Show (1 = No asistió)")
-    plt.ylabel("Cantidad de Citas")
+    df["No-show"].value_counts().plot(kind="bar", title="Distribución No-Show")
     plt.tight_layout()
     plt.savefig(f"{PLOTS_DIR}/no_show_distribution.png")
     plt.close()
 
-    # Gráfico 2: Edad vs No-show
-    plt.figure()
     df.boxplot(column="Age", by="No-show")
-    plt.title("Distribución de Edad por No-Show")
+    plt.title("Edad vs No-Show")
     plt.suptitle("")
-    plt.xlabel("No-Show")
-    plt.ylabel("Edad")
     plt.tight_layout()
     plt.savefig(f"{PLOTS_DIR}/age_vs_noshow.png")
     plt.close()
 
-    print("\n Gráficos generados en docs/")
-    logging.info("Gráficos EDA generados")
+    logging.info("Gráficos generados")
 
-    # GUARDAR EN PROCESSED
-    df.to_csv(OUTPUT_PATH, index=False)
-    logging.info(f"Archivo procesado guardado en {OUTPUT_PATH}")
+    # GUARDAR LOCAL
 
-    print("\n Archivo procesado cargado a BRONCE/processed")
-    print(" EDA FINALIZADO CORRECTAMENTE")
+    df.to_csv(OUTPUT_LOCAL, index=False)
+    print(f"\n Archivo limpio generado: {OUTPUT_LOCAL}")
+    logging.info("CSV limpio generado")
+
+
+    # SUBIR A GCS (PROCESSED)
+
+    print("\n Subiendo archivo a BRONCE/processed...")
+    subprocess.run(
+        ["gcloud", "storage", "cp", OUTPUT_LOCAL, OUTPUT_GCS],
+        check=True
+    )
+
+    print(" Archivo subido a bronce/processed")
+    logging.info(f"Archivo subido a {OUTPUT_GCS}")
+
+    print("\n EDA FINALIZADO CORRECTAMENTE")
 
 except Exception as e:
-    logging.error(f"Error durante el EDA: {e}")
-    print(f" Error durante el EDA: {e}")
+    logging.error(f"Error en EDA: {e}")
+    print(f" Error: {e}")
