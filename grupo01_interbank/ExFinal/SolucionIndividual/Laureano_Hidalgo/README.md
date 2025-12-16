@@ -96,6 +96,12 @@ Número de vuelos desviados por aerolínea
 <img width="328" height="313" alt="image" src="https://github.com/user-attachments/assets/e03242f7-cbe7-4075-a7c2-2c517553189b" />
 
 # DASHBOARDS
+Ahora procedemos a utilizar las tablas creada para hacer los dashboards, para ello, utilizaremos Looker Studio
+
+<img width="1446" height="597" alt="image" src="https://github.com/user-attachments/assets/dde60206-9831-4a9a-a4d4-d8525d61759a" />
+
+Con ello, generamos los dashboards
+
 
 
 
