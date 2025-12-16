@@ -28,57 +28,8 @@ Creamos la tabla.
 
 Con la tabla ya ingresada, creamos las dimensiones y la tabla de hechos para hacer el estrella (Scripts en otro archivo)
 
-# Diagrama ERD (Modelo Estrella)
+<img width="1069" height="527" alt="image" src="https://github.com/user-attachments/assets/54c9add3-b12e-4336-9890-093d41fe807a" />
 
-```mermaid
-erDiagram
-  DIM_DATE ||--o{ FACT_FLIGHT_DELAY : "date_key (1:N)"
-  DIM_CARRIER ||--o{ FACT_FLIGHT_DELAY : "carrier_key (1:N)"
-  DIM_FLIGHT ||--o{ FACT_FLIGHT_DELAY : "flight_key (1:N)"
-  DIM_AIRCRAFT ||--o{ FACT_FLIGHT_DELAY : "aircraft_key (1:N)"
-  DIM_AIRPORT ||--o{ FACT_FLIGHT_DELAY : "origin_airport_key (1:N)"
-  DIM_AIRPORT ||--o{ FACT_FLIGHT_DELAY : "dest_airport_key (1:N)"
-
-  DIM_DATE {
-    INT64  date_key PK
-    DATE   date
-    INT64  year
-    INT64  month
-    INT64  day
-    INT64  dayofweek
-  }
-
-  DIM_CARRIER {
-    INT64  carrier_key PK
-    STRING uniquecarrier
-    STRING airline
-  }
-
-  DIM_FLIGHT {
-    INT64  flight_key PK
-    STRING uniquecarrier
-    STRING flightnum
-  }
-
-  DIM_AIRCRAFT {
-    INT64  aircraft_key PK
-    STRING tailnum
-  }
-
-  DIM_AIRPORT {
-    INT64  airport_key PK
-    STRING airport_code
-    STRING airport_name
-  }
-
-  FACT_FLIGHT_DELAY {
-    INT64 date_key FK
-    INT64 carrier_key FK
-    INT64 flight_key FK
-    INT64 aircraft_key FK
-    INT64 origin_airport_key FK
-    INT64 dest_airport_key FK
-  }
 
 ### Justificación de cada dimensión
 DIM_DATE
@@ -121,6 +72,32 @@ Métricas y tiempos:
 - operaciones (taxiin, taxiout, distance)
 - flags (cancelled, diverted)
 - Metadatos (_source_path, _ingestion_ts) para trazabilidad y auditoría.
+
+Ahora vamos con los KPIs de Oro
+Demora promedio por aerolínea
+<img width="486" height="318" alt="image" src="https://github.com/user-attachments/assets/b17c8d84-b88a-4f70-973e-788854523780" />
+
+Porcentaje de vuelos cancelados por aerolínea
+<img width="376" height="321" alt="image" src="https://github.com/user-attachments/assets/30b0fb49-f669-4684-8d96-bc4281952bec" />
+
+Promedio de demora por aeropuerto
+<img width="510" height="447" alt="image" src="https://github.com/user-attachments/assets/954cb681-93b4-4b34-bd42-3af4f623ebe7" />
+
+Distancia promedio de vuelos por aerolínea
+<img width="342" height="319" alt="image" src="https://github.com/user-attachments/assets/6cb2c3b6-1a21-43b8-a29a-5fec87a94be3" />
+
+Tiempo promedio de taxi por ruta (origen y destino)
+<img width="405" height="449" alt="image" src="https://github.com/user-attachments/assets/9e1872f7-5e7b-4eb8-b02a-90b5c5edee2d" />
+
+Demora promedio por día de la semana
+<img width="488" height="231" alt="image" src="https://github.com/user-attachments/assets/db841fa1-3f4d-4561-8da3-c43dc3d94549" />
+
+Número de vuelos desviados por aerolínea
+<img width="328" height="313" alt="image" src="https://github.com/user-attachments/assets/e03242f7-cbe7-4075-a7c2-2c517553189b" />
+
+# DASHBOARDS
+
+
 
 
 
