@@ -44,6 +44,8 @@ Como resultado del EDA, se obtuvo una versión limpia y consistente del dataset,
 se crea el script con nano identificando la carpeta donde queremos crearla para este caso se hizo 
 nano scripts / EDA.py
 <img width="1449" height="593" alt="image" src="https://github.com/user-attachments/assets/9be1faf3-6169-44bb-9947-466d7bbc0c7b" />
+<img width="1919" height="968" alt="Captura de pantalla 2025-12-15 212552" src="https://github.com/user-attachments/assets/636ca6b8-e7c7-4ee0-a2b2-dbfdae999900" />
+
 # Visualizaciones del EDA 
 <img width="640" height="480" alt="age_vs_noshow" src="https://github.com/user-attachments/assets/c6766dcc-fb4e-4cf4-8df6-603e4f54c8d4" />
 <img width="640" height="480" alt="no_show_distribution" src="https://github.com/user-attachments/assets/dbc907af-ad31-4500-86dc-f68ca66f1947" />
