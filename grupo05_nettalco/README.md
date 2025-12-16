@@ -151,3 +151,36 @@ MODELO ESTRELLA MINIMO:
 
 
 
+# Examen Final – SI807-U  
+**Nombre:** Loayza Segura Roger Salvador  
+**Código de Proyecto:** `ef-si807u-20220018k`  
+**Equipo:** `grupo05_nettalco`
+
+---
+
+## 📌 Objetivo del Proyecto
+Construir una arquitectura de datos moderna en la nube (**Lakehouse**) utilizando **Google Cloud Platform (GCP)** para el análisis de retrasos en vuelos aéreos. El flujo de datos abarca tres capas:
+- **Bronce**: Almacenamiento de datos crudos y procesados en Google Cloud Storage (GCS).
+- **Plata**: Datos limpios y estructurados en BigQuery.
+- **Oro**: Modelo dimensional (tipo estrella) optimizado para BI y visualización.
+
+El proyecto finaliza con un dashboard interactivo en **Looker Studio**, alimentado directamente desde BigQuery.
+
+---
+
+## ☁️ Justificación del Uso de GCP
+
+| Componente        | Servicio GCP                 | Justificación |
+|-------------------|------------------------------|---------------|
+| **Almacenamiento** | Google Cloud Storage (GCS)   | Ofrece almacenamiento de objetos altamente duradero, seguro y escalable, ideal para la capa Bronce de una arquitectura Lakehouse. |
+| **Almacén de Datos** | BigQuery                  | Data Warehouse sin servidor, de alto rendimiento y bajo mantenimiento, perfecto para las capas Plata y Oro. Soporta consultas SQL rápidas y análisis a gran escala. |
+| **Transformación** | Cloud Shell + Scripts Python | Permite ejecutar tareas de EDA y limpieza ligera usando bibliotecas como `pandas`, `gcsfs` y el SDK de GCP, sin necesidad de infraestructura adicional. |
+| **Visualización**  | Looker Studio               | Herramienta gratuita integrada nativamente con BigQuery, ideal para crear dashboards interactivos sin costo ni complejidad adicional. |
+
+---
+
+## 🛠️ Pasos de Implementación
+
+### 1. Inicializar el entorno de GCP mediante CLI
+```bash
+gcloud config set project ef-si807u-20220018k
