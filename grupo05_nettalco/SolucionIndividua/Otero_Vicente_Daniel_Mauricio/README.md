@@ -317,7 +317,91 @@ Este tablero está orientado a toma de decisiones estratégicas y monitoreo gene
 <img width="1147" height="811" alt="Captura de pantalla 2025-12-16 024337" src="https://github.com/user-attachments/assets/1dc63610-913e-4091-9ef9-c7e70f227e7a" />
 
 
-### 📊 Dashboard 1: Visión General del No-Show
+## 📊 Dashboard 1: Visión General del No-Show
+
 > Monitoreo ejecutivo del comportamiento de inasistencia a citas médicas.
 
+Este dashboard ofrece una **visión global y resumida** del fenómeno *no-show*, permitiendo comprender rápidamente la magnitud del problema, su impacto general y los principales patrones de asistencia.
+
+Está orientado a **usuarios ejecutivos y tomadores de decisiones**, sirviendo como punto de partida para el análisis del desempeño del sistema de citas médicas.
+
+---
+
+### 📌 Indicadores Principales
+
+- **Total de citas:** Volumen total de citas registradas.
+- **Total de no-show:** Cantidad absoluta de inasistencias.
+- **Tasa de no-show:** Indicador clave del nivel de inasistencia.
+- **Tasa de asistencia:** Métrica complementaria de desempeño positivo.
+
+---
+
+### 📈 Análisis Incluido
+
+- **Evolución temporal del volumen de citas**
+- **Distribución por género**
+- **Distribución por condiciones médicas relevantes**
+
+Estos análisis permiten detectar patrones generales y servir de base para exploraciones más detalladas en el Dashboard 2.
+
+---
+<img width="1147" height="811" alt="Captura de pantalla 2025-12-16 024337" src="https://github.com/user-attachments/assets/43f33586-404e-4b26-8a77-51179d765033" />
+
+
+### 🔗 Acceso al Dashboard
+
 [![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_1-EA4335?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/32d39dc5-f9dc-4a10-bf30-bea3552ba2e8)
+
+---
+## 📉 Dashboard 2: Análisis Operativo del No-Show
+
+> Análisis detallado para identificar factores asociados a la inasistencia y apoyar acciones correctivas.
+
+Este dashboard complementa la visión ejecutiva del Dashboard 1 mediante un **análisis operativo y segmentado** del fenómeno *no-show*, permitiendo identificar patrones y factores que influyen en la inasistencia a citas médicas.
+
+---
+
+### 🎯 Objetivo del Dashboard
+
+Identificar **factores asociados al no-show** desde distintas perspectivas:
+- Comunicación con el paciente
+- Segmentación demográfica
+- Condiciones médicas
+- Distribución geográfica
+
+Este tablero está orientado a **analistas y gestores operativos**, facilitando la toma de decisiones basada en datos.
+
+---
+
+### 🔍 Análisis Incluido
+
+- **Impacto del SMS:** Evaluación de la efectividad de los recordatorios vía SMS en la reducción del no-show.
+- **Análisis por rango de edad:** Identificación de grupos etarios con mayor riesgo de inasistencia.
+- **Análisis por género:** Comparación de tasas de no-show entre hombres y mujeres.
+- **Condiciones médicas:** Evaluación del impacto de condiciones como hipertensión y diabetes en la asistencia.
+---
+
+### 🧠 Valor del Dashboard
+
+Este dashboard permite:
+- Identificar **factores críticos** asociados a la inasistencia
+- Priorizar **intervenciones operativas**
+- Evaluar estrategias preventivas
+- Complementar la visión general del Dashboard 1
+
+---
+<img width="1180" height="851" alt="Captura de pantalla 2025-12-16 030534" src="https://github.com/user-attachments/assets/3f8ec10b-4ff6-4682-8cf1-62288cc1ea60" />
+
+
+### 🔗 Acceso al Dashboard
+
+[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_2-EA4335?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/c7371ace-c371-4bbe-8d0a-7a8b8a7df6c1)
+
+---
+
+### 🧩 Relación con el Dashboard 1
+
+- **Dashboard 1:** Visión ejecutiva del problema de no-show.
+- **Dashboard 2:** Análisis operativo de causas y factores asociados.
+
+Ambos dashboards reutilizan los KPIs definidos en la capa ORO, diferenciándose por su enfoque analítico.
