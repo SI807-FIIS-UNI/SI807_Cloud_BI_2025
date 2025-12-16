@@ -105,7 +105,17 @@ Power BI
    
    └── Dashboard Analítico
    
+```bash 
+export BUCKET_NAME=dl-bi-examen-caruzo
 
+gsutil mb -l us-central1 gs://$BUCKET_NAME 
+
+gsutil cp /dev/null gs://$BUCKET_NAME/bronce/raw/.keep 
+gsutil cp /dev/null gs://$BUCKET_NAME/bronce/processed/.keep 
+gsutil cp /dev/null gs://$BUCKET_NAME/bronce/curated/.keep 
+gsutil cp /dev/null gs://$BUCKET_NAME/plata/.keep 
+gsutil cp /dev/null gs://$BUCKET_NAME/oro/.keep
+```
 
 **[CAPTURA AQUÍ: estructura de buckets implementada en CLI]**
 
@@ -677,6 +687,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
