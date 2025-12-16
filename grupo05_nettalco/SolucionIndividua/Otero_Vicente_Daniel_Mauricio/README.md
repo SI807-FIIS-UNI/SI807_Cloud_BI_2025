@@ -298,3 +298,21 @@ se selecciona la opción de conectar con bigquery
 y luego se selecciona el proyecto , la tabla (en este caso el oro donde se encuentran los KPIs y seleccionados el que nos interesa) , en este caso seleccionaremos el kpi global, ya que es el principal y tiene una visión general del caso 
 <img width="1920" height="1080" alt="Captura de pantalla (239)" src="https://github.com/user-attachments/assets/2f376ee4-eaab-40ff-ac3c-64588a191ecd" />
 
+## Dashboard 1
+Este dashboard presenta una visión global y resumida del fenómeno de no-show, permitiendo a los responsables del sistema de salud comprender rápidamente la magnitud del problema y sus principales patrones demográficos y clínicos.
+**Objetivo del Dashboard**
+
+Brindar una visión ejecutiva del desempeño general de las citas médicas, enfocándose en:
+
+Nivel de asistencia e inasistencia
+
+Distribución por género
+
+Presencia de condiciones médicas relevantes
+
+Volumen de citas a lo largo del tiempo
+
+Este tablero está orientado a toma de decisiones estratégicas y monitoreo general.
+
+<img width="1147" height="811" alt="Captura de pantalla 2025-12-16 024337" src="https://github.com/user-attachments/assets/1dc63610-913e-4091-9ef9-c7e70f227e7a" />
+
