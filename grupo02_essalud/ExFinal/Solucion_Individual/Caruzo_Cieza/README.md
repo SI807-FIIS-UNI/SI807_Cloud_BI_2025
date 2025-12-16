@@ -660,23 +660,22 @@ Identificar patrones de No-Show por perfil del paciente y momento de la cita.
 
 ---
 
-#### Heatmap – No-Show por Día y Hora
-
-- Fuente: `kpi_no_show_tiempo`  
-- Filas: `dia_semana`  
-- Columnas: `hora`  
-- Valor: `tasa_no_show_pct`  
-
----
-
-#### Barras – Volumen de Citas por Día
+#### Gráfico de Barras – No-Show por día de semana
 
 - Fuente: `kpi_no_show_tiempo`  
 - Eje X: `dia_semana`  
-- Valor: `total_citas`  
+- Valor: `tasa_no_show_tiempo`
+
+---
+
+#### Tabla – Volumen de Citas por Día
+
+- Fuente: `kpi_no_show_tiempo`  
+- Fila: `dia_semana`  
+- Columnas: `promedio de no_show_pct`, `suma total de citas`  
 
 **Justificación de diseño:**  
-La combinación de gráficos permite detectar simultáneamente **frecuencia**, **volumen** y **patrones temporales**, facilitando acciones operativas.
+La combinación de gráficos permite detectar simultáneamente **frecuencia**, **volumen** y **patrones temporales**, facilitando acciones operativas por sector demográfico. ¿Quiénes faltan más? ¿Influye el día de la semana?
 
 **[CAPTURA AQUÍ: Dashboard Analítico completo]**
 
@@ -716,3 +715,4 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
