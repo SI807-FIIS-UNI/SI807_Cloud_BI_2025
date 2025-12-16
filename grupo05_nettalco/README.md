@@ -55,8 +55,7 @@ gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
 
 ```
 
-
-![1](/grupo05_nettalco/EVIDENCIAS/4.png)
+![1](/grupo05_nettalco/EVIDENCIAS/bucket.png)
 
 # VISTA EN GOOGLE CLOUD STORAGE:
 
