@@ -61,7 +61,7 @@ Evidencias
 ![evidencia6](evidencia4.jpeg)
 ---
 
-## 6️⃣ Capa PLATA – Modelo Dimensional
+##  Capa PLATA – Modelo 
 
 Objetivo  
 Transformar los datos crudos en un modelo estrella optimizado para análisis.
@@ -95,7 +95,7 @@ hechos
 
 ---
 
-## 7️⃣ Capa ORO – KPIs
+## Capa ORO – KPIs
 
 Objetivo  
 Generar indicadores clave ambientales para la toma de decisiones.
@@ -113,4 +113,4 @@ KPIs Generados
 
 Evidencias  
 
-![evidencia5](evidenciaOro.jpeg)
+![evidencia5](EvidenciaOro.jpg)
