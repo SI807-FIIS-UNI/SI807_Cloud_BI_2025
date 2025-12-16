@@ -238,7 +238,7 @@ CREATE INDEX idx_fact_fecha_tienda ON fact_transacciones(tiempo_id, tienda_id);
 
 ### 4.3. Crear el Job
 
-
+<img width="1919" height="987" alt="image" src="https://github.com/user-attachments/assets/05cefc02-5b24-48a3-bc45-782d5039aabe" />
 
 ## 5. Crear el Frontend
 
