@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "region": "us-east-1",
+  "account_id": "877617909831",
+  "buckets": {
+    "bronze": "sin-exam-bronze-877617909831",
+    "silver": "sin-exam-silver-877617909831",
+    "gold": "sin-exam-gold-877617909831"
+  },
+  "glue_database": "sin-exam_db",
+  "crawlers": {
+    "bronze": "sin-exam-bronze-crawler",
+    "silver": "sin-exam-silver-crawler",
+    "gold": "sin-exam-gold-crawler"
+  },
+  "sagemaker_notebook": "sin-exam-notebook",
+  "roles": {
+    "glue": "arn:aws:iam::877617909831:role/sin-exam-glue-role",
+    "sagemaker": "arn:aws:iam::877617909831:role/sin-exam-sagemaker-role"
+  },
+  "bronze_csv_path": "s3://sin-exam-bronze-877617909831/raw/20251216_011426_Sample-Superstore.csv",
+  "csv_filename": "Sample-Superstore.csv"
+}
