@@ -40,3 +40,8 @@ Validación y normalización de variables clave, como la conversión de campos d
 Generación de visualizaciones exploratorias, incluyendo la distribución de inasistencias y la relación entre edad y asistencia, con el fin de identificar patrones preliminares relevantes para el análisis posterior.
 
 Como resultado del EDA, se obtuvo una versión limpia y consistente del dataset, la cual fue almacenada en la ruta bronce/processed. Este proceso permitió garantizar la calidad de los datos y sentó las bases para la construcción del modelo dimensional en la capa PLATA y la generación de KPIs en la capa ORO.
+
+se crea el script con nano identificando la carpeta donde queremos crearla para este caso se hizo 
+nano scripts / EDA.py
+<img width="1449" height="593" alt="image" src="https://github.com/user-attachments/assets/9be1faf3-6169-44bb-9947-466d7bbc0c7b" />
+
