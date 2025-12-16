@@ -2,7 +2,7 @@
 from pyspark.sql import functions as F
 
 storage_account = "azdatalakefinal"
-container_silver = "plata"
+container_oro = "oro"
 storage_account_key = "s7afnbWsMe4zI5rLCHBhOW6fRHiaWfQOlDyp22jFA3152SrFkVQERlIIaVBgxAPRlJ0z/5NQu9fl+ASt5JBUQA=="
 
 spark.conf.set(
