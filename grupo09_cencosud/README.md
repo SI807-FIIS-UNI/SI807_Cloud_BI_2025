@@ -1,4 +1,4 @@
-# grupo09_cencosud
+# grupo09_cencosud - Parte individual
 Proyecto Cloud BI 2025-II
 
 # 📊 Proyecto ETL Retail Analytics - Grupo 09
