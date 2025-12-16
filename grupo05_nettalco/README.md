@@ -164,6 +164,8 @@ VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/logs.png)
 
+- [🐍 LOGS ](./grupo05_nettalco/docs) - Ubicacion de los archivos log del EDA y el ETL
+
 # MODELO ESTRELLA MINIMO:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen19.png)
