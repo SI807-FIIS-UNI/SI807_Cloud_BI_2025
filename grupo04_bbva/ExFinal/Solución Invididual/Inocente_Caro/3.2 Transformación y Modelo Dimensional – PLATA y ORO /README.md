@@ -1,5 +1,5 @@
  
-# Modelo Estrella -> Capa Plata ffff
+# Modelo Estrella -> Capa Plata 
 
 ## Justificación
 
