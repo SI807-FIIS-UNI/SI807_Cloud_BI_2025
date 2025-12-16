@@ -50,7 +50,7 @@ nano scripts / EDA.py
 <img width="640" height="480" alt="age_vs_noshow" src="https://github.com/user-attachments/assets/c6766dcc-fb4e-4cf4-8df6-603e4f54c8d4" />
 <img width="640" height="480" alt="no_show_distribution" src="https://github.com/user-attachments/assets/dbc907af-ad31-4500-86dc-f68ca66f1947" />
 
-🔗 [Script EDA – `eda (1).py`](./Scripts/eda%20(1).py)
+[Acceder al script ETL – `etl (2).py`](./Scripts/etl%20(2).py)
 
 Luego del análisis exploratorio de datos (EDA), se generó una versión limpia del dataset que fue almacenada en la capa BRONCE/processed para su posterior modelado dimensional.
 
