@@ -50,18 +50,22 @@ az storage blob upload `
 
 - Definir KPIs
 
-| # | KPI | Descripción | Fórmula | Columnas Utilizadas |
-|---|-----|-------------|---------|---------------------|
-| 1 | **Revenue Total** | Ingresos totales generados por todas las transacciones | `SUM(total_cost)` | `total_cost` |
-| 2 | **Ticket Promedio** | Monto promedio gastado por transacción | `AVG(total_cost)` | `total_cost` |
-| 3 | **Unidades Promedio por Transacción** | Cantidad promedio de items vendidos por transacción | `AVG(total_items)` | `total_items` |
-| 4 | **Total de Transacciones** | Número total de transacciones realizadas | `COUNT(transaction_id)` | `transaction_id` |
-| 5 | **Tasa de Descuento** | Porcentaje de transacciones con descuento aplicado | `(COUNT(discount_applied = TRUE) / COUNT(*)) * 100` | `discount_applied` |
-| 6 | **Revenue con Descuento** | Ingresos totales de transacciones con descuento | `SUM(total_cost WHERE discount_applied = TRUE)` | `total_cost`, `discount_applied` |
-| 7 | **Precio Promedio por Item** | Precio promedio por unidad vendida | `SUM(total_cost) / SUM(total_items)` | `total_cost`, `total_items` |
-| 8 | **Transacciones por Cliente** | Número promedio de compras por cliente | `COUNT(transaction_id) / COUNT(DISTINCT cliente_id)` | `transaction_id`, `cliente_id` |
-| 9 | **Revenue por Tienda** | Ingresos totales por ubicación de tienda | `SUM(total_cost) GROUP BY tienda_id` | `total_cost`, `tienda_id` |
-| 10 | **Tasa de Conversión de Promociones** | Porcentaje de transacciones que usaron alguna promoción | `(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100` | `promocion_id` |
+Tipo de KPI | KPI | Descripción | Fórmula | Columnas Utilizadas
+---|---|---|---|---
+1 | Por fila (ETL) | Monto Total de Transacción | Valor total pagado en una transacción | `monto_total` | `fact_transacciones.monto_total`
+2 | Por fila (ETL) | Total de Unidades | Cantidad total de ítems comprados en la transacción | `total_unidades` | `fact_transacciones.total_unidades`
+3 | Por fila (ETL) | Precio Promedio Unitario | Precio promedio por unidad en la transacción | `monto_total / total_unidades` | `monto_total`, `total_unidades`
+4 | Por fila (ETL) | Indicador de Descuento | Indica si la transacción tuvo descuento | `descuento_aplicado` | `fact_transacciones.descuento_aplicado`
+5 | Por fila (ETL) | Ticket Unitario Normalizado | Métrica base para comparaciones entre transacciones | `precio_promedio_unitario` | `monto_total`, `total_unidades`
+6 | Por fila (ETL) | Cantidad de Productos Distintos | Número de productos diferentes en la transacción | `COUNT(producto_id)` (tabla puente) | `fact_transaccion_producto.producto_id`
+7 | Global (Dashboard) | Ventas Totales | Ingresos totales según filtros aplicados | `SUM(monto_total)` | `fact_transacciones.monto_total`
+8 | Global (Dashboard) | Total de Transacciones | Número total de ventas realizadas | `COUNT(transaccion_id)` | `fact_transacciones.transaccion_id`
+9 | Global (Dashboard) | Ticket Promedio | Gasto promedio por transacción | `SUM(monto_total) / COUNT(transaccion_id)` | `monto_total`, `transaccion_id`
+10 | Global (Dashboard) | Unidades Vendidas | Total de unidades vendidas | `SUM(total_unidades)` | `fact_transacciones.total_unidades`
+11 | Global (Dashboard) | Precio Promedio Global | Precio promedio por unidad vendida | `SUM(monto_total) / SUM(total_unidades)` | `monto_total`, `total_unidades`
+12 | Global (Dashboard) | % Transacciones con Descuento | Proporción de transacciones con descuento | `SUM(descuento_aplicado::int) / COUNT(*)` | `descuento_aplicado`
+13 | Global (Dashboard) | Ventas por Producto | Ingresos por producto vendido | `SUM(monto_total)` (join puente) | `fact_transacciones`, `fact_transaccion_producto`, `dim_producto`
+14 | Global (Dashboard) | Productos Más Vendidos | Ranking de productos más comprados | `COUNT(producto_id)` | `fact_transaccion_producto.producto_id`
 
 ## 3. Crear el PostgreSQL
 
@@ -70,155 +74,103 @@ az storage blob upload `
 ### 3.1. Crear Tablas Dimensionales (SQL)
 
 ```
--- ============================================================
--- MODELO DIMENSIONAL - RETAIL TRANSACTIONS
--- PostgreSQL / pgAdmin
--- ============================================================
+DROP TABLE IF EXISTS fact_transaccion_producto CASCADE;
+DROP TABLE IF EXISTS fact_transacciones CASCADE;
 
--- ============================================================
--- 1. DIMENSIÓN TIEMPO
--- ============================================================
+DROP TABLE IF EXISTS dim_producto CASCADE;
+DROP TABLE IF EXISTS dim_tiempo CASCADE;
+DROP TABLE IF EXISTS dim_cliente CASCADE;
+DROP TABLE IF EXISTS dim_tienda CASCADE;
+DROP TABLE IF EXISTS dim_metodo_pago CASCADE;
+DROP TABLE IF EXISTS dim_temporada CASCADE;
+DROP TABLE IF EXISTS dim_promocion CASCADE;
+
+-- DIMENSIONES
 CREATE TABLE dim_tiempo (
-    tiempo_id SERIAL PRIMARY KEY,
-    fecha DATE NOT NULL UNIQUE,
-    anio INTEGER NOT NULL,
-    mes INTEGER NOT NULL,
-    mes_nombre VARCHAR(20) NOT NULL,
-    trimestre INTEGER NOT NULL,
-    dia INTEGER NOT NULL,
-    dia_semana INTEGER NOT NULL,
-    dia_semana_nombre VARCHAR(20) NOT NULL,
-    semana_anio INTEGER NOT NULL,
-    es_fin_semana BOOLEAN NOT NULL,
-    CONSTRAINT chk_mes CHECK (mes BETWEEN 1 AND 12),
-    CONSTRAINT chk_trimestre CHECK (trimestre BETWEEN 1 AND 4),
-    CONSTRAINT chk_dia_semana CHECK (dia_semana BETWEEN 0 AND 6)
+  tiempo_id BIGINT PRIMARY KEY,
+  fecha DATE NOT NULL UNIQUE,
+  anio INTEGER NOT NULL,
+  mes INTEGER NOT NULL,
+  mes_nombre VARCHAR(20) NOT NULL,
+  trimestre INTEGER NOT NULL,
+  dia INTEGER NOT NULL,
+  dia_semana INTEGER NOT NULL,
+  dia_semana_nombre VARCHAR(20) NOT NULL,
+  semana_anio INTEGER NOT NULL,
+  es_fin_semana BOOLEAN NOT NULL
 );
 
--- Índices para optimizar consultas
-CREATE INDEX idx_dim_tiempo_fecha ON dim_tiempo(fecha);
-CREATE INDEX idx_dim_tiempo_anio_mes ON dim_tiempo(anio, mes);
-CREATE INDEX idx_dim_tiempo_trimestre ON dim_tiempo(anio, trimestre);
-
--- ============================================================
--- 2. DIMENSIÓN CLIENTE
--- ============================================================
 CREATE TABLE dim_cliente (
-    cliente_id SERIAL PRIMARY KEY,
-    nombre_cliente VARCHAR(255) NOT NULL UNIQUE,
-    categoria_cliente VARCHAR(50) NOT NULL,
-    fecha_primer_compra DATE,
-    fecha_ultima_compra DATE,
-    CONSTRAINT chk_categoria CHECK (categoria_cliente IN ('Student', 'Young Adult', 'Professional', 'Middle-Aged', 'Senior', 'Homemaker', 'Teenager'))
+  cliente_id BIGINT PRIMARY KEY,
+  nombre_cliente VARCHAR(255) NOT NULL,
+  categoria_cliente VARCHAR(50) NOT NULL
 );
 
--- Índices
-CREATE INDEX idx_dim_cliente_nombre ON dim_cliente(nombre_cliente);
-CREATE INDEX idx_dim_cliente_categoria ON dim_cliente(categoria_cliente);
-
--- ============================================================
--- 3. DIMENSIÓN PRODUCTO
--- ============================================================
-CREATE TABLE dim_producto (
-    producto_id SERIAL PRIMARY KEY,
-    nombre_producto VARCHAR(255) NOT NULL UNIQUE,
-    categoria_producto VARCHAR(100),
-    subcategoria_producto VARCHAR(100)
-);
-
--- Índice
-CREATE INDEX idx_dim_producto_nombre ON dim_producto(nombre_producto);
-CREATE INDEX idx_dim_producto_categoria ON dim_producto(categoria_producto);
-
--- ============================================================
--- 4. DIMENSIÓN TIENDA
--- ============================================================
 CREATE TABLE dim_tienda (
-    tienda_id SERIAL PRIMARY KEY,
-    ciudad VARCHAR(100) NOT NULL,
-    tipo_tienda VARCHAR(50) NOT NULL,
-    CONSTRAINT uq_tienda UNIQUE (ciudad, tipo_tienda),
-    CONSTRAINT chk_tipo_tienda CHECK (tipo_tienda IN ('Supermarket', 'Convenience Store', 'Specialty Store', 'Warehouse Club', 'Department Store', 'Pharmacy'))
+  tienda_id BIGINT PRIMARY KEY,
+  ciudad VARCHAR(100) NOT NULL,
+  tipo_tienda VARCHAR(50) NOT NULL,
+  CONSTRAINT uq_tienda UNIQUE (ciudad, tipo_tienda)
 );
 
--- Índices
-CREATE INDEX idx_dim_tienda_ciudad ON dim_tienda(ciudad);
-CREATE INDEX idx_dim_tienda_tipo ON dim_tienda(tipo_tienda);
-
--- ============================================================
--- 5. DIMENSIÓN PROMOCIÓN
--- ============================================================
-CREATE TABLE dim_promocion (
-    promocion_id SERIAL PRIMARY KEY,
-    nombre_promocion VARCHAR(100) NOT NULL UNIQUE,
-    tipo_promocion VARCHAR(50)
+CREATE TABLE dim_metodo_pago (
+  metodo_pago_id BIGINT PRIMARY KEY,
+  metodo_pago VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Índice
-CREATE INDEX idx_dim_promocion_nombre ON dim_promocion(nombre_promocion);
-
--- ============================================================
--- 6. DIMENSIÓN TEMPORADA
--- ============================================================
 CREATE TABLE dim_temporada (
-    temporada_id SERIAL PRIMARY KEY,
-    nombre_temporada VARCHAR(20) NOT NULL UNIQUE,
-    CONSTRAINT chk_temporada CHECK (nombre_temporada IN ('Spring', 'Summer', 'Fall', 'Winter'))
+  temporada_id BIGINT PRIMARY KEY,
+  nombre_temporada VARCHAR(20) NOT NULL UNIQUE
 );
 
--- Poblar dimensión temporada (son valores fijos)
-INSERT INTO dim_temporada (nombre_temporada) VALUES 
-    ('Spring'),
-    ('Summer'),
-    ('Fall'),
-    ('Winter');
+CREATE TABLE dim_promocion (
+  promocion_id BIGINT PRIMARY KEY,
+  nombre_promocion VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE dim_producto (
+  producto_id BIGINT PRIMARY KEY,
+  nombre_producto VARCHAR(255) NOT NULL UNIQUE
+);
 ```
 
 ## 3.2. Crear Tabla Hechos (SQL)
 
 ```
--- ============================================================
--- 7. TABLA DE HECHOS - TRANSACCIONES
--- ============================================================
+-- FACT PRINCIPAL (1 fila por transacción) - SIN producto_id
 CREATE TABLE fact_transacciones (
-    transaccion_id BIGINT PRIMARY KEY,
-    tiempo_id INTEGER NOT NULL,
-    cliente_id INTEGER NOT NULL,
-    tienda_id INTEGER NOT NULL,
-    promocion_id INTEGER NOT NULL,
-    temporada_id INTEGER NOT NULL,
-    
-    -- Métricas
-    total_unidades INTEGER NOT NULL,
-    monto_total DECIMAL(10, 2) NOT NULL,
-    precio_promedio_unitario DECIMAL(10, 2) NOT NULL,
-    
-    -- Atributos degenerados (descriptivos de la transacción)
-    metodo_pago VARCHAR(50) NOT NULL,
-    descuento_aplicado BOOLEAN NOT NULL,
-    numero_productos_distintos INTEGER NOT NULL,
-    
-    -- Claves foráneas
-    CONSTRAINT fk_tiempo FOREIGN KEY (tiempo_id) REFERENCES dim_tiempo(tiempo_id),
-    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES dim_cliente(cliente_id),
-    CONSTRAINT fk_tienda FOREIGN KEY (tienda_id) REFERENCES dim_tienda(tienda_id),
-    CONSTRAINT fk_promocion FOREIGN KEY (promocion_id) REFERENCES dim_promocion(promocion_id),
-    CONSTRAINT fk_temporada FOREIGN KEY (temporada_id) REFERENCES dim_temporada(temporada_id),
-    
-    -- Constraints de validación
-    CONSTRAINT chk_unidades CHECK (total_unidades > 0),
-    CONSTRAINT chk_monto CHECK (monto_total > 0),
-    CONSTRAINT chk_metodo_pago CHECK (metodo_pago IN ('Credit Card', 'Debit Card', 'Cash', 'Mobile Payment'))
+  transaccion_id BIGINT PRIMARY KEY,
+  tiempo_id BIGINT NOT NULL,
+  cliente_id BIGINT NOT NULL,
+  tienda_id BIGINT NOT NULL,
+  metodo_pago_id BIGINT NOT NULL,
+  temporada_id BIGINT NOT NULL,
+  promocion_id BIGINT NOT NULL,
+
+  total_unidades INTEGER NOT NULL,
+  monto_total DECIMAL(10,2) NOT NULL,
+  precio_promedio_unitario DECIMAL(10,2) NOT NULL,
+  descuento_aplicado BOOLEAN NOT NULL,
+
+  CONSTRAINT fk_tiempo FOREIGN KEY (tiempo_id) REFERENCES dim_tiempo(tiempo_id),
+  CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES dim_cliente(cliente_id),
+  CONSTRAINT fk_tienda FOREIGN KEY (tienda_id) REFERENCES dim_tienda(tienda_id),
+  CONSTRAINT fk_metodo_pago FOREIGN KEY (metodo_pago_id) REFERENCES dim_metodo_pago(metodo_pago_id),
+  CONSTRAINT fk_temporada FOREIGN KEY (temporada_id) REFERENCES dim_temporada(temporada_id),
+  CONSTRAINT fk_promocion FOREIGN KEY (promocion_id) REFERENCES dim_promocion(promocion_id),
+
+  CONSTRAINT chk_unidades CHECK (total_unidades > 0),
+  CONSTRAINT chk_monto CHECK (monto_total > 0)
 );
 
--- Índices para optimizar consultas analíticas
-CREATE INDEX idx_fact_tiempo ON fact_transacciones(tiempo_id);
-CREATE INDEX idx_fact_cliente ON fact_transacciones(cliente_id);
-CREATE INDEX idx_fact_tienda ON fact_transacciones(tienda_id);
-CREATE INDEX idx_fact_promocion ON fact_transacciones(promocion_id);
-CREATE INDEX idx_fact_temporada ON fact_transacciones(temporada_id);
-CREATE INDEX idx_fact_fecha_cliente ON fact_transacciones(tiempo_id, cliente_id);
-CREATE INDEX idx_fact_fecha_tienda ON fact_transacciones(tiempo_id, tienda_id);
+-- FACT PUENTE (muchos productos por transacción)
+CREATE TABLE fact_transaccion_producto (
+  transaccion_id BIGINT NOT NULL,
+  producto_id BIGINT NOT NULL,
+  PRIMARY KEY (transaccion_id, producto_id),
+  CONSTRAINT fk_ftp_transaccion FOREIGN KEY (transaccion_id) REFERENCES fact_transacciones(transaccion_id),
+  CONSTRAINT fk_ftp_producto FOREIGN KEY (producto_id) REFERENCES dim_producto(producto_id)
+);
 ```
 
 <img width="398" height="195" alt="image" src="https://github.com/user-attachments/assets/a1ac7ff2-5ad6-4646-ba42-5ddc20619acd" />
@@ -238,7 +190,7 @@ CREATE INDEX idx_fact_fecha_tienda ON fact_transacciones(tiempo_id, tienda_id);
 
 ### 4.3. Crear el Job
 
-<img width="1919" height="987" alt="image" src="https://github.com/user-attachments/assets/05cefc02-5b24-48a3-bc45-782d5039aabe" />
+<img width="1860" height="941" alt="image" src="https://github.com/user-attachments/assets/adb48583-8c2a-4e5f-9487-e690934bf0bf" />
 
 ## 5. Crear el Frontend
 
@@ -252,5 +204,11 @@ CREATE INDEX idx_fact_fecha_tienda ON fact_transacciones(tiempo_id, tienda_id);
 
 - Se sube el frontend a un repositorio privado. Para que lo reciba el static webapps.
 
+<img width="1863" height="938" alt="image" src="https://github.com/user-attachments/assets/41aba64e-f196-441b-b547-3d31de7763c0" />
+<img width="1862" height="939" alt="image" src="https://github.com/user-attachments/assets/6fc0243f-c398-455a-80ea-ffa497885d65" />
+
 ## 7. Dashboard Funcional
+
+
+
 Link del Dashboard: https://yellow-meadow-0f17f000f.3.azurestaticapps.net/
