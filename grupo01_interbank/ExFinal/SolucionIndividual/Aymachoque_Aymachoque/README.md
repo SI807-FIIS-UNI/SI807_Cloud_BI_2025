@@ -33,6 +33,7 @@ aws s3 cp .keep "s3://$BUCKET/bronce/curated/.keep"
 
 aws s3 ls "s3://$BUCKET/bronce/" --recursive
 ```
+<img width="1694" height="515" alt="estructrua" src="https://github.com/user-attachments/assets/324eeea5-d35d-440a-a208-40f8aba4e2c8" />
 
 ## 3.1.4 Cargar CSV a Bronce/Raw (CLI)
 (Archivo local en CloudShell: `Sample_Superstore.csv`)
@@ -40,6 +41,7 @@ aws s3 ls "s3://$BUCKET/bronce/" --recursive
 aws s3 cp "Sample_Superstore.csv" "s3://$BUCKET/bronce/raw/Sample_Superstore.csv"
 aws s3 ls "s3://$BUCKET/bronce/raw/"
 ```
+<img width="1671" height="471" alt="Bronce raw" src="https://github.com/user-attachments/assets/500ec661-9e70-42f8-8b03-9a44e0a5b4af" />
 
 ## 3.1.5 Crear carpeta de evidencias `docs/` (CLI)
 ```bash
@@ -275,6 +277,7 @@ aws s3 cp "fact_ventas.csv"  "s3://$BUCKET/plata/fact/fact_ventas.csv"
 aws s3 ls "s3://$BUCKET/plata/dim/"
 aws s3 ls "s3://$BUCKET/plata/fact/"
 ```
+<img width="1701" height="542" alt="plata" src="https://github.com/user-attachments/assets/bafff5dd-a3f4-4ce7-9713-8d0139d017f8" />
 
 ## 3.2.6 Subir evidencias Plata a S3 (CLI)
 ```bash
@@ -389,6 +392,7 @@ aws s3 cp "kpi_top_productos_profit.csv" "s3://$BUCKET/oro/kpis/kpi_top_producto
 
 aws s3 ls "s3://$BUCKET/oro/kpis/"
 ```
+<img width="1689" height="649" alt="Oro" src="https://github.com/user-attachments/assets/1efc5720-4b57-4608-9133-f9c02000618d" />
 
 ## 3.2.6 Subir evidencias Oro a S3 (CLI)
 ```bash
