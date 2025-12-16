@@ -1,2 +1,2 @@
-# grupo05_nettalco
-Proyecto Cloud BI 2025-II
+# Examen Final SI807-U 
+Loayza Segura Roger Salvador
