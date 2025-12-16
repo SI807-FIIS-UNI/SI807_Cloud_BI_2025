@@ -8,3 +8,8 @@ aquí una visualización del codigo que se empleo para realizar esta fase  :
 ## Visualización del bucket con las carpetas en la plataforma google cloude: 
 
 <img width="533" height="761" alt="Captura de pantalla 2025-12-15 201639" src="https://github.com/user-attachments/assets/10aa210a-c5cf-4241-859e-f621a3fdfff9" />
+
+Despues de eso se suben los archivos para luego subirlos al Bucket para realizar el EDA y el ETL 
+## Subida de archivos en Cloud Shell Editor : 
+
+<img width="957" height="967" alt="Captura de pantalla 2025-12-15 202455" src="https://github.com/user-attachments/assets/96b09aad-cd48-4d78-a97b-837f0db9a927" />
