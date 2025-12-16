@@ -368,6 +368,7 @@ Campos relevantes:
 
 
 **[CAPTURA AQUÍ: diagrama del modelo estrella]**
+
 ![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20213053.png)
 
 ---
@@ -609,6 +610,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
 
 **[CAPTURA AQUÍ: vista general del proyecto completo]**
+
 
 
 
