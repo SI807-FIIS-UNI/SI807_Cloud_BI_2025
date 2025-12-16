@@ -23,3 +23,20 @@ se usan los comandos para subir el csv a google cloude para su posterior anális
 en esta parte vamos a realizar un Análsis exploratorio de datos de manera simple, para ver el comportamiento de los datos el archivo lo llamaremos EDA.py, pero antes se crean las carpetas doc y Script para almancenar imagenes y código de lo que resulte del EDA y el proceso ETL que se implementará luego y además se descargan las librerías pandas ,  matplotlib ,  fsspec  y gcsfs para realizar el correcto EDA
 ## Creación de carpetas
 <img width="1514" height="786" alt="Captura de pantalla 2025-12-15 203416" src="https://github.com/user-attachments/assets/ba398e3d-e6a7-40c9-a1c6-f79e4ec07634" />
+
+## EDA : 
+En la capa BRONCE se realizó un Análisis Exploratorio de Datos (EDA) con el objetivo de comprender la estructura, calidad y comportamiento inicial del dataset No-Show Medical Appointments antes de su transformación y modelado analítico.
+
+El EDA incluyó:
+
+Inspección estructural del dataset, mediante la revisión de dimensiones (número de filas y columnas), tipos de datos y presencia de valores nulos.
+
+Visualización de las primeras observaciones (head) para validar la correcta lectura de los datos desde Google Cloud Storage.
+
+Análisis estadístico básico de las variables numéricas, permitiendo identificar rangos válidos y posibles valores atípicos, especialmente en la variable Age.
+
+Validación y normalización de variables clave, como la conversión de campos de fecha (ScheduledDay y AppointmentDay) a formato temporal y la estandarización de la variable objetivo No-show.
+
+Generación de visualizaciones exploratorias, incluyendo la distribución de inasistencias y la relación entre edad y asistencia, con el fin de identificar patrones preliminares relevantes para el análisis posterior.
+
+Como resultado del EDA, se obtuvo una versión limpia y consistente del dataset, la cual fue almacenada en la ruta bronce/processed. Este proceso permitió garantizar la calidad de los datos y sentó las bases para la construcción del modelo dimensional en la capa PLATA y la generación de KPIs en la capa ORO.
