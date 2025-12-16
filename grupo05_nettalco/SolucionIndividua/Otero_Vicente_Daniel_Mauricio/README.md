@@ -55,3 +55,96 @@ Luego del análisis exploratorio de datos (EDA), se generó una versión limpia 
 
 <img width="1920" height="1080" alt="Captura de pantalla (235)" src="https://github.com/user-attachments/assets/385444c9-af93-4c03-aa91-4cd10d5302e0" />
 
+## Fase 3 Transformación y Modelo Dimensional 
+Se implementa un modelo dimensional tipo estrella debido a que el problema de análisis se centra en el estudio de eventos repetitivos (citas médicas) y sus métricas asociadas, las cuales requieren ser analizadas desde múltiples perspectivas como tiempo, paciente, ubicación y condiciones médicas.
+El modelo estrella:
+
+Simplifica las consultas analíticas.
+
+Optimiza el rendimiento en motores OLAP como BigQuery.
+
+Facilita la generación de KPIs y dashboards en la capa ORO.
+Tabla de Hechos: fact_appointments
+Rol
+
+La tabla de hechos representa el evento central del negocio:
+
+Una cita médica programada.
+
+Granularidad
+
+👉 1 fila = 1 cita médica
+
+Métricas principales
+
+no_show (indicador de inasistencia)
+
+Conteo de citas
+
+Posibles métricas derivadas (porcentaje de no-show)
+
+## Tablas de Dimensión
+### Dimensión Tiempo – dim_time
+
+Propósito: Analizar el comportamiento de asistencia a lo largo del tiempo.
+
+Permite responder preguntas como:
+¿En qué meses hay más inasistencias?
+¿Existe una tendencia temporal en el no-show?
+
+### Dimensión Paciente – dim_patient
+
+Propósito: Analizar características demográficas y sociales del paciente.
+
+Incluye:
+
+  Edad
+  Género
+
+Condición de beca (Scholarship)
+
+Permite evaluar:
+
+Relación entre edad y asistencia
+
+Impacto de factores sociales en el no-show
+
+### Dimensión Ubicación – dim_neighbourhood
+
+Propósito: Analizar la distribución geográfica de las citas.
+
+Permite identificar:
+
+Zonas con mayor tasa de inasistencia
+
+Posibles problemas de acceso o distancia
+
+### Dimensión Condiciones Médicas – dim_conditions
+
+Propósito: Analizar si condiciones clínicas influyen en la asistencia.
+
+Incluye:
+
+Hipertensión
+
+Diabetes
+
+Alcoholismo
+
+Discapacidad
+
+Permite responder:
+
+¿Pacientes con ciertas condiciones faltan más o menos?
+
+### Dimensión Comunicación – dim_communication
+
+Propósito: Evaluar el impacto de recordatorios en la asistencia.
+
+Incluye:
+
+SMS recibidos
+
+Permite analizar:
+
+Efectividad de mensajes SMS en reducir el no-show
