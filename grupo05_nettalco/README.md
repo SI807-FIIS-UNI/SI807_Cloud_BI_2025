@@ -314,6 +314,7 @@ Aquí puedes acceder a los tableros interactivos en vivo:
 
 [![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_2-EA4335?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/6ade085f-ee13-4af9-a47b-697fedf4a9c4)
 
+
 # Examen Final – SI807-U  
 **Nombre:** Loayza Segura Roger Salvador  
 **Código de Proyecto:** `ef-si807u-20220018k`  
