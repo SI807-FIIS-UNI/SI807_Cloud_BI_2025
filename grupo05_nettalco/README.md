@@ -21,11 +21,15 @@ gcloud storage buckets create gs://$BUCKET_NAME --location=us-central1
 ![1](/grupo05_nettalco/EVIDENCIAS/4.png)
 
 VISTA EN GOOGLE CLOUD STORAGE:
+
 ![1](/grupo05_nettalco/EVIDENCIAS/5.png)
+
 CREACION DE LAS CARPETAS BRONCE:
+
 *bronce/raw
 *bronce/processed
 *bronce/curated
+
 ![1](/grupo05_nettalco/EVIDENCIAS/6.png)
 
 VISUALIZACION EN GCS:
@@ -54,29 +58,37 @@ COMPROBAMOS QUE SE ENCUENTRA CARGADO EL CSV:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen12.png)
 
-ABRIMOS EL EDITOR DE GOOGLE CLOUD:
-
 ![1](/grupo05_nettalco/EVIDENCIAS/Imagen13.png)
 
+ABRIMOS EL EDITOR DE GOOGLE CLOUD:
+
+
+
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen14.png)
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen15.png)
 
 CREAMOS LAS CARPETAS:
 
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen14.png)
+
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen16.png)
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen17.png)
 
 CREACION DEL EDA Y EL PROCESO ETL:
-pip install pandas google-cloud-storage fsspec gcsfs #
+
+pip install pandas google-cloud-storage fsspec gcsfs 
 python scripts/eda.py
 
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen15.png)
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen18.png)
 
 
 SCRIPT DEL EDA EN PYTHON:
 
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen16.png)
+
 
 INSTALACION DE LA DEPENDENCIA PANDASY EJECUCION DEL SCRIPT:
 
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen17.png)
+
+
 SUBIDA DEL ARCHIVO A GCS:
 
 Comando para copiar el archivo procesado de Cloud Shell a GCS
@@ -85,9 +97,12 @@ BUCKET_NAME="bi-examen-final"
 PROCESSED_FILE="processed_Flight_delay.csv"
 gcloud storage cp $PROCESSED_FILE gs://$BUCKET_NAME/bronce/processed/$PROCESSED_FILE
 
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen17.png)
+
+
 MODELO ESTRELLA MINIMO:
-![1](/grupo05_nettalco/EVIDENCIAS/Imagen18.png)
+
+![1](/grupo05_nettalco/EVIDENCIAS/Imagen19.png)
+
 
 
 
