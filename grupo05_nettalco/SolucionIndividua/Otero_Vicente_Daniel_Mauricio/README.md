@@ -2,12 +2,15 @@
 ## Justificación de la Elección de Google Cloud Platform (GCP)
 
 Google Cloud Platform (GCP) fue seleccionada como la plataforma tecnológica para la implementación del proyecto debido a su enfoque nativo en analítica de datos, su capacidad de escalabilidad y su integración directa con herramientas de Business Intelligence.
+
 **Orientación Nativa a Analítica y BI**
 
 GCP ofrece servicios diseñados específicamente para el procesamiento y análisis de grandes volúmenes de datos. En particular, BigQuery permite ejecutar consultas analíticas complejas sobre datasets masivos sin necesidad de administrar infraestructura, lo cual resulta ideal para proyectos de analítica descriptiva y exploratoria, como el análisis de inasistencia a citas médicas.
+
 **Arquitectura Serverless y Escalabilidad**
 
 El uso de servicios serverless como BigQuery elimina la necesidad de gestionar servidores, configuraciones de clúster o escalamiento manual. Esto permite que el pipeline ETL se ejecute de manera eficiente tanto con volúmenes pequeños como con datasets de mayor tamaño, garantizando escalabilidad automática y alta disponibilidad.
+
 **Integración con Data Lake en Cloud Storage**
 
 Google Cloud Storage (GCS) permite implementar una arquitectura de Data Lake basada en capas (raw, processed, curated), facilitando:
@@ -19,15 +22,19 @@ Separación clara de responsabilidades
 Reprocesamiento controlado de la información
 
 Esta estructura es una práctica estándar en arquitecturas modernas de datos y se integra de forma natural con BigQuery.
+
 **Alto Rendimiento en Consultas Analíticas**
 
 BigQuery utiliza un motor de consultas distribuido y columnar, optimizado para agregaciones y análisis multidimensional. Esto resulta especialmente adecuado para la generación de KPIs y dashboards, ya que permite responder consultas complejas en segundos, incluso cuando el volumen de datos crece.
+
 **Facilidad de Integración con Herramientas de Visualización**
 
 GCP se integra de manera nativa con herramientas de visualización como Looker Studio, permitiendo consumir directamente las tablas de la capa ORO sin necesidad de procesos intermedios. Esto simplifica el flujo desde el ETL hasta la construcción de dashboards interactivos
+
 **Seguridad y Control de Acceso**
 
 Google Cloud proporciona mecanismos robustos de Identity and Access Management (IAM), permitiendo controlar de forma granular quién puede acceder a los datos, ejecutar consultas o modificar recursos. Esto es especialmente relevante en contextos de análisis de datos sensibles, como información relacionada con el sector salud.
+
 **Adecuación al Contexto Académico y Profesional**
 
 GCP ofrece un entorno ampliamente utilizado tanto en la industria como en entornos académicos, lo que permite aplicar buenas prácticas reales de Data Engineering. La experiencia adquirida en este proyecto es directamente transferible a escenarios profesionales de analítica y BI.
