@@ -6,6 +6,17 @@ El objetivo de la capa de visualización es **traducir los datos procesados en l
 
 Los dashboards fueron diseñados para consumir datos **exclusivamente desde la capa Oro (en BigQuery)**, garantizando consistencia, calidad y trazabilidad de la información.
 
+## Pasos para la Conexión
+
+### 1. Crear Conexión
+
+![BI](../docs/imagenes/5.Carga_tablas.png)
+
+
+### 2. Cargar Tablas
+
+![BI](../docs/imagenes/5.creando_conexiones.png)
+
 ---
 
 ## 5.2. Dashboards desarrollados
