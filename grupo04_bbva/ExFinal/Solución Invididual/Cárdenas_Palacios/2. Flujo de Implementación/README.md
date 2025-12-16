@@ -67,6 +67,10 @@ Tipo de KPI | KPI | Descripción | Fórmula | Columnas Utilizadas
 13 | Global (Dashboard) | Ventas por Producto | Ingresos por producto vendido | `SUM(monto_total)` (join puente) | `fact_transacciones`, `fact_transaccion_producto`, `dim_producto`
 14 | Global (Dashboard) | Productos Más Vendidos | Ranking de productos más comprados | `COUNT(producto_id)` | `fact_transaccion_producto.producto_id`
 
+## 2.3 Dar Permisos CORS GET
+
+<img width="1339" height="422" alt="image" src="https://github.com/user-attachments/assets/a41123fe-377a-43c2-9494-62ecb1d62ab7" />
+
 ## 3. Crear el PostgreSQL
 
 <img width="886" height="448" alt="image" src="https://github.com/user-attachments/assets/727343f8-db20-4693-9715-7312246551c0" />
