@@ -1,42 +1,45 @@
-# Tabla de Hechos: `fact_flight_delays`
+# Tabla de Hechos: `fact_vuelos_gold`
 
-En esta carpeta se documenta la **tabla de hechos** del modelo dimensional para el análisis de **retrasos de vuelos y sus causas**.  
-La tabla `fact_flight_delays` concentra las **métricas y atributos operativos** del vuelo (tiempos, demoras, distancia, cancelaciones y causas), y se relaciona con las dimensiones para permitir análisis por **fecha**, **aerolínea**, **aeropuerto de origen/destino** y **aeronave**.
+En esta carpeta se documenta la **tabla de hechos** del modelo dimensional (capa Oro) orientado al análisis de **retrasos de vuelos y sus causas**.
 
-Su objetivo es responder preguntas como:
-- ¿Qué aerolíneas presentan mayores retrasos promedio?
-- ¿Qué rutas (origen → destino) se retrasan más?
-- ¿Qué causa de demora es más frecuente (clima, NAS, seguridad, etc.)?
+La tabla `fact_vuelos_gold` concentra las **métricas de retraso**, estado de **cancelación**, y los **minutos asociados a cada causa de demora**. Además, incluye atributos de fecha (año/mes/día) y claves descriptivas como aerolínea y aeropuertos (origen/destino), lo cual permite realizar análisis comparativos por compañía, ruta y periodo.
+
+Este modelo busca responder preguntas como:
+- ¿Qué aerolíneas presentan mayor porcentaje de retrasos?
+- ¿En qué rutas (origen → destino) se registran mayores demoras?
+- ¿Qué causas explican más minutos de retraso (Carrier, Weather, NAS, Security, Late Aircraft)?
+- ¿Qué aerolíneas presentan más cancelaciones?
+
+---
 
 ## Estructura de la tabla
 
 | Campo | Descripción |
 |------|-------------|
-| flight_delay_id (PK) | Identificador único del registro de retraso/vuelo. |
-| date_id (FK) | Clave foránea hacia `dim_date` (fecha programada del vuelo). |
-| airline_id (FK) | Clave foránea hacia `dim_airline` (aerolínea / carrier). |
-| origin_airport_id (FK) | Clave foránea hacia `dim_airport` (aeropuerto de origen). |
-| dest_airport_id (FK) | Clave foránea hacia `dim_airport` (aeropuerto de destino). |
-| aircraft_id (FK, nullable) | Clave foránea hacia `dim_aircraft` (aeronave). Puede ser nulo si no hay TailNum. |
-| flight_num | Número de vuelo. |
-| dep_time | Hora real de salida (local, formato hhmm). |
-| arr_time | Hora real de llegada (local, formato hhmm). |
-| crs_arr_time | Hora programada de llegada (local, formato hhmm). |
-| actual_elapsed_time | Tiempo real total del vuelo (min), incluye taxi-in/taxi-out. |
-| crs_elapsed_time | Tiempo estimado/programado del vuelo (min). |
-| air_time | Tiempo en el aire (min). |
-| arr_delay | Retraso en llegada (min): diferencia entre llegada real y programada. |
-| dep_delay | Retraso en salida (min). |
-| distance | Distancia entre aeropuertos (millas). |
-| taxi_in | Tiempo desde aterrizaje hasta puerta (min). |
-| taxi_out | Tiempo desde puerta hasta despegue (min). |
-| cancelled | Indica si el vuelo fue cancelado (true/false). |
-| diverted | Indica si el vuelo fue desviado (true/false). |
-| cancellation_code | Código/motivo de cancelación. |
-| carrier_delay | Demora atribuida a la aerolínea (min). |
-| weather_delay | Demora por clima (min). |
-| nas_delay | Demora por NAS (National Airspace/System) (min). |
-| security_delay | Demora por seguridad (min). |
-| late_aircraft_delay | Demora por llegada tardía de la aeronave (min). |
+| year | Año del vuelo (derivado de la fecha). |
+| month | Mes del vuelo (1-12). |
+| day_of_month | Día del mes del vuelo (1-31). |
+| day_of_week | Día de la semana (1-7 según la función `dayofweek` de Spark). |
+| carrier_code | Código de aerolínea/carrier (ej. AA, DL, UA). |
+| origin | Código IATA del aeropuerto de origen (ej. JFK, LAX). |
+| dest | Código IATA del aeropuerto de destino (ej. SFO, MIA). |
+| dep_delay | Minutos de retraso en salida (departure delay). |
+| arr_delay | Minutos de retraso en llegada (arrival delay). |
+| cancelled | Indicador de cancelación (0 = No, 1 = Sí). |
+| delay_carrier | Minutos de retraso atribuibles a la aerolínea (mantenimiento, tripulación, combustible, etc.). |
+| delay_weather | Minutos de retraso por condiciones climáticas. |
+| delay_nas | Minutos de retraso por NAS (National Airspace System: congestión/control aéreo, etc.). |
+| delay_security | Minutos de retraso por razones de seguridad. |
+| delay_late_aircraft | Minutos de retraso por aeronave tardía proveniente de vuelos previos. |
 
+---
 
+## Relación con dimensiones
+
+Aunque en esta capa Oro el hecho mantiene campos descriptivos (códigos y componentes de fecha), se complementa con las dimensiones para análisis y consistencia:
+
+- **Tiempo:** `dim_tiempo_gold` (year, month, day_of_month, day_of_week)
+- **Aerolínea:** `dim_aerolinea_gold` (carrier_code)
+- **Aeropuertos:** `dim_origen_gold` y `dim_destino_gold` (airport_code)
+
+> Nota: Este esquema corresponde al modelo generado en Databricks usando Delta Tables en la capa Oro.
