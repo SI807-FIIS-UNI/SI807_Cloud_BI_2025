@@ -154,6 +154,157 @@ Para poder usar spark se seleciono la reguion de us-central1 y se habilitaron la
 ![7](docs/7.Sparknotebbok.png)
 
 
+### Desarrollo de capas Bronce-Plata-Oro
+
+### Enfoque de Transformación (ETL)
+
+El proceso de transformación de datos se implementó siguiendo el patrón Medallion Architecture (Bronce → Plata → Oro) sobre Google Cloud Platform, utilizando BigQuery como motor analítico y notebooks en Python para la ejecución de los procesos ETL.
+
+Cada capa cumple una función específica:
+
+- BRONCE: ingestión de datos crudos desde Google Cloud Storage.
+
+- PLATA: limpieza, estandarización, enriquecimiento y tipificación de los datos.
+
+- ORO: modelado dimensional y cálculo de indicadores clave (KPIs).
+
+![14](docs/14.Dimensiones.png)
+
+Los scripts utilizados para cada etapa se encuentran en la carpeta:
+```bash
+/Notebook-Big-Query
+```
+### Capa Bronce – Carga directamente el csv
+
+Despues del EDA incial se procede la ingesta de datos a la capa bronce, en esta capa simplemente se cargan los datos tal cual estan en el csv.
+
+![15](docs/15.Tabla_bronce_raw.png)
+
+### Capa PLATA – Transformación y Limpieza
+
+En la capa PLATA se construyó la tabla plata.accidents_clean, cuyo objetivo es dejar los datos en condiciones óptimas para análisis analítico y modelado dimensional.
+
+Las transformaciones realizadas incluyen:
+
+- Conversión de campos temporales a tipos TIMESTAMP.
+
+- Cálculo de la duración del accidente.
+
+- Normalización de variables climáticas.
+
+- Tipificación de atributos temporales (hora, día de la semana, mes).
+
+Filtrado de registros inconsistentes.
+
+📌 Scripts ETL
+Los scripts de transformación de BRONCE a PLATA se encuentran documentados y ejecutados en los notebooks disponibles en la carpeta Notebook-Big-Query.
+
+📷 Evidencia – Tabla PLATA creada
+![16](docs/16.Tabla_plata.png)
+
+### 3. Capa ORO – Modelo Dimensional
+### 3.1 Justificación del Modelo Estrella
+
+Se implementó un modelo estrella mínimo, adecuado para análisis OLAP y herramientas de Business Intelligence, debido a las siguientes razones técnicas:
+
+- Optimiza el rendimiento de consultas agregadas.
+
+- Simplifica la interpretación de los datos para usuarios de negocio.
+
+- Facilita la generación de KPIs y dashboards.
+
+- Se alinea con buenas prácticas de modelado dimensional.
+
+El modelo está compuesto por:
+
+1)Tabla de hechos: fact_accidentes
+
+2)Tablas de dimensión: tiempo, ubicación y clima.
+
+```bash
+
+                    ||--------------------||
+                    ||     DIM_TIEMPO     ||
+                    ||--------------------||
+                    || PK fecha_hora      ||
+                    || hora               ||
+                    || dia_semana         ||
+                    || mes                ||
+                    ||--------------------||
+                               ||
+                               ||
+                               ||
+                               ||
+||--------------------||        ||        ||------------------------||
+||  DIM_UBICACION     ||========||========||    FACT_ACCIDENTES     ||
+||--------------------||        ||        ||------------------------||
+|| PK city            ||        ||        || PK id                 ||
+|| state              ||        ||        || FK fecha_hora         ||
+|| start_lat          ||        ||        || FK city               ||
+|| start_lng          ||        ||        || FK weather_condition  ||
+||--------------------||        ||        || severity               ||
+                               ||        || duration_min           ||
+                               ||        || traffic_signal         ||
+                               ||        || junction               ||
+                               ||        || crossing               ||
+                               ||        ||------------------------||
+                               ||
+                               ||
+                               ||
+                    ||--------------------||
+                    ||     DIM_CLIMA      ||
+                    ||--------------------||
+                    || PK weather_condition||
+                    || temperaturef       ||
+                    || humiditypct        ||
+                    || pressurein         ||
+                    || visibilitymi       ||
+                    || wind_speedmph      ||
+                    || precipitationin    ||
+                    ||--------------------||
+```
+
+![24](docs/24.Esquema_Relacional.png)
+
+
+### Tablas de Dimensión
+
+Las dimensiones fueron generadas a partir de la capa PLATA mediante scripts SQL ejecutados desde notebooks.
+
+- Dimensión Tiempo (dim_tiempo)
+Permite analizar accidentes por hora, día y mes.
+
+- Dimensión Ubicación (dim_ubicacion)
+Facilita el análisis geográfico por ciudad y estado.
+
+- Dimensión Clima (dim_clima)
+Permite evaluar la relación entre accidentes y condiciones meteorológicas.
+
+📌 Referencia de scripts
+La creación de las tablas de dimensión se encuentra implementada en los notebooks disponibles en Notebook-Big-Query.
+
+
+### Tabla de Hechos – fact_accidentes
+
+La tabla de hechos centraliza las métricas principales del negocio y se relaciona con las dimensiones mediante claves naturales.
+
+Contiene:
+
+- Severidad del accidente.
+
+- Duración del evento.
+
+- Indicadores viales relevantes.
+
+- Referencias temporales, geográficas y climáticas.
+
+📌 Referencia de scripts
+El proceso de construcción de la tabla de hechos está documentado en los notebooks de la carpeta Notebook-Big-Query.
+
+![17](docs/17.Dimensiones.png)
+
+![18](docs/18.Tabla_oro.png)
+
 
 ## 3.3. Visualización
 
@@ -164,15 +315,15 @@ Para la visualizacion se creo una cuenta de servicio la cual generará una llave
 
 Esta sera la cuenta de servicio que permitira la visualización del PowerBI
 ```bash
-gcloud iam service-accounts create sa-visualizacion-dashboard \
-  --display-name="Cuenta de Servicio - Visualización Dashboards Power BI"
+gcloud iam service-accounts create sa-powerbi-visualizacion \
+  --display-name="Cuenta de Servicio - Power BI Visualización" \
+  --project=final-julio-alvarez
 ```
 
 ## Generación de Clave JSON (Credencial Temporal)
 ```bash
-gcloud iam service-accounts keys create \
-  sa-visualizacion-dashboard-key.json \
-  --iam-account=sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com
+gcloud iam service-accounts keys create sa-powerbi-visualizacion-key.json \
+  --iam-account=sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com
 ```
 ![10](docs/10.Clave-_cuenta_servico.png)
 
@@ -180,7 +331,7 @@ La clave se genera en el directorio de ejecución de Cloud Shell.
 
 ### Descarga a entorno local
 ```bash
-cloudshell download sa-visualizacion-dashboard-key.json
+cloudshell download sa-powerbi-visualizacion-key.json
 ```
 
 ![11](docs/11.Clave_cuenta.png)
@@ -189,8 +340,19 @@ cloudshell download sa-visualizacion-dashboard-key.json
 
 Para garantizar compatibilidad con datasets que utilizan ACL clásico y facilitar la conexión desde Power BI, se asignaron los siguientes roles a nivel proyecto:
 ```bash
-gcloud projects add-iam-policy-binding grupo6-scotiabank \
-  --member="serviceAccount:sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding final-julio-alvarez \
+  --member="serviceAccount:sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com" \
+  --role="roles/bigquery.dataViewer"
+```
+
+```bash
+gcloud projects add-iam-policy-binding final-julio-alvarez \
+  --member="serviceAccount:sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com" \
+  --role="roles/bigquery.jobUser"
+```
+```bash
+gcloud projects add-iam-policy-binding final-julio-alvarez \
+  --member="serviceAccount:sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com" \
   --role="roles/bigquery.user"
 ```
 
@@ -205,7 +367,7 @@ Consideraciones
 Comando CLI para eliminar una clave existente
 ```bash
 gcloud iam service-accounts keys delete KEY_ID \
-  --iam-account=sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com
+  --iam-account=sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com
 ```
 
 Este comando revoca inmediatamente el acceso asociado a la clave, asegurando el principio de mínimo privilegio y evitando accesos no autorizados posteriores.
@@ -217,7 +379,10 @@ Este comando revoca inmediatamente el acceso asociado a la clave, asegurando el 
 Las claves de acceso para las cuentas de usuario deberan ser descargadas en el dispositivo del usuario y evitar ser compartidas o subidas a un repositorio público. Por tal motivo se asigno un rol de administrador de cuentas de servicio lo que le permite crear su propia clave de acceso para replicación del Dashboard.
 
 ```bash
-gcloud projects add-iam-policy-binding grupo6-scotiabank --member=user:fgarcia@webconceptos.com  --role="roles/iam.serviceAccountKeyAdmin"
+gcloud projects add-iam-policy-binding final-julio-alvarez \
+  --member=user:fgarcia@webconceptos.com \
+  --role="roles/iam.serviceAccountKeyAdmin" \
+  --project=final-julio-alvarez
 ```
 ![13](docs/13.Rol_docente.png)
 
@@ -231,13 +396,31 @@ Con este rol el usuario puede:
 
 Replicar:
 ```bash
-gcloud iam service-accounts keys create sa-visualizacion-dashboard-key.json \
-  --iam-account=sa-visualizacion-dashboard@grupo6-scotiabank.iam.gserviceaccount.com
+gcloud iam service-accounts keys create sa-powerbi-visualizacion-key.json \
+  --iam-account=sa-powerbi-visualizacion@final-julio-alvarez.iam.gserviceaccount.com \
+  --project=final-julio-alvarez
 ```
+
+![19](docs/19.Cuenta_Servicio.png)
 
 Descargar Clave:
 
 ```bash
-cloudshell download sa-visualizacion-dashboard-key.json
+cloudshell download sa-powerbi-visualizacion-key.json
 ```
 
+![20](docs/20.Credenciales.png)
+
+![21](docs/21.tablas.png)
+
+Una vez puesta las credenciales, se procede a crear el dashboard comparativo.
+
+En el primero se hace un comparativo con un grafico pareto del nivel de severidad de los accidentes por ciudad y estado, donde se puede analizar los estados y ciudadades con mayor nivel accidentes en los Estados Unidos
+
+![22](docs/22.Pareto_Severidad_por_mes.png)
+
+En el segundo tablero se puede ver una comparativa circular por ciudad dependiendo el tipo de condicion climática asociada.
+
+![23](docs/23.Severidad_Por%20Ciudad.png)
+
+El archivo power BI esta cargado en la carpeta de desarrollo, para que pueda ser usado.
