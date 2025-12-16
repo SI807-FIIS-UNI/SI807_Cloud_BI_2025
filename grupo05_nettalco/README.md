@@ -102,10 +102,9 @@ python scripts/eda.py
 
 SCRIPT DEL EDA EN PYTHON:
 
+### 📂 Estructura del Proyecto
 
-
-INSTALACION DE LA DEPENDENCIA PANDASY EJECUCION DEL SCRIPT:
-
+- [🐍 Scripts ETL](./grupo05_nettalco/scripts/eda.py) - Código Python para la extracción y carga.
 
 
 SUBIDA DEL ARCHIVO A GCS:
@@ -122,7 +121,7 @@ VISUALIZACION DE LA CAPA ORO Y PLATA EN BIGQUERY:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/31.png)
 
-![1](/grupo05_nettalco/EVIDENCIAS/31.png)
+![1](/grupo05_nettalco/EVIDENCIAS/32.png)
 
 
 MODELO ESTRELLA MINIMO:
