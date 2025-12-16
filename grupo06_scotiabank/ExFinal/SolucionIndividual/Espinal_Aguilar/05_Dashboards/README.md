@@ -23,10 +23,15 @@ Los dashboards fueron diseñados para consumir datos **exclusivamente desde la c
 
 ### 📊 Dashboard 1:
 
+![BI](../docs/imagenes/5.d1.png)
+
 ### 📈 Dashboard 2:
 
+![BI](../docs/imagenes/5.d2.png)
 
+### 📊 Dashboard 3:
 
+![BI](../docs/imagenes/5.d3.png)
 
 ## 5.3. Reproducibilidad de los dashboards
 
