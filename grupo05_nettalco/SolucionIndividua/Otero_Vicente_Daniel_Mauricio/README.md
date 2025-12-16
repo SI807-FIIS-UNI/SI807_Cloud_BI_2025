@@ -153,3 +153,6 @@ Efectividad de mensajes SMS en reducir el no-show
 El archivo está dentro de la carpeta scripts
 <img width="1319" height="173" alt="Captura de pantalla 2025-12-15 214332" src="https://github.com/user-attachments/assets/34663646-5d4e-42d1-9e5b-15eda6f47d12" />
 
+## carga de las dimensiones a google cloude 
+<img width="1920" height="1080" alt="Captura de pantalla (236)" src="https://github.com/user-attachments/assets/8e338a22-f9d7-4881-bd7a-0be30c5c85a1" />
+
