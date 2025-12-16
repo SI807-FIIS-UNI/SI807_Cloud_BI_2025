@@ -1,0 +1,994 @@
+Product line,Unit price,producto_key
+Health and beauty,74.69,1
+Electronic accessories,15.28,2
+Home and lifestyle,46.33,3
+Health and beauty,58.22,4
+Sports and travel,86.31,5
+Electronic accessories,85.39,6
+Electronic accessories,68.84,7
+Home and lifestyle,73.56,8
+Health and beauty,36.26,9
+Food and beverages,54.84,10
+Fashion accessories,14.48,11
+Electronic accessories,25.51,12
+Electronic accessories,46.95,13
+Food and beverages,43.19,14
+Health and beauty,71.38,15
+Sports and travel,93.72,16
+Health and beauty,68.93,17
+Sports and travel,72.61,18
+Food and beverages,54.67,19
+Home and lifestyle,40.3,20
+Electronic accessories,86.04,21
+Health and beauty,87.98,22
+Home and lifestyle,33.2,23
+Electronic accessories,34.56,24
+Sports and travel,88.63,25
+Home and lifestyle,52.59,26
+Fashion accessories,33.52,27
+Fashion accessories,87.67,28
+Food and beverages,88.36,29
+Health and beauty,24.89,30
+Fashion accessories,94.13,31
+Sports and travel,78.07,32
+Sports and travel,83.78,33
+Health and beauty,96.58,34
+Food and beverages,99.42,35
+Sports and travel,68.12,36
+Sports and travel,62.62,37
+Electronic accessories,60.88,38
+Health and beauty,54.92,39
+Home and lifestyle,30.12,40
+Home and lifestyle,86.72,41
+Home and lifestyle,56.11,42
+Sports and travel,69.12,43
+Food and beverages,98.7,44
+Health and beauty,15.37,45
+Electronic accessories,93.96,46
+Health and beauty,56.69,47
+Food and beverages,20.01,48
+Electronic accessories,18.93,49
+Fashion accessories,82.63,50
+Food and beverages,91.4,51
+Food and beverages,44.59,52
+Fashion accessories,17.87,53
+Fashion accessories,15.43,54
+Home and lifestyle,16.16,55
+Electronic accessories,85.98,56
+Home and lifestyle,44.34,57
+Health and beauty,89.6,58
+Home and lifestyle,72.35,59
+Electronic accessories,30.61,60
+Sports and travel,24.74,61
+Home and lifestyle,55.73,62
+Sports and travel,55.07,63
+Sports and travel,15.81,64
+Health and beauty,75.74,65
+Health and beauty,15.87,66
+Health and beauty,33.47,67
+Fashion accessories,97.61,68
+Sports and travel,78.77,69
+Health and beauty,18.33,70
+Food and beverages,89.48,71
+Fashion accessories,62.12,72
+Food and beverages,48.52,73
+Electronic accessories,75.91,74
+Home and lifestyle,74.67,75
+Electronic accessories,41.65,76
+Fashion accessories,49.04,77
+Fashion accessories,20.01,78
+Food and beverages,78.31,79
+Health and beauty,20.38,80
+Health and beauty,99.19,81
+Food and beverages,96.68,82
+Food and beverages,19.25,83
+Food and beverages,80.36,84
+Sports and travel,48.91,85
+Sports and travel,83.06,86
+Fashion accessories,76.52,87
+Food and beverages,49.38,88
+Sports and travel,42.47,89
+Health and beauty,76.99,90
+Home and lifestyle,47.38,91
+Sports and travel,44.86,92
+Sports and travel,21.98,93
+Health and beauty,64.36,94
+Health and beauty,89.75,95
+Electronic accessories,97.16,96
+Health and beauty,87.87,97
+Electronic accessories,12.45,98
+Food and beverages,52.75,99
+Home and lifestyle,82.7,100
+Fashion accessories,48.71,101
+Fashion accessories,78.55,102
+Electronic accessories,23.07,103
+Food and beverages,58.26,104
+Health and beauty,30.35,105
+Electronic accessories,88.67,106
+Fashion accessories,27.38,107
+Sports and travel,62.13,108
+Food and beverages,33.98,109
+Electronic accessories,81.97,110
+Sports and travel,16.49,111
+Health and beauty,98.21,112
+Fashion accessories,72.84,113
+Home and lifestyle,58.07,114
+Home and lifestyle,80.79,115
+Fashion accessories,27.02,116
+Fashion accessories,21.94,117
+Fashion accessories,51.36,118
+Food and beverages,10.96,119
+Home and lifestyle,53.44,120
+Electronic accessories,99.56,121
+Sports and travel,57.12,122
+Sports and travel,99.96,123
+Home and lifestyle,63.91,124
+Fashion accessories,56.47,125
+Home and lifestyle,93.69,126
+Sports and travel,32.25,127
+Fashion accessories,31.73,128
+Food and beverages,68.54,129
+Sports and travel,90.28,130
+Fashion accessories,39.62,131
+Sports and travel,92.13,132
+Sports and travel,34.84,133
+Electronic accessories,87.45,134
+Health and beauty,81.3,135
+Fashion accessories,90.22,136
+Electronic accessories,26.31,137
+Home and lifestyle,34.42,138
+Sports and travel,51.91,139
+Sports and travel,72.5,140
+Sports and travel,89.8,141
+Health and beauty,90.5,142
+Health and beauty,68.6,143
+Food and beverages,30.41,144
+Home and lifestyle,77.95,145
+Health and beauty,46.26,146
+Fashion accessories,30.14,147
+Health and beauty,66.14,148
+Home and lifestyle,71.86,149
+Health and beauty,32.46,150
+Fashion accessories,91.54,151
+Sports and travel,34.56,152
+Fashion accessories,83.24,153
+Food and beverages,16.48,154
+Sports and travel,80.97,155
+Food and beverages,92.29,156
+Electronic accessories,72.17,157
+Home and lifestyle,50.28,158
+Health and beauty,97.22,159
+Sports and travel,93.39,160
+Food and beverages,43.18,161
+Sports and travel,63.69,162
+Food and beverages,45.79,163
+Sports and travel,76.4,164
+Food and beverages,39.9,165
+Health and beauty,42.57,166
+Home and lifestyle,95.58,167
+Fashion accessories,98.98,168
+Food and beverages,51.28,169
+Sports and travel,69.52,170
+Health and beauty,70.01,171
+Food and beverages,80.05,172
+Electronic accessories,20.85,173
+Electronic accessories,52.89,174
+Food and beverages,19.79,175
+Home and lifestyle,33.84,176
+Food and beverages,22.17,177
+Fashion accessories,22.51,178
+Food and beverages,73.88,179
+Health and beauty,86.8,180
+Fashion accessories,64.26,181
+Food and beverages,38.47,182
+Sports and travel,15.5,183
+Health and beauty,34.31,184
+Sports and travel,12.34,185
+Food and beverages,18.08,186
+Home and lifestyle,94.49,187
+Home and lifestyle,46.47,188
+Home and lifestyle,74.07,189
+Home and lifestyle,69.81,190
+Home and lifestyle,77.04,191
+Fashion accessories,73.52,192
+Food and beverages,87.8,193
+Home and lifestyle,25.55,194
+Electronic accessories,32.71,195
+Fashion accessories,74.29,196
+Health and beauty,43.7,197
+Home and lifestyle,25.29,198
+Health and beauty,41.5,199
+Food and beverages,71.39,200
+Sports and travel,19.15,201
+Electronic accessories,57.49,202
+Electronic accessories,61.41,203
+Health and beauty,25.9,204
+Home and lifestyle,17.77,205
+Health and beauty,23.03,206
+Electronic accessories,66.65,207
+Home and lifestyle,28.53,208
+Fashion accessories,30.37,209
+Electronic accessories,99.73,210
+Electronic accessories,26.23,211
+Food and beverages,93.26,212
+Home and lifestyle,92.36,213
+Sports and travel,46.42,214
+Sports and travel,29.61,215
+Home and lifestyle,18.28,216
+Sports and travel,24.77,217
+Electronic accessories,94.64,218
+Fashion accessories,94.87,219
+Food and beverages,57.34,220
+Electronic accessories,45.35,221
+Food and beverages,62.08,222
+Electronic accessories,11.81,223
+Fashion accessories,12.54,224
+Food and beverages,43.25,225
+Sports and travel,87.16,226
+Health and beauty,69.37,227
+Electronic accessories,37.06,228
+Electronic accessories,90.7,229
+Home and lifestyle,63.42,230
+Fashion accessories,81.37,231
+Electronic accessories,10.59,232
+Health and beauty,84.09,233
+Fashion accessories,73.82,234
+Health and beauty,51.94,235
+Sports and travel,93.14,236
+Health and beauty,17.41,237
+Fashion accessories,44.22,238
+Electronic accessories,13.22,239
+Fashion accessories,89.69,240
+Food and beverages,24.94,241
+Health and beauty,59.77,242
+Fashion accessories,93.2,243
+Home and lifestyle,62.65,244
+Home and lifestyle,93.87,245
+Home and lifestyle,47.59,246
+Electronic accessories,81.4,247
+Fashion accessories,17.94,248
+Electronic accessories,77.72,249
+Food and beverages,73.06,250
+Food and beverages,46.55,251
+Fashion accessories,35.19,252
+Sports and travel,14.39,253
+Home and lifestyle,23.75,254
+Home and lifestyle,58.9,255
+Fashion accessories,32.62,256
+Electronic accessories,66.35,257
+Home and lifestyle,25.91,258
+Electronic accessories,32.25,259
+Electronic accessories,65.94,260
+Electronic accessories,75.06,261
+Fashion accessories,16.45,262
+Fashion accessories,38.3,263
+Sports and travel,22.24,264
+Sports and travel,54.45,265
+Sports and travel,98.4,266
+Home and lifestyle,35.47,267
+Food and beverages,74.6,268
+Home and lifestyle,70.74,269
+Home and lifestyle,35.54,270
+Sports and travel,67.43,271
+Health and beauty,21.12,272
+Home and lifestyle,21.54,273
+Home and lifestyle,12.03,274
+Health and beauty,99.71,275
+Fashion accessories,47.97,276
+Home and lifestyle,21.82,277
+Fashion accessories,95.42,278
+Fashion accessories,70.99,279
+Sports and travel,44.02,280
+Home and lifestyle,69.96,281
+Home and lifestyle,37.0,282
+Sports and travel,15.34,283
+Health and beauty,99.83,284
+Health and beauty,47.67,285
+Health and beauty,66.68,286
+Home and lifestyle,74.86,287
+Sports and travel,23.75,288
+Food and beverages,48.51,289
+Home and lifestyle,94.88,290
+Electronic accessories,40.3,291
+Electronic accessories,27.85,292
+Electronic accessories,62.48,293
+Food and beverages,36.36,294
+Health and beauty,18.11,295
+Electronic accessories,51.92,296
+Electronic accessories,28.84,297
+Home and lifestyle,78.38,298
+Home and lifestyle,60.01,299
+Home and lifestyle,88.61,300
+Fashion accessories,99.82,301
+Health and beauty,39.01,302
+Food and beverages,48.61,303
+Electronic accessories,51.19,304
+Electronic accessories,14.96,305
+Electronic accessories,72.2,306
+Sports and travel,40.23,307
+Home and lifestyle,88.79,308
+Electronic accessories,26.48,309
+Fashion accessories,81.91,310
+Sports and travel,79.93,311
+Fashion accessories,69.33,312
+Food and beverages,14.23,313
+Health and beauty,15.55,314
+Electronic accessories,78.13,315
+Food and beverages,99.37,316
+Food and beverages,21.08,317
+Electronic accessories,74.79,318
+Health and beauty,29.67,319
+Health and beauty,44.07,320
+Food and beverages,22.93,321
+Health and beauty,39.42,322
+Health and beauty,15.26,323
+Fashion accessories,61.77,324
+Home and lifestyle,21.52,325
+Sports and travel,97.74,326
+Food and beverages,99.78,327
+Food and beverages,94.26,328
+Health and beauty,51.13,329
+Electronic accessories,36.36,330
+Home and lifestyle,22.02,331
+Food and beverages,32.9,332
+Fashion accessories,77.02,333
+Food and beverages,23.48,334
+Sports and travel,14.7,335
+Electronic accessories,28.45,336
+Fashion accessories,76.4,337
+Sports and travel,57.95,338
+Electronic accessories,47.65,339
+Food and beverages,42.82,340
+Electronic accessories,48.09,341
+Health and beauty,55.97,342
+Health and beauty,76.9,343
+Food and beverages,97.03,344
+Sports and travel,44.65,345
+Fashion accessories,77.93,346
+Electronic accessories,71.95,347
+Home and lifestyle,89.25,348
+Electronic accessories,26.02,349
+Health and beauty,13.5,350
+Fashion accessories,99.3,351
+Electronic accessories,51.69,352
+Fashion accessories,54.73,353
+Home and lifestyle,27.0,354
+Electronic accessories,30.24,355
+Food and beverages,89.14,356
+Fashion accessories,37.55,357
+Sports and travel,95.44,358
+Electronic accessories,27.5,359
+Sports and travel,74.97,360
+Food and beverages,80.96,361
+Food and beverages,94.47,362
+Food and beverages,99.79,363
+Home and lifestyle,73.22,364
+Food and beverages,41.24,365
+Fashion accessories,81.68,366
+Electronic accessories,51.32,367
+Home and lifestyle,65.94,368
+Sports and travel,14.36,369
+Electronic accessories,21.5,370
+Electronic accessories,26.26,371
+Fashion accessories,60.96,372
+Home and lifestyle,70.11,373
+Fashion accessories,42.08,374
+Home and lifestyle,67.09,375
+Fashion accessories,96.7,376
+Home and lifestyle,35.38,377
+Sports and travel,95.49,378
+Fashion accessories,96.98,379
+Electronic accessories,23.65,380
+Sports and travel,82.33,381
+Electronic accessories,26.61,382
+Food and beverages,99.69,383
+Food and beverages,74.89,384
+Food and beverages,40.94,385
+Sports and travel,75.82,386
+Food and beverages,46.77,387
+Health and beauty,32.32,388
+Fashion accessories,54.07,389
+Food and beverages,18.22,390
+Fashion accessories,80.48,391
+Fashion accessories,37.95,392
+Electronic accessories,76.82,393
+Sports and travel,52.26,394
+Health and beauty,79.74,395
+Health and beauty,77.5,396
+Food and beverages,54.27,397
+Home and lifestyle,13.59,398
+Health and beauty,41.06,399
+Electronic accessories,19.24,400
+Food and beverages,39.43,401
+Home and lifestyle,46.22,402
+Home and lifestyle,13.98,403
+Fashion accessories,39.75,404
+Fashion accessories,97.79,405
+Sports and travel,67.26,406
+Food and beverages,13.79,407
+Fashion accessories,68.71,408
+Home and lifestyle,56.53,409
+Fashion accessories,23.82,410
+Health and beauty,34.21,411
+Sports and travel,21.87,412
+Health and beauty,20.97,413
+Sports and travel,25.84,414
+Home and lifestyle,50.93,415
+Health and beauty,96.11,416
+Home and lifestyle,45.38,417
+Health and beauty,81.51,418
+Health and beauty,57.22,419
+Electronic accessories,25.22,420
+Food and beverages,38.6,421
+Electronic accessories,84.05,422
+Fashion accessories,97.21,423
+Fashion accessories,25.42,424
+Fashion accessories,16.28,425
+Fashion accessories,40.61,426
+Health and beauty,53.17,427
+Food and beverages,20.87,428
+Sports and travel,67.27,429
+Home and lifestyle,90.65,430
+Fashion accessories,69.08,431
+Food and beverages,43.27,432
+Electronic accessories,23.46,433
+Fashion accessories,95.54,434
+Fashion accessories,47.44,435
+Sports and travel,99.24,436
+Sports and travel,82.93,437
+Home and lifestyle,33.99,438
+Food and beverages,17.04,439
+Electronic accessories,40.86,440
+Food and beverages,17.44,441
+Sports and travel,88.43,442
+Home and lifestyle,89.21,443
+Fashion accessories,12.78,444
+Sports and travel,19.1,445
+Health and beauty,19.15,446
+Food and beverages,27.66,447
+Fashion accessories,45.74,448
+Health and beauty,27.07,449
+Sports and travel,39.12,450
+Electronic accessories,74.71,451
+Electronic accessories,22.01,452
+Food and beverages,63.61,453
+Health and beauty,25.0,454
+Electronic accessories,20.77,455
+Fashion accessories,29.56,456
+Food and beverages,77.4,457
+Electronic accessories,79.39,458
+Electronic accessories,46.57,459
+Food and beverages,35.89,460
+Food and beverages,40.52,461
+Food and beverages,73.05,462
+Sports and travel,73.95,463
+Food and beverages,22.62,464
+Food and beverages,51.34,465
+Sports and travel,54.55,466
+Health and beauty,37.15,467
+Sports and travel,37.02,468
+Food and beverages,21.58,469
+Electronic accessories,98.84,470
+Home and lifestyle,83.77,471
+Sports and travel,40.05,472
+Fashion accessories,43.13,473
+Health and beauty,72.57,474
+Electronic accessories,64.44,475
+Health and beauty,65.18,476
+Sports and travel,33.26,477
+Electronic accessories,84.07,478
+Sports and travel,34.37,479
+Electronic accessories,38.6,480
+Food and beverages,65.97,481
+Electronic accessories,32.8,482
+Sports and travel,37.14,483
+Home and lifestyle,60.38,484
+Sports and travel,36.98,485
+Sports and travel,49.49,486
+Fashion accessories,41.09,487
+Fashion accessories,37.15,488
+Home and lifestyle,22.96,489
+Home and lifestyle,77.68,490
+Fashion accessories,34.7,491
+Fashion accessories,19.66,492
+Health and beauty,25.32,493
+Home and lifestyle,12.12,494
+Fashion accessories,99.89,495
+Sports and travel,75.92,496
+Electronic accessories,63.22,497
+Food and beverages,90.24,498
+Sports and travel,98.13,499
+Sports and travel,51.52,500
+Sports and travel,73.97,501
+Fashion accessories,31.9,502
+Home and lifestyle,69.4,503
+Sports and travel,93.31,504
+Sports and travel,88.45,505
+Electronic accessories,24.18,506
+Sports and travel,48.5,507
+Food and beverages,84.05,508
+Health and beauty,61.29,509
+Home and lifestyle,15.95,510
+Sports and travel,90.74,511
+Home and lifestyle,42.91,512
+Fashion accessories,54.28,513
+Electronic accessories,99.55,514
+Sports and travel,58.39,515
+Fashion accessories,51.47,516
+Health and beauty,54.86,517
+Home and lifestyle,39.39,518
+Home and lifestyle,34.73,519
+Sports and travel,71.92,520
+Electronic accessories,45.71,521
+Home and lifestyle,83.17,522
+Home and lifestyle,37.44,523
+Health and beauty,62.87,524
+Food and beverages,81.71,525
+Sports and travel,91.41,526
+Fashion accessories,39.21,527
+Fashion accessories,59.86,528
+Food and beverages,54.36,529
+Sports and travel,98.09,530
+Health and beauty,25.43,531
+Fashion accessories,86.68,532
+Electronic accessories,22.95,533
+Food and beverages,16.31,534
+Home and lifestyle,28.32,535
+Home and lifestyle,16.67,536
+Fashion accessories,73.96,537
+Home and lifestyle,97.94,538
+Fashion accessories,73.05,539
+Food and beverages,87.48,540
+Home and lifestyle,30.68,541
+Health and beauty,75.88,542
+Sports and travel,20.18,543
+Electronic accessories,18.77,544
+Food and beverages,71.2,545
+Home and lifestyle,38.81,546
+Fashion accessories,29.42,547
+Sports and travel,60.95,548
+Sports and travel,51.54,549
+Electronic accessories,66.06,550
+Fashion accessories,57.27,551
+Fashion accessories,54.31,552
+Health and beauty,58.24,553
+Electronic accessories,22.21,554
+Electronic accessories,19.32,555
+Home and lifestyle,37.48,556
+Fashion accessories,72.04,557
+Food and beverages,98.52,558
+Food and beverages,41.66,559
+Home and lifestyle,72.42,560
+Electronic accessories,21.58,561
+Food and beverages,89.2,562
+Electronic accessories,42.42,563
+Electronic accessories,74.51,564
+Fashion accessories,99.25,565
+Food and beverages,81.21,566
+Sports and travel,49.33,567
+Fashion accessories,65.74,568
+Fashion accessories,79.86,569
+Sports and travel,73.98,570
+Home and lifestyle,82.04,571
+Sports and travel,26.67,572
+Food and beverages,10.13,573
+Food and beverages,72.39,574
+Sports and travel,85.91,575
+Fashion accessories,81.31,576
+Food and beverages,60.3,577
+Food and beverages,31.77,578
+Health and beauty,64.27,579
+Health and beauty,69.51,580
+Food and beverages,27.22,581
+Health and beauty,77.68,582
+Fashion accessories,92.98,583
+Fashion accessories,18.08,584
+Sports and travel,63.06,585
+Health and beauty,51.71,586
+Food and beverages,52.34,587
+Sports and travel,43.06,588
+Fashion accessories,59.61,589
+Health and beauty,14.62,590
+Health and beauty,46.53,591
+Home and lifestyle,24.24,592
+Sports and travel,45.58,593
+Sports and travel,75.2,594
+Sports and travel,96.8,595
+Health and beauty,14.82,596
+Food and beverages,52.2,597
+Sports and travel,46.66,598
+Fashion accessories,36.85,599
+Home and lifestyle,70.32,600
+Electronic accessories,83.08,601
+Fashion accessories,64.99,602
+Food and beverages,77.56,603
+Sports and travel,54.51,604
+Fashion accessories,51.89,605
+Home and lifestyle,31.75,606
+Fashion accessories,53.65,607
+Food and beverages,49.79,608
+Fashion accessories,30.61,609
+Food and beverages,57.89,610
+Electronic accessories,28.96,611
+Food and beverages,98.97,612
+Fashion accessories,93.22,613
+Sports and travel,80.93,614
+Food and beverages,67.45,615
+Sports and travel,38.72,616
+Sports and travel,72.6,617
+Electronic accessories,87.91,618
+Food and beverages,98.53,619
+Fashion accessories,43.46,620
+Food and beverages,71.68,621
+Food and beverages,91.61,622
+Home and lifestyle,94.59,623
+Fashion accessories,83.25,624
+Fashion accessories,91.35,625
+Food and beverages,78.88,626
+Sports and travel,60.87,627
+Health and beauty,82.58,628
+Home and lifestyle,53.3,629
+Fashion accessories,12.09,630
+Sports and travel,64.19,631
+Electronic accessories,78.31,632
+Food and beverages,83.77,633
+Home and lifestyle,99.7,634
+Food and beverages,79.91,635
+Health and beauty,66.47,636
+Health and beauty,28.95,637
+Electronic accessories,46.2,638
+Food and beverages,17.63,639
+Fashion accessories,52.42,640
+Food and beverages,98.79,641
+Electronic accessories,88.55,642
+Electronic accessories,55.67,643
+Food and beverages,72.52,644
+Electronic accessories,12.05,645
+Home and lifestyle,19.36,646
+Health and beauty,70.21,647
+Fashion accessories,33.63,648
+Sports and travel,15.49,649
+Electronic accessories,24.74,650
+Electronic accessories,75.66,651
+Health and beauty,55.81,652
+Home and lifestyle,72.78,653
+Sports and travel,37.32,654
+Fashion accessories,60.18,655
+Electronic accessories,15.69,656
+Electronic accessories,99.69,657
+Fashion accessories,88.15,658
+Sports and travel,27.93,659
+Fashion accessories,55.45,660
+Sports and travel,42.97,661
+Sports and travel,17.14,662
+Fashion accessories,58.75,663
+Food and beverages,87.1,664
+Sports and travel,98.8,665
+Fashion accessories,48.63,666
+Food and beverages,57.74,667
+Health and beauty,17.97,668
+Health and beauty,47.71,669
+Sports and travel,40.62,670
+Fashion accessories,56.04,671
+Food and beverages,93.4,672
+Health and beauty,73.41,673
+Health and beauty,33.64,674
+Electronic accessories,45.48,675
+Fashion accessories,83.77,676
+Sports and travel,64.08,677
+Food and beverages,73.47,678
+Health and beauty,58.95,679
+Food and beverages,48.5,680
+Electronic accessories,39.48,681
+Sports and travel,34.81,682
+Fashion accessories,49.32,683
+Fashion accessories,21.48,684
+Sports and travel,23.08,685
+Home and lifestyle,49.1,686
+Sports and travel,64.83,687
+Home and lifestyle,63.56,688
+Sports and travel,72.88,689
+Food and beverages,67.1,690
+Sports and travel,70.19,691
+Food and beverages,55.04,692
+Health and beauty,48.63,693
+Fashion accessories,73.38,694
+Food and beverages,52.6,695
+Home and lifestyle,87.37,696
+Sports and travel,27.04,697
+Home and lifestyle,62.19,698
+Electronic accessories,69.58,699
+Home and lifestyle,97.5,700
+Fashion accessories,60.41,701
+Food and beverages,32.32,702
+Fashion accessories,19.77,703
+Health and beauty,80.47,704
+Home and lifestyle,88.39,705
+Health and beauty,71.77,706
+Electronic accessories,43.0,707
+Food and beverages,68.98,708
+Fashion accessories,15.62,709
+Sports and travel,25.7,710
+Food and beverages,80.62,711
+Home and lifestyle,75.53,712
+Electronic accessories,77.63,713
+Health and beauty,13.85,714
+Fashion accessories,98.7,715
+Health and beauty,35.68,716
+Fashion accessories,71.46,717
+Electronic accessories,11.94,718
+Fashion accessories,45.38,719
+Fashion accessories,17.48,720
+Fashion accessories,25.56,721
+Sports and travel,90.63,722
+Home and lifestyle,44.12,723
+Food and beverages,36.77,724
+Food and beverages,23.34,725
+Health and beauty,28.5,726
+Home and lifestyle,55.57,727
+Sports and travel,69.74,728
+Fashion accessories,97.26,729
+Home and lifestyle,52.18,730
+Fashion accessories,22.32,731
+Health and beauty,56.0,732
+Fashion accessories,19.7,733
+Electronic accessories,75.88,734
+Food and beverages,53.72,735
+Health and beauty,81.95,736
+Home and lifestyle,81.2,737
+Electronic accessories,58.76,738
+Electronic accessories,91.56,739
+Home and lifestyle,93.96,740
+Home and lifestyle,55.61,741
+Food and beverages,84.83,742
+Sports and travel,71.63,743
+Home and lifestyle,37.69,744
+Sports and travel,31.67,745
+Food and beverages,38.42,746
+Fashion accessories,65.23,747
+Home and lifestyle,10.53,748
+Home and lifestyle,12.29,749
+Health and beauty,81.23,750
+Food and beverages,27.28,751
+Electronic accessories,17.42,752
+Home and lifestyle,73.28,753
+Fashion accessories,84.87,754
+Fashion accessories,97.29,755
+Electronic accessories,35.74,756
+Home and lifestyle,96.52,757
+Food and beverages,18.85,758
+Food and beverages,55.39,759
+Food and beverages,77.2,760
+Electronic accessories,72.13,761
+Fashion accessories,63.88,762
+Health and beauty,10.69,763
+Health and beauty,55.5,764
+Home and lifestyle,95.46,765
+Fashion accessories,76.06,766
+Sports and travel,13.69,767
+Electronic accessories,95.64,768
+Home and lifestyle,11.43,769
+Sports and travel,95.54,770
+Health and beauty,85.87,771
+Sports and travel,67.99,772
+Food and beverages,52.42,773
+Food and beverages,65.65,774
+Food and beverages,28.86,775
+Health and beauty,65.31,776
+Sports and travel,93.38,777
+Sports and travel,25.25,778
+Electronic accessories,87.87,779
+Health and beauty,21.8,780
+Sports and travel,94.76,781
+Fashion accessories,30.62,782
+Home and lifestyle,44.01,783
+Health and beauty,10.16,784
+Electronic accessories,74.58,785
+Electronic accessories,71.89,786
+Health and beauty,10.99,787
+Health and beauty,60.47,788
+Sports and travel,58.91,789
+Fashion accessories,46.41,790
+Health and beauty,68.55,791
+Home and lifestyle,97.37,792
+Electronic accessories,92.6,793
+Electronic accessories,46.61,794
+Fashion accessories,27.18,795
+Home and lifestyle,60.87,796
+Sports and travel,24.49,797
+Health and beauty,92.78,798
+Home and lifestyle,86.69,799
+Sports and travel,23.01,800
+Electronic accessories,30.2,801
+Fashion accessories,67.39,802
+Fashion accessories,48.96,803
+Electronic accessories,75.59,804
+Home and lifestyle,77.47,805
+Sports and travel,93.18,806
+Electronic accessories,50.23,807
+Health and beauty,17.75,808
+Fashion accessories,62.18,809
+Health and beauty,10.75,810
+Electronic accessories,40.26,811
+Sports and travel,64.97,812
+Electronic accessories,95.15,813
+Electronic accessories,48.62,814
+Food and beverages,53.21,815
+Fashion accessories,45.44,816
+Food and beverages,33.88,817
+Health and beauty,96.16,818
+Food and beverages,47.16,819
+Home and lifestyle,47.68,820
+Sports and travel,10.17,821
+Health and beauty,68.71,822
+Sports and travel,60.08,823
+Sports and travel,22.01,824
+Health and beauty,72.11,825
+Fashion accessories,41.28,826
+Electronic accessories,64.95,827
+Electronic accessories,74.22,828
+Electronic accessories,10.56,829
+Health and beauty,62.57,830
+Sports and travel,11.85,831
+Health and beauty,91.3,832
+Home and lifestyle,40.73,833
+Fashion accessories,52.38,834
+Fashion accessories,38.54,835
+Sports and travel,44.63,836
+Electronic accessories,55.87,837
+Sports and travel,29.22,838
+Fashion accessories,51.94,839
+Electronic accessories,60.3,840
+Sports and travel,39.47,841
+Food and beverages,14.87,842
+Fashion accessories,21.32,843
+Electronic accessories,93.78,844
+Electronic accessories,73.26,845
+Sports and travel,22.38,846
+Food and beverages,72.88,847
+Fashion accessories,99.1,848
+Fashion accessories,74.1,849
+Fashion accessories,98.48,850
+Health and beauty,53.19,851
+Electronic accessories,52.79,852
+Health and beauty,95.95,853
+Fashion accessories,36.51,854
+Food and beverages,21.12,855
+Home and lifestyle,28.31,856
+Health and beauty,57.59,857
+Food and beverages,47.63,858
+Home and lifestyle,86.27,859
+Sports and travel,12.76,860
+Home and lifestyle,11.28,861
+Home and lifestyle,51.07,862
+Electronic accessories,79.59,863
+Health and beauty,33.81,864
+Sports and travel,90.53,865
+Health and beauty,62.82,866
+Food and beverages,24.31,867
+Sports and travel,64.59,868
+Food and beverages,24.82,869
+Fashion accessories,56.5,870
+Electronic accessories,21.43,871
+Sports and travel,89.06,872
+Home and lifestyle,23.29,873
+Home and lifestyle,65.26,874
+Fashion accessories,52.35,875
+Electronic accessories,39.75,876
+Electronic accessories,90.02,877
+Electronic accessories,12.1,878
+Food and beverages,33.21,879
+Fashion accessories,10.18,880
+Sports and travel,31.99,881
+Food and beverages,83.34,882
+Food and beverages,87.9,883
+Electronic accessories,73.47,884
+Fashion accessories,12.19,885
+Sports and travel,76.92,886
+Health and beauty,83.66,887
+Electronic accessories,57.91,888
+Fashion accessories,92.49,889
+Electronic accessories,28.38,890
+Electronic accessories,50.45,891
+Health and beauty,99.16,892
+Fashion accessories,60.74,893
+Food and beverages,47.27,894
+Health and beauty,85.6,895
+Food and beverages,35.04,896
+Electronic accessories,44.84,897
+Home and lifestyle,45.97,898
+Health and beauty,27.73,899
+Food and beverages,11.53,900
+Health and beauty,58.32,901
+Health and beauty,84.61,902
+Health and beauty,82.88,903
+Food and beverages,79.54,904
+Home and lifestyle,49.01,905
+Food and beverages,29.15,906
+Electronic accessories,56.13,907
+Home and lifestyle,93.12,908
+Fashion accessories,51.34,909
+Food and beverages,99.6,910
+Electronic accessories,35.49,911
+Sports and travel,42.85,912
+Fashion accessories,94.67,913
+Home and lifestyle,68.97,914
+Home and lifestyle,35.79,915
+Home and lifestyle,16.37,916
+Home and lifestyle,12.73,917
+Sports and travel,83.14,918
+Sports and travel,35.22,919
+Electronic accessories,13.78,920
+Sports and travel,88.31,921
+Health and beauty,39.62,922
+Electronic accessories,88.25,923
+Sports and travel,25.31,924
+Home and lifestyle,99.92,925
+Fashion accessories,83.35,926
+Food and beverages,74.44,927
+Health and beauty,64.08,928
+Home and lifestyle,63.15,929
+Home and lifestyle,85.72,930
+Health and beauty,78.89,931
+Sports and travel,89.48,932
+Health and beauty,92.09,933
+Food and beverages,57.29,934
+Food and beverages,66.52,935
+Home and lifestyle,45.68,936
+Health and beauty,50.79,937
+Health and beauty,10.08,938
+Electronic accessories,93.88,939
+Electronic accessories,84.25,940
+Fashion accessories,53.78,941
+Home and lifestyle,35.81,942
+Food and beverages,26.43,943
+Health and beauty,39.91,944
+Home and lifestyle,21.9,945
+Food and beverages,62.85,946
+Food and beverages,21.04,947
+Home and lifestyle,65.91,948
+Fashion accessories,42.57,949
+Food and beverages,50.49,950
+Electronic accessories,46.02,951
+Home and lifestyle,15.8,952
+Food and beverages,98.66,953
+Fashion accessories,91.98,954
+Electronic accessories,20.89,955
+Fashion accessories,15.5,956
+Electronic accessories,96.82,957
+Food and beverages,33.33,958
+Electronic accessories,38.27,959
+Home and lifestyle,33.3,960
+Home and lifestyle,81.01,961
+Health and beauty,15.8,962
+Electronic accessories,34.49,963
+Food and beverages,84.63,964
+Home and lifestyle,36.91,965
+Electronic accessories,87.08,966
+Home and lifestyle,80.08,967
+Fashion accessories,86.13,968
+Fashion accessories,49.92,969
+Food and beverages,74.66,970
+Food and beverages,26.6,971
+Electronic accessories,25.45,972
+Food and beverages,67.77,973
+Food and beverages,59.59,974
+Health and beauty,58.15,975
+Sports and travel,97.48,976
+Health and beauty,99.96,977
+Electronic accessories,96.37,978
+Fashion accessories,63.71,979
+Health and beauty,14.76,980
+Health and beauty,62.0,981
+Electronic accessories,82.34,982
+Health and beauty,75.37,983
+Food and beverages,56.56,984
+Sports and travel,76.6,985
+Electronic accessories,58.03,986
+Fashion accessories,17.49,987
+Electronic accessories,60.95,988
+Health and beauty,40.35,989
+Home and lifestyle,97.38,990
+Food and beverages,31.84,991
+Home and lifestyle,65.82,992
+Fashion accessories,88.34,993
