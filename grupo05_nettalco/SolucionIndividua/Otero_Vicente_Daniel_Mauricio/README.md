@@ -153,6 +153,9 @@ Efectividad de mensajes SMS en reducir el no-show
 El archivo está dentro de la carpeta scripts
 <img width="1319" height="173" alt="Captura de pantalla 2025-12-15 214332" src="https://github.com/user-attachments/assets/34663646-5d4e-42d1-9e5b-15eda6f47d12" />
 
+## Moldelo estrella 
+<img width="1426" height="498" alt="Captura de pantalla 2025-12-16 013146" src="https://github.com/user-attachments/assets/7af8557e-d8f5-4bc1-a961-1fd8b46187ec" />
+
 ## carga de las dimensiones a google cloude 
 
 <img width="1910" height="774" alt="Captura de pantalla 2025-12-16 011456" src="https://github.com/user-attachments/assets/9568b125-de53-4e4c-ace8-1144cf5f7f23" />
