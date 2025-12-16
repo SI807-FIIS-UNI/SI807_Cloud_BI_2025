@@ -357,9 +357,9 @@ Contiene las métricas clave del negocio y las llaves foráneas hacia las dimens
 - `appointmentid`  
 - `paciente_id`  
 - `tiempo_id`  
-- `barrio_id`  
+- `barrio_id`
+- `canal_id`
 - `lead_time` (anticipación en días)  
-- `sms_received`  
 - `no_show`  
 
 ---
@@ -402,6 +402,15 @@ Campos relevantes:
 - Barrio (*Neighbourhood*)  
 
 ---
+
+### `dim_canal`
+
+Permite análisis de influencia del canal sms en la asistencia del paciente.
+
+Campos relevantes:
+
+- SMS recibido
+
 
 ### 📐 Representación del Modelo Estrella
 
@@ -469,6 +478,12 @@ La capa **oro** consolida indicadores agregados listos para visualización, elim
 - Impacto del tiempo de anticipación en la asistencia  
 
 ---
+
+#### ✔ KPI 5 – No-Show por Canal de Confirmación (SMS)
+
+- Impacto del canal de confirmación en la tasa de No-Show
+- Identificación de la efectividad del envío de recordatorios en la asistencia
+
 
 ### Script utilizado
 
@@ -653,6 +668,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
