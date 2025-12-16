@@ -135,12 +135,12 @@ Posibles métricas derivadas (porcentaje de no-show)
 | Comunicación | `dim_communication` | Evaluar el impacto de los recordatorios en la asistencia. | Analizar la efectividad de los mensajes SMS en la reducción del no-show. |
 
 
+## Moldelo estrella 
+<img width="1426" height="498" alt="Captura de pantalla 2025-12-16 013146" src="https://github.com/user-attachments/assets/7af8557e-d8f5-4bc1-a961-1fd8b46187ec" />
+
 ## Proceso ETL 
 El archivo está dentro de la carpeta scripts
 <img width="1319" height="173" alt="Captura de pantalla 2025-12-15 214332" src="https://github.com/user-attachments/assets/34663646-5d4e-42d1-9e5b-15eda6f47d12" />
-
-## Moldelo estrella 
-<img width="1426" height="498" alt="Captura de pantalla 2025-12-16 013146" src="https://github.com/user-attachments/assets/7af8557e-d8f5-4bc1-a961-1fd8b46187ec" />
 
 ## carga de las dimensiones a google cloude 
 
