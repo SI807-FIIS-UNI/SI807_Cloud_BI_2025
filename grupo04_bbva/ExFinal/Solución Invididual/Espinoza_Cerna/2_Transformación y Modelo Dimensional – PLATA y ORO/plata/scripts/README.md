@@ -1,9 +1,8 @@
-# Scripts de procesamiento (Silver y Gold) — PySpark / Databricks
+# Scripts de procesamiento (Silver) — PySpark / Databricks
 
-En esta carpeta se incluyen los scripts en **PySpark** ejecutados en **Databricks** para transformar el dataset **Flight Delay and Causes** siguiendo la lógica de capas:
+En esta carpeta se incluyen los scripts en **PySpark** ejecutados en **Databricks** para transformar el dataset **Flight Delay and Causes** siguiendo la lógica de capa:
 
 - **Silver:** limpieza y estandarización de la tabla Bronze (`flight_delay_bronze`) para generar una tabla Delta consistente (`flight_delay_silver`).
-- **Gold:** construcción de un modelo analítico (dimensiones + tabla de hechos) y cálculo de KPIs para análisis.
 
 ---
 
