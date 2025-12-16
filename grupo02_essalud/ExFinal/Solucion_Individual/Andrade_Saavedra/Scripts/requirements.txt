@@ -1,0 +1,7 @@
+google-cloud-storage
+google-cloud-bigquery
+pandas
+pandas-gbq
+pyarrow
+functions-framework
+gcsfs
