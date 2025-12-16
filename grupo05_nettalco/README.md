@@ -4,6 +4,17 @@ USO DE GCP:
 
 ![1](/grupo05_nettalco/EVIDENCIAS/1.png)
 
+JUSTIFICACION:
+Simplicidad y Escalabilidad: 
+Google Cloud Storage (GCS) ofrece un almacenamiento de objetos altamente duradero y escalable, perfecto para la capa Bronce (Lakehouse).
+
+Capacidades de BI/DW: 
+BigQuery es un Data Warehouse (DW) sin servidor y de alto rendimiento, ideal para las capas Plata y Oro. Su integración nativa con GCS y la herramienta de transformación Dataproc/Dataprep o Cloud Functions/Cloud Run simplifica la arquitectura ETL/ELT.
+
+Visualización: 
+Looker Studio (anteriormente Google Data Studio) ofrece una integración gratuita y nativa con BigQuery.
+
+
 INICIAR EL CLI DE GCP:
 
 Id del proyecto: ef-si807u-20220018k
