@@ -6,9 +6,9 @@ Este repositorio documenta lo realizado **por consola (AWS CLI)** para construir
 
 ---
 
-## 0) Resumen ejecutivo (qué quedó hecho)
+## 0) Resumen ejecutivo
 ✅ **Bronce (3.1)**  
-- Bucket creado (único) en `us-east-1`  
+- Bucket creado en `us-east-1`  
 - Estructura `bronce/raw`, `bronce/processed`, `bronce/curated`  
 - CSV cargado a `bronce/raw`  
 - EDA ejecutado (con workaround de encoding)  
