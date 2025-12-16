@@ -1,3 +1,6 @@
+# Diagrama ERD (Modelo Estrella)
+
+```mermaid
 erDiagram
   DIM_DATE ||--o{ FACT_FLIGHT_DELAY : "date_key (1:N)"
   DIM_CARRIER ||--o{ FACT_FLIGHT_DELAY : "carrier_key (1:N)"
