@@ -50,7 +50,7 @@ El dataset contiene información histórica de citas médicas, incluyendo:
 - Edad, género y condiciones médicas
 - Indicador de asistencia o inasistencia (*No-show*)
 
-**Nota:** El dataset fue cargado mediante CLI directamente a la capa **bronce/raw**.
+**Nota:** El dataset fue cargado mediante CLI directamente a Cloud Shell**.
 
 ```bash 
 curl -L -o ~/noshowappointments.zip  https://www.kaggle.com/api/v1/datasets/download/joniarroba/noshowappointments
@@ -60,13 +60,10 @@ curl -L -o ~/noshowappointments.zip  https://www.kaggle.com/api/v1/datasets/down
 unzip noshowappointments.zip
 ```
 
-```bash
-gsutil cp KaggleV2-May-2016.csv gs://$BUCKET_NAME/bronce/raw/
-```
 
-**[CAPTURA AQUÍ: archivo CSV cargado en bronce/raw vía `gsutil cp`]**
+**[CAPTURA AQUÍ: archivo CSV cargado en Cloud Shell vía `curl` y `unzip`]**
 
-![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201237.png)
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20001730.png)
 
 ---
 
@@ -680,6 +677,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
