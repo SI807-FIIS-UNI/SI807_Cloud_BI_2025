@@ -73,7 +73,7 @@ Una cita médica programada.
 
 Granularidad
 
-👉 1 fila = 1 cita médica
+1 fila = 1 cita médica
 
 Métricas principales
 
