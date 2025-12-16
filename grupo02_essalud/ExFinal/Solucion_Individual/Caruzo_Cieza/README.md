@@ -109,7 +109,7 @@ Power BI
 
 **[CAPTURA AQUÍ: estructura de buckets implementada en CLI]**
 
-![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-15%20201004.png)
+![Diagrama estrella](docs/Captura%20de%20pantalla%202025-12-16%20201004.png)
 
 ---
 
@@ -677,6 +677,7 @@ El enfoque permite **mejorar la toma de decisiones**, reducir pérdidas por inas
 ## 5. Sustentación Técnica Final
 
 > La arquitectura y los dashboards fueron diseñados bajo principios de escalabilidad, trazabilidad y performance, utilizando servicios cloud-native y buenas prácticas de Inteligencia de Negocios.
+
 
 
 
