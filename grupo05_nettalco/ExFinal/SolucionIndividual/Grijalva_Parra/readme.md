@@ -3,6 +3,8 @@
 ## Resumen
 Este repositorio contiene scripts y funciones para desplegar un pipeline ETL sobre Google Cloud (GCP). Incluye ingestión en la capa **bronce**, transformación y modelo dimensional en **plata**, y generación de KPIs en **oro**. Los scripts de despliegue y orquestación se encuentran en la carpeta `scripts`.
 
+Fuente de Datos: https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents?resource=download
+
 ## 1) Selección de nube (Justificación técnica)
 - Nube seleccionada: **Google Cloud Platform (GCP)**.
 - Justificación: los artefactos y comandos presentes usan `gcloud`, `gsutil`, `bq` y `dataproc` — integrar con GCP es natural y ofrece servicios gestionados necesarios: Cloud Storage para el Data Lake, Dataproc para procesos distribuídos (Spark), Cloud Functions para orquestar ETL y BigQuery para almacenamiento analítico y consultas rápidas. GCP facilita escalado, facturación por uso y componentes nativos para cada etapa del pipeline.
