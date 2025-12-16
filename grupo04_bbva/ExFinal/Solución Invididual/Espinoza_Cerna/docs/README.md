@@ -15,4 +15,7 @@ docs/                     # Evidencias globales del proyecto
 
 <img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/429badd9-b2f4-414c-9bcc-1ef93c878ace" />
 
+#  Recursos utilizados
+<img width="1919" height="966" alt="image" src="https://github.com/user-attachments/assets/063a2fd0-a8f2-428f-a1f9-71c7cc5c3cdc" />
+
 
