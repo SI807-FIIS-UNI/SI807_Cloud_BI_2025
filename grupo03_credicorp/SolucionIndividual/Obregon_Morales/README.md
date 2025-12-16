@@ -1,0 +1,123 @@
+# Solución Individual - Examen Final
+
+##  Arquitectura del Pipeline
+
+CSV (Kaggle)  
+|  
+CAPA BRONCE (Azure Blob / Raw)  
+|  
+EDA (Calidad de Datos)  
+|  
+CAPA PLATA (Modelo Estrella)  
+|  
+CAPA ORO (KPIs)  
+|  
+Dashboard POWERBI  
+
+---
+
+##  Capa BRONCE – Ingesta de Datos
+
+Objetivo  
+Almacenar los datos en su forma original, sin transformaciones, garantizando trazabilidad.
+
+Script  
+01_ingesta_bronce.py
+
+Descripción  
+El script:
+- Lee los CSV del dataset de calidad del aire  
+- Crea el contenedor datalake si no existe  
+- Sube los archivos a bronce/raw/  
+- Genera evidencias de ejecución  
+
+Evidencias  
+
+![evidencia1](EvidenciaSubidaCSV.jpeg)
+
+En la nube se visualizan los archivos csv subidos:
+
+![evidencia1](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/feature/grupo03-ExFinal-Obregon-Morales/grupo03_credicorp/SolucionIndividual/Obregon_Morales/aws.jpeg)
+
+---
+
+##  Capa BRONCE – Análisis Exploratorio (EDA)
+
+Objetivo  
+Evaluar la calidad, estructura y comportamiento de los datos antes de la modelación.
+
+Script  
+02_eda_bronce.py
+
+Descripción  
+El EDA analiza:
+- Valores nulos  
+- Tipos de datos  
+- Estadísticas descriptivas  
+- Valores únicos  
+- Correlaciones  
+- Outliers (IQR)  
+
+Evidencias  
+
+![evidencia2](evidencia1.jpeg)
+
+![evidencia6](evidencia4.jpeg)
+---
+
+##  Capa PLATA – Modelo 
+
+Objetivo  
+Transformar los datos crudos en un modelo estrella optimizado para análisis.
+
+Script  
+03_transformacion_plata.py
+
+Modelo Estrella
+
+Tabla de Hechos  
+fact_air_quality  
+- AQI  
+- PM2.5  
+- PM10  
+- NO2  
+- CO  
+- city_id  
+- time_id  
+
+Dimensiones  
+- dim_city  
+- dim_time  
+- dim_contaminant  
+
+Evidencias  
+dimensiones
+![evidencia4](evidencia2.jpeg)
+hechos
+![evidencia3](evidencia3.jpeg)
+
+En la nube se visualizan los archivos csv subidos:
+
+![evidencia1](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/feature/grupo03-ExFinal-Obregon-Morales/grupo03_credicorp/SolucionIndividual/Obregon_Morales/aws%20plata.jpeg)
+
+---
+
+## Capa ORO – KPIs
+
+Objetivo  
+Generar indicadores clave ambientales para la toma de decisiones.
+
+Script  
+04_kpis_oro.py
+
+KPIs Generados  
+- AQI promedio  
+- PM2.5 promedio  
+- PM10 promedio  
+- NO2 promedio  
+- CO promedio  
+- Fecha de proceso  
+
+Evidencias  
+
+![evidencia5](EvidenciaOro.jpg)
