@@ -1,0 +1,3 @@
+🚀 INICIANDO ETL MODELO ESTRELLA (Bucket: bi-examen-final-examen-bi-final-1765847142)
+✅ Columnas corregidas (ej: PM2.5 -> PM2_5)
+❌ ERROR: cannot insert Date, already exists
