@@ -79,6 +79,9 @@ Una vez teniendo el modelo estrella en nuestro servicio BigQuery, generamos KPIs
 ![kpi04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi04.png)
 ![kpi05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/kpi05.png)
 
+![ETL](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/ETL.ipynb)
+
+
 ## 2.4. Evidencias de ETL y Logs 
 
 Se evidencia que se realizo correctamente el proceso ETL y se muestran los logs
@@ -103,6 +106,8 @@ Una vez tenido los KPIS y el modelo Estrella en el BigQuery se procede a entrar 
 ![dashboard03](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard03.png)
 ![dashboard04](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard04.png)
 
+![Kpis](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/Kpis.ipynb)
+
 ## 3.2. Incluir KPIs 
 
 Para la generacion de los graficos tambien se incluyeron los kpis generados por los script de phyton
@@ -110,6 +115,8 @@ Para la generacion de los graficos tambien se incluyeron los kpis generados por 
 ![dashboard05](/grupo10_sutran/ExFinal/SolucionIndividual/Ortiz_Matamoros/docs/dashboard05.png)
 
 Link del Looker: https://lookerstudio.google.com/reporting/329ed44d-f811-4222-ba37-f2e30b2afa53
+
+
 
 ## 3.3. Sustento de diseño
 
