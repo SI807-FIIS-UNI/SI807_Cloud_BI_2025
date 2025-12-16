@@ -1,0 +1,130 @@
+Proyecto: final-espinal-aguilar
+Región: southamerica-west1
+Bucket: final-bucket-espinal-aguilar
+Updated property [core/project].
+Eventarc Service Account: service-595440692498@gcp-sa-eventarc.iam.gserviceaccount.com
+Habilitando APIs necesarias...
+Operation "operations/acat.p2-595440692498-026e2299-a041-4a0a-91aa-51dd219c5a97" finished successfully.
+Creando bucket final-bucket-espinal-aguilar...
+Creating gs://final-bucket-espinal-aguilar/...
+CommandException: The mb command requires a URL that specifies a bucket.
+"gs://final-bucket-espinal-aguilar/resources" is not valid.
+CommandException: The mb command requires a URL that specifies a bucket.
+"gs://final-bucket-espinal-aguilar/raw" is not valid.
+Subiendo SparkJobs...
+Copying file://SparkJobs\jb_medallion.py [Content-Type=text/x-python]...
+- [1 files][  6.9 KiB/  6.9 KiB]
+Operation completed over 1 objects/6.9 KiB.
+Asignando permisos Eventarc sobre el bucket...
+ERROR: Policy modification failed. For a binding with condition, run "gcloud alpha iam policies lint-condition" to identify issues in condition.
+ERROR: (gcloud.projects.add-iam-policy-binding) INVALID_ARGUMENT: Role roles/storage.legacyBucketReader is not supported for this resource.
+Asignando permisos Cloud Storage Service Agent...
+Updated IAM policy for project [final-espinal-aguilar].
+bindings:
+- members:
+  - serviceAccount:service-595440692498@gcp-sa-artifactregistry.iam.gserviceaccount.com
+  role: roles/artifactregistry.serviceAgent
+- members:
+  - serviceAccount:595440692498@cloudbuild.gserviceaccount.com
+  role: roles/cloudbuild.builds.builder
+- members:
+  - serviceAccount:service-595440692498@gcp-sa-cloudbuild.iam.gserviceaccount.com
+  role: roles/cloudbuild.serviceAgent
+- members:
+  - serviceAccount:service-595440692498@gcf-admin-robot.iam.gserviceaccount.com
+  role: roles/cloudfunctions.serviceAgent
+- members:
+  - serviceAccount:service-595440692498@compute-system.iam.gserviceaccount.com
+  role: roles/compute.serviceAgent
+- members:
+  - serviceAccount:service-595440692498@containerregistry.iam.gserviceaccount.com
+  role: roles/containerregistry.ServiceAgent
+- members:
+  - serviceAccount:service-595440692498@dataproc-accounts.iam.gserviceaccount.com
+  role: roles/dataproc.serviceAgent
+- members:
+  - serviceAccount:595440692498-compute@developer.gserviceaccount.com
+  - serviceAccount:595440692498@cloudservices.gserviceaccount.com
+  - serviceAccount:final-espinal-aguilar@appspot.gserviceaccount.com
+  role: roles/editor
+- members:
+  - serviceAccount:service-595440692498@gcp-sa-eventarc.iam.gserviceaccount.com
+  role: roles/eventarc.serviceAgent
+- members:
+  - user:albertmoisesespinal@gmail.com
+  role: roles/owner
+- members:
+  - serviceAccount:service-595440692498@gs-project-accounts.iam.gserviceaccount.com
+  role: roles/pubsub.publisher
+- members:
+  - serviceAccount:service-595440692498@gcp-sa-pubsub.iam.gserviceaccount.com
+  role: roles/pubsub.serviceAgent
+- members:
+  - serviceAccount:service-595440692498@serverless-robot-prod.iam.gserviceaccount.com
+  role: roles/run.serviceAgent
+etag: BwZF-G4KKAg=
+version: 1
+Limpiando notificaciones GCS...
+Desplegando Cloud Function final-dispatcher...
+Preparing function...
+..done.
+Updating function (may take a while)...
+[Build].....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................done
+[Service]...........................................................................................................................................................................................warning
+[Trigger]...........................................................................................................................................................................................................done
+Completed with warnings:
+  [WARNING] Cloud Run service projects/final-espinal-aguilar/locations/southamerica-west1/services/final-dispatcher for the function was not found. The service was redeployed with default values.
+You can view your function in the Cloud Console here: https://console.cloud.google.com/functions/details/southamerica-west1/final-dispatcher?project=final-espinal-aguilar
+
+buildConfig:
+  automaticUpdatePolicy: {}
+  build: projects/595440692498/locations/southamerica-west1/builds/a59496cb-3ffe-4437-87e5-ca8fbb7ad35f
+  dockerRegistry: ARTIFACT_REGISTRY
+  dockerRepository: projects/final-espinal-aguilar/locations/southamerica-west1/repositories/gcf-artifacts
+  entryPoint: final_dispatcher
+  runtime: python310
+  serviceAccount: projects/final-espinal-aguilar/serviceAccounts/595440692498-compute@developer.gserviceaccount.com
+  source:
+    storageSource:
+      bucket: gcf-v2-sources-595440692498-southamerica-west1
+      generation: '1765783181581057'
+      object: final-dispatcher/function-source.zip
+  sourceProvenance:
+    resolvedStorageSource:
+      bucket: gcf-v2-sources-595440692498-southamerica-west1
+      generation: '1765783181581057'
+      object: final-dispatcher/function-source.zip
+createTime: '2025-12-15T07:12:45.403961621Z'
+environment: GEN_2
+eventTrigger:
+  eventFilters:
+  - attribute: bucket
+    value: final-bucket-espinal-aguilar
+  eventType: google.cloud.storage.object.v1.finalized
+  pubsubTopic: projects/final-espinal-aguilar/topics/eventarc-southamerica-west1-final-dispatcher-599019-957
+  retryPolicy: RETRY_POLICY_DO_NOT_RETRY
+  serviceAccountEmail: 595440692498-compute@developer.gserviceaccount.com
+  trigger: projects/final-espinal-aguilar/locations/southamerica-west1/triggers/final-dispatcher-599019
+  triggerRegion: southamerica-west1
+labels:
+  deployment-tool: cli-gcloud
+name: projects/final-espinal-aguilar/locations/southamerica-west1/functions/final-dispatcher
+satisfiesPzi: true
+serviceConfig:
+  allTrafficOnLatestRevision: true
+  availableCpu: '0.3333'
+  availableMemory: 512M
+  environmentVariables:
+    LOG_EXECUTION_ID: 'true'
+  ingressSettings: ALLOW_ALL
+  maxInstanceCount: 6
+  maxInstanceRequestConcurrency: 1
+  revision: final-dispatcher-00001-tus
+  service: projects/final-espinal-aguilar/locations/southamerica-west1/services/final-dispatcher
+  serviceAccountEmail: 595440692498-compute@developer.gserviceaccount.com
+  timeoutSeconds: 60
+  uri: https://final-dispatcher-ndr42aw4wq-tl.a.run.app
+state: ACTIVE
+updateTime: '2025-12-15T07:21:52.812701498Z'
+url: https://southamerica-west1-final-espinal-aguilar.cloudfunctions.net/final-dispatcher
+--- Despliegue completo exitoso
