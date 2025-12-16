@@ -221,7 +221,7 @@ Aquí puedes acceder a los tableros interactivos en vivo:
 ### 🛫 Dashboard 1: Monitor Ejecutivo
 > Visión estratégica del rendimiento y puntualidad de las aerolíneas.
 
-[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_1-4285F4?style=for-the-badge&logo=looker&logoColor=white)](PEGAR_AQUI_TU_LINK_DEL_DASHBOARD_1)
+[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_1-4285F4?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/4660d5a4-bd76-490a-9cb2-ce4a1f4b8ea4)
 
 
 DASHBOARD 2:
@@ -312,7 +312,7 @@ Aquí puedes acceder a los tableros interactivos en vivo:
 ### 📉 Dashboard 2: Análisis de Causas
 > Diagnóstico operativo para identificar causas raíz de los retrasos.
 
-[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_2-EA4335?style=for-the-badge&logo=looker&logoColor=white)](PEGAR_AQUI_TU_LINK_DEL_DASHBOARD_2)
+[![Looker Studio](https://img.shields.io/badge/Looker_Studio-Ver_Dashboard_2-EA4335?style=for-the-badge&logo=looker&logoColor=white)](https://lookerstudio.google.com/reporting/6ade085f-ee13-4af9-a47b-697fedf4a9c4)
 
 # Examen Final – SI807-U  
 **Nombre:** Loayza Segura Roger Salvador  
