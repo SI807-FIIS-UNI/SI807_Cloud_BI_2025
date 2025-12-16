@@ -9,7 +9,7 @@ Para la capa PLATA, implementé un modelo estrella mínimo, compuesto por una ta
 El modelo estrella elimina las complejas uniones en cascada del modelo normalizado (3FN), reduciendo el número de joins a solo tres (uno por dimensión), lo que mejora significativamente el tiempo de respuesta en agregaciones típicas de BI (por ejemplo: "ventas por región y categoría"). Esto es crítico en entornos de visualización interactiva como Power BI o dashboards en React.
 
 2. Simplicidad y claridad para el negocio:
-La estructura estrella —con una tabla central de hechos rodeada de dimensiones descriptivas— es intuitiva para analistas y stakeholders, facilitando la comprensión del modelo sin necesidad de expertise en diseño de bases de datos. Por ejemplo, dim_tiempo expone directamente anio, mes, y dia, evitando cálculos repetitivos en el frontend.
+La estructura estrella —con una tabla central de hechos rodeada de dimensiones descriptivas es intuitiva para analistas y stakeholders, facilitando la comprensión del modelo sin necesidad de expertise en diseño de bases de datos. Por ejemplo, dim_tiempo expone directamente anio, mes, y dia, evitando cálculos repetitivos en el frontend.
 
 3. Escalabilidad horizontal:
 El modelo permite añadir nuevas dimensiones (como dim_ubicacion o dim_promocion) sin alterar la estructura existente, simplemente extendiendo las claves foráneas en f_ventas. Esto garantiza evolución a futuro sin refactorización costosa.
