@@ -5,7 +5,9 @@ USO DE GCP:
 ![1](/grupo05_nettalco/EVIDENCIAS/1.png)
 
 JUSTIFICACION:
-Simplicidad y Escalabilidad: 
+
+Simplicidad y Escalabilidad:
+
 Google Cloud Storage (GCS) ofrece un almacenamiento de objetos altamente duradero y escalable, perfecto para la capa Bronce (Lakehouse).
 
 Capacidades de BI/DW: 
