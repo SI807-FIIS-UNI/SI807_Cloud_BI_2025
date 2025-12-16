@@ -1,4 +1,4 @@
-# SOLUCION EXAMEN FINAL 
+<img width="1919" height="836" alt="image" src="https://github.com/user-attachments/assets/8c4fb51b-9e79-42c3-8837-0ae49cd67a4d" /># SOLUCION EXAMEN FINAL 
 ## 3.1 Ingestión y Estructuración – BRONCE
 ### Seleccion de nube
 - **Escalabilidad y Flexibilidad:** GCP ofrece servicios como Google Dataproc (para procesamiento de grandes volúmenes de datos) y BigQuery (para análisis de datos en tiempo real), lo cual es crucial para manejar y analizar grandes cantidades de datos de ventas, clientes y productos.
@@ -14,11 +14,20 @@ Usando GCP, puedes realizar análisis avanzados en tiempo real, identificar patr
 ### Carga de csv utilizando CLI Y Ejecucion de EDA
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_1.png)
 
-![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_2.png)
+ ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_2.png)
 
 ## 3.2 Transformación y Modelo Dimensional – PLATA y ORO
 ***Se hace una limpieza***
 ![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_10.png?raw=true)
 
+***Creacion de Tablas***
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_11.png?raw=true)
+
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_12.png?raw=true)
+
+![](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/SOLUCION_EXAMEN_FINAL_ALDAVE_REYES/grupo10_sutran/ExFinal/SolucionIndividual/Aldave_Reyes/evidencias_practi_final/Screenshot_13.png?raw=true)
+
 ![]()
 
+
+![]()
