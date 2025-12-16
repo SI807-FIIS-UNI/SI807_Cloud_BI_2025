@@ -78,5 +78,11 @@ print("✅ Capa ORO generada.")
 <img width="2559" height="908" alt="image" src="https://github.com/user-attachments/assets/47ce516f-e320-478d-a351-4cfac744bd4e" />
 
 
+# Logs
+
+Podemos visualizar los log, del notebook EDA_Superstore
+
+<img width="2559" height="1359" alt="image" src="https://github.com/user-attachments/assets/46b13d01-adf5-48c7-9c20-bcf0600ea93d" />
+
 ```bash
 ```
