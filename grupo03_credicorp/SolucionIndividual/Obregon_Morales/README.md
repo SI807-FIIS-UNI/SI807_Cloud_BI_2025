@@ -1,6 +1,6 @@
 # Solución Individual - Examen Final
 
-## 3️⃣ Arquitectura del Pipeline
+##  Arquitectura del Pipeline
 
 CSV (Kaggle)  
 |  
@@ -16,7 +16,7 @@ Dashboard POWERBI
 
 ---
 
-## 4️⃣ Capa BRONCE – Ingesta de Datos
+##  Capa BRONCE – Ingesta de Datos
 
 Objetivo  
 Almacenar los datos en su forma original, sin transformaciones, garantizando trazabilidad.
@@ -33,11 +33,11 @@ El script:
 
 Evidencias  
 
-![evidencia1](evidencia1.jpeg)
+![evidencia1](evidencia5.jpeg)
 
 ---
 
-## 5️⃣ Capa BRONCE – Análisis Exploratorio (EDA)
+##  Capa BRONCE – Análisis Exploratorio (EDA)
 
 Objetivo  
 Evaluar la calidad, estructura y comportamiento de los datos antes de la modelación.
@@ -56,9 +56,8 @@ El EDA analiza:
 
 Evidencias  
 
-![evidencia2](evidencia2.jpeg)
+![evidencia2](evidencia1.jpeg)
 
-![evidencia3](evidencia3.jpeg)
 
 ---
 
@@ -88,8 +87,11 @@ Dimensiones
 - dim_contaminant  
 
 Evidencias  
+dimensiones
+![evidencia4](evidencia2.jpeg)
+hechos
+![evidencia3](evidencia3.jpeg)
 
-![evidencia4](evidencia4.jpeg)
 
 ---
 
