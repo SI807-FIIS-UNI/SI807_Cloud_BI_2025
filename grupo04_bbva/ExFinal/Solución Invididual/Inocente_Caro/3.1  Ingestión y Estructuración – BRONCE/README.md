@@ -1,6 +1,8 @@
 # Iniciamos el login
 
-
+```bash
+az login
+```
 # Creamos las carpetas en la capa bronce
 
   <img width="2167" height="575" alt="image" src="https://github.com/user-attachments/assets/18c4ce5d-648e-4d2c-b0fb-e8d22db99d66" />
@@ -21,38 +23,57 @@ az storage blob upload `
 
 ```bash
 from datetime import datetime
-from pyspark.sql.functions import *
+from pyspark.sql import SparkSession, functions as F
+from pyspark.sql.types import IntegerType, DoubleType
 
-# ✅ Autenticación con clave de acceso (reemplaza KEY1 por tu clave real)
+# Asegurarse de tener SparkSession (en Databricks/Synapse ya existe)
+spark = SparkSession.builder.getOrCreate()
+
+# Configurar clave de Azure
 spark.conf.set(
     "fs.azure.account.key.azuresi807miguel.blob.core.windows.net",
     "YOU_KEY"
 )
 
-df = spark.read.option("header", "true").csv(
-    "wasbs://bronce@azuresi807miguel.blob.core.windows.net/raw/Sample - Superstore.csv"
-)
+print("📥 Leyendo datos RAW desde bronce/raw (sin limpieza)...")
+df_raw = spark.read \
+    .option("header", "true") \
+    .option("inferSchema", "false") \
+    .csv("wasbs://bronce@azuresi807miguel.blob.core.windows.net/raw/Sample - Superstore.csv")
 
+# Marca de tiempo
 start = datetime.now()
 print(f"🕒 EDA ejecutado el: {start.strftime('%Y-%m-%d %H:%M:%S')}")
 
-print("✅ Primeras filas:")
-df.show(3)
+# 1. Primeras filas
+print("\n✅ Primeras 3 filas (datos crudos):")
+df_raw.show(3, truncate=False)
 
-print(f"\n📊 Total filas: {df.count()}")
-print("\n🧩 Esquema:")
-df.printSchema()
+# 2. Total de filas
+total_filas = df_raw.count()
+print(f"\n📊 Total filas en el archivo RAW: {total_filas}")
 
-print("\n1️⃣ Nulos por columna:")
-df.select([count(when(col(c).isNull(), c)).alias(c) for c in df.columns]).show()
+# 3. Esquema (todo es string)
+print("\n🧩 Esquema RAW (sin inferencia):")
+df_raw.printSchema()
 
-print("\n2️⃣ Estadísticas de ventas:")
-df.select("Sales", "Profit").describe().show()
+# 4. Nulos por columna
+print("\n1️⃣ Valores nulos por columna:")
+df_raw.select([F.count(F.when(F.col(c).isNull(), c)).alias(c) for c in df_raw.columns]).show()
 
-print("\n3️⃣ Top 5 categorías por ventas:")
-df.groupBy("Category").agg(sum("Sales").alias("total_sales")).orderBy("total_sales", ascending=False).show()
+# 5. Estadísticas de Sales y Profit (convertir temporalmente a double para análisis)
+print("\n2️⃣ Estadísticas de Sales y Profit (valores crudos):")
+df_temp = df_raw \
+    .withColumn("Sales_num", F.regexp_replace(F.col("Sales"), ",", "").cast("double")) \
+    .withColumn("Profit_num", F.regexp_replace(F.col("Profit"), ",", "").cast("double"))
 
-print(f"\n✅ EDA completado en: {(datetime.now() - start).total_seconds():.2f} seg")
+df_temp.select("Sales_num", "Profit_num").describe().show()
+
+# 6. Top 5 categorías por frecuencia (solo para ver consistencia)
+print("\n3️⃣ Top 5 categorías más frecuentes:")
+df_raw.groupBy("Category").count().orderBy(F.desc("count")).show()
+
+print(f"\n✅ EDA inicial completado en: {(datetime.now() - start).total_seconds():.2f} segundos")
 ```
 
 ## Aqui limpiamos la y lo Guardamos en la ruta bronce/processed
@@ -61,25 +82,42 @@ print(f"\n✅ EDA completado en: {(datetime.now() - start).total_seconds():.2f} 
 
 
 ```bash
-# ✅ Leer desde bronce/raw
-df_raw = spark.read.option("header", "true").option("inferSchema", "true").csv(
-    "wasbs://bronce@azuresi807miguel.blob.core.windows.net/raw/Sample - Superstore.csv"
-)
+print("📥 Leyendo datos RAW desde bronce/raw...")
+df_raw = spark.read \
+    .option("header", "true") \
+    .option("inferSchema", "false") \
+    .csv("wasbs://bronce@azuresi807miguel.blob.core.windows.net/raw/Sample - Superstore.csv")
 
-# ✅ Limpieza mínima (processed): corregir fechas, tipos, nulos críticos
+print("🔧 Aplicando limpieza y tipado explícito...")
 df_processed = df_raw \
-    .withColumn("Order_Date", to_date(col("Order Date"), "M/d/yyyy")) \
-    .withColumn("Ship_Date", to_date(col("Ship Date"), "M/d/yyyy")) \
-    .withColumn("Sales", col("Sales").cast("double")) \
-    .withColumn("Profit", col("Profit").cast("double")) \
-    .filter(col("Order_Date").isNotNull())  # ejemplo de validación
+    .withColumn("Row ID", F.col("Row ID").cast(IntegerType())) \
+    .withColumn("Order ID", F.trim(F.col("Order ID"))) \
+    .withColumn("Order Date", F.to_date(F.col("Order Date"), "M/d/yyyy")) \
+    .withColumn("Ship Date", F.to_date(F.col("Ship Date"), "M/d/yyyy")) \
+    .withColumn("Ship Mode", F.trim(F.col("Ship Mode"))) \
+    .withColumn("Customer ID", F.trim(F.col("Customer ID"))) \
+    .withColumn("Customer Name", F.trim(F.col("Customer Name"))) \
+    .withColumn("Segment", F.trim(F.col("Segment"))) \
+    .withColumn("Country", F.trim(F.col("Country"))) \
+    .withColumn("City", F.trim(F.col("City"))) \
+    .withColumn("State", F.trim(F.col("State"))) \
+    .withColumn("Postal Code", F.col("Postal Code").cast(IntegerType())) \
+    .withColumn("Region", F.trim(F.col("Region"))) \
+    .withColumn("Product ID", F.trim(F.col("Product ID"))) \
+    .withColumn("Category", F.trim(F.col("Category"))) \
+    .withColumn("Sub-Category", F.trim(F.col("Sub-Category"))) \
+    .withColumn("Product Name", F.trim(F.col("Product Name"))) \
+    .withColumn("Sales", F.regexp_replace(F.col("Sales"), ",", "").cast(DoubleType())) \
+    .withColumn("Quantity", F.col("Quantity").cast(IntegerType())) \
+    .withColumn("Discount", F.col("Discount").cast(DoubleType())) \
+    .withColumn("Profit", F.regexp_replace(F.col("Profit"), ",", "").cast(DoubleType())) \
+    .filter(F.col("Order Date").isNotNull())
 
-# ✅ Guardar en bronce/processed/ (como Parquet)
+# Guardar en BRONCE/processed
 df_processed.write.mode("overwrite").parquet(
     "wasbs://bronce@azuresi807miguel.blob.core.windows.net/processed/superstore.parquet"
 )
-
-print("✅ Capa BRONCE/processed generada.")
+print("✅ BRONCE/processed guardado.")
 ```
 ## Validación Adicion y lo Guardamos en la ruta bronce/curated
 
@@ -87,14 +125,16 @@ print("✅ Capa BRONCE/processed generada.")
 
 
 ```bash
-# ✅ Curated: solo órdenes válidas (Sales > 0, Profit razonable)
 df_curated = df_processed \
-    .filter(col("Sales") > 0) \
-    .filter(col("Profit") >= -col("Sales"))  # no pérdida > 100%
+    .filter(F.col("Sales").isNotNull()) \
+    .filter(F.col("Quantity").isNotNull()) \
+    .filter(F.col("Sales") > 0) \
+    .filter(F.col("Quantity") > 0) \
+    .filter(F.col("Profit").isNotNull()) \
+    .filter(F.col("Profit") >= -F.col("Sales"))
 
 df_curated.write.mode("overwrite").parquet(
     "wasbs://bronce@azuresi807miguel.blob.core.windows.net/curated/superstore.parquet"
 )
-
-print("✅ Capa BRONCE/curated generada.")
+print("✅ BRONCE/curated guardado.")
 ```
