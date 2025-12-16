@@ -52,7 +52,7 @@ gcloud config list
 
 ---
 
-## Fase 1: Configuración Básica (15 minutos)
+## Fase 1: Configuración Básica 
 
 ### Paso 1.1: Habilitar APIs necesarias
 
@@ -85,7 +85,7 @@ gcloud config get compute/region
 
 ---
 
-## Fase 2: Cloud Storage con Alta Disponibilidad (10 minutos)
+## Fase 2: Cloud Storage con Alta Disponibilidad 
 
 ### Paso 2.1: Crear bucket principal
 
@@ -189,7 +189,7 @@ gsutil cp gs://$BUCKET_NAME/bronze/test.txt#[NUMERO_GENERACION] \
 
 ---
 
-## Fase 3: Dataproc con Autoscaling (20 minutos)
+## Fase 3: Dataproc con Autoscaling 
 
 ### Paso 3.1: Crear política de autoscaling
 
@@ -307,7 +307,7 @@ gcloud dataproc clusters delete sbs-test-cluster \
 
 ---
 
-## Fase 4: BigQuery con Disaster Recovery (15 minutos)
+## Fase 4: BigQuery con Disaster Recovery 
 
 ### Paso 4.1: Crear datasets en región principal
 
@@ -451,7 +451,7 @@ chmod +x ~/bigquery_backup.sh
 
 ---
 
-## Fase 5: Monitoreo y Alertas (10 minutos)
+## Fase 5: Monitoreo y Alertas
 
 ### Paso 5.1: Crear dashboard de monitoreo
 
@@ -500,7 +500,7 @@ echo "Configurar desde: https://console.cloud.google.com/monitoring/alerting"
 
 ---
 
-## Fase 6: Prueba End-to-End (30 minutos)
+## Fase 6: Prueba End-to-End 
 
 ### Flujo completo de medallion architecture
 
