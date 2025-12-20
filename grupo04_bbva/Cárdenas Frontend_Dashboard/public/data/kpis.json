@@ -1,0 +1,591 @@
+[
+  {
+    "cliente_id": "CLI-001",
+    "nombre_cliente": "Supermercados El Sol S.A.C.",
+    "kpis": [
+      {
+        "id": 1,
+        "nombre": "Revenue Total",
+        "valor": 154300.5,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales generados por todas las transacciones",
+        "metadatos": {
+          "formula": "SUM(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "Ticket Promedio",
+        "valor": 45.2,
+        "unidad": "moneda",
+        "descripcion": "Monto promedio gastado por transacción",
+        "metadatos": {
+          "formula": "AVG(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "Unidades Promedio por Transacción",
+        "valor": 3.5,
+        "unidad": "cantidad",
+        "descripcion": "Cantidad promedio de items vendidos por transacción",
+        "metadatos": {
+          "formula": "AVG(total_items)",
+          "columnas_utilizadas": ["total_items"]
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "Total de Transacciones",
+        "valor": 3415,
+        "unidad": "conteo",
+        "descripcion": "Número total de transacciones realizadas",
+        "metadatos": {
+          "formula": "COUNT(transaction_id)",
+          "columnas_utilizadas": ["transaction_id"]
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "Tasa de Descuento",
+        "valor": 12.5,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones con descuento aplicado",
+        "metadatos": {
+          "formula": "(COUNT(discount_applied = TRUE) / COUNT(*)) * 100",
+          "columnas_utilizadas": ["discount_applied"]
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "Revenue con Descuento",
+        "valor": 19287.5,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales de transacciones con descuento",
+        "metadatos": {
+          "formula": "SUM(total_cost WHERE discount_applied = TRUE)",
+          "columnas_utilizadas": ["total_cost", "discount_applied"]
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "Precio Promedio por Item",
+        "valor": 12.9,
+        "unidad": "moneda",
+        "descripcion": "Precio promedio por unidad vendida",
+        "metadatos": {
+          "formula": "SUM(total_cost) / SUM(total_items)",
+          "columnas_utilizadas": ["total_cost", "total_items"]
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "Transacciones por Cliente",
+        "valor": 1.8,
+        "unidad": "ratio",
+        "descripcion": "Número promedio de compras por cliente",
+        "metadatos": {
+          "formula": "COUNT(transaction_id) / COUNT(DISTINCT cliente_id)",
+          "columnas_utilizadas": ["transaction_id", "cliente_id"]
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "Revenue por Tienda",
+        "valor": [
+          { "tienda_id": "T01", "valor": 50000.0 },
+          { "tienda_id": "T02", "valor": 104300.5 }
+        ],
+        "unidad": "agrupacion",
+        "descripcion": "Ingresos totales por ubicación de tienda",
+        "metadatos": {
+          "formula": "SUM(total_cost) GROUP BY tienda_id",
+          "columnas_utilizadas": ["total_cost", "tienda_id"]
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "Tasa de Conversión de Promociones",
+        "valor": 5.4,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones que usaron alguna promoción",
+        "metadatos": {
+          "formula": "(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100",
+          "columnas_utilizadas": ["promocion_id"]
+        }
+      }
+    ]
+  },
+  {
+    "cliente_id": "CLI-002",
+    "nombre_cliente": "Moda Exclusiva Ltda.",
+    "kpis": [
+      {
+        "id": 1,
+        "nombre": "Revenue Total",
+        "valor": 85000.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales generados por todas las transacciones",
+        "metadatos": {
+          "formula": "SUM(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "Ticket Promedio",
+        "valor": 212.5,
+        "unidad": "moneda",
+        "descripcion": "Monto promedio gastado por transacción",
+        "metadatos": {
+          "formula": "AVG(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "Unidades Promedio por Transacción",
+        "valor": 1.2,
+        "unidad": "cantidad",
+        "descripcion": "Cantidad promedio de items vendidos por transacción",
+        "metadatos": {
+          "formula": "AVG(total_items)",
+          "columnas_utilizadas": ["total_items"]
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "Total de Transacciones",
+        "valor": 400,
+        "unidad": "conteo",
+        "descripcion": "Número total de transacciones realizadas",
+        "metadatos": {
+          "formula": "COUNT(transaction_id)",
+          "columnas_utilizadas": ["transaction_id"]
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "Tasa de Descuento",
+        "valor": 5.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones con descuento aplicado",
+        "metadatos": {
+          "formula": "(COUNT(discount_applied = TRUE) / COUNT(*)) * 100",
+          "columnas_utilizadas": ["discount_applied"]
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "Revenue con Descuento",
+        "valor": 4250.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales de transacciones con descuento",
+        "metadatos": {
+          "formula": "SUM(total_cost WHERE discount_applied = TRUE)",
+          "columnas_utilizadas": ["total_cost", "discount_applied"]
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "Precio Promedio por Item",
+        "valor": 177.08,
+        "unidad": "moneda",
+        "descripcion": "Precio promedio por unidad vendida",
+        "metadatos": {
+          "formula": "SUM(total_cost) / SUM(total_items)",
+          "columnas_utilizadas": ["total_cost", "total_items"]
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "Transacciones por Cliente",
+        "valor": 1.1,
+        "unidad": "ratio",
+        "descripcion": "Número promedio de compras por cliente",
+        "metadatos": {
+          "formula": "COUNT(transaction_id) / COUNT(DISTINCT cliente_id)",
+          "columnas_utilizadas": ["transaction_id", "cliente_id"]
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "Revenue por Tienda",
+        "valor": [{ "tienda_id": "TIENDA-CENTRO", "valor": 85000.0 }],
+        "unidad": "agrupacion",
+        "descripcion": "Ingresos totales por ubicación de tienda",
+        "metadatos": {
+          "formula": "SUM(total_cost) GROUP BY tienda_id",
+          "columnas_utilizadas": ["total_cost", "tienda_id"]
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "Tasa de Conversión de Promociones",
+        "valor": 2.5,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones que usaron alguna promoción",
+        "metadatos": {
+          "formula": "(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100",
+          "columnas_utilizadas": ["promocion_id"]
+        }
+      }
+    ]
+  },
+  {
+    "cliente_id": "CLI-003",
+    "nombre_cliente": "Distribuidora Mayorista Express",
+    "kpis": [
+      {
+        "id": 1,
+        "nombre": "Revenue Total",
+        "valor": 420000.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales generados por todas las transacciones",
+        "metadatos": {
+          "formula": "SUM(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "Ticket Promedio",
+        "valor": 150.0,
+        "unidad": "moneda",
+        "descripcion": "Monto promedio gastado por transacción",
+        "metadatos": {
+          "formula": "AVG(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "Unidades Promedio por Transacción",
+        "valor": 25.0,
+        "unidad": "cantidad",
+        "descripcion": "Cantidad promedio de items vendidos por transacción",
+        "metadatos": {
+          "formula": "AVG(total_items)",
+          "columnas_utilizadas": ["total_items"]
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "Total de Transacciones",
+        "valor": 2800,
+        "unidad": "conteo",
+        "descripcion": "Número total de transacciones realizadas",
+        "metadatos": {
+          "formula": "COUNT(transaction_id)",
+          "columnas_utilizadas": ["transaction_id"]
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "Tasa de Descuento",
+        "valor": 45.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones con descuento aplicado",
+        "metadatos": {
+          "formula": "(COUNT(discount_applied = TRUE) / COUNT(*)) * 100",
+          "columnas_utilizadas": ["discount_applied"]
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "Revenue con Descuento",
+        "valor": 189000.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales de transacciones con descuento",
+        "metadatos": {
+          "formula": "SUM(total_cost WHERE discount_applied = TRUE)",
+          "columnas_utilizadas": ["total_cost", "discount_applied"]
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "Precio Promedio por Item",
+        "valor": 6.0,
+        "unidad": "moneda",
+        "descripcion": "Precio promedio por unidad vendida",
+        "metadatos": {
+          "formula": "SUM(total_cost) / SUM(total_items)",
+          "columnas_utilizadas": ["total_cost", "total_items"]
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "Transacciones por Cliente",
+        "valor": 4.5,
+        "unidad": "ratio",
+        "descripcion": "Número promedio de compras por cliente",
+        "metadatos": {
+          "formula": "COUNT(transaction_id) / COUNT(DISTINCT cliente_id)",
+          "columnas_utilizadas": ["transaction_id", "cliente_id"]
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "Revenue por Tienda",
+        "valor": [
+          { "tienda_id": "ALM-NORTE", "valor": 210000.0 },
+          { "tienda_id": "ALM-SUR", "valor": 210000.0 }
+        ],
+        "unidad": "agrupacion",
+        "descripcion": "Ingresos totales por ubicación de tienda",
+        "metadatos": {
+          "formula": "SUM(total_cost) GROUP BY tienda_id",
+          "columnas_utilizadas": ["total_cost", "tienda_id"]
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "Tasa de Conversión de Promociones",
+        "valor": 30.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones que usaron alguna promoción",
+        "metadatos": {
+          "formula": "(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100",
+          "columnas_utilizadas": ["promocion_id"]
+        }
+      }
+    ]
+  },
+  {
+    "cliente_id": "CLI-004",
+    "nombre_cliente": "Bodega Don Pepe",
+    "kpis": [
+      {
+        "id": 1,
+        "nombre": "Revenue Total",
+        "valor": 12500.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales generados por todas las transacciones",
+        "metadatos": {
+          "formula": "SUM(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "Ticket Promedio",
+        "valor": 8.5,
+        "unidad": "moneda",
+        "descripcion": "Monto promedio gastado por transacción",
+        "metadatos": {
+          "formula": "AVG(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "Unidades Promedio por Transacción",
+        "valor": 2.1,
+        "unidad": "cantidad",
+        "descripcion": "Cantidad promedio de items vendidos por transacción",
+        "metadatos": {
+          "formula": "AVG(total_items)",
+          "columnas_utilizadas": ["total_items"]
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "Total de Transacciones",
+        "valor": 1470,
+        "unidad": "conteo",
+        "descripcion": "Número total de transacciones realizadas",
+        "metadatos": {
+          "formula": "COUNT(transaction_id)",
+          "columnas_utilizadas": ["transaction_id"]
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "Tasa de Descuento",
+        "valor": 2.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones con descuento aplicado",
+        "metadatos": {
+          "formula": "(COUNT(discount_applied = TRUE) / COUNT(*)) * 100",
+          "columnas_utilizadas": ["discount_applied"]
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "Revenue con Descuento",
+        "valor": 250.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales de transacciones con descuento",
+        "metadatos": {
+          "formula": "SUM(total_cost WHERE discount_applied = TRUE)",
+          "columnas_utilizadas": ["total_cost", "discount_applied"]
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "Precio Promedio por Item",
+        "valor": 4.05,
+        "unidad": "moneda",
+        "descripcion": "Precio promedio por unidad vendida",
+        "metadatos": {
+          "formula": "SUM(total_cost) / SUM(total_items)",
+          "columnas_utilizadas": ["total_cost", "total_items"]
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "Transacciones por Cliente",
+        "valor": 5.2,
+        "unidad": "ratio",
+        "descripcion": "Número promedio de compras por cliente",
+        "metadatos": {
+          "formula": "COUNT(transaction_id) / COUNT(DISTINCT cliente_id)",
+          "columnas_utilizadas": ["transaction_id", "cliente_id"]
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "Revenue por Tienda",
+        "valor": [{ "tienda_id": "LOCAL-UNICO", "valor": 12500.0 }],
+        "unidad": "agrupacion",
+        "descripcion": "Ingresos totales por ubicación de tienda",
+        "metadatos": {
+          "formula": "SUM(total_cost) GROUP BY tienda_id",
+          "columnas_utilizadas": ["total_cost", "tienda_id"]
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "Tasa de Conversión de Promociones",
+        "valor": 1.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones que usaron alguna promoción",
+        "metadatos": {
+          "formula": "(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100",
+          "columnas_utilizadas": ["promocion_id"]
+        }
+      }
+    ]
+  },
+  {
+    "cliente_id": "CLI-005",
+    "nombre_cliente": "Tecnología Digital Peru",
+    "kpis": [
+      {
+        "id": 1,
+        "nombre": "Revenue Total",
+        "valor": 350000.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales generados por todas las transacciones",
+        "metadatos": {
+          "formula": "SUM(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 2,
+        "nombre": "Ticket Promedio",
+        "valor": 700.0,
+        "unidad": "moneda",
+        "descripcion": "Monto promedio gastado por transacción",
+        "metadatos": {
+          "formula": "AVG(total_cost)",
+          "columnas_utilizadas": ["total_cost"]
+        }
+      },
+      {
+        "id": 3,
+        "nombre": "Unidades Promedio por Transacción",
+        "valor": 1.5,
+        "unidad": "cantidad",
+        "descripcion": "Cantidad promedio de items vendidos por transacción",
+        "metadatos": {
+          "formula": "AVG(total_items)",
+          "columnas_utilizadas": ["total_items"]
+        }
+      },
+      {
+        "id": 4,
+        "nombre": "Total de Transacciones",
+        "valor": 500,
+        "unidad": "conteo",
+        "descripcion": "Número total de transacciones realizadas",
+        "metadatos": {
+          "formula": "COUNT(transaction_id)",
+          "columnas_utilizadas": ["transaction_id"]
+        }
+      },
+      {
+        "id": 5,
+        "nombre": "Tasa de Descuento",
+        "valor": 20.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones con descuento aplicado",
+        "metadatos": {
+          "formula": "(COUNT(discount_applied = TRUE) / COUNT(*)) * 100",
+          "columnas_utilizadas": ["discount_applied"]
+        }
+      },
+      {
+        "id": 6,
+        "nombre": "Revenue con Descuento",
+        "valor": 70000.0,
+        "unidad": "moneda",
+        "descripcion": "Ingresos totales de transacciones con descuento",
+        "metadatos": {
+          "formula": "SUM(total_cost WHERE discount_applied = TRUE)",
+          "columnas_utilizadas": ["total_cost", "discount_applied"]
+        }
+      },
+      {
+        "id": 7,
+        "nombre": "Precio Promedio por Item",
+        "valor": 466.67,
+        "unidad": "moneda",
+        "descripcion": "Precio promedio por unidad vendida",
+        "metadatos": {
+          "formula": "SUM(total_cost) / SUM(total_items)",
+          "columnas_utilizadas": ["total_cost", "total_items"]
+        }
+      },
+      {
+        "id": 8,
+        "nombre": "Transacciones por Cliente",
+        "valor": 1.1,
+        "unidad": "ratio",
+        "descripcion": "Número promedio de compras por cliente",
+        "metadatos": {
+          "formula": "COUNT(transaction_id) / COUNT(DISTINCT cliente_id)",
+          "columnas_utilizadas": ["transaction_id", "cliente_id"]
+        }
+      },
+      {
+        "id": 9,
+        "nombre": "Revenue por Tienda",
+        "valor": [
+          { "tienda_id": "WEB-STORE", "valor": 250000.0 },
+          { "tienda_id": "LIMA-STORE", "valor": 100000.0 }
+        ],
+        "unidad": "agrupacion",
+        "descripcion": "Ingresos totales por ubicación de tienda",
+        "metadatos": {
+          "formula": "SUM(total_cost) GROUP BY tienda_id",
+          "columnas_utilizadas": ["total_cost", "tienda_id"]
+        }
+      },
+      {
+        "id": 10,
+        "nombre": "Tasa de Conversión de Promociones",
+        "valor": 15.0,
+        "unidad": "porcentaje",
+        "descripcion": "Porcentaje de transacciones que usaron alguna promoción",
+        "metadatos": {
+          "formula": "(COUNT(promocion_id WHERE promotion != 'No Promotion') / COUNT(*)) * 100",
+          "columnas_utilizadas": ["promocion_id"]
+        }
+      }
+    ]
+  }
+]
