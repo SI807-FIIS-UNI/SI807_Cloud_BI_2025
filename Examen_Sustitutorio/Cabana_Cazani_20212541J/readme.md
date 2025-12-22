@@ -57,29 +57,55 @@ La arquitectura sigue la nomenclatura oficial y una organización por capas (Med
         └── proyecto_admision_uni.json     <-- Exportación de Zeppelin Notebook
 ```
 
-  Luego vamos al servicio de Hive para la creación de las tablas, ejecutamos lo siguiente, antes debemos crear nuestra base de datos con créate database db_cepreuni1, en el texto, está el código, expandir para ver el código completo, de igual manera se encuentra el código en el repositorio.
-Link: https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/Carga_tablas_Hive.sql
-Usamos ese archivo para la carga SQL de las tablas de dimensiones y la tabla de hechos
+# ⚙️ Guía de Ejecución y Despliegue Técnico
 
-Luego de crear las tablas nos vamos a usar Spark mediante Zeppelin
-Creamos un nuevo notebook y ejecutamos para la limpieza
-https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Lectura_Limpieza_bloque1.py
-https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Carga_de_dimensiones_bloque2.py
-https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Carga_final_hechos_bloque3.py
-Ejecutamos en ese orden, primero la limpieza, luego la carga de dimensiones y finalmente la carga de hechos, estan ordenados por bloques
+El proceso de implementación sigue un flujo lógico de ingeniería de datos: desde la definición de estructuras en el Data Warehouse hasta la visualización final.
 
-Luego de eso procedemos a crear reportes_kpis para almacenar en curated
-https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/tablas_kpis_curated.sql
-Se corre eso para crear las tablas de los kpis
-Y luego se corre en Zepellin para llenar las tablas, todo será en formato parquet
-https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Llenado%20tablas_kpi.py
-Se ejecuta ese código
+---
 
-Revisando nos daremos cuenta de que se realizó la carga en las carpetas processed y curated en formato parquet, en todas las tablas, luego procedemos a conectar nuestro servicio con Power BI para elaborar los dashboards, para eso debemos descargar un driver ODBC para Apache Hive.
+### 1. 🗄️ Configuración del Data Warehouse (Apache Hive)
+Antes de procesar los datos con Spark, preparamos el entorno en **Hive**. Primero, creamos la base de datos y luego ejecutamos el script DDL para definir las tablas del modelo estrella.
 
-https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-4.html
+* **Paso A:** Crear la base de datos: 
+    ```sql
+    CREATE DATABASE db_cepreuni1;
+    ```
+* **Paso B:** Ejecutar la creación de tablas (Hechos y Dimensiones):
+    * [🔗 Script SQL: Carga de Tablas Hive](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/Carga_tablas_Hive.sql)
 
-Configuramos la conexión de Apache para poder conectarnos con el Power BI.
-Vamos a obtener datos, escribimos ODBS, seleccionamos Hive, que acabamos de crear y nos mostrará las tablas de nuestra base de datos creada.
-Luego procedemos a crear los Dashboards, para visualizar los dashboards se puede ir al siguiente Link
+---
+
+### 2. ⚡ Procesamiento ETL con Apache Spark (Zeppelin)
+Utilizamos **PySpark** dentro de Apache Zeppelin para transformar los datos crudos. Los scripts están organizados por bloques y deben ejecutarse en el siguiente orden:
+
+1.  **Bloque 1: Lectura y Limpieza** Lectura del CSV desde la capa *Raw* y aplicación de filtros de calidad.  
+    * [📄 Script: Lectura_Limpieza_bloque1.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Lectura_Limpieza_bloque1.py)
+2.  **Bloque 2: Carga de Dimensiones** Generación de tablas maestras y almacenamiento en la capa `processed`.  
+    * [📄 Script: Carga_de_dimensiones_bloque2.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Carga_de_dimensiones_bloque2.py)
+3.  **Bloque 3: Carga de Hechos** Carga final de la tabla `fact_admision` integrando las llaves foráneas.  
+    * [📄 Script: Carga_final_hechos_bloque3.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Carga_final_hechos_bloque3.py)
+
+---
+
+### 3. 📊 Generación de KPIs (Capa Curated)
+Para asegurar la rapidez del Dashboard, se calculan los KPIs y se almacenan físicamente en formato **Parquet**:
+
+1.  **Esquema de Reportes:** [🔗 Script SQL: tablas_kpis_curated.sql](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/tablas_kpis_curated.sql)
+2.  **Proceso de Llenado:** [📄 Script PySpark: Llenado_tablas_kpi.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Llenado%20tablas_kpi.py)
+
+---
+
+### 4. 📈 Conectividad y Visualización (Power BI)
+La conexión entre el ecosistema Hadoop y la capa de BI se realiza mediante protocolos estándar:
+
+* **Driver ODBC:** Se requiere la instalación del conector de Cloudera para Hive.  
+    * [⬇️ Descargar Cloudera ODBC Driver for Apache Hive](https://www.cloudera.com/downloads/connectors/hive/odbc/2-6-4.html)
+* **Configuración en Power BI:**
+    1.  Ir a **Obtener Datos** > **ODBC**.
+    2.  Seleccionar el DSN configurado para el servidor Hive.
+    3.  Importar las tablas de la base de datos `db_cepreuni1`.
+* **Acceso al Dashboard:** Puedes visualizar los resultados finales en el siguiente enlace:
+    * [🔗 Ver Dashboard de Power BI](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/tree/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/dashboards)
+
+---
 
