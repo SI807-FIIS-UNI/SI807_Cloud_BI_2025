@@ -94,8 +94,19 @@ Para asegurar la rapidez del Dashboard, se calculan los KPIs y se almacenan fís
 2.  **Proceso de Llenado:** [📄 Script PySpark: Llenado_tablas_kpi.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Llenado%20tablas_kpi.py)
 
 ---
+## 4. 🔍 Consultas Analíticas en Hive (Ad-hoc)
 
-### 4. 📈 Conectividad y Visualización (Power BI)
+Además de la visualización automatizada, la arquitectura permite realizar consultas directas sobre el Data Warehouse en **Apache Hive** para análisis específicos. Se han diseñado scripts SQL optimizados para responder preguntas de negocio críticas:
+
+* **Análisis de Demanda por Carrera:** Consulta para identificar el volumen de postulantes y la competitividad por cada especialidad académica.
+    * [🔗 Script SQL: Consulta_postulantes_carrera.sql](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/Consulta_postulantes_carrera.sql)
+
+* **Análisis de Rendimiento (Notas):** Consulta orientada a obtener el ranking de puntajes y promedios para evaluar el nivel académico del proceso.
+    * [🔗 Script SQL: Consulta_postulantes_nota.sql](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/sql/Consulta_postulantes_nota.sql)
+
+> **Nota:** Estas consultas aprovechan las llaves foráneas y el particionamiento de las tablas en formato **Parquet** para devolver resultados en milisegundos.
+
+### 5. 📈 Conectividad y Visualización (Power BI)
 La conexión entre el ecosistema Hadoop y la capa de BI se realiza mediante protocolos estándar:
 
 * **Driver ODBC:** Se requiere la instalación del conector de Cloudera para Hive.  
@@ -106,6 +117,13 @@ La conexión entre el ecosistema Hadoop y la capa de BI se realiza mediante prot
     3.  Importar las tablas de la base de datos `db_cepreuni1`.
 * **Acceso al Dashboard:** Puedes visualizar los resultados finales en el siguiente enlace:
     * [🔗 Ver Dashboard de Power BI](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/tree/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/dashboards)
+
+Puede consultar el informe técnico para la configuración exacta de la conexión del Hive en el apartado de reproducibilidad.
+## 📄 Documentación del Proyecto
+
+Para un análisis detallado de la metodología, el diseño del modelo dimensional y la interpretación de los resultados, puede consultar el informe técnico oficial del proyecto:
+
+* **Informe Técnico Final:** [📕 Descargar PDF - Informe_Tecnico_Cabana_Gabriel.pdf](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/docs/Informe_Tecnico_Cabana_Gabriel.pdf)
 
 ---
 
