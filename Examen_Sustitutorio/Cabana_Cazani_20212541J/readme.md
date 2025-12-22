@@ -94,6 +94,7 @@ Para asegurar la rapidez del Dashboard, se calculan los KPIs y se almacenan fís
 2.  **Proceso de Llenado:** [📄 Script PySpark: Llenado_tablas_kpi.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Llenado%20tablas_kpi.py)
 
 ---
+
 ## 4. 🔍 Consultas Analíticas en Hive (Ad-hoc)
 
 Además de la visualización automatizada, la arquitectura permite realizar consultas directas sobre el Data Warehouse en **Apache Hive** para análisis específicos. Se han diseñado scripts SQL optimizados para responder preguntas de negocio críticas:
@@ -106,7 +107,22 @@ Además de la visualización automatizada, la arquitectura permite realizar cons
 
 > **Nota:** Estas consultas aprovechan las llaves foráneas y el particionamiento de las tablas en formato **Parquet** para devolver resultados en milisegundos.
 
-### 5. 📈 Conectividad y Visualización (Power BI)
+## 5. 📤 Exportación de Resultados (Capa de Salida)
+
+Para garantizar la portabilidad de los datos y facilitar auditorías externas, se han desarrollado scripts de **PySpark** que convierten las tablas finales de formato **Parquet** a archivos **CSV**. Estos archivos permiten el consumo de los datos procesados en herramientas de análisis tradicionales.
+
+* **Exportación de Tablas Maestras:** Scripts para convertir el modelo estrella (dimensiones y hechos) a archivos planos.
+    * [📄 Script: Exportacion_a_csv.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Exportacion_a_csv.py)
+    * [📄 Script: Exportacion_a_csv1.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Exportacion_a_csv1.py)
+
+* **Exportación de Reportes KPI:** Script específico para extraer los resultados de la capa `curated`.
+    * [📄 Script: Exportacion_reportes_kpi_csv.py](https://github.com/SI807-FIIS-UNI/SI807_Cloud_BI_2025/blob/ExSusti_Cabana_Cazani_20212541J/Examen_Sustitutorio/Cabana_Cazani_20212541J/etl/Exportacion_reportes_kpi_csv.py)
+
+  He incluido scripts de exportación para que los resultados no se queden 'atrapados' en el clúster. Esto permite que la oficina de admisión pueda descargar los rankings de colegios o la lista de ingresantes directamente en archivos CSV para ser abiertos en Excel, asegurando la interoperabilidad de mi solución.
+
+> **Nota:** La exportación se realiza de manera eficiente utilizando el motor de Spark, asegurando que incluso con grandes volúmenes de datos, la estructura se mantenga íntegra en los archivos CSV resultantes.
+
+### 6. 📈 Conectividad y Visualización (Power BI)
 La conexión entre el ecosistema Hadoop y la capa de BI se realiza mediante protocolos estándar:
 
 * **Driver ODBC:** Se requiere la instalación del conector de Cloudera para Hive.  
