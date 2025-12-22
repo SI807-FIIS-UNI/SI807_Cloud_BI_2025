@@ -6,18 +6,6 @@ Este repositorio contiene la infraestructura y el código necesario para despleg
 
 ---
 
-## 📋 Arquitectura de la Solución
-
-El flujo de datos sigue el patrón **ELT (Extract, Load, Transform)**:
-
-1. **Ingesta:** Carga de CSV a Google Cloud Storage (Data Lake).
-2. **Procesamiento:** Limpieza y estandarización con **Dataproc Serverless (PySpark)**.
-3. **Almacenamiento:** Carga a tabla de Staging en **BigQuery**.
-4. **Modelado:** Transformación a Modelo Estrella (SQL) dentro del Data Warehouse.
-5. **Visualización:** Consumo de datos en **Looker Studio**.
-
----
-
 ## 🚀 Guía de Despliegue (Paso a Paso)
 
 Sigue estos bloques de código en tu **Google Cloud Shell** para implementar la solución completa.
