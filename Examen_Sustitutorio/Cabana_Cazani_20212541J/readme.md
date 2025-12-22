@@ -121,6 +121,7 @@ Para garantizar la portabilidad de los datos y facilitar auditorías externas, s
   He incluido scripts de exportación para que los resultados no se queden 'atrapados' en el clúster. Esto permite que la oficina de admisión pueda descargar los rankings de colegios o la lista de ingresantes directamente en archivos CSV para ser abiertos en Excel, asegurando la interoperabilidad de mi solución.
 
 > **Nota:** La exportación se realiza de manera eficiente utilizando el motor de Spark, asegurando que incluso con grandes volúmenes de datos, la estructura se mantenga íntegra en los archivos CSV resultantes.
+> **OJO:** Este proceso se realizo para hacer la subida de archivos a la carpeta data, para la conexión de tablas en formato parquet con el visualizador, se realizo una configuración con un driver, que conecta directamente con mi entorno Hive, en el siguiente punto se explica más detalladamente.
 
 ### 6. 📈 Conectividad y Visualización (Power BI)
 La conexión entre el ecosistema Hadoop y la capa de BI se realiza mediante protocolos estándar:
