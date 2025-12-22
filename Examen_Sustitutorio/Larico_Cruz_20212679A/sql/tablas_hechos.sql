@@ -1,0 +1,14 @@
+
+-- C. TABLA DE HECHOS (FACT TABLE)
+CREATE OR REPLACE TABLE `cepreuni_bi.fact_postulaciones` AS
+SELECT
+    ABS(FARM_FINGERPRINT(CONCAT(CAST(ANIO_POSTULA AS STRING), '-', CAST(CICLO_POSTULA AS STRING)))) as id_tiempo,
+    ABS(FARM_FINGERPRINT(CONCAT(DOMICILIO_DEPA, DOMICILIO_PROV, DOMICILIO_DIST))) as id_ubicacion,
+    ABS(FARM_FINGERPRINT(ESPECIALIDAD)) as id_especialidad,
+    IDHASH as id_postulante_hash,
+    CAST(COALESCE(CALIF_FINAL, 0) AS FLOAT64) as puntaje_final,
+    (CAST(ANIO_POSTULA AS INT64) - CAST(ANIO_NACIMIENTO AS INT64)) as edad,
+    CASE WHEN INGRESO = 'SI' THEN 1 ELSE 0 END as es_ingresante,
+    1 as cantidad_postulacion
+FROM `cepreuni_bi.cepre_uni`
+WHERE ANIO_POSTULA IS NOT NULL;
