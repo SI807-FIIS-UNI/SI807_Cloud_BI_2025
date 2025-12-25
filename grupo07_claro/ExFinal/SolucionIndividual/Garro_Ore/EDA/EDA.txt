@@ -1,0 +1,41 @@
+# 01_eda_bronce.py
+import pandas as pd
+import io
+from google.cloud import storage
+
+# --- CONFIGURACIÓN ---
+BUCKET_NAME = 'examen-final-bi-2025-garroore'
+FILE_PATH = 'bronce/raw/citas_medicas.csv'
+
+def realizar_eda():
+    print("--- INICIANDO EDA (CAPA BRONCE) ---")
+    
+    # 1. Descargar archivo desde GCS a memoria
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+    blob = bucket.blob(FILE_PATH)
+    data = blob.download_as_string()
+    
+    # 2. Cargar en Pandas
+    df = pd.read_csv(io.BytesIO(data))
+    
+    # 3. Análisis de Estructura
+    print(f"\n[INFO] Dimensiones del dataset: {df.shape}")
+    print("\n[INFO] Primeras 5 filas:")
+    print(df.head())
+    
+    # 4. Detección de Nulos
+    print("\n[INFO] Conteo de valores nulos por columna:")
+    nulos = df.isnull().sum()
+    print(nulos[nulos > 0] if nulos.sum() > 0 else "No se encontraron valores nulos.")
+    
+    # 5. Estadísticas Descriptivas
+    print("\n[INFO] Estadísticas de columnas numéricas (Edad, etc):")
+    print(df.describe())
+    
+    # 6. Verificación de Tipos de Dato
+    print("\n[INFO] Tipos de datos detectados:")
+    print(df.dtypes)
+
+if __name__ == "__main__":
+    realizar_eda()

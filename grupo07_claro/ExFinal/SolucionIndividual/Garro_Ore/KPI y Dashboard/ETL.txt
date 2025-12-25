@@ -1,0 +1,85 @@
+# 02_etl_plata.py
+import pandas as pd
+from google.cloud import storage
+
+# --- CONFIGURACIÓN ---
+BUCKET_NAME = 'examen-final-bi-2025-garroore'
+DATASET_ID = 'citas_medicas_dw'
+
+def run_etl_plata():
+    print("--- INICIANDO ETL A CAPA PLATA (BIGQUERY) ---")
+    
+    # 1. Lectura desde Bronce (GCS)
+    path = f'gs://{BUCKET_NAME}/bronce/raw/citas_medicas.csv'
+    df = pd.read_csv(path)
+    
+    # --- LIMPIEZA ---
+    # Renombrar columnas para estandarizar (Snake Case)
+    df.rename(columns={
+        'PatientId': 'paciente_id',
+        'AppointmentID': 'cita_id',
+        'Gender': 'genero',
+        'ScheduledDay': 'fecha_programacion',
+        'AppointmentDay': 'fecha_cita',
+        'Age': 'edad',
+        'Neighbourhood': 'barrio',
+        'Scholarship': 'beca',
+        'Hipertension': 'hipertension',
+        'Diabetes': 'diabetes',
+        'Alcoholism': 'alcoholismo',
+        'Handcap': 'discapacidad', # Corrigiendo typo original 'Handcap'
+        'SMS_received': 'sms_recibido',
+        'No-show': 'no_asistio'
+    }, inplace=True)
+
+    # Convertir fechas
+    df['fecha_programacion'] = pd.to_datetime(df['fecha_programacion']).dt.date
+    df['fecha_cita'] = pd.to_datetime(df['fecha_cita']).dt.date
+    
+    # Convertir Target a Binario (No-show: Yes=1, No=0)
+    df['no_asistio_flag'] = df['no_asistio'].apply(lambda x: 1 if x == 'Yes' else 0)
+    
+    # Limpieza de Edad (eliminar negativos si existen)
+    df = df[df['edad'] >= 0]
+
+    print("Datos limpiados y transformados.")
+
+    # --- MODELADO ESTRELLA ---
+    
+    # Dimensión Paciente (Asumimos última foto del paciente)
+    dim_paciente = df[['paciente_id', 'genero', 'edad', 'beca', 'hipertension', 'diabetes', 'alcoholismo', 'discapacidad']].drop_duplicates(subset=['paciente_id'], keep='last')
+    
+    # Dimensión Lugar
+    dim_lugar = pd.DataFrame(df['barrio'].unique(), columns=['barrio'])
+    dim_lugar['lugar_id'] = range(1, len(dim_lugar) + 1)
+    
+    # Dimensión Tiempo (Basada en fecha cita)
+    fechas = pd.DataFrame(df['fecha_cita'].unique(), columns=['fecha'])
+    fechas['dia_semana'] = pd.to_datetime(fechas['fecha']).dt.day_name()
+    fechas['mes'] = pd.to_datetime(fechas['fecha']).dt.month
+    fechas['anio'] = pd.to_datetime(fechas['fecha']).dt.year
+    dim_tiempo = fechas
+    
+    # Tabla de Hechos (Fact)
+    fact_citas = df[['cita_id', 'paciente_id', 'barrio', 'fecha_cita', 'fecha_programacion', 'sms_recibido', 'no_asistio_flag']]
+    # Calculamos días de anticipación (Lead Time)
+    fact_citas['dias_anticipacion'] = (pd.to_datetime(fact_citas['fecha_cita']) - pd.to_datetime(fact_citas['fecha_programacion'])).dt.days
+
+    # --- CARGA A BIGQUERY ---
+    
+    print("Cargando DIM_PACIENTE...")
+    dim_paciente.to_gbq(f'{DATASET_ID}.dim_paciente', project_id=PROJECT_ID, if_exists='replace')
+    
+    print("Cargando DIM_LUGAR...")
+    dim_lugar.to_gbq(f'{DATASET_ID}.dim_lugar', project_id=PROJECT_ID, if_exists='replace')
+    
+    print("Cargando DIM_TIEMPO...")
+    dim_tiempo.to_gbq(f'{DATASET_ID}.dim_tiempo', project_id=PROJECT_ID, if_exists='replace')
+    
+    print("Cargando FACT_CITAS...")
+    fact_citas.to_gbq(f'{DATASET_ID}.fact_citas', project_id=PROJECT_ID, if_exists='replace')
+    
+    print("--- CARGA PLATA COMPLETADA ---")
+
+if __name__ == "__main__":
+    run_etl_plata()
