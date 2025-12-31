@@ -69,5 +69,31 @@ Para poder replicar y hacer uso del dashboard generado, descargar el archivo ubi
 
 Generar el modelo estrella de la parte 5.
 
+## ✨8. Actualización en tiempo real
+
+En el siguiente enlace se desarrolla un ejemplo de actulización de la base de datos en BigQuery.
+
+El comando SQL usado es el siguiente:
+```sql
+UPDATE `grupo6-scotiabank.oro.hecho_riesgo` hr
+SET hr.valor = 1
+WHERE hr.id_fecha = (
+    SELECT f.id_fecha
+    FROM `grupo6-scotiabank.oro.dim_fecha` f
+    WHERE f.anio = 2018 AND f.mes = 2
+)
+AND hr.id_banco = (
+    SELECT b.id_banco
+    FROM `grupo6-scotiabank.oro.dim_banco` b
+    WHERE b.abreviacion = 'Scotiabank'
+)
+AND hr.id_indicador = 2;
+```
+
+[![Validaciones BigQuery](https://img.youtube.com/vi/uQoriO4Ozig/0.jpg)](https://youtu.be/uQoriO4Ozig)
+
+
+
+
 
 

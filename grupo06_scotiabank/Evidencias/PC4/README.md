@@ -11,6 +11,7 @@ El objetivo de este trabajo es implementar un flujo funcional de sistema de inte
 Información de implementación estructurada de recursos GCP en 👉 [IMPLEMENTACION.md](01_Ambiente_GCP/IMPLEMENTACION.md)
 
 
+
 ### Estructura de Carpetas
 
 ```json
@@ -142,6 +143,90 @@ Para la observabilidad, el servicio de Loggins de GCP esta activado por defecto.
 
 ![Logging](Evidencias_generales/3-Observabilidad.png)
 
+## 📂 3. Carga en Buckets / Data Lake — Evidencias
+
+La carga hacia el Data Lake se realiza a través de tres componentes principales del pipeline. En este documento se separan y referencian las evidencias asociadas a cada etapa para facilitar la trazabilidad y la auditoría.
+
+**Rutas de interés (en el repositorio)**  
+
+
+- [02_WebScraping](02_WebScraping/README.md) — Descarga automática desde SBS  
+- [03_ETL](03_ETL/README.md) — Ingesta, limpieza y carga Bronce (Cloud Function)  
+- [04_DataLake](04_DataLake/README.md) — Organización del Data Lake (raw / trusted / refined)  
+
+---
+
+### 🔗 Módulos y roles en la carga
+
+| Módulo | Rol en la Carga | Ruta de evidencia |
+|--------|-----------------|-------------------|
+| **02_WebScraping** | Descarga automatizada de archivos desde la SBS y BCRP → sube a `gs://.../data/raw/` | [02_WebScraping](02_WebScraping/README.md) |
+| **03_ETL (bronce-dispatcher)** | Ingesta, limpieza inicial y tabulado → inserción a BigQuery (dataset `bronce`) | [03_ETL](03_ETL/README.md) |
+| **04_DataLake** | Organización física y políticas del bucket GCS (raw / trusted / refined) | [04_DataLake](04_DataLake/README.md) |
+
+
+
+### 📁 Detalle de evidencias por etapa
+
+### 🔸 1) Carga inicial — `02_WebScraping`
+- **Qué valida:** Descargas automáticas, scheduling, logs de descarga, CSV de control.
+- **Evidencias incluidas:**
+  - `02_WebScraping/logs/descargas_sbs.csv`
+  - Capturas: `02_WebScraping/evidencias/*.png`
+  - Descripción del scheduler y comandos de despliegue.
+- **Ruta:** [02_WebScraping](02_WebScraping/README.md)
+
+---
+
+### 🔸 2) Ingesta y ETL Bronce — `03_ETL`
+- **Qué valida:** Cloud Function `bronce-dispatcher`, pipelines por reporte (SBS/BCRP), extracción, limpieza y carga a `bronce.*` en BigQuery.
+- **Evidencias incluidas:**
+  - Código fuente: `resources/bronce-dispatcher/`
+  - Outputs de ejecución y logs: `03_ETL/evidencias/`
+  - Capturas de las tablas `bronce.*` en BigQuery.
+- **Ruta:** [03_ETL](03_ETL/README.md)
+
+> **Nota:** El dispatcher identifica el pipeline a ejecutar según el prefijo del archivo y lanza la transformación adecuada (ej. `ratio_liquidez`, `creditos`, `depositos`).
+
+---
+
+### 🔸 3) Organización del Data Lake — `04_DataLake`
+- **Qué valida:** Estructura medallion (`raw / trusted / refined`), versionamiento, lifecycle rules, políticas de retención y seguridad.
+- **Evidencias incluidas:**
+  - Configuración de lifecycle: `04_DataLake/lifecycle.json`
+  - Output de `gsutil versioning get` y `gsutil lifecycle get`
+  - Diagramas y explicación conceptual.
+- **Ruta:** [04_DataLake](04_DataLake/README.md) 
+
+## ☁️ 4. Implementación del ETL en la Nube
+
+Esta sección presenta el flujo completo del **ETL Cloud-Native** desarrollado en Google Cloud Platform, desde la obtención de datos externos hasta su procesamiento analítico final. El pipeline está totalmente automatizado, sin intervenciones manuales, y sigue la arquitectura Medallion (Bronce → Plata → Oro).
+
+---
+
+### 🔁 Flujo General del ETL
+
+```mermaid
+flowchart TD
+    A[02_WebScraping] -->|Archivos XLS/CSV| B[03_ETL - Cloud Function]
+    B -->|Bronce| C[BigQuery]
+    C -->|PySpark| D[05_Procesamiento_Spark - Dataproc]
+    D -->|Plata / Oro| E[BigQuery Analítico]
+    E --> F[Power BI]
+```
+## #📊 Tabla Resumen — Implementación del ETL en la Nube
+
+| Fase del Pipeline | Servicio(s) GCP Utilizado(s) | Entregable / Resultado | Ruta del Detalle Técnico |
+|------------------|-----------------------------|-----------------------|--------------------------|
+| **Extracción** | Cloud Scheduler + Cloud Function | Descarga automatizada de archivos SBS/BCRP hacia el bucket RAW | [02_WebScraping](02_WebScraping/README.md) |
+| **Ingesta y Normalización Inicial** | Cloud Function Gen2 | Limpieza base, metadatos y carga en BigQuery (Bronce) | [03_ETL](03_ETL/README.md) |
+| **Data Lake** | Cloud Storage (GCS) | Organización del Data Lake bajo el modelo **Medallion**: Raw → Trusted → Refined | [04_DataLake](04_DataLake/README.md)  |
+| **Procesamiento Distribuido** | Dataproc Serverless (PySpark) | Construcción de las capas **Plata** (limpieza profunda) y **Oro** (modelo analítico final) | [05_Procesamiento_Spark](05_Procesamiento_Spark/README.md)|
+| **Modelado Analítico** | BigQuery | Tablas finales Oro: hechos, dimensiones, KPIs para BI | [06_BigQuery](06_BigQuery/README.md) |
+| **Visualización** | Power BI | Dashboard conectado directamente al dataset Oro | [07_PowerBI](07_PowerBI/README.md) |
+
+---
+
 
 ## 🧩 5. Consultas SQL y Validación del Modelo de Riesgo
 
@@ -209,3 +294,73 @@ Con la ejecución validada de los scripts:
 | Calidad de datos | 1–3 | Dataset íntegro y consistente |
 | KPIs financieros | 4–6 | Métricas confiables para análisis |
 
+Una vez validado los datos, estos pueden ser consumidos para el análisis.
+
+
+Dashboard de ejemplo en 👉 [07_PowerBI](07_PowerBI/README.md)
+=======
+## 🧩 5. Consultas SQL y Validación del Modelo de Riesgo
+
+Esta sección documenta las validaciones ejecutadas sobre la tabla central de hechos hecho_riesgo y sus dimensiones asociadas dentro del Data Warehouse desarrollado en Google BigQuery.
+
+📘 Evidencia de Validación en [06_BigQuery](06_BigQuery/README.md).
+
+### 🔍 5.1 Validación de Calidad de Datos
+
+
+#### **(Script 1) Validación de valores nulos críticos**
+- Verifica la existencia de registros incompletos en las claves de negocio y campos numéricos.  
+**Objetivo:** asegurar que no existan hechos sin referencia dimensional.
+![Evidencia_SQL1](06_BigQuery/Evidencias/1-SQL-Script1.png)
+
+
+
+#### **(Script 2) Validación semántica contra límites definidos**
+- Clasifica cada valor como **Óptimo / Amarillo / Riesgo** según los umbrales definidos para cada indicador.  
+**Objetivo:** comprobar que los datos se interpretan correctamente antes de alimentar visualizaciones como semáforos o tacómetros en Power BI.
+
+![Evidencia_SQL2](06_BigQuery/Evidencias/1-SQL-Script2.png)
+
+
+#### **(Script 3) Validación de cobertura temporal del dataset**
+- Revisa que cada indicador tenga registros en múltiples periodos, evitando series incompletas.  
+**Objetivo:** garantizar que los análisis evolutivos no tengan huecos que distorsionen el análisis.
+
+![Evidencia_SQL3](06_BigQuery/Evidencias/1-SQL-Script3.png)
+
+
+### 📊 5.2 KPIs y Métricas Financieras
+
+#### **(Script 4) KPI — Promedio histórico del indicador por banco**
+- Calcula el valor medio de cada indicador por entidad bancaria.  
+**Objetivo:** ofrecer una referencia sólida para evaluar el comportamiento relativo de cada banco.
+
+![Evidencia_SQL4](06_BigQuery/Evidencias/1-SQL-Script4.png)
+
+
+#### **(Script 5) KPI — Tendencia mensual (variación porcentual)**
+- Analiza la evolución del valor del indicador mes a mes usando funciones de ventana (`LAG`).  
+**Objetivo:** identificar si la situación financiera del banco mejora o empeora en el tiempo.  
+
+![Evidencia_SQL5](06_BigQuery/Evidencias/1-SQL-Script5.png)
+
+#### **(Script 6) KPI — Consolidado de salud financiera por banco**
+- Resume la cantidad de indicadores en zonas **verde**, **amarilla** y **roja** para cada entidad financiera.  
+**Objetivo:** facilitar una visión global del riesgo institucional y priorizar acciones preventivas.
+
+![Evidencia_SQL6](06_BigQuery/Evidencias/1-SQL-Script6.png)
+
+
+Los resultados obtenidos a partir de estos scripts se encuentran documentados mediante:
+
+✔ Tablas con resultados visibles  
+✔ Video demostrativo del proceso  
+✔ Scripts SQL subidos al repositorio
+
+
+Con la ejecución validada de los scripts:
+
+| Categoría | Scripts | Resultado |
+|----------|---------|-----------|
+| Calidad de datos | 1–3 | Dataset íntegro y consistente |
+| KPIs financieros | 4–6 | Métricas confiables para análisis |
