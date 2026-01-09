@@ -1,0 +1,43 @@
+--- 🔎 REPORTE DE CALIDAD DE DATOS (EDA) ---
+Archivo: gs://bi-examen-final-examen-bi-final-1765847142/bronce/raw/city_day.csv
+
+[1] VISTA PREVIA:
+        City        Date  PM2.5  PM10  ...  Toluene  Xylene  AQI  AQI_Bucket
+0  Ahmedabad  2015-01-01    NaN   NaN  ...     0.02    0.00  NaN         NaN
+1  Ahmedabad  2015-01-02    NaN   NaN  ...     5.50    3.77  NaN         NaN
+2  Ahmedabad  2015-01-03    NaN   NaN  ...    16.40    2.25  NaN         NaN
+
+[3 rows x 16 columns]
+
+[2] ESTRUCTURA:
+Filas: 29531, Columnas: 16
+
+[3] CONTEO DE NULOS (Importante para limpieza):
+PM2.5          4598
+PM10          11140
+NO             3582
+NO2            3585
+NOx            4185
+NH3           10328
+CO             2059
+SO2            3854
+O3             4022
+Benzene        5623
+Toluene        8041
+Xylene        18109
+AQI            4681
+AQI_Bucket     4681
+dtype: int64
+
+[4] ESTADÍSTICAS BÁSICAS (AQI):
+count    24850.000000
+mean       166.463581
+std        140.696585
+min         13.000000
+25%         81.000000
+50%        118.000000
+75%        208.000000
+max       2049.000000
+Name: AQI, dtype: float64
+
+✅ EDA COMPLETADO
