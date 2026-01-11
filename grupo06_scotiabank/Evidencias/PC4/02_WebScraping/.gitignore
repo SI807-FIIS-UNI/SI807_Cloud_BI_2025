@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Cloud Functions
+.gcloudignore
+
+# Local development
+.env
+.venv
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (no subir archivos descargados)
+raw/
+*.xlsx
+*.xls
+*.pdf
+*.csv
+
+# Credentials (NUNCA subir)
+*.json
+!requirements.txt
+*.pem
+*.key
+service-account*.json

@@ -1,0 +1,44 @@
+id_ubicacion,distrito,zona,ubigeo
+1,Ancón,Lima Norte,150102
+2,Carabayllo,Lima Norte,150106
+3,Comas,Lima Norte,150110
+4,Independencia,Lima Norte,150112
+5,Los Olivos,Lima Norte,150117
+6,Puente Piedra,Lima Norte,150125
+7,San Martín de Porres,Lima Norte,150135
+8,Santa Rosa,Lima Norte,150139
+9,Ate,Lima Este,150103
+10,Chaclacayo,Lima Este,150107
+11,Cieneguilla,Lima Este,150109
+12,El Agustino,Lima Este,150111
+13,La Molina,Lima Este,150114
+14,Lurigancho,Lima Este,150118
+15,San Juan de Lurigancho,Lima Este,150132
+16,Santa Anita,Lima Este,150137
+17,San Luis,Lima Este,150134
+18,Barranco,Lima Sur,150104
+19,Chorrillos,Lima Sur,150108
+20,Lurín,Lima Sur,150119
+21,Pachacámac,Lima Sur,150123
+22,Pucusana,Lima Sur,150124
+23,Punta Hermosa,Lima Sur,150126
+24,Punta Negra,Lima Sur,150127
+25,San Bartolo,Lima Sur,150129
+26,San Juan de Miraflores,Lima Sur,150133
+27,Santa María del Mar,Lima Sur,150138
+28,Villa El Salvador,Lima Sur,150142
+29,Villa María del Triunfo,Lima Sur,150143
+30,Lima,Lima Centro,150101
+31,Breña,Lima Centro,150105
+32,Jesús María,Lima Centro,150113
+33,La Victoria,Lima Centro,150115
+34,Lince,Lima Centro,150116
+35,Magdalena del Mar,Lima Centro,150120
+36,Pueblo Libre,Lima Centro,150121
+37,Miraflores,Lima Centro,150122
+38,Rímac,Lima Centro,150128
+39,San Miguel,Lima Centro,150136
+40,San Borja,Lima Centro,150130
+41,San Isidro,Lima Centro,150131
+42,Surquillo,Lima Centro,150141
+43,Santiago de Surco,Lima Centro,150140
