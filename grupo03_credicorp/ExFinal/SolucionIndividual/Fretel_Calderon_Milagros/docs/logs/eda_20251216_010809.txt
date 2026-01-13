@@ -1,0 +1,3 @@
+EDA ejecutado correctamente
+Filas: 1000
+Columnas: 17
