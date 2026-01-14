@@ -1,0 +1,213 @@
+BLOQUE 1 — KPIs FINANCIEROS (RESULTADO DEL NEGOCIO)
+Utilidad Total
+
+Qué mide: resultado total generado.
+
+SELECT SUM(utilidad) AS utilidad_total
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`;
+
+Utilidad Mensual
+
+SELECT
+  df.anio,
+  df.mes_num,
+  SUM(f.utilidad) AS utilidad_mensual
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+  ON f.id_fecha = df.id_fecha
+GROUP BY df.anio, df.mes_num;
+
+Crecimiento Mes a Mes (MoM %)
+
+WITH m AS (
+  SELECT
+    df.anio,
+    df.mes_num,
+    SUM(f.utilidad) AS utilidad
+  FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+  JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+    ON f.id_fecha = df.id_fecha
+  GROUP BY df.anio, df.mes_num
+)
+SELECT
+  *,
+  SAFE_DIVIDE(
+    utilidad - LAG(utilidad) OVER (ORDER BY anio, mes_num),
+    LAG(utilidad) OVER (ORDER BY anio, mes_num)
+  ) * 100 AS crecimiento_pct
+FROM m;
+
+BLOQUE 2 — KPIs DE VOLUMEN Y EFICIENCIA
+Volumen Total Cambiado
+
+SELECT SUM(volumen_cambiado) AS volumen_total
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`;
+
+Margen de Utilidad (%)
+
+Qué mide: eficiencia del negocio.
+
+SELECT
+  SAFE_DIVIDE(SUM(utilidad), SUM(volumen_cambiado)) * 100 AS margen_utilidad
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`;
+
+Volumen vs Utilidad
+Detecta operaciones poco rentables.
+
+SELECT
+  volumen_cambiado,
+  utilidad
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`;
+
+BLOQUE 3 — KPIs DE CLIENTES
+Clientes Activos
+
+SELECT COUNT(DISTINCT id_cliente) AS clientes_activos
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`;
+
+Utilidad Promedio por Cliente
+
+SELECT AVG(utilidad_cliente) AS utilidad_promedio
+FROM (
+  SELECT id_cliente, SUM(utilidad) AS utilidad_cliente
+  FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`
+  GROUP BY id_cliente
+);
+
+Top 10 Clientes por Utilidad
+
+SELECT
+  dc.nombre_cliente,
+  SUM(f.utilidad) AS utilidad
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CLIENTE` dc
+  ON f.id_cliente = dc.id_cliente
+GROUP BY dc.nombre_cliente
+ORDER BY utilidad DESC
+LIMIT 10;
+
+BLOQUE 4 — KPIs COMERCIALES (CANAL / EJECUTIVO)
+Utilidad por Canal
+
+SELECT
+  dca.nombre_canal,
+  SUM(f.utilidad) AS utilidad
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CANAL` dca
+  ON f.id_canal = dca.id_canal
+GROUP BY dca.nombre_canal;
+
+Ranking de Ejecutivos
+
+SELECT
+  de.nombre_ejecutivo,
+  SUM(f.utilidad) AS utilidad
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_EJECUTIVO` de
+  ON f.id_ejecutivo = de.id_ejecutivo
+GROUP BY de.nombre_ejecutivo
+ORDER BY utilidad DESC;
+
+Distribución Canal vs Cliente
+
+
+SELECT
+  dca.nombre_canal,
+  COUNT(DISTINCT f.id_cliente) AS clientes
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CANAL` dca
+  ON f.id_canal = dca.id_canal
+GROUP BY dca.nombre_canal;
+
+BLOQUE 5 Segmentos
+Total Comunicaciones 2025 
+
+Cuenta el total de comunicaciones en 2025
+
+SELECT
+  COUNT(id_comunicacion) AS total_comunicaciones_2025
+FROM `project-sin-477115.ESTRELLA.DIM_COMUNICACION` dc
+JOIN `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+  ON f.id_comunicacion = dc.id_comunicacion
+JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+  ON f.id_fecha = df.id_fecha
+WHERE df.anio = 2025;
+
+Comunicaciones por Mes 
+
+Promedio o total mensual
+
+SELECT
+  df.anio,
+  df.mes_num,
+  COUNT(f.id_comunicacion) AS comunicaciones_mes
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+  ON f.id_fecha = df.id_fecha
+GROUP BY df.anio, df.mes_num
+ORDER BY df.anio, df.mes_num;
+
+Comunicaciones por Segmento
+Cantidad de comunicaciones por segmento de cliente
+
+SELECT
+  dc.segmento_fx,
+  COUNT(f.id_comunicacion) AS total_comunicaciones
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CLIENTE` dc
+  ON f.id_cliente = dc.id_cliente
+GROUP BY dc.segmento_fx
+ORDER BY total_comunicaciones DESC;
+
+Desglose de Comunicaciones (Segmento por Mes)
+Evolución mensual por segmento
+
+SELECT
+  df.anio,
+  df.mes_num,
+  dc.segmento_fx,
+  COUNT(f.id_comunicacion) AS comunicaciones
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CLIENTE` dc
+  ON f.id_cliente = dc.id_cliente
+JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+  ON f.id_fecha = df.id_fecha
+GROUP BY df.anio, df.mes_num, dc.segmento_fx
+ORDER BY df.anio, df.mes_num;
+
+Segmento FX por Cliente 
+Distribución de clientes por segmento
+
+SELECT
+  segmento_fx,
+  COUNT(DISTINCT id_cliente) AS total_clientes
+FROM `project-sin-477115.ESTRELLA.DIM_CLIENTE`
+GROUP BY segmento_fx;
+
+Utilidad por Comunicación 
+
+Utilidad generada por segmento a lo largo del tiempo
+
+SELECT
+  df.anio,
+  df.mes_num,
+  dc.segmento_fx,
+  SUM(f.utilidad) AS utilidad_total
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING` f
+JOIN `project-sin-477115.ESTRELLA.DIM_CLIENTE` dc
+  ON f.id_cliente = dc.id_cliente
+JOIN `project-sin-477115.ESTRELLA.DIM_FECHA` df
+  ON f.id_fecha = df.id_fecha
+GROUP BY df.anio, df.mes_num, dc.segmento_fx
+ORDER BY df.anio, df.mes_num;
+
+
+Utilidad Promedio por Comunicación
+
+Gráfico: Scorecard
+
+SELECT
+  AVG(utilidad) AS utilidad_promedio_por_comunicacion
+FROM `project-sin-477115.ESTRELLA.FACT_UTILIDAD_TRADING`
+WHERE id_comunicacion IS NOT NULL;
+
