@@ -1,0 +1,50 @@
+# -------------------------
+# CONFIGURACIÓN DE BUCKETS
+# -------------------------
+
+# Bucket principal
+BUCKET_MONITOREADO = "grupo6_scotiabank_bucket"
+
+# Prefijo donde se suben los archivos RAW por entidad
+ROOT_RAW = "data/raw/"
+
+
+# -------------------------
+# PREFIJOS SBS
+# -------------------------
+
+PREFIX_SBS = ROOT_RAW + "SBS/"
+PREFIX_RATIO_LIQUIDEZ = PREFIX_SBS + "RATIO_LIQUIDEZ/"
+PREFIX_EEFF = PREFIX_SBS + "EEFF/"
+PREFIX_CREDITOS_SEGUN_SITUACION = PREFIX_SBS + "CREDITOS_SEGUN_SITUACION/"
+PREFIX_DEPOSITOS = PREFIX_SBS + "DEPOSITOS/"
+PREFIX_PATRIMONIO_EFECTIVO = PREFIX_SBS + "PATRIMONIO_EFECTIVO/"
+PREFIX_PATRIMONIO_REQUERIDO_RCG = PREFIX_SBS + "PATRIMONIO_REQUERIDO_RCG/"
+
+
+# -------------------------
+# PREFIJOS FALTANTES SCOTIABANK
+# -------------------------
+
+PREFIX_SCOTIA_EEFF = ROOT_RAW + "SCOTIABANK/EEFF/"
+PREFIX_SCOTIA_CREDITOS = ROOT_RAW + "SCOTIABANK/CREDITOS/"
+PREFIX_SCOTIA_DEPOSITOS = ROOT_RAW + "SCOTIABANK/DEPOSITOS/"
+PREFIX_SCOTIA_PERDIDAS_OPERATIVAS = ROOT_RAW + "SCOTIABANK/PERDIDAS_OPERATIVAS/"
+
+
+# -------------------------
+# PREFIJO BCRP
+# -------------------------
+
+PREFIX_BCRP_TIPO_CAMBIO = ROOT_RAW + "BCRP/TIPO_CAMBIO/"
+
+
+# -----------------------
+# BIGQUERY DATASET/TABLE
+# -----------------------
+DATASET_BRONCE = "bronce"
+TABLE_RATIO = "sbs_liquidez"
+TABLE_DEPOSITO = "sbs_deposito"
+
+
+
