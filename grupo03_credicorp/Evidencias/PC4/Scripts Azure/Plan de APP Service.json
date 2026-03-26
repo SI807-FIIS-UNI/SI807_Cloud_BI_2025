@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appServicePlanName": {
+      "type": "string",
+      "defaultValue": "ASP-grupo03credicorp-90b6",
+      "metadata": {
+        "description": "Nombre del Plan de Servicio de Aplicación."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "centralus",
+      "metadata": {
+        "description": "Ubicación del Plan de Servicio."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2024-11-01",
+      "name": "[parameters('appServicePlanName')]",
+      "location": "[parameters('location')]",
+      "kind": "functionapp",
+      "sku": {
+        "name": "Y1",
+        "tier": "Dynamic",
+        "family": "Y"
+      },
+      "properties": {
+        "reserved": true,
+        "computeMode": "Dynamic",
+        "maximumElasticWorkerCount": 1
+      }
+    }
+  ],
+  "outputs": {}
+}

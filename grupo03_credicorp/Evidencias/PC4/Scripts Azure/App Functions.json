@@ -1,0 +1,109 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": { "type": "string", "defaultValue": "grupo-03-credicorp" },
+    "location": { "type": "string", "defaultValue": "centralus" },
+    "appServicePlanName": { "type": "string", "defaultValue": "ASP-grupo03credicorp-90b6" },
+    "storageAccountName": { "type": "string", "defaultValue": "grupo03data001" },
+    "runtimeVersion": { "type": "string", "defaultValue": "Python|3.12" }
+  },
+  "variables": {
+    "appInsightsName": "[parameters('appName')]",
+    "storageAccountType": "Standard_LRS"
+  },
+  "resources": [
+    // 1. Cuenta de Almacenamiento (SA) - (Tipo: StorageV2, LRS, Acceso: Cool, Red: Deny)
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2022-05-01",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "kind": "StorageV2",
+      "sku": {
+        "name": "[variables('storageAccountType')]"
+      },
+      "properties": {
+        "accessTier": "Cool",
+        "supportsHttpsTrafficOnly": true,
+        "publicNetworkAccess": "Disabled",
+        "networkAcls": {
+          "bypass": "AzureServices",
+          "defaultAction": "Deny"
+        }
+      }
+    },
+    // 2. Application Insights (AI)
+    {
+      "type": "Microsoft.Insights/components",
+      "apiVersion": "2020-02-02",
+      "name": "[variables('appInsightsName')]",
+      "location": "[parameters('location')]",
+      "kind": "web",
+      "properties": {
+        "Application_Type": "web"
+      }
+    },
+    // 3. Plan de Servicio de Aplicación (ASP) - (Tipo: Dynamic/Consumo)
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2024-11-01",
+      "name": "[parameters('appServicePlanName')]",
+      "location": "[parameters('location')]",
+      "kind": "functionapp",
+      "sku": {
+        "name": "Y1",
+        "tier": "Dynamic",
+        "family": "Y"
+      },
+      "properties": {
+        "reserved": true,
+        "computeMode": "Dynamic",
+        "maximumElasticWorkerCount": 1
+      }
+    },
+    // 4. Azure Function App (FA)
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2024-11-01",
+      "name": "[parameters('appName')]",
+      "location": "[parameters('location')]",
+      "kind": "functionapp,linux",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+        "[resourceId('Microsoft.Insights/components', variables('appInsightsName'))]",
+        "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "siteConfig": {
+          "linuxFxVersion": "[parameters('runtimeVersion')]",
+          "alwaysOn": false,
+          "ftpsState": "Disabled",
+          "functionAppScaleLimit": 200
+        },
+        "httpsOnly": true,
+        "publicNetworkAccess": "Enabled"
+      },
+      "resources": [
+        // Configuración de la aplicación (AppSettings)
+        {
+          "type": "config",
+          "apiVersion": "2024-11-01",
+          "name": "appsettings",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('appName'))]",
+            "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+            "[resourceId('Microsoft.Insights/components', variables('appInsightsName'))]"
+          ],
+          "properties": {
+            "AzureWebJobsStorage": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2022-05-01').keys[0].connectionString]",
+            "FUNCTIONS_WORKER_RUNTIME": "python",
+            "FUNCTIONS_EXTENSION_VERSION": "~4",
+            "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2020-02-02').InstrumentationKey]"
+          }
+        }
+      ]
+    }
+  ]
+}
