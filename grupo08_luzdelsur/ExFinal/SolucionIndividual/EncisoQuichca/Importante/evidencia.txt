@@ -1,0 +1,3 @@
+Profesor, tuve un serio problema para poder hacer el push. Por el archivo RAW que pesaba casi 200MB
+Pero dejo como evidencia la foto de la última fecha de modificación de mis archivos. Ninguno pasa de las 2am del día 16/12
+No puedo dejar como evidencia el commit inicial que hice porque tuve que deshacer todo, volver a clonar y tratar así de hacer un push limpio
