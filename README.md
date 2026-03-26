@@ -143,3 +143,5 @@ Semestre: **2025-II**
 - 🌐 Repositorio GitHub: [https://github.com/webconceptos/SI807_Cloud_BI_2025](https://github.com/webconceptos/SI807_Cloud_BI_2025)  
 - 🧩 Guía de contribución: [CONTRIBUTING.md](./CONTRIBUTING.md)  
 - 📊 Evaluación: [`docs/rubrica_evaluacion.xlsx`](./docs/rubrica_evaluacion.xlsx)
+
+
