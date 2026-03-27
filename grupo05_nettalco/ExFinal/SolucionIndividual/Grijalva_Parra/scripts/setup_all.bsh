@@ -1,0 +1,105 @@
+#!/bin/bash
+
+# Crear storage Data Lake
+
+gcloud config set project us-accidents-481401
+
+gsutil mb -p us-accidents-481401 -l us-central1 gs://us-accidents-bd
+
+# crear carpetas
+ 
+gsutil cp /dev/null gs://us-accidents-bd/bronce/raw/.keep
+gsutil cp /dev/null gs://us-accidents-bd/bronce/processed/.keep
+gsutil cp /dev/null gs://us-accidents-bd/bronce/curated/.keep
+
+gsutil cp /dev/null gs://us-accidents-bd/plata/dimensions/.keep
+gsutil cp /dev/null gs://us-accidents-bd/plata/facts/.keep
+
+gsutil cp /dev/null gs://us-accidents-bd/oro/kpis/.keep
+gsutil cp /dev/null gs://us-accidents-bd/oro/aggregates/.keep
+
+gsutil cp /dev/null gs://us-accidents-bd/scripts/.keep
+gsutil cp /dev/null gs://us-accidents-bd/docs/.keep
+
+# creación del cluster en dataproc
+
+gcloud dataproc clusters create us-accidents-cluster \
+    --region=us-central1 \
+    --zone=us-central1-a \
+    --master-machine-type=e2-standard-4 \
+    --master-boot-disk-size=100 \
+    --num-workers=2 \
+    --worker-machine-type=e2-standard-4 \
+    --worker-boot-disk-size=100 \
+    --image-version=2.1-debian11 \
+    --bucket=us-accidents-bd \
+    --optional-components=JUPYTER \
+    --enable-component-gateway \
+    --max-idle=336h \
+    --project=us-accidents-481401
+
+# para crear bigquery data warehouse
+
+bq mk \
+  --dataset \
+  --location=US \
+  us-accidents-481401:us_accidents_dw
+
+# crear tabla log en bigquery
+
+bq mk --table \
+us-accidents-481401:us_accidents_dw.etl_logs \
+table_name:STRING,layer:STRING,update_timestamp:TIMESTAMP,row_count:INTEGER,status:STRING
+
+# crear functions
+
+cd bronce
+gcloud functions deploy run_etl_bronce \
+  --runtime python310 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --region us-central1
+
+
+cd ../plata
+gcloud functions deploy run_etl_plata \
+  --runtime python310 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --region us-central1
+
+
+cd ../oro
+gcloud functions deploy run_etl_oro \
+  --runtime python310 \
+  --trigger-http \
+  --allow-unauthenticated \
+  --region us-central1
+
+
+# crear job schedular
+gcloud scheduler jobs create http etl-bronce \
+  --location us-central1 \
+  --schedule "0 2 * * *" \
+  --uri https://us-central1-us-accidents-481401.cloudfunctions.net/run_etl_bronce \
+  --http-method GET \
+  --time-zone "America/Lima"
+
+gcloud scheduler jobs create http etl-plata \
+  --location us-central1 \
+  --schedule "0 3 * * *" \
+  --uri https://us-central1-us-accidents-481401.cloudfunctions.net/run_etl_plata \
+  --http-method GET \
+  --time-zone "America/Lima"
+
+gcloud scheduler jobs create http etl-oro \
+  --location us-central1 \
+  --schedule "0 4 * * *" \
+  --uri https://us-central1-us-accidents-481401.cloudfunctions.net/run_etl_oro \
+  --http-method GET \
+  --time-zone "America/Lima"
+
+# Asignar política autoscalling al cluster
+gcloud dataproc clusters update us-accidents-cluster \
+  --region us-central1 \
+  --autoscaling-policy etl-autoscaling
