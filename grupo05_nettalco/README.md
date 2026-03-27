@@ -3,7 +3,7 @@
 # Proyecto Cloud BI 2025-II
 
 
-# Análisis Exploratorio del Dataset de Netflix
+#  MINI PROYECTO: Análisis Exploratorio del Dataset de Netflix
 ![Python](https://img.shields.io/badge/Made%20with-Python-3776AB?logo=python&logoColor=white)
 ![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)
 ![Status](https://img.shields.io/badge/Estado-En%20Desarrollo-blue)
