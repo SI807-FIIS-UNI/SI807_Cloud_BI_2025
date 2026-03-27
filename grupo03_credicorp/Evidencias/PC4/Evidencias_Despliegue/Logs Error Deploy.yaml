@@ -1,0 +1,38 @@
+8:47:59 PM grupo-03-credicorp: Creating zip package...
+8:47:59 PM grupo-03-credicorp: Adding 8 files to zip package...
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\host.json
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\requirements.txt
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\function_app.py
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\.funcignore
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\Dockerfile
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\.env
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\.dockerignore
+8:47:59 PM grupo-03-credicorp: d:\Edwin\UNI\8vo Ciclo\Sistema de Inteligencia de Negocio\grupo-03-credicorp-webscrapping\webscrapping_sbs.py
+8:47:59 PM grupo-03-credicorp: Zip package size: 6.1 kB
+8:48:02 PM grupo-03-credicorp: Fetching changes.
+8:48:03 PM grupo-03-credicorp: Cleaning up temp folders from previous zip deployments and extracting pushed zip file /tmp/zipdeploy/5a05d593-c2e2-4bb9-a981-cb11e5305f4c.zip (0.01 MB) to /tmp/zipdeploy/extracted
+8:48:05 PM grupo-03-credicorp: Updating submodules.
+8:48:06 PM grupo-03-credicorp: Preparing deployment for commit id '2a0f6e48-a'.
+8:48:06 PM grupo-03-credicorp: PreDeployment: context.CleanOutputPath False
+8:48:06 PM grupo-03-credicorp: PreDeployment: context.OutputPath /home/site/wwwroot
+8:48:06 PM grupo-03-credicorp: Repository path is /tmp/zipdeploy/extracted
+8:48:06 PM grupo-03-credicorp: Running oryx build...
+8:48:06 PM grupo-03-credicorp: Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform python --platform-version 3.12 -p packagedir=.python_packages/lib/site-packages
+8:48:06 PM grupo-03-credicorp: Operation performed by Microsoft Oryx, https://github.com/Microsoft/Oryx
+8:48:06 PM grupo-03-credicorp: You can report issues at https://github.com/Microsoft/Oryx/issues
+8:48:06 PM grupo-03-credicorp: Oryx Version: 0.2.20230210.1, Commit: a49c8f6b8abbe95b4356552c4c884dea7fd0d86e, ReleaseTagName: 20230210.1
+8:48:06 PM grupo-03-credicorp: Build Operation ID: c2e2c321df237283
+8:48:06 PM grupo-03-credicorp: Repository Commit : 2a0f6e48-a18c-4ef7-9008-f1e64d0b2e7c
+8:48:06 PM grupo-03-credicorp: OS Type           : bullseye
+8:48:06 PM grupo-03-credicorp: Image Type        : githubactions
+8:48:06 PM grupo-03-credicorp: Detecting platforms...
+8:48:07 PM grupo-03-credicorp: Detected following platforms:
+8:48:07 PM grupo-03-credicorp:   python: 3.12.12
+8:48:07 PM grupo-03-credicorp: Version '3.12.12' of platform 'python' is not installed. Generating script to install it...
+8:48:07 PM grupo-03-credicorp: Source directory     : /tmp/zipdeploy/extracted
+8:48:07 PM grupo-03-credicorp: Destination directory: /home/site/wwwroot
+8:48:07 PM grupo-03-credicorp: Downloading and extracting 'python' version '3.12.12' to '/tmp/oryx/platforms/python/3.12.12'...
+8:48:07 PM grupo-03-credicorp: Detected image debian flavor: bullseye.
+8:48:20 PM grupo-03-credicorp: Syncing triggers...
+8:48:24 PM grupo-03-credicorp: Querying triggers...
+8:48:28 PM grupo-03-credicorp: No HTTP triggers found.
