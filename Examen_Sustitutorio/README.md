@@ -1,0 +1,115 @@
+# 📘 Examen Sustitutorio – SI-807  
+## Sistemas de Inteligencia de Negocios
+
+Este repositorio contiene la carpeta oficial **Examen_Sustitutorio**, creada y administrada por el docente del curso **SI-807 – Sistemas de Inteligencia de Negocios**.
+
+Este README constituye el **documento normativo** que regula el desarrollo, entrega y evaluación del Examen Sustitutorio.
+
+---
+
+## 1️⃣ Rol del Docente
+
+El docente es responsable de:
+
+- Crear y mantener la carpeta base `Examen_Sustitutorio/` en la rama `main`.
+- Proteger la rama `main` mediante reglas de Branch Protection.
+- Autorizar y supervisar el trabajo de los estudiantes en ramas individuales.
+- Evaluar las entregas directamente desde las ramas de cada estudiante.
+- Verificar reproducibilidad, trazabilidad y autoría del trabajo.
+
+---
+
+## 2️⃣ Estructura Oficial del Examen
+
+La estructura base del repositorio es la siguiente:
+
+```
+Examen_Sustitutorio/
+└── README.md   (este documento)
+```
+
+Cada estudiante trabajará **únicamente** dentro de su propia rama y su carpeta personal:
+
+```
+Examen_Sustitutorio/
+└── ApPaterno_ApMaterno_CodigoUNI/
+```
+
+---
+
+## 3️⃣ Convención de Ramas (OBLIGATORIA)
+
+Cada estudiante debe crear una rama con el formato exacto:
+
+```
+ExSusti_ApPaterno_ApMaterno_CodigoUNI
+```
+
+Ejemplo:
+
+```
+ExSusti_Garcia_Perez_20201234
+```
+
+El docente **NO debe realizar merge** de estas ramas a `main`.
+
+---
+
+## 4️⃣ Reglas de Control Académico
+
+- Los estudiantes **NO pueden** hacer push directo a `main`.
+- Los estudiantes **NO pueden** modificar carpetas ajenas.
+- Todo el trabajo queda trazado por commits y ramas.
+- Cualquier modificación indebida es causal de **NO EVALUACIÓN**.
+
+---
+
+## 5️⃣ README.md del Estudiante (Reproducibilidad)
+
+Cada carpeta de estudiante debe contener un README.md que permita:
+
+1. Configurar el entorno local.
+2. Crear o restaurar la base de datos.
+3. Ejecutar el proceso ETL / ELT.
+4. Validar la carga de datos.
+5. Abrir y ejecutar los dashboards.
+6. Reproducir la solución desde cero.
+
+Si la solución **no es reproducible**, el examen **NO ES EVALUABLE**.
+
+---
+
+## 6️⃣ Criterios Generales de Evaluación
+
+La evaluación se realiza sobre tres criterios principales:
+
+- **Solución Técnica (60%)**
+- **Informe Técnico (20%)**
+- **Sustentación Oral (20%)**
+
+Todos los criterios están sujetos a mínimos obligatorios.
+
+---
+
+## 7️⃣ Auditoría y Trazabilidad
+
+El docente puede auditar:
+
+- Historial de commits.
+- Archivos modificados.
+- Carpetas tocadas.
+- Autoría real del trabajo.
+
+GitHub actúa como evidencia oficial ante cualquier reclamo.
+
+---
+
+## 8️⃣ Consideración Final
+
+> Este esquema garantiza orden, equidad, trazabilidad y evaluación objetiva del Examen Sustitutorio.
+
+Este README **no debe ser modificado por los estudiantes**.
+
+---
+
+**Docente del curso – SI-807**
