@@ -1,0 +1,7 @@
+ETL Gold completado.
+     Neighbourhood Gender    Rango_Edad  Total_Citas  Cantidad_Faltas  Promedio_Espera_Dias  Tasa_NoShow_Porc
+0   JARDIM CAMBURI      F  36-60 Adulto         2199              431             19.443383              19.6
+1   JARDIM CAMBURI      F    60+ Senior         1439              237             21.219597             16.47
+2      MARIA ORTIZ      F  36-60 Adulto         1344              269             13.529762             20.01
+3      MARIA ORTIZ      F   18-35 Joven         1010              271             12.743564             26.83
+4  JARDIM DA PENHA      F  36-60 Adulto          999              145             10.450450             14.51
